@@ -33,25 +33,11 @@ namespace IRTaktiks.Input
         /// </summary>
         private InputManager()
         {
-			this.cursorStatus = new Dictionary<int, bool>();
 		}
 
         #endregion
 
 		#region Properties
-
-		/// <summary>
-		/// Hold the status (pressed or released) of all cursors present in the game.
-		/// </summary>
-		private Dictionary<int, bool> cursorStatus;
-		
-		/// <summary>
-		/// Hold the status (pressed or released) of all cursors present in the game.
-		/// </summary>
-		public Dictionary<int, bool> CursorStatus
-		{
-			get { return cursorStatus; }
-		}
 
 		#endregion
 		
@@ -76,37 +62,6 @@ namespace IRTaktiks.Input
 
         #region RaiseEvents
 
-        /// <summary>
-        /// Queue the AddObject event for dispatch.
-        /// </summary>
-        /// <param name="identifier">Id of the fiducial.</param>
-        /// <param name="position">Center position of the fiducial.</param>
-        /// <param name="orientation">Orientation in radians.</param>
-        public void RaiseObjectAdded(int identifier, Vector2 position, float orientation)
-        {
-            ThreadPool.QueueUserWorkItem(AddObject, new ObjectAddedArgs(identifier, position, orientation));
-        }
-
-		/// <summary>
-		/// Queue the UpdateObject event for dispatch.
-		/// </summary>
-		/// <param name="identifier">Id of the fiducial.</param>
-		/// <param name="position">Center position of the fiducial.</param>
-		/// <param name="orientation">Orientation in radians.</param>
-        public void RaiseObjectUpdated(int identifier, Vector2 position, float orientation)
-        {
-            ThreadPool.QueueUserWorkItem(UpdateObject, new ObjectUpdatedArgs(identifier, position, orientation));
-        }
-
-		/// <summary>
-		/// Queue the RemoveObject event for dispatch.
-		/// </summary>
-		/// <param name="identifier">Id of the fiducial.</param>
-        public void RaiseObjectRemoved(int identifier)
-        {
-            ThreadPool.QueueUserWorkItem(RemoveObject, new ObjectRemovedArgs(identifier));
-        }
-
 		/// <summary>
 		/// Queue the PressCursor event for dispatch.
 		/// </summary>
@@ -115,9 +70,16 @@ namespace IRTaktiks.Input
         public void RaiseCursorDown(int identifier, Vector2 position)
         {
             ThreadPool.QueueUserWorkItem(PressCursor, new CursorDownArgs(identifier, position));
-            
-			// Update the cursor status.
-			this.cursorStatus[identifier] = true;
+        }
+        
+        /// <summary>
+        /// Queue the UpdateCursor event for dispatch.
+        /// </summary>
+        /// <param name="identifier">Id of the cursor created by a finger touch.</param>
+        /// <param name="position">Center position of the finger.</param>
+        public void RaiseCursorUpdate(int identifier, Vector2 position)
+        {
+            ThreadPool.QueueUserWorkItem(UpdateCursor, new CursorUpdateArgs(identifier, position));
         }
 
 		/// <summary>
@@ -127,13 +89,7 @@ namespace IRTaktiks.Input
 		/// <param name="position">Center position of the finger.</param>
         public void RaiseCursorUp(int identifier, Vector2 position)
         {
-            if (this.cursorStatus.ContainsKey(identifier) && this.cursorStatus[identifier])
-			{
-                ThreadPool.QueueUserWorkItem(ReleaseCursor, new CursorUpArgs(identifier, position));
-
-				// Removes the cursor status from collection.
-				this.cursorStatus[identifier] = false;
-            }
+            ThreadPool.QueueUserWorkItem(ReleaseCursor, new CursorUpArgs(identifier, position));
         }
 
         #endregion
