@@ -61,10 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\Drawables\Camera.cs" />
-    <Compile Include="Components\Drawables\UnitMenu.cs" />
-    <Compile Include="Components\Drawables\PlayerMenu.cs" />
-    <Compile Include="Components\Drawables\Map.cs" />
+    <Compile Include="Components\Scenario\Camera.cs" />
+    <Compile Include="Components\Menu\UnitMenu.cs" />
+    <Compile Include="Components\Menu\PlayerMenu.cs" />
+    <Compile Include="Components\Scenario\Map.cs" />
+    <Compile Include="Components\Logic\UnitAttributes.cs" />
+    <Compile Include="Components\Logic\UnitOrientation.cs" />
     <Compile Include="Components\Managers\SpriteFontManager.cs" />
     <Compile Include="Components\Managers\EffectManager.cs" />
     <Compile Include="Components\Playables\Unit.cs" />

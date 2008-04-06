@@ -10,7 +10,6 @@ using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Input;
 using IRTaktiks.Input.EventArgs;
 using IRTaktiks.Components.Playables;
-using IRTaktiks.Components.Drawables;
 
 namespace IRTaktiks.Components.Screens
 {
@@ -60,6 +59,8 @@ namespace IRTaktiks.Components.Screens
             Unit fighterTwo = new Unit(this.Game, game.PlayerTwo, 1, "Fighter", 2000, 500, 60, 20, 30, 10, 60);
             Unit sniperTwo = new Unit(this.Game, game.PlayerTwo, 1, "Sniper", 1000, 600, 10, 50, 20, 10, 80);
             Unit wizardTwo = new Unit(this.Game, game.PlayerTwo, 1, "Wizard", 500, 2000, 10, 10, 10, 80, 80);
+
+            
 
             // Add the units for player one.
             game.PlayerOne.Units.Add(fighterOne);

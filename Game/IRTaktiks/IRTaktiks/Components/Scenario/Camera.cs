@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 
-namespace IRTaktiks.Components.Drawables
+namespace IRTaktiks.Components.Scenario
 {
     /// <summary>
     /// Representation of the camera.
