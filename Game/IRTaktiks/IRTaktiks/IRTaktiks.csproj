@@ -74,6 +74,7 @@
     <Compile Include="Components\Screens\GameScreen.cs" />
     <Compile Include="Components\Screens\Screen.cs" />
     <Compile Include="Components\Screens\TitleScreen.cs" />
+    <Compile Include="Input\EventArgs\CursorUpdateArgs.cs" />
     <Compile Include="Input\EventArgs\CursorDownArgs.cs" />
     <Compile Include="Input\EventArgs\CursorUpArgs.cs" />
     <Compile Include="Input\InputManager.cs" />
