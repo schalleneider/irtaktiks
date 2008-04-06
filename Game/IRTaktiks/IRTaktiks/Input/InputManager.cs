@@ -56,27 +56,17 @@ namespace IRTaktiks.Input
 		#endregion
 		
         #region Events
-
-        /// <summary>
-        /// Dispatched when a fiducial is added to the table.
-        /// </summary>
-        public event EventHandler<ObjectAddedArgs> ObjectAdded;
-
-        /// <summary>
-        /// Dispatched when a fiducial over the table changes its properties.
-        /// </summary>
-        public event EventHandler<ObjectUpdatedArgs> ObjectUpdated;
         
-        /// <summary>
-        /// Dispatched when a fiducial is removed from the table.
-        /// </summary>
-        public event EventHandler<ObjectRemovedArgs> ObjectRemoved;
-
         /// <summary>
         /// Dispatched when a finger touches the table.
         /// </summary>
         public event EventHandler<CursorDownArgs> CursorDown;
-        
+
+        /// <summary>
+        /// Dispatched when a finger still touching the table.
+        /// </summary>
+        public event EventHandler<CursorUpdateArgs> CursorUpdate;
+
         /// <summary>
         /// Dispatched when a finger touching the table leaves.
         /// </summary>
@@ -150,36 +140,6 @@ namespace IRTaktiks.Input
 
         #region Event Dispatcher
 
-        /// <summary>
-        /// Dispatch the AddObject event.
-        /// </summary>
-        /// <param name="data">Event data.</param>
-        private void AddObject(object data)
-        {
-            if (this.ObjectAdded != null)
-                this.ObjectAdded(null, data as ObjectAddedArgs);
-        }
-
-		/// <summary>
-		/// Dispatch the ObjectUpdated event.
-		/// </summary>
-		/// <param name="data">Event data.</param>
-        private void UpdateObject(object data)
-        {
-            if (this.ObjectUpdated != null)
-                this.ObjectUpdated(null, data as ObjectUpdatedArgs);
-        }
-
-		/// <summary>
-		/// Dispatch the ObjectRemoved event.
-		/// </summary>
-		/// <param name="data">Event data.</param>
-        private void RemoveObject(object data)
-        {
-            if (this.ObjectRemoved != null)
-                this.ObjectRemoved(null, data as ObjectRemovedArgs);
-        }
-
 		/// <summary>
 		/// Dispatch the CursorDown event.
 		/// </summary>
@@ -188,6 +148,16 @@ namespace IRTaktiks.Input
         {
             if (this.CursorDown != null)
                 this.CursorDown(null, data as CursorDownArgs);
+        }
+
+        /// <summary>
+        /// Dispatch the CursorDown event.
+        /// </summary>
+        /// <param name="data">Event data.</param>
+        private void UpdateCursor(object data)
+        {
+            if (this.CursorUpdate != null)
+                this.CursorUpdate(null, data as CursorUpdateArgs);
         }
 
 		/// <summary>
