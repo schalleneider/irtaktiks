@@ -7,7 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
-using IRTaktiks.Components.Drawables;
+using IRTaktiks.Components.Logic;
+using IRTaktiks.Components.Menu;
 
 namespace IRTaktiks.Components.Playables
 {
@@ -124,7 +125,53 @@ namespace IRTaktiks.Components.Playables
 		{
 			get { return TimeField; }
 		}
-        
+
+        /// <summary>
+        /// The position of the Unit.
+        /// </summary>
+        private Vector2 PositionField;
+
+        /// <summary>
+        /// The position of the Unit.
+        /// </summary>
+        public Vector2 Position
+        {
+            get { return PositionField; }
+            set { PositionField = value; }
+        }
+
+        /// <summary>
+        /// The orientation of the unit.
+        /// </summary>
+        private UnitOrientation OrientationField;
+
+        /// <summary>
+        /// The orientation of the unit.
+        /// </summary>
+        public UnitOrientation Orientation
+        {
+            get { return OrientationField; }
+            set { OrientationField = value; }
+        }
+
+        /// <summary>
+        /// The character texture of the unit.
+        /// </summary>
+        private Texture2D UnitTextureField;
+
+        /// <summary>
+        /// The character texture of the unit.
+        /// </summary>
+        public Texture2D UnitTexture
+        {
+            get { return UnitTextureField; }
+            set { UnitTextureField = value; }
+        }
+
+        #endregion
+
+        #region Verifications
+
         /// <summary>
         /// True if the unit is dead. Else otherwise.
         /// </summary>
@@ -141,22 +188,33 @@ namespace IRTaktiks.Components.Playables
             get { return this.Time < 1; }
         }
 
+        /// <summary>
+        /// True if the actual life of the unit is above 50%.
+        /// </summary>
+        public bool IsStatusAlive
+        {
+            get { return (this.Life / this.FullLife) > 0.5; }
+        }
+        
+        /// <summary>
+        /// True if the actual life of the unit is above 10% and less 50%.
+        /// </summary>
+        public bool IsStatusDamaged
+        {
+            get { return ((this.Life / this.FullLife) <= 0.5 && ((this.Life / this.FullLife) >= 0.1)); }
+        }
+       
+        /// <summary>
+        /// True if the actual life of the unit is less 10%.
+        /// </summary>
+        public bool IsStatusDeading
+        {
+            get { return (this.Life / this.FullLife) < 0.1; }
+        }
+
         #endregion
 
         #region Properties
-
-        /// <summary>
-		/// The fiducial id associated with this unity.
-		/// </summary>
-		private int IdField;
-
-		/// <summary>
-        /// The fiducial id associated with this unity.
-		/// </summary>
-		public int Id
-		{
-			get { return IdField; }
-		}
 
         /// <summary>
         /// The owner of the unit.
@@ -232,7 +290,6 @@ namespace IRTaktiks.Components.Playables
         /// </summary>
         /// <param name="game">The instance of game that is running.</param>
         /// <param name="player">The owner of the unit.</param>
-		/// <param name="id">The identifier of unit.</param>
 		/// <param name="name">The name of unit.</param>
 		/// <param name="life">The total life points.</param>
 		/// <param name="mana">The total mana points.</param>
@@ -241,10 +298,9 @@ namespace IRTaktiks.Components.Playables
 		/// <param name="vitality">The vittality attribute.</param>
 		/// <param name="magic">The magic attribute.</param>
 		/// <param name="dexterity">The dexterity attribute.</param>
-		public Unit(Game game, Player player, int id, string name, int life, int mana, int strenght, int agility, int vitality, int magic, int dexterity)
+		public Unit(Game game, Player player, string name, int life, int mana, int strenght, int agility, int vitality, int magic, int dexterity)
             : base(game)
 		{
-            this.IdField = id;
             this.PlayerField = player;
             this.NameField = name;
 
@@ -294,6 +350,14 @@ namespace IRTaktiks.Components.Playables
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Draw(GameTime gameTime)
         {
+            IRTGame game = this.Game as IRTGame;
+
+            game.SpriteBatch.Begin();
+
+            game.SpriteBatch.Draw(this.UnitTexture, this.Position, new Rectangle(0, 48 * (int)this.Orientation, 32, 48), Color.White);
+
+            game.SpriteBatch.End();
+
             base.Draw(gameTime);
         }
 

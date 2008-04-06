@@ -54,9 +54,9 @@ namespace IRTaktiks.Components.Managers
             this.PlayerOneStatusField = game.Content.Load<Texture2D>("Sprites/PlayerStatusBlue");
             this.PlayerTwoStatusField = game.Content.Load<Texture2D>("Sprites/PlayerStatusRed");
 
-            this.UnitStatusReadyField = game.Content.Load<Texture2D>("Sprites/UnitStatusGreen");
-            this.UnitStatusDeadField = game.Content.Load<Texture2D>("Sprites/UnitStatusRed");
-            this.UnitStatusWaitingField = game.Content.Load<Texture2D>("Sprites/UnitStatusYellow");
+            this.UnitStatusAliveField = game.Content.Load<Texture2D>("Sprites/UnitStatusGreen");
+            this.UnitStatusDeadingField = game.Content.Load<Texture2D>("Sprites/UnitStatusRed");
+            this.UnitStatusDamagedField = game.Content.Load<Texture2D>("Sprites/UnitStatusYellow");
 
             this.DefaultMenuItemField = game.Content.Load<Texture2D>("Sprites/DefaultMenuItem");
             this.SelectedMenuItemField = game.Content.Load<Texture2D>("Sprites/SelectedMenuItem");
@@ -153,6 +153,38 @@ namespace IRTaktiks.Components.Managers
 
         #endregion
 
+        #region Units
+
+        /// <summary>
+        /// The character texture of the knight's unit.
+        /// </summary>
+        private Texture2D KnightTextureField;
+
+        /// <summary>
+        /// The character texture of the knight's unit.
+        /// </summary>
+        public Texture2D KnightTexture
+        {
+            get { return KnightTextureField; }
+            set { KnightTextureField = value; }
+        }
+
+        /// <summary>
+        /// The character texture of the wizard's unit.
+        /// </summary>
+        private Texture2D WizardTextureField;
+
+        /// <summary>
+        /// The character texture of the wizard's unit.
+        /// </summary>
+        public Texture2D WizardTexture
+        {
+            get { return WizardTextureField; }
+            set { WizardTextureField = value; }
+        }
+
+        #endregion
+
         #region Player Menu
 
         /// <summary>
@@ -199,42 +231,42 @@ namespace IRTaktiks.Components.Managers
         #region Unit Menu
 
         /// <summary>
-        /// The status texture for the unit when is ready.
+        /// The status texture for the unit when is alive. HP > 50%
         /// </summary>
-        private Texture2D UnitStatusReadyField;
+        private Texture2D UnitStatusAliveField;
 
         /// <summary>
-        /// The status texture for the unit when is ready.
+        /// The status texture for the unit when is alive. HP > 50%
         /// </summary>
-        public Texture2D UnitStatusReady
+        public Texture2D UnitStatusAlive
         {
-            get { return UnitStatusReadyField; }
+            get { return UnitStatusAliveField; }
         }
 
         /// <summary>
-        /// The status texture for the unit when is dead.
+        /// The status texture for the unit when is deading. HP < 10%
         /// </summary>
-        private Texture2D UnitStatusDeadField;
+        private Texture2D UnitStatusDeadingField;
 
         /// <summary>
-        /// The status texture for the unit when is dead.
+        /// The status texture for the unit when is deading. HP < 10%
         /// </summary>
-        public Texture2D UnitStatusDead
+        public Texture2D UnitStatusDeading
         {
-            get { return UnitStatusDeadField; }
+            get { return UnitStatusDeadingField; }
         }
 
         /// <summary>
-        /// The status texture for the unit when is waiting.
+        /// The status texture for the unit when is damaged. 10% < HP < 50%
         /// </summary>
-        private Texture2D UnitStatusWaitingField;
+        private Texture2D UnitStatusDamagedField;
 
         /// <summary>
-        /// The status texture for the unit when is waiting.
+        /// The status texture for the unit when is damaged. 10% < HP < 50%
         /// </summary>
-        public Texture2D UnitStatusWaiting
+        public Texture2D UnitStatusDamaged
         {
-            get { return UnitStatusWaitingField; }
+            get { return UnitStatusDamagedField; }
         }
 
         #endregion

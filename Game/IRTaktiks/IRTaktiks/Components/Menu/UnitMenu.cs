@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Playables;
 using IRTaktiks.Components.Managers;
 
-namespace IRTaktiks.Components.Drawables
+namespace IRTaktiks.Components.Menu
 {
 	/// <summary>
 	/// Representation of the menu of the player.
@@ -99,13 +99,13 @@ namespace IRTaktiks.Components.Drawables
 			// Player one informations.
 			if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
 			{
-				this.PositionField = new Vector2(0, 150 + (UnitMenu.MenuIndex[this.Unit.Player.PlayerIndex] * (TextureManager.Instance.UnitStatusReady.Height + 5)));
+				this.PositionField = new Vector2(0, 150 + (UnitMenu.MenuIndex[this.Unit.Player.PlayerIndex] * (TextureManager.Instance.UnitStatusAlive.Height + 5)));
 			}
 
 			// Player two informations.
 			if (this.Unit.Player.PlayerIndex == PlayerIndex.Two)
 			{
-				this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.BackgroundMenu.Width, 150 + (UnitMenu.MenuIndex[this.Unit.Player.PlayerIndex] * (TextureManager.Instance.UnitStatusReady.Height + 5)));
+				this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.BackgroundMenu.Width, 150 + (UnitMenu.MenuIndex[this.Unit.Player.PlayerIndex] * (TextureManager.Instance.UnitStatusAlive.Height + 5)));
 			}
 
 			UnitMenu.MenuIndex[this.Unit.Player.PlayerIndex]++;
@@ -145,17 +145,17 @@ namespace IRTaktiks.Components.Drawables
             game.SpriteBatch.Begin();
 
 			// Set texture according the unit status.
-            if (this.Unit.IsDead)
+            if (this.Unit.IsStatusAlive)
             {
-				this.UnitTexture = TextureManager.Instance.UnitStatusDead;
+				this.UnitTexture = TextureManager.Instance.UnitStatusAlive;
             }
-            else if (this.Unit.IsWaiting)
+            if (this.Unit.IsStatusDamaged)
             {
-				this.UnitTexture = TextureManager.Instance.UnitStatusWaiting;
+				this.UnitTexture = TextureManager.Instance.UnitStatusDamaged;
             }
-            else
+            if (this.Unit.IsStatusDeading)
             {
-				this.UnitTexture = TextureManager.Instance.UnitStatusReady;
+				this.UnitTexture = TextureManager.Instance.UnitStatusDeading;
             }
 
 			// Draws the unit's status background.

@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Playables;
 using IRTaktiks.Components.Managers;
 
-namespace IRTaktiks.Components.Drawables
+namespace IRTaktiks.Components.Menu
 {
 	/// <summary>
 	/// Representation of the menu of the player.
