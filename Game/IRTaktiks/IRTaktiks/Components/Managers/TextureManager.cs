@@ -50,6 +50,8 @@ namespace IRTaktiks.Components.Managers
             this.SandTerrainField = game.Content.Load<Texture2D>("Textures/Sand");
             this.SnowTerrainField = game.Content.Load<Texture2D>("Textures/Snow");
 
+            this.KnightTextureField = game.Content.Load<Texture2D>("Characters/Knight");
+
             this.BackgroundMenuField = game.Content.Load<Texture2D>("Sprites/BackgroundMenu");
             this.PlayerOneStatusField = game.Content.Load<Texture2D>("Sprites/PlayerStatusBlue");
             this.PlayerTwoStatusField = game.Content.Load<Texture2D>("Sprites/PlayerStatusRed");

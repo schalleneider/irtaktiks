@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Input;
 using IRTaktiks.Input.EventArgs;
 using IRTaktiks.Components.Playables;
+using IRTaktiks.Components.Logic;
+using IRTaktiks.Components.Managers;
 
 namespace IRTaktiks.Components.Screens
 {
@@ -51,25 +53,19 @@ namespace IRTaktiks.Components.Screens
             game.PlayerTwo = new Player(this.Game, "Camila", PlayerIndex.Two);
             
             // Create the units for player one.
-            Unit fighterOne = new Unit(this.Game, game.PlayerOne, 1, "Fighter", 2000, 500, 60, 20, 30, 10, 60);
-            Unit sniperOne = new Unit(this.Game, game.PlayerOne, 1, "Sniper", 1000, 600, 10, 50, 20, 10, 80);
-            Unit wizardOne = new Unit(this.Game, game.PlayerOne, 1, "Wizard", 500, 2000, 10, 10, 10, 80, 80);
+            Unit fighterOne = new Unit(this.Game, game.PlayerOne, new Vector2(200, 200), new UnitAttributes(80, 10, 60, 10, 40), UnitOrientation.Left, TextureManager.Instance.KnightTexture, "Tsunami", 11358, 758);
+            Unit wizardOne = new Unit(this.Game, game.PlayerOne, new Vector2(200, 300), new UnitAttributes(1, 1, 1, 99, 99), UnitOrientation.Right, TextureManager.Instance.KnightTexture, "Ben Kildan", 1521, 2536);
 
             // Create the units for player two.
-            Unit fighterTwo = new Unit(this.Game, game.PlayerTwo, 1, "Fighter", 2000, 500, 60, 20, 30, 10, 60);
-            Unit sniperTwo = new Unit(this.Game, game.PlayerTwo, 1, "Sniper", 1000, 600, 10, 50, 20, 10, 80);
-            Unit wizardTwo = new Unit(this.Game, game.PlayerTwo, 1, "Wizard", 500, 2000, 10, 10, 10, 80, 80);
-
-            
+            Unit fighterTwo = new Unit(this.Game, game.PlayerTwo, new Vector2(800, 200), new UnitAttributes(80, 10, 60, 10, 40), UnitOrientation.Up, TextureManager.Instance.KnightTexture, "Docc", 11358, 758);
+            Unit wizardTwo = new Unit(this.Game, game.PlayerTwo, new Vector2(800, 300), new UnitAttributes(1, 1, 1, 99, 99), UnitOrientation.Down, TextureManager.Instance.KnightTexture, "Elemental", 1521, 2536);
 
             // Add the units for player one.
             game.PlayerOne.Units.Add(fighterOne);
-            game.PlayerOne.Units.Add(sniperOne);
             game.PlayerOne.Units.Add(wizardOne);
 
             // Add the units for player two.
             game.PlayerTwo.Units.Add(fighterTwo);
-            game.PlayerTwo.Units.Add(sniperTwo);
             game.PlayerTwo.Units.Add(wizardTwo);
 
             // Input Event registration.
