@@ -17,72 +17,6 @@ namespace IRTaktiks.Components.Playables
 	/// </summary>
 	public class Unit : DrawableGameComponent
     {
-        #region Attributes
-
-        /// <summary>
-        /// The strength of the unit. Influences the attack power.
-        /// </summary>
-        private int StrengthField;
-
-        /// <summary>
-        /// The strength of the unit. Influences the attack power.
-        /// </summary>
-        public int Strength
-        {
-            get { return StrengthField; }
-        }
-
-        /// <summary>
-        /// The agility of the unit. Influences the time.
-        /// </summary>
-        private int AgilityField;
-
-        /// <summary>
-        /// The agility of the unit. Influences the time.
-        /// </summary>
-        public int Agility
-        {
-            get { return AgilityField; }
-        }
-
-        /// <summary>
-        /// The vitality of the unit. Influences the deffense.
-        /// </summary>
-        private int VitalityField;
-
-        public int Vitality
-        {
-            get { return VitalityField; }
-        }
-
-        /// <summary>
-        /// The magic of the unit. Influences the magic attack and deffense.
-        /// </summary>
-        private int MagicField;
-
-        /// <summary>
-        /// The magic of the unit. Influences the magic attack and deffense.
-        /// </summary>
-        public int Magic
-        {
-            get { return MagicField; }
-        }
-
-        /// <summary>
-        /// The dexteriry of unit. Influences the range of attacks.
-        /// </summary>
-        private int DexterityField;
-
-        /// <summary>
-        /// The dexteriry of unit. Influences the range of attacks.
-        /// </summary>
-        public int Dexterity
-        {
-            get { return DexterityField; }
-        }
-
-        #endregion
-
         #region Statuses
 
         /// <summary>
@@ -125,49 +59,7 @@ namespace IRTaktiks.Components.Playables
 		{
 			get { return TimeField; }
 		}
-
-        /// <summary>
-        /// The position of the Unit.
-        /// </summary>
-        private Vector2 PositionField;
-
-        /// <summary>
-        /// The position of the Unit.
-        /// </summary>
-        public Vector2 Position
-        {
-            get { return PositionField; }
-            set { PositionField = value; }
-        }
-
-        /// <summary>
-        /// The orientation of the unit.
-        /// </summary>
-        private UnitOrientation OrientationField;
-
-        /// <summary>
-        /// The orientation of the unit.
-        /// </summary>
-        public UnitOrientation Orientation
-        {
-            get { return OrientationField; }
-            set { OrientationField = value; }
-        }
-
-        /// <summary>
-        /// The character texture of the unit.
-        /// </summary>
-        private Texture2D UnitTextureField;
-
-        /// <summary>
-        /// The character texture of the unit.
-        /// </summary>
-        public Texture2D UnitTexture
-        {
-            get { return UnitTextureField; }
-            set { UnitTextureField = value; }
-        }
-
+        
         #endregion
 
         #region Verifications
@@ -280,31 +172,101 @@ namespace IRTaktiks.Components.Playables
         {
             get { return FullManaField; }
         }
+
+        /// <summary>
+        /// The attributes of the unit.
+        /// </summary>
+        private UnitAttributes AttributesField;
+
+        /// <summary>
+        /// The attributes of the unit.
+        /// </summary>
+        public UnitAttributes Attributes
+        {
+            get { return AttributesField; }
+        }
+
+        /// <summary>
+        /// The position of the Unit.
+        /// </summary>
+        private Vector2 PositionField;
+
+        /// <summary>
+        /// The position of the Unit.
+        /// </summary>
+        public Vector2 Position
+        {
+            get { return PositionField; }
+        }
+
+        /// <summary>
+        /// The orientation of the unit.
+        /// </summary>
+        private UnitOrientation OrientationField;
+
+        /// <summary>
+        /// The orientation of the unit.
+        /// </summary>
+        public UnitOrientation Orientation
+        {
+            get { return OrientationField; }
+        }
+
+        /// <summary>
+        /// The character texture of the unit.
+        /// </summary>
+        private Texture2D UnitTextureField;
+
+        /// <summary>
+        /// The character texture of the unit.
+        /// </summary>
+        public Texture2D UnitTexture
+        {
+            get { return UnitTextureField; }
+        }
         
 		#endregion
 
-		#region Constructor
+        #region Logic Properties
+
+        /// <summary>
+        /// Indicates that the unit is selected.
+        /// </summary>
+        private bool IsSelectedField;
+
+        /// <summary>
+        /// Indicates that the unit is selected.
+        /// </summary>
+        public bool IsSelected
+        {
+            get { return IsSelectedField; }
+        }
+
+        #endregion
+
+        #region Constructor
 
         /// <summary>
         /// Constructor of class.
         /// </summary>
         /// <param name="game">The instance of game that is running.</param>
         /// <param name="player">The owner of the unit.</param>
-		/// <param name="name">The name of unit.</param>
-		/// <param name="life">The total life points.</param>
-		/// <param name="mana">The total mana points.</param>
-		/// <param name="strenght">The strenght attribute.</param>
-		/// <param name="agility">The agility attribute.</param>
-		/// <param name="vitality">The vittality attribute.</param>
-		/// <param name="magic">The magic attribute.</param>
-		/// <param name="dexterity">The dexterity attribute.</param>
-		public Unit(Game game, Player player, string name, int life, int mana, int strenght, int agility, int vitality, int magic, int dexterity)
+        /// <param name="position">The position of the unit.</param>
+        /// <param name="attributes">The attributes of the unit.</param>
+        /// <param name="orientation">The orientation of the unit.</param>
+        /// <param name="texture">The texture of the unit.</param>
+        /// <param name="name">The name of unit.</param>
+        /// <param name="life">The total life points.</param>
+        /// <param name="mana">The total mana points.</param>
+		public Unit(Game game, Player player, Vector2 position, UnitAttributes attributes, UnitOrientation orientation, Texture2D texture, String name, int life, int mana)
             : base(game)
 		{
+            this.PositionField = position;
+            this.AttributesField = attributes;
+            this.OrientationField = orientation;
+            this.UnitTextureField = texture;
             this.PlayerField = player;
             this.NameField = name;
-
-            this.MenuField = new UnitMenu(game, this);
 
             this.LifeField = life;
             this.FullLifeField = life;
@@ -312,13 +274,11 @@ namespace IRTaktiks.Components.Playables
             this.ManaField = mana;
             this.FullManaField = mana;
 
-            this.StrengthField = strenght;
-            this.AgilityField = agility;
-            this.VitalityField = vitality;
-            this.MagicField = magic;
-            this.DexterityField = dexterity;
-
             this.TimeField = 0;
+
+            this.IsSelectedField = false;
+
+            this.MenuField = new UnitMenu(game, this);
 		}
 
 		#endregion

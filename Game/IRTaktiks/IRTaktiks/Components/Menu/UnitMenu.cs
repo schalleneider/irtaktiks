@@ -18,11 +18,6 @@ namespace IRTaktiks.Components.Menu
 	public class UnitMenu : DrawableGameComponent
 	{
 		#region Properties
-
-		/// <summary>
-		/// The key-value collection used to determine the menu position.
-		/// </summary>
-		private static Dictionary<PlayerIndex, int> MenuIndex = new Dictionary<PlayerIndex,int>();
 			
 		/// <summary>
         /// The unit whose information will be displayed.
@@ -90,25 +85,17 @@ namespace IRTaktiks.Components.Menu
             this.LifeSpriteFont = SpriteFontManager.Instance.Chilopod12;
             this.ManaSpriteFont = SpriteFontManager.Instance.Chilopod12;
 
-			// Set the index of this menu.
-			if (!UnitMenu.MenuIndex.ContainsKey(this.Unit.Player.PlayerIndex))
-			{
-				UnitMenu.MenuIndex[this.Unit.Player.PlayerIndex] = 0;
-			}
-
 			// Player one informations.
 			if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
 			{
-				this.PositionField = new Vector2(0, 150 + (UnitMenu.MenuIndex[this.Unit.Player.PlayerIndex] * (TextureManager.Instance.UnitStatusAlive.Height + 5)));
+				this.PositionField = new Vector2(0, 125);
 			}
 
 			// Player two informations.
 			if (this.Unit.Player.PlayerIndex == PlayerIndex.Two)
 			{
-				this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.BackgroundMenu.Width, 150 + (UnitMenu.MenuIndex[this.Unit.Player.PlayerIndex] * (TextureManager.Instance.UnitStatusAlive.Height + 5)));
+				this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.BackgroundMenu.Width, 125);
 			}
-
-			UnitMenu.MenuIndex[this.Unit.Player.PlayerIndex]++;
 		}
 
 		#endregion
