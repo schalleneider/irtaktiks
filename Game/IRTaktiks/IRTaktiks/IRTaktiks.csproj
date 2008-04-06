@@ -76,9 +76,6 @@
     <Compile Include="Components\Screens\TitleScreen.cs" />
     <Compile Include="Input\EventArgs\CursorDownArgs.cs" />
     <Compile Include="Input\EventArgs\CursorUpArgs.cs" />
-    <Compile Include="Input\EventArgs\ObjectAddedArgs.cs" />
-    <Compile Include="Input\EventArgs\ObjectRemovedArgs.cs" />
-    <Compile Include="Input\EventArgs\ObjectUpdatedArgs.cs" />
     <Compile Include="Input\InputManager.cs" />
     <Compile Include="Listener\TuioClient.cs" />
     <Compile Include="Listener\TuioDump.cs" />
