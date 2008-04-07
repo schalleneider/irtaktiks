@@ -52,16 +52,18 @@ namespace IRTaktiks.Components.Managers
 
             this.KnightTextureField = game.Content.Load<Texture2D>("Characters/Knight");
 
-            this.BackgroundMenuField = game.Content.Load<Texture2D>("Sprites/BackgroundMenu");
-            this.PlayerOneStatusField = game.Content.Load<Texture2D>("Sprites/PlayerStatusBlue");
-            this.PlayerTwoStatusField = game.Content.Load<Texture2D>("Sprites/PlayerStatusRed");
+            this.BackgroundMenuField = game.Content.Load<Texture2D>("Sprites/Menu/Background");
 
-            this.UnitStatusAliveField = game.Content.Load<Texture2D>("Sprites/UnitStatusGreen");
-            this.UnitStatusDeadingField = game.Content.Load<Texture2D>("Sprites/UnitStatusRed");
-            this.UnitStatusDamagedField = game.Content.Load<Texture2D>("Sprites/UnitStatusYellow");
+            this.DefaultMenuItemField = game.Content.Load<Texture2D>("Sprites/Menu/Item");
+            this.SelectedMenuItemField = game.Content.Load<Texture2D>("Sprites/Menu/SelectedItem");
 
-            this.DefaultMenuItemField = game.Content.Load<Texture2D>("Sprites/DefaultMenuItem");
-            this.SelectedMenuItemField = game.Content.Load<Texture2D>("Sprites/SelectedMenuItem");
+            this.PlayerOneStatusField = game.Content.Load<Texture2D>("Sprites/Player/PlayerOneBackground");
+            this.PlayerTwoStatusField = game.Content.Load<Texture2D>("Sprites/Player/PlayerTwoBackground");
+
+            this.UnitStatusAliveField = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusAlive");
+            this.UnitStatusDeadingField = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusDeading");
+            this.UnitStatusDamagedField = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusDamaged");
+            this.UnitQuickStatusField = game.Content.Load<Texture2D>("Sprites/Unit/QuickStatus");
         }
 
         #endregion
@@ -158,6 +160,19 @@ namespace IRTaktiks.Components.Managers
         #region Units
 
         /// <summary>
+        /// The quick status background texture of the unit.
+        /// </summary>
+        private Texture2D UnitQuickStatusField;
+        
+        /// <summary>
+        /// The quick status background texture of the unit.
+        /// </summary>
+        public Texture2D UnitQuickStatus
+        {
+            get { return UnitQuickStatusField; }
+        }
+
+        /// <summary>
         /// The character texture of the knight's unit.
         /// </summary>
         private Texture2D KnightTextureField;
@@ -168,7 +183,6 @@ namespace IRTaktiks.Components.Managers
         public Texture2D KnightTexture
         {
             get { return KnightTextureField; }
-            set { KnightTextureField = value; }
         }
 
         /// <summary>
@@ -182,7 +196,6 @@ namespace IRTaktiks.Components.Managers
         public Texture2D WizardTexture
         {
             get { return WizardTextureField; }
-            set { WizardTextureField = value; }
         }
 
         #endregion
@@ -273,7 +286,7 @@ namespace IRTaktiks.Components.Managers
 
         #endregion
 
-        #region Unit Submenu
+        #region Actions
 
         /// <summary>
         /// The default texture for the menu item.

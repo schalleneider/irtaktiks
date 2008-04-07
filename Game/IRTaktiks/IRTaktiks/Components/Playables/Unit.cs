@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Logic;
 using IRTaktiks.Components.Menu;
+using IRTaktiks.Components.Managers;
+using IRTaktiks.Input;
+using IRTaktiks.Input.EventArgs;
 
 namespace IRTaktiks.Components.Playables
 {
@@ -240,6 +243,7 @@ namespace IRTaktiks.Components.Playables
         public bool IsSelected
         {
             get { return IsSelectedField; }
+            set { IsSelectedField = value; }
         }
 
         #endregion
@@ -279,6 +283,8 @@ namespace IRTaktiks.Components.Playables
             this.IsSelectedField = false;
 
             this.MenuField = new UnitMenu(game, this);
+
+            InputManager.Instance.CursorUp += new EventHandler<CursorUpArgs>(CursorUp_Handler); 
 		}
 
 		#endregion
@@ -314,7 +320,12 @@ namespace IRTaktiks.Components.Playables
 
             game.SpriteBatch.Begin();
 
+            // Draws the unit character.
             game.SpriteBatch.Draw(this.UnitTexture, this.Position, new Rectangle(0, 48 * (int)this.Orientation, 32, 48), Color.White);
+
+            // Draws the quick status.
+            Vector2 statusPosition = new Vector2(this.Position.X + (this.UnitTexture.Width / 2) - (TextureManager.Instance.UnitQuickStatus.Width / 2), this.Position.Y + 50);
+            game.SpriteBatch.Draw(TextureManager.Instance.UnitQuickStatus, statusPosition, Color.White);
 
             game.SpriteBatch.End();
 
@@ -322,5 +333,29 @@ namespace IRTaktiks.Components.Playables
         }
 
 		#endregion
-	}
+
+        #region Input Handling
+
+        /// <summary>
+        /// Handles the CursorUp event.
+        /// </summary>
+        /// <param name="sender">Always null.</param>
+        /// <param name="e">Data of event</param>
+        private void CursorUp_Handler(object sender, CursorUpArgs e)
+        {
+            // Touch was inside of the character.
+            if (((e.Position.X > this.Position.X) && e.Position.X < (this.Position.X + this.UnitTexture.Width)) &&
+                ((e.Position.Y > this.Position.Y) && e.Position.Y < (this.Position.Y + this.UnitTexture.Height)))
+            {
+                foreach (Unit unit in this.Player.Units)
+                {
+                    unit.IsSelected = false;
+                }
+                
+                this.IsSelected = true;
+            }
+        }
+
+        #endregion
+    }
 }

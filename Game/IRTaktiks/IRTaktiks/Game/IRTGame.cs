@@ -272,15 +272,32 @@ namespace IRTaktiks
 
 			MouseState mouseState = Mouse.GetState();
 
-			if (mouseState.LeftButton == ButtonState.Pressed)
-			{
-				InputManager.Instance.RaiseCursorDown(0, new Vector2(mouseState.X, mouseState.Y));
-				InputManager.Instance.RaiseCursorUp(0, new Vector2(mouseState.X, mouseState.Y));
-                System.Threading.Thread.Sleep(1000);
-			}
+            if (!mouseIsPressed)
+            {
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    mouseIsPressed = true;
+                    InputManager.Instance.RaiseCursorDown(0, new Vector2(mouseState.X, mouseState.Y));
+                }
+            }
+            else
+            {
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    mouseIsPressed = true;
+                    InputManager.Instance.RaiseCursorUpdate(0, new Vector2(mouseState.X, mouseState.Y));
+                }
+                else
+                {
+                    mouseIsPressed = false;
+                    InputManager.Instance.RaiseCursorUp(0, new Vector2(mouseState.X, mouseState.Y));
+                }
+            }
 
 			base.Update(gameTime);
 		}
+
+        private bool mouseIsPressed;
 
 		/// <summary>
 		/// This is called when the game should draw itself.
