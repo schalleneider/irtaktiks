@@ -80,7 +80,7 @@ namespace IRTaktiks.Components.Screens
         #region Input Events
 
         /// <summary>
-        /// Handler for the CursorUp event in this class.
+        /// Handles the CursorUp event.
         /// </summary>
         /// <param name="sender">Always null.</param>
         /// <param name="e">Data of event.</param>

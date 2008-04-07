@@ -127,54 +127,58 @@ namespace IRTaktiks.Components.Menu
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public override void Draw(GameTime gameTime)
 		{
-            IRTGame game = this.Game as IRTGame;
-
-            game.SpriteBatch.Begin();
-
-			// Set texture according the unit status.
-            if (this.Unit.IsStatusAlive)
+            // Draws the menu, only if the unit is selected
+            if (this.Unit.IsSelected)
             {
-				this.UnitTexture = TextureManager.Instance.UnitStatusAlive;
+                IRTGame game = this.Game as IRTGame;
+
+                game.SpriteBatch.Begin();
+
+                // Set texture according the unit status.
+                if (this.Unit.IsStatusAlive)
+                {
+                    this.UnitTexture = TextureManager.Instance.UnitStatusAlive;
+                }
+                if (this.Unit.IsStatusDamaged)
+                {
+                    this.UnitTexture = TextureManager.Instance.UnitStatusDamaged;
+                }
+                if (this.Unit.IsStatusDeading)
+                {
+                    this.UnitTexture = TextureManager.Instance.UnitStatusDeading;
+                }
+
+                // Draws the unit's status background.
+                game.SpriteBatch.Draw(this.UnitTexture, this.Position, Color.White);
+
+                // Get the unit's life points text.
+                string lifeInformation = String.Format("{0}/{1}", this.Unit.Life, this.Unit.FullLife);
+
+                // Get the unit's mana points text.
+                string manaInformation = String.Format("{0}/{1}", this.Unit.Mana, this.Unit.FullMana);
+
+                // Measure the texts size.
+                Vector2 nameSize = this.NameSpriteFont.MeasureString(this.Unit.Name);
+                Vector2 lifeSize = this.LifeSpriteFont.MeasureString(lifeInformation);
+                Vector2 manaSize = this.ManaSpriteFont.MeasureString(manaInformation);
+
+                // Calculate the position of the texts.
+                Vector2 namePosition = new Vector2(this.Position.X + this.UnitTexture.Width / 2 - nameSize.X / 2, this.Position.Y + 5);
+                Vector2 lifePosition = new Vector2(this.Position.X + this.UnitTexture.Width - lifeSize.X - 5, this.Position.Y + 30);
+                Vector2 manaPosition = new Vector2(this.Position.X + this.UnitTexture.Width - manaSize.X - 5, this.Position.Y + 53);
+
+                // Draws the name of the player.
+                game.SpriteBatch.DrawString(this.NameSpriteFont, this.Unit.Name, namePosition, Color.White);
+
+                // Draws the life points information.
+                game.SpriteBatch.DrawString(this.LifeSpriteFont, lifeInformation, lifePosition, Color.White);
+
+                // Draws the mana points information.
+                game.SpriteBatch.DrawString(this.ManaSpriteFont, manaInformation, manaPosition, Color.White);
+
+                game.SpriteBatch.End();
             }
-            if (this.Unit.IsStatusDamaged)
-            {
-				this.UnitTexture = TextureManager.Instance.UnitStatusDamaged;
-            }
-            if (this.Unit.IsStatusDeading)
-            {
-				this.UnitTexture = TextureManager.Instance.UnitStatusDeading;
-            }
 
-			// Draws the unit's status background.
-			game.SpriteBatch.Draw(this.UnitTexture, this.Position, Color.White);
-
-			// Get the unit's life points text.
-            string lifeInformation = String.Format("{0}/{1}", this.Unit.Life, this.Unit.FullLife);
-
-            // Get the unit's mana points text.
-            string manaInformation = String.Format("{0}/{1}", this.Unit.Mana, this.Unit.FullMana);
-
-			// Measure the texts size.
-			Vector2 nameSize = this.NameSpriteFont.MeasureString(this.Unit.Name);
-			Vector2 lifeSize = this.LifeSpriteFont.MeasureString(lifeInformation);
-            Vector2 manaSize = this.ManaSpriteFont.MeasureString(manaInformation);
-
-			// Calculate the position of the texts.
-            Vector2 namePosition = new Vector2(this.Position.X + this.UnitTexture.Width / 2 - nameSize.X / 2, this.Position.Y + 5);
-            Vector2 lifePosition = new Vector2(this.Position.X + this.UnitTexture.Width - lifeSize.X - 5, this.Position.Y + 30);
-            Vector2 manaPosition = new Vector2(this.Position.X + this.UnitTexture.Width - manaSize.X - 5, this.Position.Y + 53);
-
-			// Draws the name of the player.
-			game.SpriteBatch.DrawString(this.NameSpriteFont, this.Unit.Name, namePosition, Color.White);
-
-			// Draws the life points information.
-            game.SpriteBatch.DrawString(this.LifeSpriteFont, lifeInformation, lifePosition, Color.White);
-
-            // Draws the mana points information.
-            game.SpriteBatch.DrawString(this.ManaSpriteFont, manaInformation, manaPosition, Color.White);
-
-            game.SpriteBatch.End();
-            
             base.Draw(gameTime);
 		}
 

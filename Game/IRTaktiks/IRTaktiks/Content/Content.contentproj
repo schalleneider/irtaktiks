@@ -80,51 +80,51 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\DefaultMenuItem.png">
-      <Name>DefaultMenuItem</Name>
+    <Compile Include="Sprites\Menu\Item.png">
+      <Name>Item</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Sprites\SelectedMenuItem.png">
-      <Name>SelectedMenuItem</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Sprites\BackgroundMenu.png">
-      <Name>BackgroundMenu</Name>
+    <Compile Include="Sprites\Menu\SelectedItem.png">
+      <Name>SelectedItem</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\PlayerStatusBlue.png">
-      <Name>PlayerStatusBlue</Name>
+    <Compile Include="Sprites\Menu\Background.png">
+      <Name>Background</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\PlayerStatusRed.png">
-      <Name>PlayerStatusRed</Name>
+    <Compile Include="Sprites\Player\PlayerOneBackground.png">
+      <Name>PlayerOneBackground</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\UnitStatusGreen.png">
-      <Name>UnitStatusGreen</Name>
+    <Compile Include="Sprites\Player\PlayerTwoBackground.png">
+      <Name>PlayerTwoBackground</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Sprites\UnitStatusRed.png">
-      <Name>UnitStatusRed</Name>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Unit\FullStatusAlive.png">
+      <Name>FullStatusAlive</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Sprites\UnitStatusYellow.png">
-      <Name>UnitStatusYellow</Name>
+    <Compile Include="Sprites\Unit\FullStatusDeading.png">
+      <Name>FullStatusDeading</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Unit\FullStatusDamaged.png">
+      <Name>FullStatusDamaged</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -168,6 +168,13 @@
     </Compile>
     <Compile Include="Characters\Mage.png">
       <Name>Mage</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Unit\QuickStatus.png">
+      <Name>QuickStatus</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
