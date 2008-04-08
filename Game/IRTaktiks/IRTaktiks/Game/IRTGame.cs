@@ -25,12 +25,12 @@ namespace IRTaktiks
         /// <summary>
         /// Width of the window.
         /// </summary>
-        public const int Width = 1024;
+        public const int Width = 5 * 224; // 5 * 256 = 1920
         
         /// <summary>
         /// Height of the window.
         /// </summary>
-        public const int Height = 768;
+        public const int Height = 4 * 224; // 4 * 256 = 1024
 
         /// <summary>
         /// Indicates if the game will be started at fullscreen mode.
@@ -256,7 +256,9 @@ namespace IRTaktiks
 			base.UnloadContent();
 		}
 
-		/// <summary>
+		private bool mouseIsPressed;
+        
+        /// <summary>
 		/// Allows the game to run logic such as updating the world,
 		/// checking for collisions, gathering input, and playing audio.
 		/// </summary>
@@ -296,8 +298,6 @@ namespace IRTaktiks
 
 			base.Update(gameTime);
 		}
-
-        private bool mouseIsPressed;
 
 		/// <summary>
 		/// This is called when the game should draw itself.

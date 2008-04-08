@@ -63,6 +63,8 @@ namespace IRTaktiks.Components.Managers
             this.UnitStatusAliveField = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusAlive");
             this.UnitStatusDeadingField = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusDeading");
             this.UnitStatusDamagedField = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusDamaged");
+
+            this.SelectedUnitArrowField = game.Content.Load<Texture2D>("Sprites/Unit/Arrow");
             this.UnitQuickStatusField = game.Content.Load<Texture2D>("Sprites/Unit/QuickStatus");
         }
 
@@ -159,6 +161,19 @@ namespace IRTaktiks.Components.Managers
 
         #region Units
 
+        /// <summary>
+        /// The arrow that points to the selected unit.
+        /// </summary>
+        private Texture2D SelectedUnitArrowField;
+
+        /// <summary>
+        /// The arrow that points to the selected unit.
+        /// </summary>
+        public Texture2D SelectedUnitArrow
+        {
+            get { return SelectedUnitArrowField; }
+        }
+        
         /// <summary>
         /// The quick status background texture of the unit.
         /// </summary>
