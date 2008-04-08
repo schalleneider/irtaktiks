@@ -327,6 +327,13 @@ namespace IRTaktiks.Components.Playables
             Vector2 statusPosition = new Vector2(this.Position.X + (this.UnitTexture.Width / 2) - (TextureManager.Instance.UnitQuickStatus.Width / 2), this.Position.Y + 50);
             game.SpriteBatch.Draw(TextureManager.Instance.UnitQuickStatus, statusPosition, Color.White);
 
+            // Draws the arrow, if the unit is selected.
+            if (this.IsSelected)
+            {
+                Vector2 arrowPosition = new Vector2(this.Position.X + (this.UnitTexture.Width / 2) - (TextureManager.Instance.SelectedUnitArrow.Width / 2), this.Position.Y - TextureManager.Instance.SelectedUnitArrow.Height);
+                game.SpriteBatch.Draw(TextureManager.Instance.SelectedUnitArrow, arrowPosition, Color.White);
+            }
+
             game.SpriteBatch.End();
 
             base.Draw(gameTime);
@@ -347,6 +354,7 @@ namespace IRTaktiks.Components.Playables
             if (((e.Position.X > this.Position.X) && e.Position.X < (this.Position.X + this.UnitTexture.Width)) &&
                 ((e.Position.Y > this.Position.Y) && e.Position.Y < (this.Position.Y + this.UnitTexture.Height)))
             {
+                // Unselect the player's units.                
                 foreach (Unit unit in this.Player.Units)
                 {
                     unit.IsSelected = false;
