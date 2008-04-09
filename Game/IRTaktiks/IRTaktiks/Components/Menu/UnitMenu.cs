@@ -153,7 +153,7 @@ namespace IRTaktiks.Components.Menu
 
                 // Get the unit's life points text.
                 string lifeInformation = String.Format("{0}/{1}", this.Unit.Life, this.Unit.FullLife);
-
+                
                 // Get the unit's mana points text.
                 string manaInformation = String.Format("{0}/{1}", this.Unit.Mana, this.Unit.FullMana);
 
@@ -175,6 +175,25 @@ namespace IRTaktiks.Components.Menu
 
                 // Draws the mana points information.
                 game.SpriteBatch.DrawString(this.ManaSpriteFont, manaInformation, manaPosition, Color.White);
+
+                // Measure the maximum width and height for the bars.
+                int barMaxWidth = 136;
+                int barMaxHeight = 3;
+
+                // Calculates the position of the life, mana and time bars
+                Vector2 lifeBarPosition = new Vector2(this.Position.X + 7, this.Position.Y + 46);
+                Vector2 manaBarPosition = new Vector2(this.Position.X + 7, this.Position.Y + 69);
+                Vector2 timeBarPosition = new Vector2(this.Position.X + 7, this.Position.Y + 91);
+
+                // Calculates the area of the life, mana and time bars, based in unit's values.
+                Rectangle lifeBar = new Rectangle((int)lifeBarPosition.X, (int)lifeBarPosition.Y, (int)((barMaxWidth * this.Unit.Life) / this.Unit.FullLife), barMaxHeight);
+                Rectangle manaBar = new Rectangle((int)manaBarPosition.X, (int)manaBarPosition.Y, (int)((barMaxWidth * this.Unit.Mana) / this.Unit.FullMana), barMaxHeight);
+                Rectangle timeBar = new Rectangle((int)timeBarPosition.X, (int)timeBarPosition.Y, (int)(barMaxWidth * this.Unit.Time), barMaxHeight);
+
+                // Draws the life, mana and time bars.
+                game.SpriteBatch.Draw(TextureManager.Instance.LifeBar, lifeBar, Color.White);
+                game.SpriteBatch.Draw(TextureManager.Instance.ManaBar, manaBar, Color.White);
+                game.SpriteBatch.Draw(TextureManager.Instance.TimeBar, timeBar, Color.White);
 
                 game.SpriteBatch.End();
             }
