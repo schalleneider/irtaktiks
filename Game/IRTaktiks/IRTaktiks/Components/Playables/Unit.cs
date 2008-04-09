@@ -88,7 +88,7 @@ namespace IRTaktiks.Components.Playables
         /// </summary>
         public bool IsStatusAlive
         {
-            get { return (this.Life / this.FullLife) > 0.5; }
+            get { return ((float)this.Life / (float)this.FullLife) > 0.5; }
         }
         
         /// <summary>
@@ -96,7 +96,7 @@ namespace IRTaktiks.Components.Playables
         /// </summary>
         public bool IsStatusDamaged
         {
-            get { return ((this.Life / this.FullLife) <= 0.5 && ((this.Life / this.FullLife) >= 0.1)); }
+            get { return (((float)this.Life / (float)this.FullLife) <= 0.5 && (((float)this.Life / (float)this.FullLife) >= 0.1)); }
         }
        
         /// <summary>
@@ -104,7 +104,7 @@ namespace IRTaktiks.Components.Playables
         /// </summary>
         public bool IsStatusDeading
         {
-            get { return (this.Life / this.FullLife) < 0.1; }
+            get { return ((float)this.Life / (float)this.FullLife) < 0.1; }
         }
 
         #endregion
@@ -272,13 +272,13 @@ namespace IRTaktiks.Components.Playables
             this.PlayerField = player;
             this.NameField = name;
 
-            this.LifeField = life;
+            this.LifeField = life - 1000;
             this.FullLifeField = life;
 
-            this.ManaField = mana;
+            this.ManaField = mana - 500;
             this.FullManaField = mana;
 
-            this.TimeField = 0;
+            this.TimeField = 0.5;
 
             this.IsSelectedField = false;
 
@@ -327,18 +327,21 @@ namespace IRTaktiks.Components.Playables
             Vector2 statusPosition = new Vector2(this.Position.X + (this.UnitTexture.Width / 2) - (TextureManager.Instance.UnitQuickStatus.Width / 2), this.Position.Y + 50);
             game.SpriteBatch.Draw(TextureManager.Instance.UnitQuickStatus, statusPosition, Color.White);
 
-            // Draws the life, mana and time bar.
+            // Measure the maximum width and height for the bars.
             int barMaxWidth = TextureManager.Instance.UnitQuickStatus.Width - 2;
             int barMaxHeight = (TextureManager.Instance.UnitQuickStatus.Height - 2) / 3;
 
+            // Calculates the position of the life, mana and time bars
             Vector2 lifePosition = new Vector2(statusPosition.X + 1, statusPosition.Y + 1);
             Vector2 manaPosition = new Vector2(statusPosition.X + 1, statusPosition.Y + 2 + (1 * barMaxHeight));
             Vector2 timePosition = new Vector2(statusPosition.X + 1, statusPosition.Y + 3 + (2 * barMaxHeight));
 
-            Rectangle lifeBar = new Rectangle((int)lifePosition.X, (int)lifePosition.Y, barMaxWidth, barMaxHeight);
-            Rectangle manaBar = new Rectangle((int)manaPosition.X, (int)manaPosition.Y, barMaxWidth, barMaxHeight);
-            Rectangle timeBar = new Rectangle((int)timePosition.X, (int)timePosition.Y, barMaxWidth, barMaxHeight);
+            // Calculates the area of the life, mana and time bars, based in unit's values.
+            Rectangle lifeBar = new Rectangle((int)lifePosition.X, (int)lifePosition.Y, (int)((barMaxWidth * this.Life) / this.FullLife), barMaxHeight);
+            Rectangle manaBar = new Rectangle((int)manaPosition.X, (int)manaPosition.Y, (int)((barMaxWidth * this.Mana) / this.FullMana), barMaxHeight);
+            Rectangle timeBar = new Rectangle((int)timePosition.X, (int)timePosition.Y, (int)(barMaxWidth * this.Time), barMaxHeight);
 
+            // Draws the life, mana and time bars.
             game.SpriteBatch.Draw(TextureManager.Instance.LifeBar, lifeBar, Color.White);
             game.SpriteBatch.Draw(TextureManager.Instance.ManaBar, manaBar, Color.White);
             game.SpriteBatch.Draw(TextureManager.Instance.TimeBar, timeBar, Color.White);
