@@ -42,8 +42,10 @@ namespace IRTaktiks.Components.Managers
         public void Initialize(Game game)
         {
             this.TitleScreenField = game.Content.Load<Texture2D>("Sprites/TitleScreen");
-            
-            this.TerrainHeightmapField = game.Content.Load<Texture2D>("Terrains/Terrain");
+
+            this.ConfigBackgroundField = game.Content.Load<Texture2D>("Sprites/Config/Background");
+
+            // this.TerrainHeightmapField = game.Content.Load<Texture2D>("Terrains/Terrain");
 
             this.GrassTerrainField = game.Content.Load<Texture2D>("Textures/Grass");
             this.RockTerrainField = game.Content.Load<Texture2D>("Textures/Rock");
@@ -85,6 +87,23 @@ namespace IRTaktiks.Components.Managers
         public Texture2D TitleScreen
         {
             get { return TitleScreenField; }
+        }
+
+        #endregion
+
+        #region Config Screen
+
+        /// <summary>
+        /// The background of the config screen.
+        /// </summary>
+        private Texture2D ConfigBackgroundField;
+
+        /// <summary>
+        /// The background of the config screen.
+        /// </summary>
+        public Texture2D ConfigBackground
+        {
+            get { return ConfigBackgroundField; }
         }
 
         #endregion
