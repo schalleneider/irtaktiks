@@ -33,7 +33,7 @@ namespace IRTaktiks.Components.Screens
         /// <param name="priority">Drawing priority of screen. Higher indicates that the screen will be at the top of the others.</param>
         public ConfigScreen(Game game, int priority)
             : base(game, priority)
-		{
+        {
 		}
 
 		#endregion
