@@ -68,6 +68,10 @@ namespace IRTaktiks.Components.Managers
 
             this.SelectedUnitArrowField = game.Content.Load<Texture2D>("Sprites/Unit/Arrow");
             this.UnitQuickStatusField = game.Content.Load<Texture2D>("Sprites/Unit/QuickStatus");
+
+            this.LifeBarField = game.Content.Load<Texture2D>("Sprites/Unit/LifeBar");
+            this.ManaBarField = game.Content.Load<Texture2D>("Sprites/Unit/ManaBar");
+            this.TimeBarField = game.Content.Load<Texture2D>("Sprites/Unit/TimeBar");
         }
 
         #endregion
@@ -279,6 +283,30 @@ namespace IRTaktiks.Components.Managers
 
         #region Unit Menu
 
+        private Texture2D LifeBarField;
+
+        public Texture2D LifeBar
+        {
+            get { return LifeBarField; }
+            set { LifeBarField = value; }
+        }
+
+        private Texture2D ManaBarField;
+
+        public Texture2D ManaBar
+        {
+            get { return ManaBarField; }
+            set { ManaBarField = value; }
+        }
+
+        private Texture2D TimeBarField;
+
+        public Texture2D TimeBar
+        {
+            get { return TimeBarField; }
+            set { TimeBarField = value; }
+        }
+                        
         /// <summary>
         /// The status texture for the unit when is alive. HP > 50%
         /// </summary>
@@ -320,7 +348,7 @@ namespace IRTaktiks.Components.Managers
 
         #endregion
 
-        #region Actions
+        #region Action Menu
 
         /// <summary>
         /// The default texture for the menu item.
