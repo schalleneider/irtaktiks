@@ -272,13 +272,13 @@ namespace IRTaktiks.Components.Playables
             this.PlayerField = player;
             this.NameField = name;
 
-            this.LifeField = life - 1000;
+            this.LifeField = life;
             this.FullLifeField = life;
 
-            this.ManaField = mana - 500;
+            this.ManaField = mana;
             this.FullManaField = mana;
 
-            this.TimeField = 0.5;
+            this.TimeField = 0;
 
             this.IsSelectedField = false;
 
