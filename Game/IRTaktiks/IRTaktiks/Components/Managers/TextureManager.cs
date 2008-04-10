@@ -45,7 +45,7 @@ namespace IRTaktiks.Components.Managers
 
             this.ConfigBackgroundField = game.Content.Load<Texture2D>("Sprites/Config/Background");
 
-            //this.TerrainHeightmapField = game.Content.Load<Texture2D>("Terrains/Terrain");
+            this.TerrainHeightmapField = game.Content.Load<Texture2D>("Terrains/Terrain");
 
             this.GrassTerrainField = game.Content.Load<Texture2D>("Textures/Grass");
             this.RockTerrainField = game.Content.Load<Texture2D>("Textures/Rock");
