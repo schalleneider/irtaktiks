@@ -84,15 +84,15 @@ namespace IRTaktiks.Components.Menu
 			{
 				this.PositionField = new Vector2(0, 0);
 
-				this.PlayerTexture = TextureManager.Instance.PlayerOneStatus;
+				this.PlayerTexture = TextureManager.Instance.Sprites.Player.PlayerOneBackground;
 			}
 
 			// Player two informations.
 			if (this.Player.PlayerIndex == PlayerIndex.Two)
 			{
-				this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.BackgroundMenu.Width, 0);
+				this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.Background.Width, 0);
 
-				this.PlayerTexture = TextureManager.Instance.PlayerTwoStatus;
+                this.PlayerTexture = TextureManager.Instance.Sprites.Player.PlayerTwoBackground;
 			}
 		}
 
@@ -130,7 +130,7 @@ namespace IRTaktiks.Components.Menu
             game.SpriteBatch.Begin();
 			
 			// Draws the background of menu.
-            game.SpriteBatch.Draw(TextureManager.Instance.BackgroundMenu, this.Position, Color.White);
+            game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Menu.Background, this.Position, Color.White);
 			
 			// Draws the player status background.
 			game.SpriteBatch.Draw(this.PlayerTexture, this.Position, Color.White);

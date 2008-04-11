@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Content;
 
 namespace IRTaktiks.Components.Managers
 {
+    /// <summary>
+    /// Manager of textures.
+    /// </summary>
     public class TextureManager
     {
         #region Singleton
@@ -34,6 +37,602 @@ namespace IRTaktiks.Components.Managers
 
         #endregion
 
+        #region Folders
+
+        #region Characters
+
+        /// <summary>
+        /// Abstration for Characters folder.
+        /// </summary>
+        public class CharactersFolder
+        {
+            #region Folders
+
+            #endregion
+
+            #region Properties
+
+            #endregion
+
+            #region Textures
+
+            /// <summary>
+            /// Texture of Characters/Knight.
+            /// </summary>
+            private Texture2D KnightField;
+
+            /// <summary>
+            /// Texture of Characters/Knight.
+            /// </summary>
+            public Texture2D Knight
+            {
+                get { return KnightField; }
+                set { KnightField = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Wizard.
+            /// </summary>
+            private Texture2D WizardField;
+
+            /// <summary>
+            /// Texture of Characters/Wizard.
+            /// </summary>
+            public Texture2D Wizard
+            {
+                get { return WizardField; }
+                set { WizardField = value; }
+            }
+
+            #endregion
+        }
+
+        #endregion
+
+        #region Sprites
+
+        /// <summary>
+        /// Abstration for Sprites folder.
+        /// </summary>
+        public class SpritesFolder
+        {
+            #region Folders
+
+            #region Sprites/Config
+
+            /// <summary>
+            /// Abstration for Sprites/Config folder.
+            /// </summary>
+            public class ConfigFolder
+            {
+                #region Folders
+
+                #endregion
+
+                #region Properties
+
+                #endregion
+
+                #region Textures
+
+                /// <summary>
+                /// Texture of Sprites/Config/Background.
+                /// </summary>
+                private Texture2D BackgroundField;
+
+                /// <summary>
+                /// Texture of Sprites/Config/Background.
+                /// </summary>
+                public Texture2D Background
+                {
+                    get { return BackgroundField; }
+                    set { BackgroundField = value; }
+                }
+
+                #endregion
+            }
+
+            #endregion
+
+            #region Sprites/Menu
+
+            /// <summary>
+            /// Abstration for Sprites/Menu folder.
+            /// </summary>
+            public class MenuFolder
+            {
+                #region Folders
+
+                #endregion
+
+                #region Properties
+
+                #endregion
+
+                #region Textures
+                
+                /// <summary>
+                /// Texture of Sprites/Menu/Background.
+                /// </summary>
+                private Texture2D BackgroundField;
+                
+                /// <summary>
+                /// Texture of Sprites/Menu/Background.
+                /// </summary>
+                public Texture2D Background
+                {
+                    get { return BackgroundField; }
+                    set { BackgroundField = value; }
+                }
+                
+                /// <summary>
+                /// Texture of Sprites/Menu/Item.
+                /// </summary>
+                private Texture2D ItemField;
+                
+                /// <summary>
+                /// Texture of Sprites/Menu/Item.
+                /// </summary>
+                public Texture2D Item
+                {
+                    get { return ItemField; }
+                    set { ItemField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Menu/SelectedItem.
+                /// </summary>
+                private Texture2D SelectedItemField;
+               
+                /// <summary>
+                /// Texture of Sprites/Menu/SelectedItem.
+                /// </summary>
+                public Texture2D SelectedItem
+                {
+                    get { return SelectedItemField; }
+                    set { SelectedItemField = value; }
+                }
+
+                #endregion
+            }
+
+            #endregion
+
+            #region Sprites/Player
+
+            /// <summary>
+            /// Abstration for Sprites/Player folder.
+            /// </summary>
+            public class PlayerFolder
+            {
+                #region Folders
+
+                #endregion
+
+                #region Properties
+
+                #endregion
+
+                #region Textures
+
+                /// <summary>
+                /// Texture of Sprites/Player/PlayerOneBackground.
+                /// </summary>
+                private Texture2D PlayerOneBackgroundField;
+
+                /// <summary>
+                /// Texture of Sprites/Player/PlayerOneBackground.
+                /// </summary>
+                public Texture2D PlayerOneBackground
+                {
+                    get { return PlayerOneBackgroundField; }
+                    set { PlayerOneBackgroundField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Player/PlayerTwoBackground.
+                /// </summary>
+                private Texture2D PlayerTwoBackgroundField;
+
+                /// <summary>
+                /// Texture of Sprites/Player/PlayerTwoBackground.
+                /// </summary>
+                public Texture2D PlayerTwoBackground
+                {
+                    get { return PlayerTwoBackgroundField; }
+                    set { PlayerTwoBackgroundField = value; }
+                }
+
+                #endregion
+            }
+
+            #endregion
+
+            #region Sprites/Unit
+
+            /// <summary>
+            /// Abstration for Sprites/Unit folder.
+            /// </summary>
+            public class UnitFolder
+            {
+                #region Folders
+
+                #endregion
+
+                #region Properties
+
+                #endregion
+
+                #region Textures
+
+                /// <summary>
+                /// Texture of Sprites/Unit/Arrow.
+                /// </summary>
+                private Texture2D ArrowField;
+
+                /// <summary>
+                /// Texture of Sprites/Unit/Arrow.
+                /// </summary>
+                public Texture2D Arrow
+                {
+                    get { return ArrowField; }
+                    set { ArrowField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Unit/FullStatusAlive.
+                /// </summary>
+                private Texture2D FullStatusAliveField;
+
+                /// <summary>
+                /// Texture of Sprites/Unit/FullStatusAlive.
+                /// </summary>
+                public Texture2D FullStatusAlive
+                {
+                    get { return FullStatusAliveField; }
+                    set { FullStatusAliveField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Unit/FullStatusDamaged.
+                /// </summary>
+                private Texture2D FullStatusDamagedField;
+
+                /// <summary>
+                /// Texture of Sprites/Unit/FullStatusDamaged.
+                /// </summary>
+                public Texture2D FullStatusDamaged
+                {
+                    get { return FullStatusDamagedField; }
+                    set { FullStatusDamagedField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Unit/FullStatusDeading.
+                /// </summary>
+                private Texture2D FullStatusDeadingField;
+
+                /// <summary>
+                /// Texture of Sprites/Unit/FullStatusDeading.
+                /// </summary>
+                public Texture2D FullStatusDeading
+                {
+                    get { return FullStatusDeadingField; }
+                    set { FullStatusDeadingField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Unit/LifeBar.
+                /// </summary>
+                private Texture2D LifeBarField;
+
+                /// <summary>
+                /// Texture of Sprites/Unit/LifeBar.
+                /// </summary>
+                public Texture2D LifeBar
+                {
+                    get { return LifeBarField; }
+                    set { LifeBarField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Unit/ManaBar.
+                /// </summary>
+                private Texture2D ManaBarField;
+
+                /// <summary>
+                /// Texture of Sprites/Unit/ManaBar.
+                /// </summary>
+                public Texture2D ManaBar
+                {
+                    get { return ManaBarField; }
+                    set { ManaBarField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Unit/QuickStatus.
+                /// </summary>
+                private Texture2D QuickStatusField;
+
+                /// <summary>
+                /// Texture of Sprites/Unit/QuickStatus.
+                /// </summary>
+                public Texture2D QuickStatus
+                {
+                    get { return QuickStatusField; }
+                    set { QuickStatusField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Unit/TimeBar.
+                /// </summary>
+                private Texture2D TimeBarField;
+
+                /// <summary>
+                /// Texture of Sprites/Unit/TimeBar.
+                /// </summary>
+                public Texture2D TimeBar
+                {
+                    get { return TimeBarField; }
+                    set { TimeBarField = value; }
+                }
+
+                #endregion
+            }
+
+            #endregion
+
+            #endregion
+
+            #region Properties
+           
+            /// <summary>
+            /// Abstration for Sprites/Config folder.
+            /// </summary>
+            private ConfigFolder ConfigField;
+            
+            /// <summary>
+            /// Abstration for Sprites/Config folder.
+            /// </summary>
+            public ConfigFolder Config
+            {
+                get { if (ConfigField == null) ConfigField = new ConfigFolder(); return ConfigField; }
+            }
+            
+            /// <summary>
+            /// Abstration for Sprites/Menu folder.
+            /// </summary>
+            private MenuFolder MenuField;
+            
+            /// <summary>
+            /// Abstration for Sprites/Menu folder.
+            /// </summary>
+            public MenuFolder Menu
+            {
+                get { if (MenuField == null) MenuField = new MenuFolder(); return MenuField; }
+            }
+            
+            /// <summary>
+            /// Abstration for Sprites/Player folder.
+            /// </summary>
+            private PlayerFolder PlayerField;
+            
+            /// <summary>
+            /// Abstration for Sprites/Player folder.
+            /// </summary>
+            public PlayerFolder Player
+            {
+                get { if (PlayerField == null) PlayerField = new PlayerFolder(); return PlayerField; }
+            }
+            
+            /// <summary>
+            /// Abstration for Sprites/Unit folder.
+            /// </summary>
+            private UnitFolder UnitField;
+            
+            /// <summary>
+            /// Abstration for Sprites/Unit folder.
+            /// </summary>
+            public UnitFolder Unit
+            {
+                get { if (UnitField == null) UnitField = new UnitFolder(); return UnitField; }
+            }
+            
+            #endregion
+
+            #region Textures
+
+            /// <summary>
+            /// Texture of Sprites/TitleScreen.
+            /// </summary>
+            private Texture2D TitleScreenField;
+
+            /// <summary>
+            /// Texture of Sprites/TitleScreen.
+            /// </summary>
+            public Texture2D TitleScreen
+            {
+                get { return TitleScreenField; }
+                set { TitleScreenField = value; }
+            }
+
+            #endregion
+        }
+
+        #endregion
+
+        #region Terrains
+        
+        /// <summary>
+        /// Abstration for Terrains folder.
+        /// </summary>
+        public class TerrainsFolder
+        {
+            #region Folders
+
+            #endregion
+
+            #region Properties
+
+            #endregion
+
+            #region Textures
+
+            /// <summary>
+            /// Texture of Terrains/Terrain.
+            /// </summary>
+            private Texture2D TerrainField;
+
+            /// <summary>
+            /// Texture of Terrains/Terrain.
+            /// </summary>
+            public Texture2D Terrain
+            {
+                get { return TerrainField; }
+                set { TerrainField = value; }
+            }
+
+            #endregion
+        }
+
+        #endregion
+
+        #region Textures
+
+        /// <summary>
+        /// Abstration for Textures folder.
+        /// </summary>
+        public class TexturesFolder
+        {
+            #region Folders
+
+            #endregion
+
+            #region Properties
+
+            #endregion
+
+            #region Textures
+
+            /// <summary>
+            /// Texture of Textures/Grass.
+            /// </summary>
+            private Texture2D GrassField;
+
+            /// <summary>
+            /// Texture of Textures/Grass.
+            /// </summary>
+            public Texture2D Grass
+            {
+                get { return GrassField; }
+                set { GrassField = value; }
+            }
+
+            /// <summary>
+            /// Texture of Textures/Rock.
+            /// </summary>
+            private Texture2D RockField;
+
+            /// <summary>
+            /// Texture of Textures/Rock.
+            /// </summary>
+            public Texture2D Rock
+            {
+                get { return RockField; }
+                set { RockField = value; }
+            }
+
+            /// <summary>
+            /// Texture of Textures/Sand.
+            /// </summary>
+            private Texture2D SandField;
+
+            /// <summary>
+            /// Texture of Textures/Sand.
+            /// </summary>
+            public Texture2D Sand
+            {
+                get { return SandField; }
+                set { SandField = value; }
+            }
+
+            /// <summary>
+            /// Texture of Textures/Snow.
+            /// </summary>
+            private Texture2D SnowField;
+
+            /// <summary>
+            /// Texture of Textures/Snow.
+            /// </summary>
+            public Texture2D Snow
+            {
+                get { return SnowField; }
+                set { SnowField = value; }
+            }
+
+            #endregion
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Abstraction for the Characters folder.
+        /// </summary>
+        private CharactersFolder CharactersField;
+
+        /// <summary>
+        /// Abstraction for the Characters folder.
+        /// </summary>
+        public CharactersFolder Characters
+        {
+            get { if (CharactersField == null) CharactersField = new CharactersFolder(); return CharactersField; }
+        }
+
+        /// <summary>
+        /// Abstraction for the Sprites folder.
+        /// </summary>
+        private SpritesFolder SpritesField;
+
+        /// <summary>
+        /// Abstraction for the Sprites folder.
+        /// </summary>
+        public SpritesFolder Sprites
+        {
+            get { if (SpritesField == null) SpritesField = new SpritesFolder(); return SpritesField; }
+        }
+
+        /// <summary>
+        /// Abstraction for the Terrains folder.
+        /// </summary>
+        private TerrainsFolder TerrainsField;
+
+        /// <summary>
+        /// Abstraction for the Terrains folder.
+        /// </summary>
+        public TerrainsFolder Terrains
+        {
+            get { if (TerrainsField == null) TerrainsField = new TerrainsFolder(); return TerrainsField; }
+        }
+
+        /// <summary>
+        /// Abstraction for the Textures folder.
+        /// </summary>
+        private TexturesFolder TexturesField;
+
+        /// <summary>
+        /// Abstraction for the Textures folder.
+        /// </summary>
+        public TexturesFolder Textures
+        {
+            get { if (TexturesField == null) TexturesField = new TexturesFolder(); return TexturesField; }
+        }
+
+        #endregion
+
         #region Initialize
 
         /// <summary>
@@ -41,342 +640,36 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         public void Initialize(Game game)
         {
-            this.TitleScreenField = game.Content.Load<Texture2D>("Sprites/TitleScreen");
+            this.Characters.Knight = game.Content.Load<Texture2D>("Characters/Knight");
+            this.Characters.Wizard = game.Content.Load<Texture2D>("Characters/Wizard");
 
-            this.ConfigBackgroundField = game.Content.Load<Texture2D>("Sprites/Config/Background");
+            this.Sprites.Config.Background = game.Content.Load<Texture2D>("Sprites/Config/Background");
+            
+            this.Sprites.Menu.Background = game.Content.Load<Texture2D>("Sprites/Menu/Background");
+            this.Sprites.Menu.Item = game.Content.Load<Texture2D>("Sprites/Menu/Item");
+            this.Sprites.Menu.SelectedItem = game.Content.Load<Texture2D>("Sprites/Menu/SelectedItem");
 
-            this.TerrainHeightmapField = game.Content.Load<Texture2D>("Terrains/Terrain");
+            this.Sprites.Player.PlayerOneBackground = game.Content.Load<Texture2D>("Sprites/Player/PlayerOneBackground");
+            this.Sprites.Player.PlayerTwoBackground = game.Content.Load<Texture2D>("Sprites/Player/PlayerTwoBackground");
 
-            this.GrassTerrainField = game.Content.Load<Texture2D>("Textures/Grass");
-            this.RockTerrainField = game.Content.Load<Texture2D>("Textures/Rock");
-            this.SandTerrainField = game.Content.Load<Texture2D>("Textures/Sand");
-            this.SnowTerrainField = game.Content.Load<Texture2D>("Textures/Snow");
+            this.Sprites.Unit.Arrow = game.Content.Load<Texture2D>("Sprites/Unit/Arrow");
+            this.Sprites.Unit.FullStatusAlive = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusAlive");
+            this.Sprites.Unit.FullStatusDamaged = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusDamaged");
+            this.Sprites.Unit.FullStatusDeading = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusDeading");
+            this.Sprites.Unit.LifeBar = game.Content.Load<Texture2D>("Sprites/Unit/LifeBar");
+            this.Sprites.Unit.ManaBar = game.Content.Load<Texture2D>("Sprites/Unit/ManaBar");
+            this.Sprites.Unit.QuickStatus = game.Content.Load<Texture2D>("Sprites/Unit/QuickStatus");
+            this.Sprites.Unit.TimeBar = game.Content.Load<Texture2D>("Sprites/Unit/TimeBar");
+            
+            this.Sprites.TitleScreen = game.Content.Load<Texture2D>("Sprites/TitleScreen");
 
-            this.KnightTextureField = game.Content.Load<Texture2D>("Characters/Knight");
+            this.Terrains.Terrain = game.Content.Load<Texture2D>("Terrains/Terrain");
 
-            this.BackgroundMenuField = game.Content.Load<Texture2D>("Sprites/Menu/Background");
-
-            this.DefaultMenuItemField = game.Content.Load<Texture2D>("Sprites/Menu/Item");
-            this.SelectedMenuItemField = game.Content.Load<Texture2D>("Sprites/Menu/SelectedItem");
-
-            this.PlayerOneStatusField = game.Content.Load<Texture2D>("Sprites/Player/PlayerOneBackground");
-            this.PlayerTwoStatusField = game.Content.Load<Texture2D>("Sprites/Player/PlayerTwoBackground");
-
-            this.UnitStatusAliveField = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusAlive");
-            this.UnitStatusDeadingField = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusDeading");
-            this.UnitStatusDamagedField = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusDamaged");
-
-            this.SelectedUnitArrowField = game.Content.Load<Texture2D>("Sprites/Unit/Arrow");
-            this.UnitQuickStatusField = game.Content.Load<Texture2D>("Sprites/Unit/QuickStatus");
-
-            this.LifeBarField = game.Content.Load<Texture2D>("Sprites/Unit/LifeBar");
-            this.ManaBarField = game.Content.Load<Texture2D>("Sprites/Unit/ManaBar");
-            this.TimeBarField = game.Content.Load<Texture2D>("Sprites/Unit/TimeBar");
+            this.Textures.Grass = game.Content.Load<Texture2D>("Textures/Grass");
+            this.Textures.Rock = game.Content.Load<Texture2D>("Textures/Rock");
+            this.Textures.Sand = game.Content.Load<Texture2D>("Textures/Sand");
+            this.Textures.Snow = game.Content.Load<Texture2D>("Textures/Snow");
         }
-
-        #endregion
-
-        #region Textures
-
-        #region Title Screen
-
-        /// <summary>
-        /// The title screen texture.
-        /// </summary>
-        private Texture2D TitleScreenField;
-
-        /// <summary>
-        /// The title screen texture.
-        /// </summary>
-        public Texture2D TitleScreen
-        {
-            get { return TitleScreenField; }
-        }
-
-        #endregion
-
-        #region Config Screen
-
-        /// <summary>
-        /// The background of the config screen.
-        /// </summary>
-        private Texture2D ConfigBackgroundField;
-
-        /// <summary>
-        /// The background of the config screen.
-        /// </summary>
-        public Texture2D ConfigBackground
-        {
-            get { return ConfigBackgroundField; }
-        }
-
-        #endregion
-
-        #region Terrain
-
-        /// <summary>
-        /// The terrain heightmap of the game.
-        /// </summary>
-        private Texture2D TerrainHeightmapField;
-
-        /// <summary>
-        /// The terrain heightmap of the game.
-        /// </summary>
-        public Texture2D TerrainHeightMap
-        {
-            get { return TerrainHeightmapField; }
-            set { TerrainHeightmapField = value; }
-        }
-        
-        /// <summary>
-        /// The grass texture of the terrain.
-        /// </summary>
-        private Texture2D GrassTerrainField;
-
-        /// <summary>
-        /// The grass texture of the terrain.
-        /// </summary>
-        public Texture2D GrassTerrain
-        {
-            get { return GrassTerrainField; }
-        }
-
-        /// <summary>
-        /// The rock texture of the terrain.
-        /// </summary>
-        private Texture2D RockTerrainField;
-
-        /// <summary>
-        /// The rock texture of the terrain.
-        /// </summary>
-        public Texture2D RockTerrain
-        {
-            get { return RockTerrainField; }
-        }
-
-        /// <summary>
-        /// The sand texture of the terrain.
-        /// </summary>
-        private Texture2D SandTerrainField;
-
-        /// <summary>
-        /// The sand texture of the terrain.
-        /// </summary>
-        public Texture2D SandTerrain
-        {
-            get { return SandTerrainField; }
-        }
-
-        /// <summary>
-        /// The snow texture of the terrain.
-        /// </summary>
-        private Texture2D SnowTerrainField;
-
-        /// <summary>
-        /// The snow texture of the terrain.
-        /// </summary>
-        public Texture2D SnowTerrain
-        {
-            get { return SnowTerrainField; }
-        }
-
-        #endregion
-
-        #region Units
-
-        /// <summary>
-        /// The arrow that points to the selected unit.
-        /// </summary>
-        private Texture2D SelectedUnitArrowField;
-
-        /// <summary>
-        /// The arrow that points to the selected unit.
-        /// </summary>
-        public Texture2D SelectedUnitArrow
-        {
-            get { return SelectedUnitArrowField; }
-        }
-        
-        /// <summary>
-        /// The quick status background texture of the unit.
-        /// </summary>
-        private Texture2D UnitQuickStatusField;
-        
-        /// <summary>
-        /// The quick status background texture of the unit.
-        /// </summary>
-        public Texture2D UnitQuickStatus
-        {
-            get { return UnitQuickStatusField; }
-        }
-
-        /// <summary>
-        /// The character texture of the knight's unit.
-        /// </summary>
-        private Texture2D KnightTextureField;
-
-        /// <summary>
-        /// The character texture of the knight's unit.
-        /// </summary>
-        public Texture2D KnightTexture
-        {
-            get { return KnightTextureField; }
-        }
-
-        /// <summary>
-        /// The character texture of the wizard's unit.
-        /// </summary>
-        private Texture2D WizardTextureField;
-
-        /// <summary>
-        /// The character texture of the wizard's unit.
-        /// </summary>
-        public Texture2D WizardTexture
-        {
-            get { return WizardTextureField; }
-        }
-
-        #endregion
-
-        #region Player Menu
-
-        /// <summary>
-        /// The background of the player's menu.
-        /// </summary>
-        private Texture2D BackgroundMenuField;
-
-        /// <summary>
-        /// The background of the player's menu.
-        /// </summary>
-        public Texture2D BackgroundMenu
-        {
-            get { return BackgroundMenuField; }
-        }
-
-        /// <summary>
-        /// The status texture for the player one.
-        /// </summary>
-        private Texture2D PlayerOneStatusField;
-
-        /// <summary>
-        /// The status texture for the player one.
-        /// </summary>
-        public Texture2D PlayerOneStatus
-        {
-            get { return PlayerOneStatusField; }
-        }
-
-        /// <summary>
-        /// The status texture for the player two.
-        /// </summary>
-        private Texture2D PlayerTwoStatusField;
-
-        /// <summary>
-        /// The status texture for the player two.
-        /// </summary>
-        public Texture2D PlayerTwoStatus
-        {
-            get { return PlayerTwoStatusField; }
-        }
-
-        #endregion
-
-        #region Unit Menu
-
-        private Texture2D LifeBarField;
-
-        public Texture2D LifeBar
-        {
-            get { return LifeBarField; }
-            set { LifeBarField = value; }
-        }
-
-        private Texture2D ManaBarField;
-
-        public Texture2D ManaBar
-        {
-            get { return ManaBarField; }
-            set { ManaBarField = value; }
-        }
-
-        private Texture2D TimeBarField;
-
-        public Texture2D TimeBar
-        {
-            get { return TimeBarField; }
-            set { TimeBarField = value; }
-        }
-                        
-        /// <summary>
-        /// The status texture for the unit when is alive. HP > 50%
-        /// </summary>
-        private Texture2D UnitStatusAliveField;
-
-        /// <summary>
-        /// The status texture for the unit when is alive. HP > 50%
-        /// </summary>
-        public Texture2D UnitStatusAlive
-        {
-            get { return UnitStatusAliveField; }
-        }
-
-        /// <summary>
-        /// The status texture for the unit when is deading. HP < 10%
-        /// </summary>
-        private Texture2D UnitStatusDeadingField;
-
-        /// <summary>
-        /// The status texture for the unit when is deading. HP < 10%
-        /// </summary>
-        public Texture2D UnitStatusDeading
-        {
-            get { return UnitStatusDeadingField; }
-        }
-
-        /// <summary>
-        /// The status texture for the unit when is damaged. 10% < HP < 50%
-        /// </summary>
-        private Texture2D UnitStatusDamagedField;
-
-        /// <summary>
-        /// The status texture for the unit when is damaged. 10% < HP < 50%
-        /// </summary>
-        public Texture2D UnitStatusDamaged
-        {
-            get { return UnitStatusDamagedField; }
-        }
-
-        #endregion
-
-        #region Action Menu
-
-        /// <summary>
-        /// The default texture for the menu item.
-        /// </summary>
-        private Texture2D DefaultMenuItemField;
-
-        /// <summary>
-        /// The default texture for the menu item.
-        /// </summary>
-        public Texture2D DefaultMenuItem
-        {
-            get { return DefaultMenuItemField; }
-        }
-
-        /// <summary>
-        /// The default texture for the menu item.
-        /// </summary>
-        private Texture2D SelectedMenuItemField;
-
-        /// <summary>
-        /// The default texture for the menu item.
-        /// </summary>
-        public Texture2D SelectedMenuItem
-        {
-            get { return SelectedMenuItemField; }
-        }
-
-        #endregion
 
         #endregion
     }

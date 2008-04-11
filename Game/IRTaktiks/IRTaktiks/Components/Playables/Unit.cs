@@ -324,12 +324,12 @@ namespace IRTaktiks.Components.Playables
             game.SpriteBatch.Draw(this.UnitTexture, this.Position, new Rectangle(0, 48 * (int)this.Orientation, 32, 48), Color.White);
 
             // Draws the quick status.
-            Vector2 statusPosition = new Vector2(this.Position.X + (this.UnitTexture.Width / 2) - (TextureManager.Instance.UnitQuickStatus.Width / 2), this.Position.Y + 50);
-            game.SpriteBatch.Draw(TextureManager.Instance.UnitQuickStatus, statusPosition, Color.White);
+            Vector2 statusPosition = new Vector2(this.Position.X + (this.UnitTexture.Width / 2) - (TextureManager.Instance.Sprites.Unit.QuickStatus.Width / 2), this.Position.Y + 50);
+            game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.QuickStatus, statusPosition, Color.White);
 
             // Measure the maximum width and height for the bars.
-            int barMaxWidth = TextureManager.Instance.UnitQuickStatus.Width - 2;
-            int barMaxHeight = (TextureManager.Instance.UnitQuickStatus.Height - 2) / 3;
+            int barMaxWidth = TextureManager.Instance.Sprites.Unit.QuickStatus.Width - 2;
+            int barMaxHeight = (TextureManager.Instance.Sprites.Unit.QuickStatus.Height - 2) / 3;
 
             // Calculates the position of the life, mana and time bars
             Vector2 lifePosition = new Vector2(statusPosition.X + 1, statusPosition.Y + 1);
@@ -342,15 +342,15 @@ namespace IRTaktiks.Components.Playables
             Rectangle timeBar = new Rectangle((int)timePosition.X, (int)timePosition.Y, (int)(barMaxWidth * this.Time), barMaxHeight);
 
             // Draws the life, mana and time bars.
-            game.SpriteBatch.Draw(TextureManager.Instance.LifeBar, lifeBar, Color.White);
-            game.SpriteBatch.Draw(TextureManager.Instance.ManaBar, manaBar, Color.White);
-            game.SpriteBatch.Draw(TextureManager.Instance.TimeBar, timeBar, Color.White);
+            game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.LifeBar, lifeBar, Color.White);
+            game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.ManaBar, manaBar, Color.White);
+            game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.TimeBar, timeBar, Color.White);
 
             // Draws the arrow, if the unit is selected.
             if (this.IsSelected)
             {
-                Vector2 arrowPosition = new Vector2(this.Position.X + (this.UnitTexture.Width / 2) - (TextureManager.Instance.SelectedUnitArrow.Width / 2), this.Position.Y - TextureManager.Instance.SelectedUnitArrow.Height);
-                game.SpriteBatch.Draw(TextureManager.Instance.SelectedUnitArrow, arrowPosition, Color.White);
+                Vector2 arrowPosition = new Vector2(this.Position.X + (this.UnitTexture.Width / 2) - (TextureManager.Instance.Sprites.Unit.Arrow.Width / 2), this.Position.Y - TextureManager.Instance.Sprites.Unit.Arrow.Height);
+                game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.Arrow, arrowPosition, Color.White);
             }
 
             game.SpriteBatch.End();
