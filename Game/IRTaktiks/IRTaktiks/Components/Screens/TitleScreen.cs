@@ -69,7 +69,7 @@ namespace IRTaktiks.Components.Screens
             SpriteBatch spriteBatch = (this.Game as IRTGame).SpriteBatch;
             
             spriteBatch.Begin();
-            spriteBatch.Draw(TextureManager.Instance.TitleScreen, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(TextureManager.Instance.Sprites.TitleScreen, new Vector2(0, 0), Color.White);
             spriteBatch.End();
             
             base.Draw(gameTime);

@@ -128,11 +128,11 @@ namespace IRTaktiks.Components.Screens
             EffectManager.Instance.TerrainEffect.Parameters["View"].SetValue(this.Camera.View);
             EffectManager.Instance.TerrainEffect.Parameters["Projection"].SetValue(this.Camera.Projection);
             EffectManager.Instance.TerrainEffect.Parameters["MaxHeight"].SetValue(this.Map.MaxHeight);
-            EffectManager.Instance.TerrainEffect.Parameters["TerrainHeightmap"].SetValue(TextureManager.Instance.TerrainHeightMap);
-            EffectManager.Instance.TerrainEffect.Parameters["SandTexture"].SetValue(TextureManager.Instance.SandTerrain);
-            EffectManager.Instance.TerrainEffect.Parameters["GrassTexture"].SetValue(TextureManager.Instance.GrassTerrain);
-            EffectManager.Instance.TerrainEffect.Parameters["RockTexture"].SetValue(TextureManager.Instance.RockTerrain);
-            EffectManager.Instance.TerrainEffect.Parameters["SnowTexture"].SetValue(TextureManager.Instance.SnowTerrain);
+            EffectManager.Instance.TerrainEffect.Parameters["TerrainHeightmap"].SetValue(TextureManager.Instance.Terrains.Terrain);
+            EffectManager.Instance.TerrainEffect.Parameters["SandTexture"].SetValue(TextureManager.Instance.Textures.Sand);
+            EffectManager.Instance.TerrainEffect.Parameters["GrassTexture"].SetValue(TextureManager.Instance.Textures.Grass);
+            EffectManager.Instance.TerrainEffect.Parameters["RockTexture"].SetValue(TextureManager.Instance.Textures.Rock);
+            EffectManager.Instance.TerrainEffect.Parameters["SnowTexture"].SetValue(TextureManager.Instance.Textures.Snow);
 
             // Start the effect.
             EffectManager.Instance.TerrainEffect.Begin();

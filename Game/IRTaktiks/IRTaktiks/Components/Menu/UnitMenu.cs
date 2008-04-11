@@ -94,7 +94,7 @@ namespace IRTaktiks.Components.Menu
 			// Player two informations.
 			if (this.Unit.Player.PlayerIndex == PlayerIndex.Two)
 			{
-				this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.BackgroundMenu.Width, 125);
+				this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.Background.Width, 125);
 			}
 		}
 
@@ -137,15 +137,15 @@ namespace IRTaktiks.Components.Menu
                 // Set texture according the unit status.
                 if (this.Unit.IsStatusAlive)
                 {
-                    this.UnitTexture = TextureManager.Instance.UnitStatusAlive;
+                    this.UnitTexture = TextureManager.Instance.Sprites.Unit.FullStatusAlive;
                 }
                 if (this.Unit.IsStatusDamaged)
                 {
-                    this.UnitTexture = TextureManager.Instance.UnitStatusDamaged;
+                    this.UnitTexture = TextureManager.Instance.Sprites.Unit.FullStatusDamaged;
                 }
                 if (this.Unit.IsStatusDeading)
                 {
-                    this.UnitTexture = TextureManager.Instance.UnitStatusDeading;
+                    this.UnitTexture = TextureManager.Instance.Sprites.Unit.FullStatusDeading;
                 }
 
                 // Draws the unit's status background.
@@ -191,9 +191,9 @@ namespace IRTaktiks.Components.Menu
                 Rectangle timeBar = new Rectangle((int)timeBarPosition.X, (int)timeBarPosition.Y, (int)(barMaxWidth * this.Unit.Time), barMaxHeight);
 
                 // Draws the life, mana and time bars.
-                game.SpriteBatch.Draw(TextureManager.Instance.LifeBar, lifeBar, Color.White);
-                game.SpriteBatch.Draw(TextureManager.Instance.ManaBar, manaBar, Color.White);
-                game.SpriteBatch.Draw(TextureManager.Instance.TimeBar, timeBar, Color.White);
+                game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.LifeBar, lifeBar, Color.White);
+                game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.ManaBar, manaBar, Color.White);
+                game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.TimeBar, timeBar, Color.White);
 
                 game.SpriteBatch.End();
             }

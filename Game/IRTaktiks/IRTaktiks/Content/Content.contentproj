@@ -166,8 +166,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\Mage.png">
-      <Name>Mage</Name>
+    <Compile Include="Characters\Wizard.png">
+      <Name>Wizard</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
