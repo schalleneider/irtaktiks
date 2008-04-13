@@ -91,14 +91,14 @@ namespace IRTaktiks.Components.Screens
             foreach (Unit unit in game.PlayerOne.Units)
             {
                 this.Components.Add(unit);
-                this.Components.Add(unit.Menu);
+                this.Components.Add(unit.StatusMenu);
             }
 
             // Add the units of the player two and its menus.
             foreach (Unit unit in game.PlayerTwo.Units)
             {
                 this.Components.Add(unit);
-                this.Components.Add(unit.Menu);
+                this.Components.Add(unit.StatusMenu);
             }
 
             // Initialize the map.
