@@ -15,7 +15,7 @@ namespace IRTaktiks.Components.Menu
 	/// <summary>
 	/// Representation of the menu of the player.
 	/// </summary>
-	public class UnitMenu : DrawableGameComponent
+	public class StatusMenu : DrawableGameComponent
 	{
 		#region Properties
 			
@@ -74,7 +74,7 @@ namespace IRTaktiks.Components.Menu
 		/// </summary>
 		/// <param name="game">The instance of game that is running.</param>
         /// <param name="unit">The unit who is the owner of the menu.</param>
-		public UnitMenu(Game game, Unit unit)
+		public StatusMenu(Game game, Unit unit)
 			: base(game)
 		{
             // Set the unit whose information will be displayed.

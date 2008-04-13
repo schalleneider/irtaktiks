@@ -138,18 +138,31 @@ namespace IRTaktiks.Components.Playables
 		}
 
         /// <summary>
-        /// Menu of the unit.
+        /// Menu of the status of the unit.
         /// </summary>
-        private UnitMenu MenuField;
+        private StatusMenu StatusMenuField;
 
         /// <summary>
-        /// Menu of the unit.
+        /// Menu of the status of the unit.
         /// </summary>
-        public UnitMenu Menu
+        public StatusMenu StatusMenu
         {
-            get { return MenuField; }
+            get { return StatusMenuField; }
         }
-        
+
+        /// <summary>
+        /// Menu of the action of the unit.
+        /// </summary>
+        private ActionMenu ActionMenuField;
+
+        /// <summary>
+        /// Menu of the action of the unit.
+        /// </summary>
+        public ActionMenu ActionMenu
+        {
+            get { return ActionMenuField; }
+        }
+
         /// <summary>
         /// The total life points of the unit.
         /// </summary>
@@ -282,7 +295,7 @@ namespace IRTaktiks.Components.Playables
 
             this.IsSelectedField = false;
 
-            this.MenuField = new UnitMenu(game, this);
+            this.StatusMenuField = new StatusMenu(game, this);
 
             InputManager.Instance.CursorUp += new EventHandler<CursorUpArgs>(CursorUp_Handler); 
 		}
