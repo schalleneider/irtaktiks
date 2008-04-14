@@ -319,6 +319,9 @@ namespace IRTaktiks.Components.Playables
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public override void Update(GameTime gameTime)
 		{
+            this.StatusMenu.Enabled = this.IsSelected;
+            this.StatusMenu.Visible = this.IsSelected;
+
             base.Update(gameTime);
 		}
 
