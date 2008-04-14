@@ -127,76 +127,72 @@ namespace IRTaktiks.Components.Menu
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public override void Draw(GameTime gameTime)
 		{
-            // Draws the menu, only if the unit is selected
-            if (this.Unit.IsSelected)
+            IRTGame game = this.Game as IRTGame;
+
+            game.SpriteBatch.Begin();
+
+            // Set texture according the unit status.
+            if (this.Unit.IsStatusAlive)
             {
-                IRTGame game = this.Game as IRTGame;
-
-                game.SpriteBatch.Begin();
-
-                // Set texture according the unit status.
-                if (this.Unit.IsStatusAlive)
-                {
-                    this.UnitTexture = TextureManager.Instance.Sprites.Unit.FullStatusAlive;
-                }
-                if (this.Unit.IsStatusDamaged)
-                {
-                    this.UnitTexture = TextureManager.Instance.Sprites.Unit.FullStatusDamaged;
-                }
-                if (this.Unit.IsStatusDeading)
-                {
-                    this.UnitTexture = TextureManager.Instance.Sprites.Unit.FullStatusDeading;
-                }
-
-                // Draws the unit's status background.
-                game.SpriteBatch.Draw(this.UnitTexture, this.Position, Color.White);
-
-                // Get the unit's life points text.
-                string lifeInformation = String.Format("{0}/{1}", this.Unit.Life, this.Unit.FullLife);
-                
-                // Get the unit's mana points text.
-                string manaInformation = String.Format("{0}/{1}", this.Unit.Mana, this.Unit.FullMana);
-
-                // Measure the texts size.
-                Vector2 nameSize = this.NameSpriteFont.MeasureString(this.Unit.Name);
-                Vector2 lifeSize = this.LifeSpriteFont.MeasureString(lifeInformation);
-                Vector2 manaSize = this.ManaSpriteFont.MeasureString(manaInformation);
-
-                // Calculate the position of the texts.
-                Vector2 namePosition = new Vector2(this.Position.X + this.UnitTexture.Width / 2 - nameSize.X / 2, this.Position.Y + 5);
-                Vector2 lifePosition = new Vector2(this.Position.X + this.UnitTexture.Width - lifeSize.X - 5, this.Position.Y + 30);
-                Vector2 manaPosition = new Vector2(this.Position.X + this.UnitTexture.Width - manaSize.X - 5, this.Position.Y + 53);
-
-                // Draws the name of the player.
-                game.SpriteBatch.DrawString(this.NameSpriteFont, this.Unit.Name, namePosition, Color.White);
-
-                // Draws the life points information.
-                game.SpriteBatch.DrawString(this.LifeSpriteFont, lifeInformation, lifePosition, Color.White);
-
-                // Draws the mana points information.
-                game.SpriteBatch.DrawString(this.ManaSpriteFont, manaInformation, manaPosition, Color.White);
-
-                // Measure the maximum width and height for the bars.
-                int barMaxWidth = 136;
-                int barMaxHeight = 3;
-
-                // Calculates the position of the life, mana and time bars
-                Vector2 lifeBarPosition = new Vector2(this.Position.X + 7, this.Position.Y + 46);
-                Vector2 manaBarPosition = new Vector2(this.Position.X + 7, this.Position.Y + 69);
-                Vector2 timeBarPosition = new Vector2(this.Position.X + 7, this.Position.Y + 91);
-
-                // Calculates the area of the life, mana and time bars, based in unit's values.
-                Rectangle lifeBar = new Rectangle((int)lifeBarPosition.X, (int)lifeBarPosition.Y, (int)((barMaxWidth * this.Unit.Life) / this.Unit.FullLife), barMaxHeight);
-                Rectangle manaBar = new Rectangle((int)manaBarPosition.X, (int)manaBarPosition.Y, (int)((barMaxWidth * this.Unit.Mana) / this.Unit.FullMana), barMaxHeight);
-                Rectangle timeBar = new Rectangle((int)timeBarPosition.X, (int)timeBarPosition.Y, (int)(barMaxWidth * this.Unit.Time), barMaxHeight);
-
-                // Draws the life, mana and time bars.
-                game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.LifeBar, lifeBar, Color.White);
-                game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.ManaBar, manaBar, Color.White);
-                game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.TimeBar, timeBar, Color.White);
-
-                game.SpriteBatch.End();
+                this.UnitTexture = TextureManager.Instance.Sprites.Unit.FullStatusAlive;
             }
+            if (this.Unit.IsStatusDamaged)
+            {
+                this.UnitTexture = TextureManager.Instance.Sprites.Unit.FullStatusDamaged;
+            }
+            if (this.Unit.IsStatusDeading)
+            {
+                this.UnitTexture = TextureManager.Instance.Sprites.Unit.FullStatusDeading;
+            }
+
+            // Draws the unit's status background.
+            game.SpriteBatch.Draw(this.UnitTexture, this.Position, Color.White);
+
+            // Get the unit's life points text.
+            string lifeInformation = String.Format("{0}/{1}", this.Unit.Life, this.Unit.FullLife);
+            
+            // Get the unit's mana points text.
+            string manaInformation = String.Format("{0}/{1}", this.Unit.Mana, this.Unit.FullMana);
+
+            // Measure the texts size.
+            Vector2 nameSize = this.NameSpriteFont.MeasureString(this.Unit.Name);
+            Vector2 lifeSize = this.LifeSpriteFont.MeasureString(lifeInformation);
+            Vector2 manaSize = this.ManaSpriteFont.MeasureString(manaInformation);
+
+            // Calculate the position of the texts.
+            Vector2 namePosition = new Vector2(this.Position.X + this.UnitTexture.Width / 2 - nameSize.X / 2, this.Position.Y + 5);
+            Vector2 lifePosition = new Vector2(this.Position.X + this.UnitTexture.Width - lifeSize.X - 5, this.Position.Y + 30);
+            Vector2 manaPosition = new Vector2(this.Position.X + this.UnitTexture.Width - manaSize.X - 5, this.Position.Y + 53);
+
+            // Draws the name of the player.
+            game.SpriteBatch.DrawString(this.NameSpriteFont, this.Unit.Name, namePosition, Color.White);
+
+            // Draws the life points information.
+            game.SpriteBatch.DrawString(this.LifeSpriteFont, lifeInformation, lifePosition, Color.White);
+
+            // Draws the mana points information.
+            game.SpriteBatch.DrawString(this.ManaSpriteFont, manaInformation, manaPosition, Color.White);
+
+            // Measure the maximum width and height for the bars.
+            int barMaxWidth = 136;
+            int barMaxHeight = 3;
+
+            // Calculates the position of the life, mana and time bars
+            Vector2 lifeBarPosition = new Vector2(this.Position.X + 7, this.Position.Y + 46);
+            Vector2 manaBarPosition = new Vector2(this.Position.X + 7, this.Position.Y + 69);
+            Vector2 timeBarPosition = new Vector2(this.Position.X + 7, this.Position.Y + 91);
+
+            // Calculates the area of the life, mana and time bars, based in unit's values.
+            Rectangle lifeBar = new Rectangle((int)lifeBarPosition.X, (int)lifeBarPosition.Y, (int)((barMaxWidth * this.Unit.Life) / this.Unit.FullLife), barMaxHeight);
+            Rectangle manaBar = new Rectangle((int)manaBarPosition.X, (int)manaBarPosition.Y, (int)((barMaxWidth * this.Unit.Mana) / this.Unit.FullMana), barMaxHeight);
+            Rectangle timeBar = new Rectangle((int)timeBarPosition.X, (int)timeBarPosition.Y, (int)(barMaxWidth * this.Unit.Time), barMaxHeight);
+
+            // Draws the life, mana and time bars.
+            game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.LifeBar, lifeBar, Color.White);
+            game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.ManaBar, manaBar, Color.White);
+            game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.TimeBar, timeBar, Color.White);
+
+            game.SpriteBatch.End();
 
             base.Draw(gameTime);
 		}
