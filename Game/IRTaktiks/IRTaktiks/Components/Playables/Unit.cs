@@ -296,6 +296,7 @@ namespace IRTaktiks.Components.Playables
             this.IsSelectedField = false;
 
             this.StatusMenuField = new StatusMenu(game, this);
+            this.ActionMenuField = new ActionMenu(game, this);
 
             InputManager.Instance.CursorUp += new EventHandler<CursorUpArgs>(CursorUp_Handler); 
 		}
@@ -321,6 +322,9 @@ namespace IRTaktiks.Components.Playables
 		{
             this.StatusMenu.Enabled = this.IsSelected;
             this.StatusMenu.Visible = this.IsSelected;
+
+            this.ActionMenu.Enabled = this.IsSelected;
+            this.ActionMenu.Visible = this.IsSelected;
 
             base.Update(gameTime);
 		}

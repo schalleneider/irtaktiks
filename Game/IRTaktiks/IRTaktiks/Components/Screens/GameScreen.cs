@@ -92,6 +92,7 @@ namespace IRTaktiks.Components.Screens
             {
                 this.Components.Add(unit);
                 this.Components.Add(unit.StatusMenu);
+                this.Components.Add(unit.ActionMenu);
             }
 
             // Add the units of the player two and its menus.
@@ -99,6 +100,7 @@ namespace IRTaktiks.Components.Screens
             {
                 this.Components.Add(unit);
                 this.Components.Add(unit.StatusMenu);
+                this.Components.Add(unit.ActionMenu);
             }
 
             // Initialize the map.
@@ -141,7 +143,7 @@ namespace IRTaktiks.Components.Screens
             foreach (EffectPass pass in EffectManager.Instance.TerrainEffect.CurrentTechnique.Passes)
             {
                 pass.Begin();
-                this.Map.Draw(gameTime);
+                //this.Map.Draw(gameTime);
                 pass.End();
             }
 
