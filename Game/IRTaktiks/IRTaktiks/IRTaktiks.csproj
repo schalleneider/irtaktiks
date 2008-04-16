@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Menu\ActionMenu.cs" />
+    <Compile Include="Components\Menu\ActionMenuItem.cs" />
     <Compile Include="Components\Scenario\Camera.cs" />
     <Compile Include="Components\Menu\StatusMenu.cs" />
     <Compile Include="Components\Menu\PlayerMenu.cs" />
