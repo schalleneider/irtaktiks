@@ -14,7 +14,7 @@ using IRTaktiks.Components.Managers;
 namespace IRTaktiks.Components.Menu
 {
     /// <summary>
-    /// Representation of the commands of the main menu.
+    /// Representation of one command from the unit.
     /// </summary>
     public class CommandMenu : ActionMenu
     {

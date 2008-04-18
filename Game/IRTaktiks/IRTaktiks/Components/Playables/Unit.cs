@@ -325,11 +325,11 @@ namespace IRTaktiks.Components.Playables
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public override void Update(GameTime gameTime)
 		{
-            this.StatusMenu.Enabled = this.IsSelected;
-            this.StatusMenu.Visible = this.IsSelected;
+            this.StatusMenu.Enabled = this.IsSelected && !this.IsDead;
+            this.StatusMenu.Visible = this.IsSelected && !this.IsDead;
 
-            this.ActionManager.Enabled = this.IsSelected;
-            this.ActionManager.Visible = this.IsSelected;
+            this.ActionManager.Enabled = this.IsSelected && !this.IsDead;
+            this.ActionManager.Visible = this.IsSelected && !this.IsDead;
 
             base.Update(gameTime);
 		}
@@ -394,17 +394,21 @@ namespace IRTaktiks.Components.Playables
         /// <param name="e">Data of event</param>
         private void CursorUp_Handler(object sender, CursorUpArgs e)
         {
-            // Touch was inside of the character.
-            if (((e.Position.X > this.Position.X) && e.Position.X < (this.Position.X + this.UnitTexture.Width)) &&
-                ((e.Position.Y > this.Position.Y) && e.Position.Y < (this.Position.Y + this.UnitTexture.Height)))
+            // Test if the unit can be selected
+            if (!this.IsDead && !this.IsSelected)
             {
-                // Unselect the player's units.                
-                foreach (Unit unit in this.Player.Units)
+                // Touch was inside of the character.
+                if (((e.Position.X > this.Position.X) && e.Position.X < (this.Position.X + this.UnitTexture.Width)) &&
+                    ((e.Position.Y > this.Position.Y) && e.Position.Y < (this.Position.Y + this.UnitTexture.Height)))
                 {
-                    unit.IsSelected = false;
+                    // Unselect the player's units.                
+                    foreach (Unit unit in this.Player.Units)
+                    {
+                        unit.IsSelected = false;
+                    }
+
+                    this.IsSelected = true;
                 }
-                
-                this.IsSelected = true;
             }
         }
 

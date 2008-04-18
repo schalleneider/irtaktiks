@@ -126,7 +126,7 @@ namespace IRTaktiks.Components.Menu
             this.SelectedItemTexture = TextureManager.Instance.Sprites.Menu.SelectedItem;
 
             // Set the font to draw the text.
-            this.TextSpriteFont = SpriteFontManager.Instance.Chilopod14;
+            this.TextSpriteFont = SpriteFontManager.Instance.Chilopod16;
             
             // Create the commands.
             this.CommandsField = new List<CommandMenu>();
@@ -142,6 +142,17 @@ namespace IRTaktiks.Components.Menu
         /// <param name="spriteBatch">SpriteBatche that will be used to draw the textures.</param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+            // Draws the item of the menu.
+            spriteBatch.Draw(this.IsSelected ? this.SelectedItemTexture : this.ItemTexture, this.Position, Color.White);
+
+            // Measure the text size.
+            Vector2 textSize = this.TextSpriteFont.MeasureString(this.Text);
+
+            // Calculate the position of the texts.
+            Vector2 textPosition = new Vector2(this.Position.X + this.ItemTexture.Width / 2 - textSize.X / 2, this.Position.Y + this.ItemTexture.Height / 2 - textSize.Y / 2);
+            
+            // Draws the name of the player.
+            spriteBatch.DrawString(this.TextSpriteFont, this.Text, textPosition, Color.White);
         }
 
         #endregion
