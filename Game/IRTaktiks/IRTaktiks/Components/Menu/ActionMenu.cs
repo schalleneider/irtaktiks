@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.GamerServices;
@@ -9,25 +10,23 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Playables;
 using IRTaktiks.Components.Managers;
-using IRTaktiks.Input;
-using IRTaktiks.Input.EventArgs;
 
 namespace IRTaktiks.Components.Menu
 {
 	/// <summary>
-	/// Representation of the action menu of the unit.
+	/// Representation of one action from the unit.
 	/// </summary>
-	public class ActionMenu : DrawableGameComponent
+	public class ActionMenu
 	{
         #region Properties
-			
-		/// <summary>
-        /// The unit whose actions will be displayed.
-        /// </summary>
-        private Unit UnitField;
 
         /// <summary>
-        /// The unit whose actions will be displayed.
+        /// The unit owner of the action.
+        /// </summary>
+        private Unit UnitField;
+        
+        /// <summary>
+        /// The unit owner of the action.
         /// </summary>
         public Unit Unit
         {
@@ -35,188 +34,114 @@ namespace IRTaktiks.Components.Menu
         }
 
         /// <summary>
-        /// The items of the menu.
+        /// The commands of this action.
         /// </summary>
-        private List<ActionMenuItem> ItemsField;
+        private List<CommandMenu> CommandsField;
 
         /// <summary>
-        /// The items of the menu.
+        /// The commands of this action.
         /// </summary>
-        public List<ActionMenuItem> Items
+        public List<CommandMenu> Commands
         {
-            get { if (ItemsField == null) ItemsField = new List<ActionMenuItem>(); return ItemsField; }
+            get { return CommandsField; }
+        }
+        
+        /// <summary>
+        /// The text of the action.
+        /// </summary>
+        private string TextField;
+
+        /// <summary>
+        /// The text of the action.
+        /// </summary>
+        public string Text
+        {
+            get { return TextField; }
         }
 
-		/// <summary>
-		/// The position of the menu.
-		/// </summary>
-		private Vector2 PositionField;
+        /// <summary>
+        /// The actual position of the item.
+        /// </summary>
+        private Vector2 PositionField;
 
-		/// <summary>
-		/// The position of the menu.
-		/// </summary>
-		public Vector2 Position
-		{
-			get { return PositionField; }
-		}
+        /// <summary>
+        /// The actual position of the item.
+        /// </summary>
+        public Vector2 Position
+        {
+            get { return PositionField; }
+            set { PositionField = value; }
+        }
+
+        /// <summary>
+        /// For actions who have commands, indicates its selection.
+        /// </summary>
+        private bool IsSelectedField;
+
+        /// <summary>
+        /// For actions who have commands, indicates its selection.
+        /// </summary>
+        public bool IsSelected
+        {
+            get { return IsSelectedField; }
+            set { IsSelectedField = true; }
+        }
+
+        #endregion
+
+        #region Textures and SpriteFonts
+
+        /// <summary>
+        /// The texture of the item, when its not selected.
+        /// </summary>
+        private Texture2D ItemTexture;
+        
+        /// <summary>
+        /// The texture of the item, when its selected.
+        /// </summary>
+        private Texture2D SelectedItemTexture;
+
+        /// <summary>
+        /// The sprite font that will be used to write the command.
+        /// </summary>
+        private SpriteFont TextSpriteFont;
 
         #endregion
 
         #region Constructor
 
         /// <summary>
-		/// Constructor of class.
-		/// </summary>
-		/// <param name="game">The instance of game that is running.</param>
-        /// <param name="unit">The unit who is the owner of the menu.</param>
-		public ActionMenu(Game game, Unit unit)
-			: base(game)
-		{
-            // Set the unit whose information will be displayed.
-			this.UnitField = unit;
-
-			// Player one informations.
-			if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
-			{
-				this.PositionField = new Vector2(0, 300);
-			}
-
-			// Player two informations.
-			if (this.Unit.Player.PlayerIndex == PlayerIndex.Two)
-			{
-				this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.Background.Width, 300);
-			}
-
-            // Construct the menu.
-            this.Construct();
-
-            // Input Handling
-            InputManager.Instance.CursorUp += new EventHandler<CursorUpArgs>(CursorUp_Handler); 
-		}
-
-		#endregion
-
-		#region Component Methods
-
-		/// <summary>
-		/// Allows the game component to perform any initialization it needs to before starting
-		/// to run. This is where it can query for any required services and load content.
-		/// </summary>
-		public override void Initialize()
-		{
-            base.Initialize();
-		}
-
-		/// <summary>
-		/// Allows the game component to update itself.
-		/// </summary>
-		/// <param name="gameTime">Provides a snapshot of timing values.</param>
-		public override void Update(GameTime gameTime)
-		{
-			base.Update(gameTime);
-		}
-
-		/// <summary>
-		/// Called when the DrawableGameComponent needs to be drawn. Override this method
-		//  with component-specific drawing code.
-		/// </summary>
-		/// <param name="gameTime">Provides a snapshot of timing values.</param>
-		public override void Draw(GameTime gameTime)
-		{
-            IRTGame game = this.Game as IRTGame;
-
-            game.SpriteBatch.Begin();
-            
-            // Draw all the menuitems.
-            for (int index = 0; index < this.Items.Count; index++)
-            {
-                // Draw the menuitem.
-                this.Items[index].Draw(new Vector2(this.Position.X, this.Position.Y + (index * 40)), game.SpriteBatch);
-                                
-                // If the menuitem is selected.
-                if (this.Items[index].IsSelected)
-                {
-                    // Draw all the subitems.
-                    for (int subindex = 0; subindex < this.Items[index].Items.Count; subindex++)
-                    {
-                        this.Items[index].Items[subindex].Draw(new Vector2(this.Position.X, this.Position.Y + (index * 40)), game.SpriteBatch);
-                    }
-                }
-            }
-
-            game.SpriteBatch.End();
-
-            base.Draw(gameTime);
-		}
-
-		#endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Construct the menu.
+        /// Constructor of the class.
         /// </summary>
-        private void Construct()
+        /// <param name="unit">The unit that will be the actor of the command.</param>
+        /// <param name="text">The text of the command that will be displayed.</param>
+        public ActionMenu(Unit unit, string text)
         {
-            // 1st level items.
-            ActionMenuItem move = new ActionMenuItem(null, "Move");
-            ActionMenuItem defend = new ActionMenuItem(null, "Defend");
-            ActionMenuItem attack = new ActionMenuItem(null, "Attack");
-            ActionMenuItem magic = new ActionMenuItem(null, "Magic");
-            ActionMenuItem item = new ActionMenuItem(null, "Item");
+            // Set the properties.
+            this.UnitField = unit;
+            this.TextField = text;
 
-            // 2nd level items.
-            ActionMenuItem closeAttack = new ActionMenuItem(attack, "Close");
-            ActionMenuItem longAttack = new ActionMenuItem(attack, "Long");
+            // Set the correct textures.
+            this.ItemTexture = TextureManager.Instance.Sprites.Menu.Item;
+            this.SelectedItemTexture = TextureManager.Instance.Sprites.Menu.SelectedItem;
 
-            ActionMenuItem healMagic = new ActionMenuItem(magic, "Heal");
-            ActionMenuItem fireMagic = new ActionMenuItem(magic, "Fire");
-            ActionMenuItem iceMagic = new ActionMenuItem(magic, "Ice");
-            ActionMenuItem thunderMagic = new ActionMenuItem(magic, "Thunder");
-
-            ActionMenuItem potionMagic = new ActionMenuItem(item, "Potion");
-            ActionMenuItem etherMagic = new ActionMenuItem(item, "Ether");
-            ActionMenuItem elixirMagic = new ActionMenuItem(item, "Elixir");
-
-            // Construct the root menu.
-            this.Items.Add(move);
-            this.Items.Add(defend);
-            this.Items.Add(attack);
-            this.Items.Add(magic);
-            this.Items.Add(item);
-
-            // Construct the attack menu.
-            attack.Items.Add(closeAttack);
-            attack.Items.Add(longAttack);
-
-            // Construct the magic menu.
-            magic.Items.Add(healMagic);
-            magic.Items.Add(fireMagic);
-            magic.Items.Add(iceMagic);
-            magic.Items.Add(thunderMagic);
-
-            // Construct the item menu.
-            item.Items.Add(potionMagic);
-            item.Items.Add(etherMagic);
-            item.Items.Add(elixirMagic);
+            // Set the font to draw the text.
+            this.TextSpriteFont = SpriteFontManager.Instance.Chilopod14;
+            
+            // Create the commands.
+            this.CommandsField = new List<CommandMenu>();
         }
 
         #endregion
 
-        #region Input Handling
+        #region Methods
 
         /// <summary>
-        /// Handles the CursorUp event.
+        /// Draws the menuitem at the specified position.
         /// </summary>
-        /// <param name="sender">Always null.</param>
-        /// <param name="e">Data of event</param>
-        private void CursorUp_Handler(object sender, CursorUpArgs e)
+        /// <param name="spriteBatch">SpriteBatche that will be used to draw the textures.</param>
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            // Handles the input only if the unit is selected.
-            if (this.Unit.IsSelected)
-            {
-
-            }
         }
 
         #endregion

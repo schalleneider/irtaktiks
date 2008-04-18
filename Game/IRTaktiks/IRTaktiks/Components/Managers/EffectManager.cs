@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Content;
 
 namespace IRTaktiks.Components.Managers
 {
+    /// <summary>
+    /// Manager of effects.
+    /// </summary>
     public class EffectManager
     {
         #region Singleton
