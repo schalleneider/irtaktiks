@@ -151,19 +151,6 @@ namespace IRTaktiks.Components.Playables
         }
 
         /// <summary>
-        /// Menu of the action of the unit.
-        /// </summary>
-        private ActionMenu ActionMenuField;
-
-        /// <summary>
-        /// Menu of the action of the unit.
-        /// </summary>
-        public ActionMenu ActionMenu
-        {
-            get { return ActionMenuField; }
-        }
-
-        /// <summary>
         /// The total life points of the unit.
         /// </summary>
         private int FullLifeField;
@@ -243,6 +230,23 @@ namespace IRTaktiks.Components.Playables
         
 		#endregion
 
+        #region Managers
+
+        /// <summary>
+        /// The action manager of the unit.
+        /// </summary>
+        private ActionManager ActionManagerField;
+
+        /// <summary>
+        /// The action manager of the unit.
+        /// </summary>
+        public ActionManager ActionManager
+        {
+            get { return ActionManagerField; }
+        }
+
+        #endregion
+
         #region Logic Properties
 
         /// <summary>
@@ -294,9 +298,10 @@ namespace IRTaktiks.Components.Playables
             this.TimeField = 0;
 
             this.IsSelectedField = false;
+            
+            this.ActionManagerField = new ActionManager(game, this);
 
             this.StatusMenuField = new StatusMenu(game, this);
-            this.ActionMenuField = new ActionMenu(game, this);
 
             InputManager.Instance.CursorUp += new EventHandler<CursorUpArgs>(CursorUp_Handler); 
 		}
@@ -323,8 +328,8 @@ namespace IRTaktiks.Components.Playables
             this.StatusMenu.Enabled = this.IsSelected;
             this.StatusMenu.Visible = this.IsSelected;
 
-            this.ActionMenu.Enabled = this.IsSelected;
-            this.ActionMenu.Visible = this.IsSelected;
+            this.ActionManager.Enabled = this.IsSelected;
+            this.ActionManager.Visible = this.IsSelected;
 
             base.Update(gameTime);
 		}

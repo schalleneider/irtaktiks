@@ -12,7 +12,7 @@ using IRTaktiks.Components.Screens;
 namespace IRTaktiks.Components.Managers
 {
 	/// <summary>
-	/// This is a game component that implements IUpdateable.
+	/// Manager of screens.
 	/// </summary>
 	public class ScreenManager : DrawableGameComponent
 	{
