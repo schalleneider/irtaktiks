@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Menu;
 using IRTaktiks.Components.Playables;
+using IRTaktiks.Input.EventArgs;
 
 namespace IRTaktiks.Components.Managers
 {
@@ -87,6 +88,12 @@ namespace IRTaktiks.Components.Managers
 			{
 				this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.Background.Width, 300);
 			}
+            
+            // Construct the menu.
+            this.Construct();
+
+            // Input
+            InputManager.Instance.CursorDown += new EventHandler<IRTaktiks.Input.EventArgs.CursorDownArgs>(CursorDown);
 		}
 
         #endregion
@@ -108,7 +115,11 @@ namespace IRTaktiks.Components.Managers
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // UPDATE THE POSITION OF THE ACTIONS AND COMMANDS !!!!!!
+            // Set the positions of the actions.
+            for (int index = 0; index < this.Actions.Count; index++)
+            {
+                this.Actions[index].Position = new Vector2(this.Position.X, this.Position.Y + (index * 40));
+            }
             
             base.Update(gameTime);
         }
@@ -124,11 +135,68 @@ namespace IRTaktiks.Components.Managers
 
             game.SpriteBatch.Begin();
 
-            // DRAW ALL THE ACTIONS AND COMMANDS !!!!
+            // Draw the actions.
+            for (int index = 0; index < this.Actions.Count; index++)
+            {
+                this.Actions[index].Draw(game.SpriteBatch);
+            }
 
             game.SpriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Construct the menu.
+        /// </summary>
+        private void Construct()
+        {
+            // Create the actions.
+            ActionMenu moveAction = new ActionMenu(this.Unit, "Move");
+            ActionMenu defendAction = new ActionMenu(this.Unit, "Defend");
+            ActionMenu attackAction = new ActionMenu(this.Unit, "Attack");
+            ActionMenu magicAction = new ActionMenu(this.Unit, "Magic");
+            ActionMenu itemsAction = new ActionMenu(this.Unit, "Items");
+
+            // Add the actions.
+            this.Actions.Add(moveAction);
+            this.Actions.Add(defendAction);
+            this.Actions.Add(attackAction);
+            this.Actions.Add(magicAction);
+            this.Actions.Add(itemsAction);
+        }
+
+        #endregion
+
+        #region Input Handling
+
+        /// <summary>
+        /// Input Handling for Cursor Down event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CursorDown(object sender, CursorDownArgs e)
+        {
+            // Check if the items can be selected or executed.
+            if (this.Enabled && this.Visible)
+            {
+
+            }
+
+            // Handle the event only if the unit is selected.
+            if (this.Unit.IsSelected)
+            {
+                // Touch was inside of the menu.
+                if (((e.Position.X > this.Position.X) && e.Position.X < (this.Position.X + this.ItemTexture.Width)) &&
+                    ((e.Position.Y > this.Position.Y) && e.Position.Y < (this.Position.Y + this.ItemTexture.Height)))
+                {
+                    this.IsSelected = true;
+                }
+            }
         }
 
         #endregion
