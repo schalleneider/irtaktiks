@@ -62,6 +62,38 @@ namespace IRTaktiks.Components.Managers
 
         #endregion
 
+        #region Logic Properties
+
+        /// <summary>
+        /// Indicates if the menu needs to be updated.
+        /// </summary>
+        private bool ChangedField;
+
+        /// <summary>
+        /// Indicates if the menu needs to be updated.
+        /// </summary>
+        public bool Changed
+        {
+            get { return ChangedField; }
+            set { ChangedField = value; }
+        }
+
+        /// <summary>
+        /// Indicates if the menu is freezed and its selected items cannot be changed.
+        /// </summary>
+        private bool FreezedField;
+
+        /// <summary>
+        /// Indicates if the menu is freezed and its selected items cannot be changed.
+        /// </summary>
+        public bool Freezed
+        {
+            get { return FreezedField; }
+            set { FreezedField = value; }
+        }
+
+        #endregion
+
         #region Constructor
 
         /// <summary>
@@ -74,6 +106,9 @@ namespace IRTaktiks.Components.Managers
 		{
             // Set the unit owner of the commands.
 			this.UnitField = unit;
+
+            this.Changed = true;
+            this.Freezed = false;
 
             // Create the actions.
             this.ActionsField = new List<ActionMenu>();
@@ -115,13 +150,29 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
-        {
-            // Set the positions of the actions.
-            for (int index = 0; index < this.Actions.Count; index++)
+        {            
+            // Check if the menu needs updates
+            if (this.Changed)
             {
-                this.Actions[index].Position = new Vector2(this.Position.X, this.Position.Y + (index * 40));
+                // Set the positions of the items.
+                for (int index = 0, positionIndex = 0; index < this.Actions.Count; index++)
+                {
+                    this.Actions[index].Position = new Vector2(this.Position.X, this.Position.Y + (positionIndex++ * TextureManager.Instance.Sprites.Menu.Item.Height));
+
+                    // If the menu item is selected, must set the position for its subitems.
+                    if (this.Actions[index].IsSelected)
+                    {
+                        // Set the position for all the subitems.
+                        for (int subindex = 0; subindex < this.Actions[index].Commands.Count; subindex++)
+                        {
+                            this.Actions[index].Commands[subindex].Position = new Vector2(this.Position.X, this.Position.Y + (positionIndex++ * TextureManager.Instance.Sprites.Menu.Item.Height));
+                        }
+                    }
+                }
+
+                this.Changed = false;
             }
-            
+
             base.Update(gameTime);
         }
 
@@ -136,10 +187,20 @@ namespace IRTaktiks.Components.Managers
 
             game.SpriteBatch.Begin();
 
-            // Draw the actions.
+            // Draw the items.
             for (int index = 0; index < this.Actions.Count; index++)
             {
                 this.Actions[index].Draw(game.SpriteBatch);
+
+                // If the item is selected, draws the subitems.
+                if (this.Actions[index].IsSelected)
+                {
+                    // Draws all the subitems.
+                    for (int subindex = 0; subindex < this.Actions[index].Commands.Count; subindex++)
+                    {
+                        this.Actions[index].Commands[subindex].Draw(game.SpriteBatch);
+                    }
+                }
             }
 
             game.SpriteBatch.End();
@@ -163,12 +224,47 @@ namespace IRTaktiks.Components.Managers
             ActionMenu magicAction = new ActionMenu(this.Unit, "Magic");
             ActionMenu itemsAction = new ActionMenu(this.Unit, "Items");
 
+            // Create the commands.
+            CommandMenu longAttackCommand = new CommandMenu(this.Unit, "Long", 0);
+            CommandMenu shortAttackCommand = new CommandMenu(this.Unit, "Short", 0);
+
+            CommandMenu fireMagicCommand = new CommandMenu(this.Unit, "Fire", 75);
+            CommandMenu iceMagicCommand = new CommandMenu(this.Unit, "Ice", 105);
+            CommandMenu thunderMagicCommand = new CommandMenu(this.Unit, "Thunder", 145);
+
+            // Add the commands.
+            attackAction.Commands.Add(longAttackCommand);
+            attackAction.Commands.Add(shortAttackCommand);
+
+            magicAction.Commands.Add(fireMagicCommand);
+            magicAction.Commands.Add(iceMagicCommand);
+            magicAction.Commands.Add(thunderMagicCommand);
+            
             // Add the actions.
             this.Actions.Add(moveAction);
             this.Actions.Add(defendAction);
             this.Actions.Add(attackAction);
             this.Actions.Add(magicAction);
             this.Actions.Add(itemsAction);
+        }
+
+        /// <summary>
+        /// Reset the logic properties of the menu.
+        /// </summary>
+        private void Reset()
+        {
+            for (int index = 0; index < this.Actions.Count; index++)
+            {
+                for (int subindex = 0; subindex < this.Actions[index].Commands.Count; subindex++)
+                {
+                    this.Actions[index].Commands[subindex].IsSelected = false;
+                }
+
+                this.Actions[index].IsSelected = false;
+            }
+
+            this.Changed = true;
+            this.Freezed = false;
         }
 
         #endregion
@@ -178,12 +274,10 @@ namespace IRTaktiks.Components.Managers
         /// <summary>
         /// Input Handling for Cursor Down event.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CursorDown(object sender, CursorDownArgs e)
         {
             // Check if the items can be selected or executed.
-            if (this.Enabled && this.Visible)
+            if (this.Enabled && this.Visible && !this.Freezed)
             {
                 // Define if the touch was inside the menu area.
                 float limitX = this.Position.X + TextureManager.Instance.Sprites.Menu.Item.Width;
@@ -201,7 +295,7 @@ namespace IRTaktiks.Components.Managers
                             selected = index;
                         }
 
-                        // Deselect all the items.
+                        // Unselect all the items.
                         this.Actions[index].IsSelected = false;
                     }
                     
@@ -209,20 +303,61 @@ namespace IRTaktiks.Components.Managers
                     float limitY = this.Position.Y + (TextureManager.Instance.Sprites.Menu.Item.Width * count);
                     if (e.Position.Y < limitY && e.Position.Y > this.Position.Y)
                     {
-                        // Calculates the touched index.
-                        int touchedIndex = (int)(e.Position.Y - this.Position.Y) / TextureManager.Instance.Sprites.Menu.Item.Height;
-
-                        // Items selected
+                        // If items were selected
                         if (selected != -1)
                         {
-                            // Reselect the item that was previously selected.
-                            //this.Actions[selected].IsSelected = true;
+                            // Verify the position in all items.
+                            for (int index = 0; index < this.Actions.Count; index++)
+                            {
+                                // Check if the actual item is that was selected.
+                                if (index == selected)
+                                {
+                                    // Check if the actual item has subitems
+                                    if (this.Actions[index].Commands.Count > 0)
+                                    {
+                                        // Check if the touch was inside a subitems of the selected item.
+                                        float sublimitY = this.Actions[index].Commands[this.Actions[index].Commands.Count - 1].Position.Y + TextureManager.Instance.Sprites.Menu.Item.Height;
+                                        if (e.Position.Y < sublimitY && e.Position.Y > this.Actions[index].Commands[0].Position.Y)
+                                        {
+                                            // Calculates the index of the subitem touched.
+                                            int subindex = (int)(e.Position.Y - this.Actions[index].Commands[0].Position.Y) / TextureManager.Instance.Sprites.Menu.Item.Height;
 
+                                            // Reselect the item that was selected.
+                                            this.Actions[index].IsSelected = true;
 
+                                            // Select and queue the Execute event of the subitem touched.
+                                            this.Actions[index].Commands[subindex].IsSelected = true;
+                                            this.Actions[index].Commands[subindex].RaiseExecute();
+
+                                            this.Freezed = true;
+                                            this.Changed = true;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    // Check if the touch was inside of the item.
+                                    limitY = this.Actions[index].Position.Y + TextureManager.Instance.Sprites.Menu.Item.Height;
+                                    if (e.Position.Y < limitY && e.Position.Y > this.Actions[index].Position.Y)
+                                    {
+                                        this.Actions[index].IsSelected = true;
+                                        this.Actions[index].RaiseExecute();
+
+                                        this.Changed = true;
+                                    }
+                                }
+                            }
                         }
                         else
                         {
-                            this.Actions[touchedIndex].IsSelected = true;
+                            // Calculates the index of the item touched.
+                            int index = (int)(e.Position.Y - this.Position.Y) / TextureManager.Instance.Sprites.Menu.Item.Height;
+                            
+                            // Selects the menu item for the first time and queue the Execute event for dispatch.
+                            this.Actions[index].IsSelected = true;
+                            this.Actions[index].RaiseExecute();
+
+                            this.Changed = true;
                         }
                     }
                 }
