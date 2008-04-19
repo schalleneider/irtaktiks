@@ -71,6 +71,10 @@ namespace IRTaktiks.Components.Menu
         {
             this.AttributeField = attribute;
 
+            this.ItemTexture = TextureManager.Instance.Sprites.Menu.SubmenuItem;
+            this.SelectedItemTexture = TextureManager.Instance.Sprites.Menu.SubmenuSelectedItem;
+
+            this.TextSpriteFont = SpriteFontManager.Instance.Chilopod12;
             this.AttributeSpriteFont = SpriteFontManager.Instance.Chilopod12;
         }
 

@@ -109,17 +109,17 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// The texture of the item, when its not selected.
         /// </summary>
-        private Texture2D ItemTexture;
+        protected Texture2D ItemTexture;
         
         /// <summary>
         /// The texture of the item, when its selected.
         /// </summary>
-        private Texture2D SelectedItemTexture;
+        protected Texture2D SelectedItemTexture;
 
         /// <summary>
         /// The sprite font that will be used to write the command.
         /// </summary>
-        private SpriteFont TextSpriteFont;
+        protected SpriteFont TextSpriteFont;
 
         #endregion
 

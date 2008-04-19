@@ -183,7 +183,7 @@ namespace IRTaktiks.Components.Managers
                 /// Texture of Sprites/Menu/SelectedItem.
                 /// </summary>
                 private Texture2D SelectedItemField;
-               
+
                 /// <summary>
                 /// Texture of Sprites/Menu/SelectedItem.
                 /// </summary>
@@ -191,6 +191,34 @@ namespace IRTaktiks.Components.Managers
                 {
                     get { return SelectedItemField; }
                     set { SelectedItemField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Menu/SubmenuItem.
+                /// </summary>
+                private Texture2D SubmenuItemField;
+
+                /// <summary>
+                /// Texture of Sprites/Menu/SubmenuItem.
+                /// </summary>
+                public Texture2D SubmenuItem
+                {
+                    get { return SubmenuItemField; }
+                    set { SubmenuItemField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Menu/SubmenuSelectedItem.
+                /// </summary>
+                private Texture2D SubmenuSelectedItemField;
+
+                /// <summary>
+                /// Texture of Sprites/Menu/SubmenuSelectedItem.
+                /// </summary>
+                public Texture2D SubmenuSelectedItem
+                {
+                    get { return SubmenuSelectedItemField; }
+                    set { SubmenuSelectedItemField = value; }
                 }
 
                 #endregion
@@ -648,6 +676,8 @@ namespace IRTaktiks.Components.Managers
             this.Sprites.Menu.Background = game.Content.Load<Texture2D>("Sprites/Menu/Background");
             this.Sprites.Menu.Item = game.Content.Load<Texture2D>("Sprites/Menu/Item");
             this.Sprites.Menu.SelectedItem = game.Content.Load<Texture2D>("Sprites/Menu/SelectedItem");
+            this.Sprites.Menu.SubmenuItem = game.Content.Load<Texture2D>("Sprites/Menu/SubmenuItem");
+            this.Sprites.Menu.SubmenuSelectedItem = game.Content.Load<Texture2D>("Sprites/Menu/SubmenuSelectedItem");
 
             this.Sprites.Player.PlayerOneBackground = game.Content.Load<Texture2D>("Sprites/Player/PlayerOneBackground");
             this.Sprites.Player.PlayerTwoBackground = game.Content.Load<Texture2D>("Sprites/Player/PlayerTwoBackground");
