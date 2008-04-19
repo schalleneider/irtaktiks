@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Menu;
 using IRTaktiks.Components.Playables;
 using IRTaktiks.Input.EventArgs;
+using IRTaktiks.Input;
 
 namespace IRTaktiks.Components.Managers
 {
@@ -86,14 +87,14 @@ namespace IRTaktiks.Components.Managers
             // Set the top left position for the player two
 			if (this.Unit.Player.PlayerIndex == PlayerIndex.Two)
 			{
-				this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.Background.Width, 300);
+                this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.Item.Width, 300);
 			}
             
             // Construct the menu.
             this.Construct();
 
             // Input
-            InputManager.Instance.CursorDown += new EventHandler<IRTaktiks.Input.EventArgs.CursorDownArgs>(CursorDown);
+            InputManager.Instance.CursorDown += new EventHandler<CursorDownArgs>(CursorDown);
 		}
 
         #endregion
@@ -184,17 +185,46 @@ namespace IRTaktiks.Components.Managers
             // Check if the items can be selected or executed.
             if (this.Enabled && this.Visible)
             {
-
-            }
-
-            // Handle the event only if the unit is selected.
-            if (this.Unit.IsSelected)
-            {
-                // Touch was inside of the menu.
-                if (((e.Position.X > this.Position.X) && e.Position.X < (this.Position.X + this.ItemTexture.Width)) &&
-                    ((e.Position.Y > this.Position.Y) && e.Position.Y < (this.Position.Y + this.ItemTexture.Height)))
+                // Define if the touch was inside the menu area.
+                float limitX = this.Position.X + TextureManager.Instance.Sprites.Menu.Item.Width;
+                if (e.Position.X < limitX && e.Position.X > this.Position.X)
                 {
-                    this.IsSelected = true;
+                    // Calculate the count of items displayed in the menu.
+                    int count = this.Actions.Count;
+                    int selected = -1;
+                    for (int index = 0; index < this.Actions.Count; index++)
+                    {
+                        // Guard the item that is selected.
+                        if (this.Actions[index].IsSelected)
+                        {
+                            count += this.Actions[index].Commands.Count;
+                            selected = index;
+                        }
+
+                        // Deselect all the items.
+                        this.Actions[index].IsSelected = false;
+                    }
+                    
+                    // Define if the touch was inside the action menu area.
+                    float limitY = this.Position.Y + (TextureManager.Instance.Sprites.Menu.Item.Width * count);
+                    if (e.Position.Y < limitY && e.Position.Y > this.Position.Y)
+                    {
+                        // Calculates the touched index.
+                        int touchedIndex = (int)(e.Position.Y - this.Position.Y) / TextureManager.Instance.Sprites.Menu.Item.Height;
+
+                        // Items selected
+                        if (selected != -1)
+                        {
+                            // Reselect the item that was previously selected.
+                            //this.Actions[selected].IsSelected = true;
+
+
+                        }
+                        else
+                        {
+                            this.Actions[touchedIndex].IsSelected = true;
+                        }
+                    }
                 }
             }
         }

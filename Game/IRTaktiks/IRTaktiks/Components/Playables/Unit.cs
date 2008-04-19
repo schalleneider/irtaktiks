@@ -15,54 +15,54 @@ using IRTaktiks.Input.EventArgs;
 
 namespace IRTaktiks.Components.Playables
 {
-	/// <summary>
-	/// Representation of one combat unit of the game.
-	/// </summary>
-	public class Unit : DrawableGameComponent
+    /// <summary>
+    /// Representation of one combat unit of the game.
+    /// </summary>
+    public class Unit : DrawableGameComponent
     {
         #region Statuses
 
         /// <summary>
-		/// The actual life points of the unit.
-		/// </summary>
-		private int LifeField;
-
-		/// <summary>
         /// The actual life points of the unit.
-		/// </summary>
-		public int Life
-		{
-			get { return LifeField; }
-		}
+        /// </summary>
+        private int LifeField;
 
-		/// <summary>
+        /// <summary>
+        /// The actual life points of the unit.
+        /// </summary>
+        public int Life
+        {
+            get { return LifeField; }
+        }
+
+        /// <summary>
         /// The actual mana points of the unit.
-		/// </summary>
-		private int ManaField;
+        /// </summary>
+        private int ManaField;
 
-		/// <summary>
+        /// <summary>
         /// The actual mana points of the unit.
-		/// </summary>
-		public int Mana
-		{
-			get { return ManaField; }
-		}
+        /// </summary>
+        public int Mana
+        {
+            get { return ManaField; }
+        }
 
-		/// <summary>
-		/// The actual time of the wait to act. 
-		/// Mininum value is 0 and maximum is 1.
-		/// </summary>
-		private double TimeField;
+        /// <summary>
+        /// The actual time of the wait to act. 
+        /// Mininum value is 0 and maximum is 1.
+        /// </summary>
+        private double TimeField;
 
-		/// <summary>
-		/// The actual time of the wait to act.
-		/// Mininum value is 0 and maximum is 1.
-		/// </summary>
-		public double Time
-		{
-			get { return TimeField; }
-		}
-        
+        /// <summary>
+        /// The actual time of the wait to act.
+        /// Mininum value is 0 and maximum is 1.
+        /// </summary>
+        public double Time
+        {
+            get { return TimeField; }
+        }
+
         #endregion
 
         #region Verifications
@@ -90,7 +90,7 @@ namespace IRTaktiks.Components.Playables
         {
             get { return ((float)this.Life / (float)this.FullLife) > 0.5; }
         }
-        
+
         /// <summary>
         /// True if the actual life of the unit is above 10% and less 50%.
         /// </summary>
@@ -98,7 +98,7 @@ namespace IRTaktiks.Components.Playables
         {
             get { return (((float)this.Life / (float)this.FullLife) <= 0.5 && (((float)this.Life / (float)this.FullLife) >= 0.1)); }
         }
-       
+
         /// <summary>
         /// True if the actual life of the unit is less 10%.
         /// </summary>
@@ -123,19 +123,19 @@ namespace IRTaktiks.Components.Playables
         {
             get { return PlayerField; }
         }
-                
-        /// <summary>
-		/// Name of unit.
-		/// </summary>
-		private String NameField;
 
-		/// <summary>
-		/// Name of unit.
-		/// </summary>
-		public String Name
-		{
-			get { return NameField; }
-		}
+        /// <summary>
+        /// Name of unit.
+        /// </summary>
+        private String NameField;
+
+        /// <summary>
+        /// Name of unit.
+        /// </summary>
+        public String Name
+        {
+            get { return NameField; }
+        }
 
         /// <summary>
         /// Menu of the status of the unit.
@@ -154,7 +154,7 @@ namespace IRTaktiks.Components.Playables
         /// The total life points of the unit.
         /// </summary>
         private int FullLifeField;
-        
+
         /// <summary>
         /// The total life points of the unit.
         /// </summary>
@@ -162,12 +162,12 @@ namespace IRTaktiks.Components.Playables
         {
             get { return FullLifeField; }
         }
-        
+
         /// <summary>
         /// The total mana points of the unit.
         /// </summary>
         private int FullManaField;
-        
+
         /// <summary>
         /// The total mana points of the unit.
         /// </summary>
@@ -227,8 +227,8 @@ namespace IRTaktiks.Components.Playables
         {
             get { return UnitTextureField; }
         }
-        
-		#endregion
+
+        #endregion
 
         #region Managers
 
@@ -279,9 +279,9 @@ namespace IRTaktiks.Components.Playables
         /// <param name="name">The name of unit.</param>
         /// <param name="life">The total life points.</param>
         /// <param name="mana">The total mana points.</param>
-		public Unit(Game game, Player player, Vector2 position, UnitAttributes attributes, UnitOrientation orientation, Texture2D texture, String name, int life, int mana)
+        public Unit(Game game, Player player, Vector2 position, UnitAttributes attributes, UnitOrientation orientation, Texture2D texture, String name, int life, int mana)
             : base(game)
-		{
+        {
             this.PositionField = position;
             this.AttributesField = attributes;
             this.OrientationField = orientation;
@@ -298,33 +298,33 @@ namespace IRTaktiks.Components.Playables
             this.TimeField = 0;
 
             this.IsSelectedField = false;
-            
+
             this.ActionManagerField = new ActionManager(game, this);
 
             this.StatusMenuField = new StatusMenu(game, this);
 
-            InputManager.Instance.CursorUp += new EventHandler<CursorUpArgs>(CursorUp_Handler); 
-		}
+            InputManager.Instance.CursorUp += new EventHandler<CursorUpArgs>(CursorUp_Handler);
+        }
 
-		#endregion
+        #endregion
 
         #region Component Methods
 
-		/// <summary>
-		/// Allows the game component to perform any initialization it needs to before starting
-		/// to run. This is where it can query for any required services and load content.
-		/// </summary>
-		public override void Initialize()
-		{
+        /// <summary>
+        /// Allows the game component to perform any initialization it needs to before starting
+        /// to run. This is where it can query for any required services and load content.
+        /// </summary>
+        public override void Initialize()
+        {
             base.Initialize();
-		} 
+        }
 
-		/// <summary>
-		/// Allows the game component to update itself.
-		/// </summary>
-		/// <param name="gameTime">Provides a snapshot of timing values.</param>
-		public override void Update(GameTime gameTime)
-		{
+        /// <summary>
+        /// Allows the game component to update itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public override void Update(GameTime gameTime)
+        {
             this.StatusMenu.Enabled = this.IsSelected && !this.IsDead;
             this.StatusMenu.Visible = this.IsSelected && !this.IsDead;
 
@@ -332,7 +332,7 @@ namespace IRTaktiks.Components.Playables
             this.ActionManager.Visible = this.IsSelected && !this.IsDead;
 
             base.Update(gameTime);
-		}
+        }
 
         /// <summary>
         /// Called when the DrawableGameComponent needs to be drawn. Override this method
@@ -383,7 +383,7 @@ namespace IRTaktiks.Components.Playables
             base.Draw(gameTime);
         }
 
-		#endregion
+        #endregion
 
         #region Input Handling
 
@@ -397,17 +397,20 @@ namespace IRTaktiks.Components.Playables
             // Test if the unit can be selected
             if (!this.IsDead && !this.IsSelected)
             {
-                // Touch was inside of the character.
-                if (((e.Position.X > this.Position.X) && e.Position.X < (this.Position.X + this.UnitTexture.Width)) &&
-                    ((e.Position.Y > this.Position.Y) && e.Position.Y < (this.Position.Y + this.UnitTexture.Height)))
+                // Touch was inside of the X area of the character.
+                if (e.Position.X < (this.Position.X + this.UnitTexture.Width) && e.Position.X > this.Position.X)
                 {
-                    // Unselect the player's units.                
-                    foreach (Unit unit in this.Player.Units)
+                    // Touch was inside of the Y area of the character.
+                    if (e.Position.Y < (this.Position.Y + this.UnitTexture.Height) && e.Position.Y > this.Position.Y)
                     {
-                        unit.IsSelected = false;
-                    }
+                        // Unselect the player's units.                
+                        foreach (Unit unit in this.Player.Units)
+                        {
+                            unit.IsSelected = false;
+                        }
 
-                    this.IsSelected = true;
+                        this.IsSelected = true;
+                    }
                 }
             }
         }
