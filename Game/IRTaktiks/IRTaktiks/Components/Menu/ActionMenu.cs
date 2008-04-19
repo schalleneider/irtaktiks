@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Playables;
 using IRTaktiks.Components.Managers;
+using System.Threading;
 
 namespace IRTaktiks.Components.Menu
 {
@@ -84,8 +85,22 @@ namespace IRTaktiks.Components.Menu
         public bool IsSelected
         {
             get { return IsSelectedField; }
-            set { IsSelectedField = true; }
+            set { IsSelectedField = value; }
         }
+
+        #endregion
+
+        #region Event
+
+        /// <summary>
+        /// The method template who will used to handle the Execute event.
+        /// </summary>
+        public delegate void ExecuteEventHandler();
+
+        /// <summary>
+        /// The Execute event.
+        /// </summary>
+        public event ExecuteEventHandler Execute;
 
         #endregion
 
@@ -130,6 +145,28 @@ namespace IRTaktiks.Components.Menu
             
             // Create the commands.
             this.CommandsField = new List<CommandMenu>();
+        }
+
+        #endregion
+
+        #region Event Dispatcher
+
+        /// <summary>
+        /// Queue the Execute event for dispatch.
+        /// </summary>
+        public void RaiseExecute()
+        {
+            ThreadPool.QueueUserWorkItem(ExecuteNow, null);
+        }
+
+        /// <summary>
+        /// Dispatch the Execute event.
+        /// </summary>
+        /// <param name="data">Event data.</param>
+        public void ExecuteNow(object data)
+        {
+            if (this.Execute != null)
+                this.Execute();
         }
 
         #endregion
