@@ -103,19 +103,6 @@ namespace IRTaktiks.Components.Managers
             get { return FreezedField; }
         }
 
-        /// <summary>
-        /// Indicates if the aim is enabled.
-        /// </summary>
-        private bool AimingField;
-
-        /// <summary>
-        /// Indicates if the aim is enabled.
-        /// </summary>
-        public bool Aiming
-        {
-            get { return AimingField; }
-        }
-
         #endregion
 
         #region Constructor
@@ -200,8 +187,6 @@ namespace IRTaktiks.Components.Managers
                 this.ChangedField = false;
             }
 
-            this.Aim.Enabled = this.Aiming && this.Enabled && this.Visible;
-
             base.Update(gameTime);
         }
 
@@ -233,10 +218,7 @@ namespace IRTaktiks.Components.Managers
             }
 
             // Draw the aim.
-            if (this.Aiming)
-            {
-                this.Aim.Draw(game.SpriteBatch);
-            }
+            this.Aim.Draw(game.SpriteBatch);
 
             game.SpriteBatch.End();
 
@@ -324,7 +306,6 @@ namespace IRTaktiks.Components.Managers
 
             this.ChangedField = true;
             this.FreezedField = false;
-            this.AimingField = false;
         }
 
         #endregion
@@ -433,7 +414,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void moveAction_Execute()
         {
-            throw new Exception("The method or operation is not implemented.");
+            
         }
 
         /// <summary>
@@ -441,7 +422,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void defendAction_Execute()
         {
-            throw new Exception("The method or operation is not implemented.");
+            
         }
 
         #endregion
@@ -453,7 +434,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void longAttackCommand_Execute()
         {
-            throw new Exception("The method or operation is not implemented.");
+            
         }
 
         /// <summary>
@@ -461,7 +442,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void shortAttackCommand_Execute()
         {
-            throw new Exception("The method or operation is not implemented.");
+            
         }
 
         /// <summary>
@@ -470,7 +451,6 @@ namespace IRTaktiks.Components.Managers
         private void healMagicCommand_Execute()
         {
             this.Aim.RegisterForInputHandling(this.Unit);
-            this.AimingField = true;
         }
 
         /// <summary>
@@ -478,7 +458,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void fireMagicCommand_Execute()
         {
-            throw new Exception("The method or operation is not implemented.");
+            
         }
 
         /// <summary>
@@ -486,7 +466,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void iceMagicCommand_Execute()
         {
-            throw new Exception("The method or operation is not implemented.");
+            
         }
 
         /// <summary>
@@ -494,7 +474,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void thunderMagicCommand_Execute()
         {
-            throw new Exception("The method or operation is not implemented.");
+            
         }
 
         /// <summary>
@@ -502,7 +482,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void potionItemCommand_Execute()
         {
-            throw new Exception("The method or operation is not implemented.");
+            
         }
 
         /// <summary>
@@ -510,7 +490,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void elixirItemCommand_Execute()
         {
-            throw new Exception("The method or operation is not implemented.");
+            
         }
 
         #endregion
