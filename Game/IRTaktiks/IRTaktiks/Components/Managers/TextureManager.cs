@@ -150,7 +150,21 @@ namespace IRTaktiks.Components.Managers
                 #endregion
 
                 #region Textures
-                
+
+                /// <summary>
+                /// Texture of Sprites/Menu/Aim.
+                /// </summary>
+                private Texture2D AimField;
+
+                /// <summary>
+                /// Texture of Sprites/Menu/Aim.
+                /// </summary>
+                public Texture2D Aim
+                {
+                    get { return AimField; }
+                    set { AimField = value; }
+                }
+
                 /// <summary>
                 /// Texture of Sprites/Menu/Background.
                 /// </summary>
@@ -672,7 +686,8 @@ namespace IRTaktiks.Components.Managers
             this.Characters.Wizard = game.Content.Load<Texture2D>("Characters/Wizard");
 
             this.Sprites.Config.Background = game.Content.Load<Texture2D>("Sprites/Config/Background");
-            
+
+            this.Sprites.Menu.Aim = game.Content.Load<Texture2D>("Sprites/Menu/Aim");
             this.Sprites.Menu.Background = game.Content.Load<Texture2D>("Sprites/Menu/Background");
             this.Sprites.Menu.Item = game.Content.Load<Texture2D>("Sprites/Menu/Item");
             this.Sprites.Menu.SelectedItem = game.Content.Load<Texture2D>("Sprites/Menu/SelectedItem");

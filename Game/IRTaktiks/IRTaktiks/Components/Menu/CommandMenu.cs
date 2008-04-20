@@ -74,7 +74,7 @@ namespace IRTaktiks.Components.Menu
             this.ItemTexture = TextureManager.Instance.Sprites.Menu.SubmenuItem;
             this.SelectedItemTexture = TextureManager.Instance.Sprites.Menu.SubmenuSelectedItem;
 
-            this.TextSpriteFont = SpriteFontManager.Instance.Chilopod12;
+            this.TextSpriteFont = SpriteFontManager.Instance.Chilopod14;
             this.AttributeSpriteFont = SpriteFontManager.Instance.Chilopod12;
         }
 
@@ -83,12 +83,25 @@ namespace IRTaktiks.Components.Menu
         #region Methods
 
         /// <summary>
-        /// Draws the menuitem at the specified position.
+        /// Draws the subitem.
         /// </summary>
-        /// <param name="spriteBatch">SpriteBatche that will be used to draw the textures.</param>
+        /// <param name="spriteBatch">SpriteBatch that will be used to draw the textures.</param>
         public override void Draw(SpriteBatch spriteBatch)
         {
- 	         base.Draw(spriteBatch);
+            // Draws the item of the menu.
+            spriteBatch.Draw(this.IsSelected ? this.SelectedItemTexture : this.ItemTexture, this.Position, Color.White);
+
+            // Measure the text and attribute size.
+            Vector2 textSize = this.TextSpriteFont.MeasureString(this.Text);
+            Vector2 attributeSize = this.AttributeSpriteFont.MeasureString(this.Attribute.ToString());
+
+            // Calculate the position of the text and attribute.
+            Vector2 textPosition = new Vector2(this.Position.X + 54 - textSize.X / 2, this.Position.Y + this.ItemTexture.Height / 2 - textSize.Y / 2);
+            Vector2 attributePosition = new Vector2(this.Position.X + 125 - attributeSize.X / 2, this.Position.Y + this.ItemTexture.Height / 2 - attributeSize.Y / 2);
+
+            // Draws the text and attribute.
+            spriteBatch.DrawString(this.TextSpriteFont, this.Text, textPosition, Color.White);
+            spriteBatch.DrawString(this.AttributeSpriteFont, this.Attribute.ToString(), attributePosition, Color.White);
         }
 
         #endregion
