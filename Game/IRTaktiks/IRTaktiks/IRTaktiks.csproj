@@ -64,8 +64,9 @@
     <Compile Include="Components\Managers\ActionManager.cs" />
     <Compile Include="Components\Menu\ActionMenu.cs" />
     <Compile Include="Components\Menu\CommandMenu.cs" />
-    <Compile Include="Components\Scenario\Camera.cs" />
     <Compile Include="Components\Menu\StatusMenu.cs" />
+    <Compile Include="Components\Scenario\Camera.cs" />
+    <Compile Include="Components\Menu\AimMenu.cs" />
     <Compile Include="Components\Menu\PlayerMenu.cs" />
     <Compile Include="Components\Scenario\Map.cs" />
     <Compile Include="Components\Logic\UnitAttributes.cs" />

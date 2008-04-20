@@ -20,7 +20,7 @@ namespace IRTaktiks.Components.Managers
     public class ActionManager : DrawableGameComponent
     {
         #region Properties
-        
+
         /// <summary>
         /// The unit owner of the commands.
         /// </summary>
@@ -38,13 +38,26 @@ namespace IRTaktiks.Components.Managers
         /// The actions of the unit.
         /// </summary>
         private List<ActionMenu> ActionsField;
-        
+
         /// <summary>
         /// The actions of the unit.
         /// </summary>
         public List<ActionMenu> Actions
         {
             get { return ActionsField; }
+        }
+
+        /// <summary>
+        /// The aim of the unit.
+        /// </summary>
+        private AimMenu AimField;
+
+        /// <summary>
+        /// The aim of the unit.
+        /// </summary>
+        public AimMenu Aim
+        {
+            get { return AimField; }
         }
 
         /// <summary>
@@ -75,7 +88,6 @@ namespace IRTaktiks.Components.Managers
         public bool Changed
         {
             get { return ChangedField; }
-            set { ChangedField = value; }
         }
 
         /// <summary>
@@ -89,7 +101,19 @@ namespace IRTaktiks.Components.Managers
         public bool Freezed
         {
             get { return FreezedField; }
-            set { FreezedField = value; }
+        }
+
+        /// <summary>
+        /// Indicates if the aim is enabled.
+        /// </summary>
+        private bool AimingField;
+
+        /// <summary>
+        /// Indicates if the aim is enabled.
+        /// </summary>
+        public bool Aiming
+        {
+            get { return AimingField; }
         }
 
         #endregion
@@ -97,40 +121,43 @@ namespace IRTaktiks.Components.Managers
         #region Constructor
 
         /// <summary>
-		/// Constructor of class.
-		/// </summary>
-		/// <param name="game">The instance of game that is running.</param>
+        /// Constructor of class.
+        /// </summary>
+        /// <param name="game">The instance of game that is running.</param>
         /// <param name="unit">The unit owner of the commands.</param>
         public ActionManager(Game game, Unit unit)
-			: base(game)
-		{
+            : base(game)
+        {
             // Set the unit owner of the commands.
-			this.UnitField = unit;
+            this.UnitField = unit;
 
-            this.Changed = true;
-            this.Freezed = false;
+            this.ChangedField = true;
+            this.FreezedField = false;
 
             // Create the actions.
             this.ActionsField = new List<ActionMenu>();
 
-			// Set the top left position for the player one.
-			if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
-			{
-				this.PositionField = new Vector2(0, 300);
-			}
+            // Create the aim.
+            this.AimField = new AimMenu();
+
+            // Set the top left position for the player one.
+            if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
+            {
+                this.PositionField = new Vector2(0, 300);
+            }
 
             // Set the top left position for the player two
-			if (this.Unit.Player.PlayerIndex == PlayerIndex.Two)
-			{
+            if (this.Unit.Player.PlayerIndex == PlayerIndex.Two)
+            {
                 this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.Item.Width, 300);
-			}
-            
+            }
+
             // Construct the menu.
             this.Construct();
 
             // Input
             InputManager.Instance.CursorDown += new EventHandler<CursorDownArgs>(CursorDown);
-		}
+        }
 
         #endregion
 
@@ -150,7 +177,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
-        {            
+        {
             // Check if the menu needs updates
             if (this.Changed)
             {
@@ -170,8 +197,10 @@ namespace IRTaktiks.Components.Managers
                     }
                 }
 
-                this.Changed = false;
+                this.ChangedField = false;
             }
+
+            this.Aim.Enabled = this.Aiming && this.Enabled && this.Visible;
 
             base.Update(gameTime);
         }
@@ -203,6 +232,12 @@ namespace IRTaktiks.Components.Managers
                 }
             }
 
+            // Draw the aim.
+            if (this.Aiming)
+            {
+                this.Aim.Draw(game.SpriteBatch);
+            }
+
             game.SpriteBatch.End();
 
             base.Draw(gameTime);
@@ -224,22 +259,46 @@ namespace IRTaktiks.Components.Managers
             ActionMenu magicAction = new ActionMenu(this.Unit, "Magic");
             ActionMenu itemsAction = new ActionMenu(this.Unit, "Items");
 
+            // Handle the Execute event.
+            moveAction.Execute += new ActionMenu.ExecuteEventHandler(moveAction_Execute);
+            defendAction.Execute += new ActionMenu.ExecuteEventHandler(defendAction_Execute);
+
             // Create the commands.
-            CommandMenu longAttackCommand = new CommandMenu(this.Unit, "Long", 0);
+            CommandMenu longAttackCommand = new CommandMenu(this.Unit, "Long", 5);
             CommandMenu shortAttackCommand = new CommandMenu(this.Unit, "Short", 0);
 
+            CommandMenu healMagicCommand = new CommandMenu(this.Unit, "Heal", 200);
             CommandMenu fireMagicCommand = new CommandMenu(this.Unit, "Fire", 75);
             CommandMenu iceMagicCommand = new CommandMenu(this.Unit, "Ice", 105);
             CommandMenu thunderMagicCommand = new CommandMenu(this.Unit, "Thunder", 145);
+
+            CommandMenu potionItemCommand = new CommandMenu(this.Unit, "Potion", 5);
+            CommandMenu elixirItemCommand = new CommandMenu(this.Unit, "Elixir", 1);
+
+            // Handle the Execute event.
+            longAttackCommand.Execute += new ActionMenu.ExecuteEventHandler(longAttackCommand_Execute);
+            shortAttackCommand.Execute += new ActionMenu.ExecuteEventHandler(shortAttackCommand_Execute);
+
+            healMagicCommand.Execute += new ActionMenu.ExecuteEventHandler(healMagicCommand_Execute);
+            fireMagicCommand.Execute += new ActionMenu.ExecuteEventHandler(fireMagicCommand_Execute);
+            iceMagicCommand.Execute += new ActionMenu.ExecuteEventHandler(iceMagicCommand_Execute);
+            thunderMagicCommand.Execute += new ActionMenu.ExecuteEventHandler(thunderMagicCommand_Execute);
+
+            potionItemCommand.Execute += new ActionMenu.ExecuteEventHandler(potionItemCommand_Execute);
+            elixirItemCommand.Execute += new ActionMenu.ExecuteEventHandler(elixirItemCommand_Execute);
 
             // Add the commands.
             attackAction.Commands.Add(longAttackCommand);
             attackAction.Commands.Add(shortAttackCommand);
 
+            magicAction.Commands.Add(healMagicCommand);
             magicAction.Commands.Add(fireMagicCommand);
             magicAction.Commands.Add(iceMagicCommand);
             magicAction.Commands.Add(thunderMagicCommand);
-            
+
+            itemsAction.Commands.Add(potionItemCommand);
+            itemsAction.Commands.Add(elixirItemCommand);
+
             // Add the actions.
             this.Actions.Add(moveAction);
             this.Actions.Add(defendAction);
@@ -263,8 +322,9 @@ namespace IRTaktiks.Components.Managers
                 this.Actions[index].IsSelected = false;
             }
 
-            this.Changed = true;
-            this.Freezed = false;
+            this.ChangedField = true;
+            this.FreezedField = false;
+            this.AimingField = false;
         }
 
         #endregion
@@ -298,7 +358,7 @@ namespace IRTaktiks.Components.Managers
                         // Unselect all the items.
                         this.Actions[index].IsSelected = false;
                     }
-                    
+
                     // Define if the touch was inside the action menu area.
                     float limitY = this.Position.Y + (TextureManager.Instance.Sprites.Menu.Item.Width * count);
                     if (e.Position.Y < limitY && e.Position.Y > this.Position.Y)
@@ -329,8 +389,8 @@ namespace IRTaktiks.Components.Managers
                                             this.Actions[index].Commands[subindex].IsSelected = true;
                                             this.Actions[index].Commands[subindex].RaiseExecute();
 
-                                            this.Freezed = true;
-                                            this.Changed = true;
+                                            this.FreezedField = true;
+                                            this.ChangedField = true;
                                         }
                                     }
                                 }
@@ -343,7 +403,7 @@ namespace IRTaktiks.Components.Managers
                                         this.Actions[index].IsSelected = true;
                                         this.Actions[index].RaiseExecute();
 
-                                        this.Changed = true;
+                                        this.ChangedField = true;
                                     }
                                 }
                             }
@@ -352,16 +412,105 @@ namespace IRTaktiks.Components.Managers
                         {
                             // Calculates the index of the item touched.
                             int index = (int)(e.Position.Y - this.Position.Y) / TextureManager.Instance.Sprites.Menu.Item.Height;
-                            
+
                             // Selects the menu item for the first time and queue the Execute event for dispatch.
                             this.Actions[index].IsSelected = true;
                             this.Actions[index].RaiseExecute();
 
-                            this.Changed = true;
+                            this.ChangedField = true;
                         }
                     }
                 }
             }
+        }
+
+        #endregion
+
+        #region Action Events
+
+        /// <summary>
+        /// Handle the Execute event for the Move action.
+        /// </summary>
+        private void moveAction_Execute()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        /// <summary>
+        /// Handle the Execute event for the Defend action.
+        /// </summary>
+        private void defendAction_Execute()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        #endregion
+
+        #region Command Events
+
+        /// <summary>
+        /// Handle the Execute event for the Long command.
+        /// </summary>
+        private void longAttackCommand_Execute()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        /// <summary>
+        /// Handle the Execute event for the Short command.
+        /// </summary>
+        private void shortAttackCommand_Execute()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        /// <summary>
+        /// Handle the Execute event for the Heal command.
+        /// </summary>
+        private void healMagicCommand_Execute()
+        {
+            this.Aim.RegisterForInputHandling(this.Unit);
+            this.AimingField = true;
+        }
+
+        /// <summary>
+        /// Handle the Execute event for the Fire command.
+        /// </summary>
+        private void fireMagicCommand_Execute()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        /// <summary>
+        /// Handle the Execute event for the Ice command.
+        /// </summary>
+        private void iceMagicCommand_Execute()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        /// <summary>
+        /// Handle the Execute event for the Thunder command.
+        /// </summary>
+        private void thunderMagicCommand_Execute()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        /// <summary>
+        /// Handle the Execute event for the Potion command.
+        /// </summary>
+        private void potionItemCommand_Execute()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        /// <summary>
+        /// Handle the Execute event for the Elixir command.
+        /// </summary>
+        private void elixirItemCommand_Execute()
+        {
+            throw new Exception("The method or operation is not implemented.");
         }
 
         #endregion

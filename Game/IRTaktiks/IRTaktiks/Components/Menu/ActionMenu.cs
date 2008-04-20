@@ -174,9 +174,9 @@ namespace IRTaktiks.Components.Menu
         #region Methods
 
         /// <summary>
-        /// Draws the menuitem at the specified position.
+        /// Draws the item.
         /// </summary>
-        /// <param name="spriteBatch">SpriteBatche that will be used to draw the textures.</param>
+        /// <param name="spriteBatch">SpriteBatch that will be used to draw the textures.</param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             // Draws the item of the menu.
@@ -185,10 +185,10 @@ namespace IRTaktiks.Components.Menu
             // Measure the text size.
             Vector2 textSize = this.TextSpriteFont.MeasureString(this.Text);
 
-            // Calculate the position of the texts.
+            // Calculate the position of the text.
             Vector2 textPosition = new Vector2(this.Position.X + this.ItemTexture.Width / 2 - textSize.X / 2, this.Position.Y + this.ItemTexture.Height / 2 - textSize.Y / 2);
             
-            // Draws the name of the player.
+            // Draws the text.
             spriteBatch.DrawString(this.TextSpriteFont, this.Text, textPosition, Color.White);
         }
 

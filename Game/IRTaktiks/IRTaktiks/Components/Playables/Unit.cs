@@ -107,6 +107,14 @@ namespace IRTaktiks.Components.Playables
             get { return ((float)this.Life / (float)this.FullLife) < 0.1; }
         }
 
+        /// <summary>
+        /// True if the unit can act on the menu.
+        /// </summary>
+        public bool CanAct
+        {
+            get { return this.Time == 1; }
+        }
+
         #endregion
 
         #region Properties
@@ -325,11 +333,16 @@ namespace IRTaktiks.Components.Playables
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
+            // Update the status of the StatusMenu.
             this.StatusMenu.Enabled = this.IsSelected && !this.IsDead;
             this.StatusMenu.Visible = this.IsSelected && !this.IsDead;
 
-            this.ActionManager.Enabled = this.IsSelected && !this.IsDead;
-            this.ActionManager.Visible = this.IsSelected && !this.IsDead;
+            // Update the status of the ActionManager.
+            this.ActionManager.Enabled = this.IsSelected && !this.IsDead && this.CanAct;
+            this.ActionManager.Visible = this.IsSelected && !this.IsDead && this.CanAct;
+
+            // Update the actual time of the unit.
+            this.TimeField = this.Time < 1 ? this.Time + this.Attributes.CalculateTimeFactor() : 1; 
 
             base.Update(gameTime);
         }

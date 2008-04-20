@@ -9,6 +9,20 @@ namespace IRTaktiks.Components.Logic
     /// </summary>
     public class UnitAttributes
     {
+        #region Constants
+
+        /// <summary>
+        /// The minimum value for an attribute.
+        /// </summary>
+        public const int Minimum = 1;
+
+        /// <summary>
+        /// The maximum value for an attribute.
+        /// </summary>
+        public const int Maximum = 99;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -95,6 +109,21 @@ namespace IRTaktiks.Components.Logic
             this.VitalityField = vitality;
             this.MagicField = magic;
             this.DexterityField = dexterity;
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Calculates the time factor.
+        /// Used on time update.
+        /// Based on agility.
+        /// </summary>
+        /// <returns></returns>
+        public double CalculateTimeFactor()
+        {
+            return 0.001 + 0.001 * ((double)this.Agility / (double)UnitAttributes.Maximum);
         }
 
         #endregion
