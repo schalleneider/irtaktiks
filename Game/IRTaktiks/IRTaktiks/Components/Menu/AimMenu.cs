@@ -22,6 +22,19 @@ namespace IRTaktiks.Components.Menu
 		#region Properties
 
         /// <summary>
+        /// The unit who will be the owner of the aim.
+        /// </summary>
+        private Unit UnitField;
+
+        /// <summary>
+        /// The unit who will be the owner of the aim.
+        /// </summary>
+        public Unit Unit
+        {
+            get { return UnitField; }
+        }
+        
+        /// <summary>
         /// Indicates if the aim is enabled.
         /// </summary>
         private bool EnabledField;
@@ -32,7 +45,6 @@ namespace IRTaktiks.Components.Menu
         public bool Enabled
         {
             get { return EnabledField; }
-            set { EnabledField = value; }
         }
         
         /// <summary>
@@ -65,18 +77,20 @@ namespace IRTaktiks.Components.Menu
             get { return AimingField; }
         }
 
-        /// <summary>
-        /// Indicates if the aim stopped its movement.
-        /// </summary>
-        private bool AimedField;
+        #endregion
+
+        #region Event
 
         /// <summary>
-        /// Indicates if the aim stopped its movement.
+        /// The method template who will used to handle the Aimed event.
         /// </summary>
-        public bool Aimed
-        {
-            get { return AimedField; }
-        }
+        /// <param name="position"></param>
+        public delegate void AimedEventHandler(Vector2 position);
+
+        /// <summary>
+        /// The Aimed event.
+        /// </summary>
+        public event AimedEventHandler Aimed;
 
         #endregion
 
@@ -85,10 +99,14 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
 		/// Constructor of class.
 		/// </summary>
-        public AimMenu()
+        /// <param name="unit">The unit who will be the owner of the aim.</param>
+        public AimMenu(Unit unit)
         {
+            this.UnitField = unit;
+
+            this.Position = this.Unit.Position;
+
             this.AimingField = false;
-            this.AimedField = false;
             this.EnabledField = false;
 		}
 
@@ -99,10 +117,9 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// Register the aim for input handling.
         /// </summary>
-        /// <param name="unit">The unit who will be the owner of the aim.</param>
-        public void RegisterForInputHandling(Unit unit)
+        public void Begin()
         {
-            this.PositionField = unit.Position;
+            this.EnabledField = true;
 
             InputManager.Instance.CursorDown += new EventHandler<CursorDownArgs>(CursorDown_Handler);
             InputManager.Instance.CursorUpdate += new EventHandler<CursorUpdateArgs>(CursorUpdate_Handler);
@@ -115,7 +132,11 @@ namespace IRTaktiks.Components.Menu
         /// <param name="spriteBatch">SpriteBatch that will be used to draw the textures.</param>
         public void Draw(SpriteBatch spriteBatch)
 		{
-            spriteBatch.Draw(TextureManager.Instance.Sprites.Menu.Aim, this.Position, Color.White);
+            // If the aim is enabled.
+            if (this.Enabled)
+            {
+                spriteBatch.Draw(TextureManager.Instance.Sprites.Menu.Aim, this.Position, Color.White);
+            }
 		}
 
 		#endregion
@@ -171,7 +192,12 @@ namespace IRTaktiks.Components.Menu
             {
                 // End the aiming and set the aimed true.
                 this.AimingField = false;
-                this.AimedField = true;
+
+                // Dispatch the Aimed event.
+                if (this.Aimed != null)
+                {
+                    this.Aimed(this.Position);
+                }
 
                 // Unregister the event handler.
                 InputManager.Instance.CursorUpdate -= CursorUpdate_Handler;
