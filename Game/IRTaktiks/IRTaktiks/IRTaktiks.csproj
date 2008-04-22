@@ -61,7 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\Actions\MagicManager.cs" />
+    <Compile Include="Components\Managers\Actions\MagicManager.cs" />
     <Compile Include="Components\Managers\ActionManager.cs" />
     <Compile Include="Components\Menu\ActionMenu.cs" />
     <Compile Include="Components\Menu\CommandMenu.cs" />
