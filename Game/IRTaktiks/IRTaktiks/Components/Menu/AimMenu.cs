@@ -104,7 +104,7 @@ namespace IRTaktiks.Components.Menu
         {
             this.UnitField = unit;
 
-            this.Position = this.Unit.Position;
+            this.PositionField = this.Unit.Position;
 
             this.AimingField = false;
             this.EnabledField = false;
@@ -115,15 +115,27 @@ namespace IRTaktiks.Components.Menu
 		#region Methods
 
         /// <summary>
-        /// Register the aim for input handling.
+        /// Activate the input handling.
         /// </summary>
-        public void Begin()
+        public void Activate()
         {
             this.EnabledField = true;
 
             InputManager.Instance.CursorDown += new EventHandler<CursorDownArgs>(CursorDown_Handler);
             InputManager.Instance.CursorUpdate += new EventHandler<CursorUpdateArgs>(CursorUpdate_Handler);
             InputManager.Instance.CursorUp += new EventHandler<CursorUpArgs>(CursorUp_Handler);
+        }
+
+        /// <summary>
+        /// Deactivate the input handling.
+        /// </summary>
+        public void Deactivate()
+        {
+            this.EnabledField = false;
+
+            InputManager.Instance.CursorDown -= new EventHandler<CursorDownArgs>(CursorDown_Handler);
+            InputManager.Instance.CursorUpdate -= new EventHandler<CursorUpdateArgs>(CursorUpdate_Handler);
+            InputManager.Instance.CursorUp -= new EventHandler<CursorUpArgs>(CursorUp_Handler);
         }
 
         /// <summary>
@@ -159,9 +171,6 @@ namespace IRTaktiks.Components.Menu
                 {
                     this.AimingField = true;
                 }
-
-                // Unregister the event handler.
-                InputManager.Instance.CursorDown -= CursorDown_Handler;
             }
         }
 
@@ -200,8 +209,7 @@ namespace IRTaktiks.Components.Menu
                 }
 
                 // Unregister the event handler.
-                InputManager.Instance.CursorUpdate -= CursorUpdate_Handler;
-                InputManager.Instance.CursorUp -= CursorUp_Handler;
+                this.Deactivate();
             }
         }
 
