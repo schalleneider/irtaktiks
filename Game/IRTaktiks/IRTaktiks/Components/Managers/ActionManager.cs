@@ -125,7 +125,7 @@ namespace IRTaktiks.Components.Managers
             this.ActionsField = new List<ActionMenu>();
 
             // Create the aim.
-            this.AimField = new AimMenu();
+            this.AimField = new AimMenu(unit);
 
             // Set the top left position for the player one.
             if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
@@ -292,7 +292,7 @@ namespace IRTaktiks.Components.Managers
         /// <summary>
         /// Reset the logic properties of the menu.
         /// </summary>
-        private void Reset()
+        public void Reset()
         {
             for (int index = 0; index < this.Actions.Count; index++)
             {
@@ -306,6 +306,8 @@ namespace IRTaktiks.Components.Managers
 
             this.ChangedField = true;
             this.FreezedField = false;
+
+            this.Aim.Deactivate();
         }
 
         #endregion
@@ -450,7 +452,8 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void healMagicCommand_Execute()
         {
-            this.Aim.RegisterForInputHandling(this.Unit);
+            this.Aim.Activate();
+            this.Aim.Aimed += new AimMenu.AimedEventHandler(HealMagic_Aimed);
         }
 
         /// <summary>
@@ -491,6 +494,15 @@ namespace IRTaktiks.Components.Managers
         private void elixirItemCommand_Execute()
         {
             
+        }
+
+        #endregion
+
+        #region Aim
+
+        private void HealMagic_Aimed(Vector2 position)
+        {
+            throw new Exception();
         }
 
         #endregion
