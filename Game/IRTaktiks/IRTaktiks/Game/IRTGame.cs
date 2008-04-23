@@ -296,6 +296,8 @@ namespace IRTaktiks
                 }
             }
 
+            this.Window.Title = String.Format("({0},{1})", mouseState.X, mouseState.Y);
+
 			base.Update(gameTime);
 		}
 

@@ -11,12 +11,12 @@ using IRTaktiks.Components.Menu;
 
 namespace IRTaktiks.Components.Playables
 {
-	/// <summary>
-	/// Representation of one player of game.
-	/// </summary>
-	public class Player : DrawableGameComponent
-	{
-		#region Properties
+    /// <summary>
+    /// Representation of one player of game.
+    /// </summary>
+    public class Player : DrawableGameComponent
+    {
+        #region Properties
 
         /// <summary>
         /// Index of the player.
@@ -30,32 +30,55 @@ namespace IRTaktiks.Components.Playables
         {
             get { return PlayerIndexField; }
         }
-        
+
         /// <summary>
-		/// Name of player.
-		/// </summary>
-		private String NameField;
+        /// The enemy of this player.
+        /// </summary>
+        public Player Enemy
+        {
+            get
+            {
+                IRTGame game = this.Game as IRTGame;
+                if (this.PlayerIndex == PlayerIndex.One)
+                {
+                    return game.PlayerTwo;
+                }
+                if (this.PlayerIndex == PlayerIndex.Two)
+                {
+                    return game.PlayerOne;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 
-		/// <summary>
-		/// Name of player.
-		/// </summary>
-		public String Name
-		{
-			get { return NameField; }
-		}
+        /// <summary>
+        /// Name of player.
+        /// </summary>
+        private String NameField;
 
-		/// <summary>
-		/// The combat units that the player posseses.
-		/// </summary>
-		private List<Unit> UnitsField;
+        /// <summary>
+        /// Name of player.
+        /// </summary>
+        public String Name
+        {
+            get { return NameField; }
+        }
 
-		/// <summary>
-		/// The combat units that the player posseses.
-		/// </summary>
-		public List<Unit> Units
-		{
-			get { return UnitsField; }
-		}
+        /// <summary>
+        /// The combat units that the player posseses.
+        /// </summary>
+        private List<Unit> UnitsField;
+
+        /// <summary>
+        /// The combat units that the player posseses.
+        /// </summary>
+        public List<Unit> Units
+        {
+            get { return UnitsField; }
+        }
 
         /// <summary>
         /// Menu of the player.
@@ -71,48 +94,48 @@ namespace IRTaktiks.Components.Playables
             set { MenuField = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Constructor
+        #region Constructor
 
-		/// <summary>
-		/// Constructor of class.
-		/// </summary>
-		/// <param name="game">The instance of game that is running.</param>
+        /// <summary>
+        /// Constructor of class.
+        /// </summary>
+        /// <param name="game">The instance of game that is running.</param>
         /// <param name="name">The name of the player.</param>
         /// <param name="index">The index of the player.</param>
-		public Player(Game game, String name, PlayerIndex index)
+        public Player(Game game, String name, PlayerIndex index)
             : base(game)
-		{
+        {
             this.NameField = name;
             this.PlayerIndexField = index;
 
             this.MenuField = new PlayerMenu(game, this);
 
-			this.UnitsField = new List<Unit>();
-		}
+            this.UnitsField = new List<Unit>();
+        }
 
-		#endregion
+        #endregion
 
         #region Component Methods
 
-		/// <summary>
-		/// Allows the game component to perform any initialization it needs to before starting
-		/// to run. This is where it can query for any required services and load content.
-		/// </summary>
-		public override void Initialize()
-		{
+        /// <summary>
+        /// Allows the game component to perform any initialization it needs to before starting
+        /// to run. This is where it can query for any required services and load content.
+        /// </summary>
+        public override void Initialize()
+        {
             base.Initialize();
-		} 
+        }
 
-		/// <summary>
-		/// Allows the game component to update itself.
-		/// </summary>
-		/// <param name="gameTime">Provides a snapshot of timing values.</param>
-		public override void Update(GameTime gameTime)
-		{
+        /// <summary>
+        /// Allows the game component to update itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public override void Update(GameTime gameTime)
+        {
             base.Update(gameTime);
-		}
+        }
 
         /// <summary>
         /// Called when the DrawableGameComponent needs to be drawn. Override this method
@@ -124,6 +147,6 @@ namespace IRTaktiks.Components.Playables
             base.Draw(gameTime);
         }
 
-		#endregion
-	}
+        #endregion
+    }
 }
