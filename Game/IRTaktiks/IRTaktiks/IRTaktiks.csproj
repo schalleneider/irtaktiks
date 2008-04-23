@@ -61,7 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\Managers\Actions\MagicManager.cs" />
+    <Compile Include="Components\Managers\Commands\MagicManager.cs" />
     <Compile Include="Components\Managers\ActionManager.cs" />
     <Compile Include="Components\Menu\ActionMenu.cs" />
     <Compile Include="Components\Menu\CommandMenu.cs" />
@@ -106,6 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="IRTaktiks.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\Managers\Actions\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\v2.0\Microsoft.Xna.GameStudio.Common.targets" />

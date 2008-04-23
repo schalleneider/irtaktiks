@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 
-namespace IRTaktiks.Components.Managers.Actions
+namespace IRTaktiks.Components.Managers.Commands
 {
     public class MagicManager
     {
