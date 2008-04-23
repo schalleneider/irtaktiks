@@ -132,7 +132,7 @@ namespace IRTaktiks.Components.Menu
             this.AimAlly = TextureManager.Instance.Sprites.Menu.AimAlly;
             this.AimEnemy = TextureManager.Instance.Sprites.Menu.AimEnemy;
             this.AimNothing = TextureManager.Instance.Sprites.Menu.AimNothing;
-            this.TextureToDraw = TextureManager.Instance.Sprites.Menu.AimNothing;
+            this.TextureToDraw = TextureManager.Instance.Sprites.Menu.AimAlly;
 		}
 
 		#endregion
@@ -180,6 +180,7 @@ namespace IRTaktiks.Components.Menu
             // If the aim is enabled.
             if (this.Enabled)
             {
+                // Updates the aim ten times per second.
                 if (gameTime.TotalGameTime.Milliseconds % 100 == 0)
                 {
                     // Get all the units of the game.
