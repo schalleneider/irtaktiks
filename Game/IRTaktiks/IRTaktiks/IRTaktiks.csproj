@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Logic\FPS.cs" />
     <Compile Include="Components\Managers\Commands\MagicManager.cs" />
     <Compile Include="Components\Managers\ActionManager.cs" />
     <Compile Include="Components\Menu\ActionMenu.cs" />
