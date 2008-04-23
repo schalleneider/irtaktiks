@@ -226,14 +226,14 @@ namespace IRTaktiks.Components.Playables
         /// <summary>
         /// The character texture of the unit.
         /// </summary>
-        private Texture2D UnitTextureField;
+        private Texture2D TextureField;
 
         /// <summary>
         /// The character texture of the unit.
         /// </summary>
-        public Texture2D UnitTexture
+        public Texture2D Texture
         {
-            get { return UnitTextureField; }
+            get { return TextureField; }
         }
 
         #endregion
@@ -293,7 +293,7 @@ namespace IRTaktiks.Components.Playables
             this.PositionField = position;
             this.AttributesField = attributes;
             this.OrientationField = orientation;
-            this.UnitTextureField = texture;
+            this.TextureField = texture;
             this.PlayerField = player;
             this.NameField = name;
 
@@ -311,7 +311,7 @@ namespace IRTaktiks.Components.Playables
 
             this.StatusMenuField = new StatusMenu(game, this);
 
-            InputManager.Instance.CursorUp += new EventHandler<CursorUpArgs>(CursorUp_Handler);
+            InputManager.Instance.CursorDown += new EventHandler<CursorDownArgs>(CursorDown_Handler);
         }
 
         #endregion
@@ -359,10 +359,10 @@ namespace IRTaktiks.Components.Playables
             game.SpriteBatch.Begin();
 
             // Draws the unit character.
-            game.SpriteBatch.Draw(this.UnitTexture, this.Position, new Rectangle(0, 48 * (int)this.Orientation, 32, 48), Color.White);
+            game.SpriteBatch.Draw(this.Texture, this.Position, new Rectangle(0, 48 * (int)this.Orientation, 32, 48), Color.White);
 
             // Draws the quick status.
-            Vector2 statusPosition = new Vector2(this.Position.X + (this.UnitTexture.Width / 2) - (TextureManager.Instance.Sprites.Unit.QuickStatus.Width / 2), this.Position.Y + 50);
+            Vector2 statusPosition = new Vector2(this.Position.X + (this.Texture.Width / 2) - (TextureManager.Instance.Sprites.Unit.QuickStatus.Width / 2), this.Position.Y + 50);
             game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.QuickStatus, statusPosition, Color.White);
 
             // Measure the maximum width and height for the bars.
@@ -387,7 +387,7 @@ namespace IRTaktiks.Components.Playables
             // Draws the arrow, if the unit is selected.
             if (this.IsSelected)
             {
-                Vector2 arrowPosition = new Vector2(this.Position.X + (this.UnitTexture.Width / 2) - (TextureManager.Instance.Sprites.Unit.Arrow.Width / 2), this.Position.Y - TextureManager.Instance.Sprites.Unit.Arrow.Height);
+                Vector2 arrowPosition = new Vector2(this.Position.X + (this.Texture.Width / 2) - (TextureManager.Instance.Sprites.Unit.Arrow.Width / 2), this.Position.Y - TextureManager.Instance.Sprites.Unit.Arrow.Height);
                 game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Unit.Arrow, arrowPosition, Color.White);
             }
 
@@ -401,20 +401,20 @@ namespace IRTaktiks.Components.Playables
         #region Input Handling
 
         /// <summary>
-        /// Handles the CursorUp event.
+        /// Handles the CursorDown event.
         /// </summary>
         /// <param name="sender">Always null.</param>
         /// <param name="e">Data of event</param>
-        private void CursorUp_Handler(object sender, CursorUpArgs e)
+        private void CursorDown_Handler(object sender, CursorDownArgs e)
         {
             // Test if the unit can be selected
             if (!this.IsDead && !this.IsSelected)
             {
                 // Touch was inside of the X area of the character.
-                if (e.Position.X < (this.Position.X + this.UnitTexture.Width) && e.Position.X > this.Position.X)
+                if (e.Position.X < (this.Position.X + this.Texture.Width) && e.Position.X > this.Position.X)
                 {
                     // Touch was inside of the Y area of the character.
-                    if (e.Position.Y < (this.Position.Y + this.UnitTexture.Height) && e.Position.Y > this.Position.Y)
+                    if (e.Position.Y < (this.Position.Y + this.Texture.Height) && e.Position.Y > this.Position.Y)
                     {
                         // Unselect the player's units.                
                         foreach (Unit unit in this.Player.Units)

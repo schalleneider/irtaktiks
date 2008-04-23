@@ -60,6 +60,21 @@ namespace IRTaktiks.Components.Menu
             get { return PositionField; }
 		}
 
+        /// <summary>
+        /// The texture of the aim when its over nothing.
+        /// </summary>
+        private Texture2D AimNothing;
+
+        /// <summary>
+        /// The texture of the aim when its over some ally.
+        /// </summary>
+        private Texture2D AimAlly;
+
+        /// <summary>
+        /// The texture of the aim when its over some enemy.
+        /// </summary>
+        private Texture2D AimEnemy;
+
         #endregion
 
         #region Logic Properties
@@ -104,10 +119,14 @@ namespace IRTaktiks.Components.Menu
         {
             this.UnitField = unit;
 
-            this.PositionField = this.Unit.Position;
+            this.PositionField = new Vector2(unit.Position.X + unit.Texture.Width / 2, unit.Position.Y + unit.Texture.Height / 8);
 
             this.AimingField = false;
             this.EnabledField = false;
+
+            this.AimAlly = TextureManager.Instance.Sprites.Menu.AimAlly;
+            this.AimEnemy = TextureManager.Instance.Sprites.Menu.AimEnemy;
+            this.AimNothing = TextureManager.Instance.Sprites.Menu.AimNothing;
 		}
 
 		#endregion
@@ -147,7 +166,17 @@ namespace IRTaktiks.Components.Menu
             // If the aim is enabled.
             if (this.Enabled)
             {
-                spriteBatch.Draw(TextureManager.Instance.Sprites.Menu.Aim, this.Position, Color.White);
+                Texture2D textureToDraw = this.AimNothing;
+
+                for (int index = 0; index < this.Unit.Player.Units.Count; index++)
+                {
+                    Vector2 unitPosition = this.Unit.Player.Units[index].Position;
+
+                    //if (
+                }
+
+                Vector2 position = new Vector2(this.Position.X - this.AimAlly.Width / 2, this.Position.Y - this.AimAlly.Height / 2);
+                spriteBatch.Draw(this.AimNothing, position, Color.White);
             }
 		}
 
@@ -165,9 +194,9 @@ namespace IRTaktiks.Components.Menu
             // Handles the event only if the aim is enabled.
             if (this.Enabled)
             {
-                // If the touch was nearby of the area of the aim
-                if ((e.Position.X < this.Position.X + 50 && e.Position.X > this.Position.X) &&
-                    (e.Position.Y < this.Position.Y + 50 && e.Position.Y > this.Position.Y))
+                // If the touch was in the area of the aim
+                if ((e.Position.X < (this.Position.X + this.AimAlly.Width / 2) && e.Position.X > (this.Position.X - this.AimAlly.Width / 2)) &&
+                    (e.Position.Y < (this.Position.Y + this.AimAlly.Height / 2) && e.Position.Y > (this.Position.Y - this.AimAlly.Height / 2)))
                 {
                     this.AimingField = true;
                 }

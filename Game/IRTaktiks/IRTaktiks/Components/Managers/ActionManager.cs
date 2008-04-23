@@ -502,7 +502,7 @@ namespace IRTaktiks.Components.Managers
 
         private void HealMagic_Aimed(Vector2 position)
         {
-            throw new Exception();
+            
         }
 
         #endregion
