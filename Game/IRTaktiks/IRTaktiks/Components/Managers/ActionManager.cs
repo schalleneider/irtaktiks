@@ -218,7 +218,7 @@ namespace IRTaktiks.Components.Managers
             }
 
             // Draw the aim.
-            this.Aim.Draw(game.SpriteBatch);
+            this.Aim.Draw(game.SpriteBatch, gameTime);
 
             game.SpriteBatch.End();
 
@@ -308,6 +308,7 @@ namespace IRTaktiks.Components.Managers
             this.FreezedField = false;
 
             this.Aim.Deactivate();
+            this.Aim.Reset();
         }
 
         #endregion
@@ -502,7 +503,6 @@ namespace IRTaktiks.Components.Managers
 
         private void HealMagic_Aimed(Vector2 position)
         {
-            
         }
 
         #endregion

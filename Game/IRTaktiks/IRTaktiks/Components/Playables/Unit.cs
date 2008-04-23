@@ -33,6 +33,8 @@ namespace IRTaktiks.Components.Playables
         public int Life
         {
             get { return LifeField; }
+            set { LifeField = value; }
+
         }
 
         /// <summary>
@@ -46,6 +48,7 @@ namespace IRTaktiks.Components.Playables
         public int Mana
         {
             get { return ManaField; }
+            set { ManaField = value; }
         }
 
         /// <summary>
@@ -61,6 +64,21 @@ namespace IRTaktiks.Components.Playables
         public double Time
         {
             get { return TimeField; }
+            set { TimeField = value; }
+        }
+
+        /// <summary>
+        /// The orientation of the unit.
+        /// </summary>
+        private UnitOrientation OrientationField;
+
+        /// <summary>
+        /// The orientation of the unit.
+        /// </summary>
+        public UnitOrientation Orientation
+        {
+            get { return OrientationField; }
+            set { OrientationField = value; }
         }
 
         #endregion
@@ -208,19 +226,6 @@ namespace IRTaktiks.Components.Playables
         public Vector2 Position
         {
             get { return PositionField; }
-        }
-
-        /// <summary>
-        /// The orientation of the unit.
-        /// </summary>
-        private UnitOrientation OrientationField;
-
-        /// <summary>
-        /// The orientation of the unit.
-        /// </summary>
-        public UnitOrientation Orientation
-        {
-            get { return OrientationField; }
         }
 
         /// <summary>

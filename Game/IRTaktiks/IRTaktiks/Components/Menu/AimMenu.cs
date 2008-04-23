@@ -75,6 +75,11 @@ namespace IRTaktiks.Components.Menu
         /// </summary>
         private Texture2D AimEnemy;
 
+        /// <summary>
+        /// The texture that will be used to draw the aim.
+        /// </summary>
+        private Texture2D TextureToDraw;
+
         #endregion
 
         #region Logic Properties
@@ -127,6 +132,7 @@ namespace IRTaktiks.Components.Menu
             this.AimAlly = TextureManager.Instance.Sprites.Menu.AimAlly;
             this.AimEnemy = TextureManager.Instance.Sprites.Menu.AimEnemy;
             this.AimNothing = TextureManager.Instance.Sprites.Menu.AimNothing;
+            this.TextureToDraw = TextureManager.Instance.Sprites.Menu.AimNothing;
 		}
 
 		#endregion
@@ -158,44 +164,62 @@ namespace IRTaktiks.Components.Menu
         }
 
         /// <summary>
+        /// Reset the logic properties of the aim.
+        /// </summary>
+        public void Reset()
+        {
+            this.PositionField = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 8);
+        }
+
+        /// <summary>
         /// Draws the aim.
         /// </summary>
         /// <param name="spriteBatch">SpriteBatch that will be used to draw the textures.</param>
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
 		{
             // If the aim is enabled.
             if (this.Enabled)
             {
-                Texture2D textureToDraw = this.AimNothing;
-                                
-                // Get all the units of the game.
-                List<Unit> units = new List<Unit>();
-                units.AddRange(this.Unit.Player.Units);
-                units.AddRange(this.Unit.Player.Enemy.Units);
-
-                // Check if the aim is over some unit.
-                for (int index = 0; index < units.Count; index++)
+                if (gameTime.TotalGameTime.Milliseconds % 100 == 0)
                 {
-                    // Get the center position of the unit.
-                    Vector2 unitPosition = new Vector2(units[index].Position.X + units[index].Texture.Width / 2, units[index].Position.Y + units[index].Texture.Height / 8);
+                    // Get all the units of the game.
+                    List<Unit> units = new List<Unit>();
+                    units.AddRange(this.Unit.Player.Units);
+                    units.AddRange(this.Unit.Player.Enemy.Units);
 
-                    // Calculates the distance between the unit and the aim.
-                    if (Vector2.Distance(this.Position, unitPosition) < 40)
+                    bool isOverSomething = false;
+
+                    // Check if the aim is over some unit.
+                    for (int index = 0; index < units.Count; index++)
                     {
-                        // Determine if the player owner of the unit is the enemy;
-                        if (units[index].Player != this.Unit.Player)
+                        // Get the center position of the unit.
+                        Vector2 unitPosition = new Vector2(units[index].Position.X + units[index].Texture.Width / 2, units[index].Position.Y + units[index].Texture.Height / 8);
+
+                        // Calculates the distance between the unit and the aim.
+                        if (Vector2.Distance(this.Position, unitPosition) < 40)
                         {
-                            textureToDraw = this.AimEnemy;
+                            isOverSomething = true;
+                            
+                            // Determine if the player owner of the unit is the enemy;
+                            if (units[index].Player != this.Unit.Player)
+                            {
+                                this.TextureToDraw = this.AimEnemy;
+                            }
+                            else
+                            {
+                                this.TextureToDraw = this.AimAlly;
+                            }
                         }
-                        else
-                        {
-                            textureToDraw = this.AimAlly;
-                        }
+                    }
+
+                    if (!isOverSomething)
+                    {
+                        this.TextureToDraw = this.AimNothing;
                     }
                 }
 
                 Vector2 position = new Vector2(this.Position.X - this.AimAlly.Width / 2, this.Position.Y - this.AimAlly.Height / 2);
-                spriteBatch.Draw(textureToDraw, position, Color.White);
+                spriteBatch.Draw(this.TextureToDraw, position, Color.White);
             }
 		}
 

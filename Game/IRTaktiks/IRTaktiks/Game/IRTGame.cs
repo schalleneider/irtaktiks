@@ -12,6 +12,7 @@ using IRTaktiks.Input;
 using IRTaktiks.Components.Screens;
 using IRTaktiks.Components.Managers;
 using IRTaktiks.Components.Playables;
+using IRTaktiks.Components.Logic;
 
 namespace IRTaktiks
 {
@@ -55,6 +56,19 @@ namespace IRTaktiks
 		#endregion
 
 		#region Game
+
+        /// <summary>
+        /// The FPS component.
+        /// </summary>
+        private FPS FPSField;
+
+        /// <summary>
+        /// The FPS component.
+        /// </summary>
+        public FPS FPS
+        {
+            get { return FPSField; }
+        }
 
         /// <summary>
         /// The player one of the game.
@@ -192,6 +206,8 @@ namespace IRTaktiks
             this.GraphicsDeviceManager.IsFullScreen = IRTGame.IsFullScreen;
 
 			this.GraphicsDeviceManager.ApplyChanges();
+
+            this.FPSField = new FPS(this);
 		}
 
 		#endregion
@@ -234,6 +250,9 @@ namespace IRTaktiks
 			// Change the game to its first status.
 			this.ChangeGameStatus(GameStatus.TitleScreen);
 
+            // Add the fps component to the game's components.
+            //this.Components.Add(this.FPS);
+
 			base.Initialize();
 		}
 
@@ -265,6 +284,7 @@ namespace IRTaktiks
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime)
 		{
+            // Exits the game.
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 this.Exit();
@@ -315,7 +335,7 @@ namespace IRTaktiks
 
 		#endregion
 
-		#region Other Methods
+		#region Methods
 
 		/// <summary>
 		/// Change the status of the game.
