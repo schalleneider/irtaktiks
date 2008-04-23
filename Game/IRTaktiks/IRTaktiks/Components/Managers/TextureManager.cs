@@ -152,17 +152,45 @@ namespace IRTaktiks.Components.Managers
                 #region Textures
 
                 /// <summary>
-                /// Texture of Sprites/Menu/Aim.
+                /// Texture of Sprites/Menu/AimAlly.
                 /// </summary>
-                private Texture2D AimField;
+                private Texture2D AimAllyField;
 
                 /// <summary>
-                /// Texture of Sprites/Menu/Aim.
+                /// Texture of Sprites/Menu/AimAlly.
                 /// </summary>
-                public Texture2D Aim
+                public Texture2D AimAlly
                 {
-                    get { return AimField; }
-                    set { AimField = value; }
+                    get { return AimAllyField; }
+                    set { AimAllyField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Menu/AimEnemy.
+                /// </summary>
+                private Texture2D AimEnemyField;
+
+                /// <summary>
+                /// Texture of Sprites/Menu/AimEnemy.
+                /// </summary>
+                public Texture2D AimEnemy
+                {
+                    get { return AimEnemyField; }
+                    set { AimEnemyField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Menu/AimNothing.
+                /// </summary>
+                private Texture2D AimNothingField;
+
+                /// <summary>
+                /// Texture of Sprites/Menu/AimNothing.
+                /// </summary>
+                public Texture2D AimNothing
+                {
+                    get { return AimNothingField; }
+                    set { AimNothingField = value; }
                 }
 
                 /// <summary>
@@ -687,7 +715,9 @@ namespace IRTaktiks.Components.Managers
 
             this.Sprites.Config.Background = game.Content.Load<Texture2D>("Sprites/Config/Background");
 
-            this.Sprites.Menu.Aim = game.Content.Load<Texture2D>("Sprites/Menu/Aim");
+            this.Sprites.Menu.AimAlly = game.Content.Load<Texture2D>("Sprites/Menu/AimAlly");
+            this.Sprites.Menu.AimEnemy = game.Content.Load<Texture2D>("Sprites/Menu/AimEnemy");
+            this.Sprites.Menu.AimNothing = game.Content.Load<Texture2D>("Sprites/Menu/AimNothing");
             this.Sprites.Menu.Background = game.Content.Load<Texture2D>("Sprites/Menu/Background");
             this.Sprites.Menu.Item = game.Content.Load<Texture2D>("Sprites/Menu/Item");
             this.Sprites.Menu.SelectedItem = game.Content.Load<Texture2D>("Sprites/Menu/SelectedItem");
