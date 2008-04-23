@@ -167,16 +167,35 @@ namespace IRTaktiks.Components.Menu
             if (this.Enabled)
             {
                 Texture2D textureToDraw = this.AimNothing;
+                                
+                // Get all the units of the game.
+                List<Unit> units = new List<Unit>();
+                units.AddRange(this.Unit.Player.Units);
+                units.AddRange(this.Unit.Player.Enemy.Units);
 
-                for (int index = 0; index < this.Unit.Player.Units.Count; index++)
+                // Check if the aim is over some unit.
+                for (int index = 0; index < units.Count; index++)
                 {
-                    Vector2 unitPosition = this.Unit.Player.Units[index].Position;
+                    // Get the center position of the unit.
+                    Vector2 unitPosition = new Vector2(units[index].Position.X + units[index].Texture.Width / 2, units[index].Position.Y + units[index].Texture.Height / 8);
 
-                    //if (
+                    // Calculates the distance between the unit and the aim.
+                    if (Vector2.Distance(this.Position, unitPosition) < 40)
+                    {
+                        // Determine if the player owner of the unit is the enemy;
+                        if (units[index].Player != this.Unit.Player)
+                        {
+                            textureToDraw = this.AimEnemy;
+                        }
+                        else
+                        {
+                            textureToDraw = this.AimAlly;
+                        }
+                    }
                 }
 
                 Vector2 position = new Vector2(this.Position.X - this.AimAlly.Width / 2, this.Position.Y - this.AimAlly.Height / 2);
-                spriteBatch.Draw(this.AimNothing, position, Color.White);
+                spriteBatch.Draw(textureToDraw, position, Color.White);
             }
 		}
 
