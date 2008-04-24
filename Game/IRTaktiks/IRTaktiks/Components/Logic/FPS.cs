@@ -26,7 +26,7 @@ namespace IRTaktiks.Components.Logic
         /// <summary>
         /// The FPS value.
         /// </summary>
-        private float FPSValue;
+        private float Value;
 
         #endregion
 
@@ -40,7 +40,7 @@ namespace IRTaktiks.Components.Logic
 			: base(game)
 		{
             this.Delta = 0;
-            this.FPSValue = 0;
+            this.Value = 0;
 		}
 
 		#endregion
@@ -65,7 +65,7 @@ namespace IRTaktiks.Components.Logic
             float timeElapsed = Convert.ToSingle(gameTime.ElapsedRealTime.TotalSeconds);
             if ((this.Delta += timeElapsed) > 1)
             {
-                this.FPSValue = 1 / timeElapsed;
+                this.Value = Convert.ToInt32(1 / timeElapsed);
                 this.Delta -= 1;
             }
 
@@ -79,16 +79,7 @@ namespace IRTaktiks.Components.Logic
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public override void Draw(GameTime gameTime)
 		{
-            IRTGame game = this.Game as IRTGame;
-
-            game.SpriteBatch.Begin();
-
-            Vector2 fpsSize = SpriteFontManager.Instance.Chilopod12.MeasureString(this.FPSValue.ToString());
-            Vector2 fpsPosition = new Vector2(IRTGame.Width / 2 - fpsSize.X / 2, 0);
-
-            game.SpriteBatch.DrawString(SpriteFontManager.Instance.Chilopod12, this.FPSValue.ToString(), fpsPosition, Color.White);
-
-            game.SpriteBatch.End();
+            this.Game.Window.Title = String.Format("IRTAKTIKS - FPS: {0}", this.Value.ToString());
 
             base.Draw(gameTime);
 		}
