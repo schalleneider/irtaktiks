@@ -64,6 +64,7 @@
     <Compile Include="Components\Logic\FPS.cs" />
     <Compile Include="Components\Managers\Commands\MagicManager.cs" />
     <Compile Include="Components\Managers\ActionManager.cs" />
+    <Compile Include="Components\Managers\SpriteBatchManager.cs" />
     <Compile Include="Components\Menu\ActionMenu.cs" />
     <Compile Include="Components\Menu\CommandMenu.cs" />
     <Compile Include="Components\Menu\StatusMenu.cs" />
