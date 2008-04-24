@@ -55,7 +55,7 @@ namespace IRTaktiks
 
 		#endregion
 
-		#region Game
+		#region Game Properties
 
         /// <summary>
         /// The FPS component.
@@ -100,7 +100,7 @@ namespace IRTaktiks
 
         #endregion
 
-        #region Graphics
+        #region Graphic Properties
 
         /// <summary>
 		/// Handles the configuration and management of the graphics device.
@@ -116,17 +116,16 @@ namespace IRTaktiks
 		}
 
 		/// <summary>
-		/// Enables sprites to be drawn.
+		/// Manager of sprites.
 		/// </summary>
-		private SpriteBatch SpriteBatchField;
+        private SpriteBatchManager SpriteBatchManagerField;
 
 		/// <summary>
-		/// Enables sprites to be drawn.
+		/// Manager of sprites.
 		/// </summary>
-		public SpriteBatch SpriteBatch
+        public SpriteBatchManager SpriteBatchManager
 		{
-			get { return SpriteBatchField; }
-			set { SpriteBatchField = value; }
+            get { return SpriteBatchManagerField; }
         }
 
         #endregion
@@ -207,6 +206,7 @@ namespace IRTaktiks
 
 			this.GraphicsDeviceManager.ApplyChanges();
 
+            this.SpriteBatchManagerField = new SpriteBatchManager();
             this.FPSField = new FPS(this);
 		}
 
@@ -261,8 +261,6 @@ namespace IRTaktiks
 		/// </summary>
 		protected override void LoadContent()
 		{
-			this.SpriteBatchField = new SpriteBatch(this.GraphicsDeviceManager.GraphicsDevice);
-
 			base.LoadContent();
 		}
 
@@ -274,15 +272,14 @@ namespace IRTaktiks
 		{
 			base.UnloadContent();
 		}
-
-		private bool mouseIsPressed;
         
         /// <summary>
 		/// Allows the game to run logic such as updating the world,
 		/// checking for collisions, gathering input, and playing audio.
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
-		protected override void Update(GameTime gameTime)
+		private bool mouseIsPressed;
+        protected override void Update(GameTime gameTime)
 		{
             // Exits the game.
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -316,8 +313,6 @@ namespace IRTaktiks
                 }
             }
 
-            this.Window.Title = String.Format("({0},{1})", mouseState.X, mouseState.Y);
-
 			base.Update(gameTime);
 		}
 
@@ -331,6 +326,8 @@ namespace IRTaktiks
             this.GraphicsDeviceManager.GraphicsDevice.RenderState.CullMode = CullMode.None;
 
 			base.Draw(gameTime);
+
+            this.SpriteBatchManager.Flush();
 		}
 
 		#endregion
