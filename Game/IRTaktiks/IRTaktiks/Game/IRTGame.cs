@@ -251,7 +251,7 @@ namespace IRTaktiks
 			this.ChangeGameStatus(GameStatus.TitleScreen);
 
             // Add the fps component to the game's components.
-            //this.Components.Add(this.FPS);
+            this.Components.Add(this.FPS);
 
 			base.Initialize();
 		}
