@@ -65,7 +65,7 @@ namespace IRTaktiks.Components.Logic
             float timeElapsed = Convert.ToSingle(gameTime.ElapsedRealTime.TotalSeconds);
             if ((this.Delta += timeElapsed) > 1)
             {
-                this.Value = Convert.ToInt32(1 / timeElapsed);
+                this.Value = 1 / timeElapsed;
                 this.Delta -= 1;
             }
 
@@ -79,7 +79,7 @@ namespace IRTaktiks.Components.Logic
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public override void Draw(GameTime gameTime)
 		{
-            this.Game.Window.Title = String.Format("IRTAKTIKS - FPS: {0}", this.Value.ToString());
+            this.Game.Window.Title = String.Format("IRTAKTIKS - FPS: {0:N}", this.Value);
 
             base.Draw(gameTime);
 		}

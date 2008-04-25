@@ -196,7 +196,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         public SpriteBatchManager(Game game)
         {
-            this.ListField = new List<SpriteDraw>();
+            this.ListField = new List<SpriteDraw>(50);
             this.SpriteBatchField = new SpriteBatch(game.GraphicsDevice);
         }
 
