@@ -199,12 +199,10 @@ namespace IRTaktiks.Components.Managers
         {
             IRTGame game = this.Game as IRTGame;
 
-            game.SpriteBatch.Begin();
-
             // Draw the items.
             for (int index = 0; index < this.Actions.Count; index++)
             {
-                this.Actions[index].Draw(game.SpriteBatch);
+                this.Actions[index].Draw(game.SpriteBatchManager);
 
                 // If the item is selected, draws the subitems.
                 if (this.Actions[index].IsSelected)
@@ -212,15 +210,13 @@ namespace IRTaktiks.Components.Managers
                     // Draws all the subitems.
                     for (int subindex = 0; subindex < this.Actions[index].Commands.Count; subindex++)
                     {
-                        this.Actions[index].Commands[subindex].Draw(game.SpriteBatch);
+                        this.Actions[index].Commands[subindex].Draw(game.SpriteBatchManager);
                     }
                 }
             }
 
             // Draw the aim.
-            this.Aim.Draw(game.SpriteBatch, gameTime);
-
-            game.SpriteBatch.End();
+            this.Aim.Draw(game.SpriteBatchManager, gameTime);
 
             base.Draw(gameTime);
         }

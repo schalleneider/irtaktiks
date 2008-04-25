@@ -176,11 +176,11 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// Draws the item.
         /// </summary>
-        /// <param name="spriteBatch">SpriteBatch that will be used to draw the textures.</param>
-        public virtual void Draw(SpriteBatch spriteBatch)
+        /// <param name="spriteBatchManager">SpriteBatchManager used to draw.</param>
+        public virtual void Draw(SpriteBatchManager spriteBatchManager)
         {
             // Draws the item of the menu.
-            spriteBatch.Draw(this.IsSelected ? this.SelectedItemTexture : this.ItemTexture, this.Position, Color.White);
+            spriteBatchManager.Draw(this.IsSelected ? this.SelectedItemTexture : this.ItemTexture, this.Position, Color.White, 50);
 
             // Measure the text size.
             Vector2 textSize = this.TextSpriteFont.MeasureString(this.Text);
@@ -189,7 +189,7 @@ namespace IRTaktiks.Components.Menu
             Vector2 textPosition = new Vector2(this.Position.X + this.ItemTexture.Width / 2 - textSize.X / 2, this.Position.Y + this.ItemTexture.Height / 2 - textSize.Y / 2);
             
             // Draws the text.
-            spriteBatch.DrawString(this.TextSpriteFont, this.Text, textPosition, Color.White);
+            spriteBatchManager.DrawString(this.TextSpriteFont, this.Text, textPosition, Color.White, 51);
         }
 
         #endregion

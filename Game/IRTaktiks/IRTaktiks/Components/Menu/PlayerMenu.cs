@@ -126,14 +126,12 @@ namespace IRTaktiks.Components.Menu
 		public override void Draw(GameTime gameTime)
 		{
             IRTGame game = this.Game as IRTGame;
-
-            game.SpriteBatch.Begin();
 			
 			// Draws the background of menu.
-            game.SpriteBatch.Draw(TextureManager.Instance.Sprites.Menu.Background, this.Position, Color.White);
+            game.SpriteBatchManager.Draw(TextureManager.Instance.Sprites.Menu.Background, this.Position, Color.White, 40);
 			
 			// Draws the player status background.
-			game.SpriteBatch.Draw(this.PlayerTexture, this.Position, Color.White);
+            game.SpriteBatchManager.Draw(this.PlayerTexture, this.Position, Color.White, 50);
 
 			// Get the unit information text.
 			string unitInformation = String.Format("0{0}/0{1}", this.Player.Units.FindAll(delegate(Unit unit) { return unit.Life > 0; }).Count, this.Player.Units.Count);
@@ -147,12 +145,10 @@ namespace IRTaktiks.Components.Menu
 			Vector2 unitPosition = new Vector2(this.Position.X + this.PlayerTexture.Width - unitSize.X - 10, this.Position.Y + 85);
 
 			// Draws the name of the player.
-			game.SpriteBatch.DrawString(this.NameSpriteFont, this.Player.Name, namePosition, Color.White);
+            game.SpriteBatchManager.DrawString(this.NameSpriteFont, this.Player.Name, namePosition, Color.White, 51);
 
 			// Draws the unit information.
-			game.SpriteBatch.DrawString(this.UnitSpriteFont, unitInformation, unitPosition, Color.White);
-
-            game.SpriteBatch.End();
+            game.SpriteBatchManager.DrawString(this.UnitSpriteFont, unitInformation, unitPosition, Color.White, 51);
             
             base.Draw(gameTime);
 		}
