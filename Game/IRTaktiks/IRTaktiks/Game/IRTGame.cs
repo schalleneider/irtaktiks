@@ -205,9 +205,6 @@ namespace IRTaktiks
             this.GraphicsDeviceManager.IsFullScreen = IRTGame.IsFullScreen;
 
 			this.GraphicsDeviceManager.ApplyChanges();
-
-            this.SpriteBatchManagerField = new SpriteBatchManager();
-            this.FPSField = new FPS(this);
 		}
 
 		#endregion
@@ -230,6 +227,12 @@ namespace IRTaktiks
 
 			// Spritefont loading.
 			SpriteFontManager.Instance.Initialize(this);
+
+            // Create the sprite batch manager.
+            this.SpriteBatchManagerField = new SpriteBatchManager(this);
+            
+            // Create the FPS component.
+            this.FPSField = new FPS(this);
 
 			// Screen construction.
 			this.TitleScreenField = new TitleScreen(this, 0);
@@ -326,8 +329,6 @@ namespace IRTaktiks
             this.GraphicsDeviceManager.GraphicsDevice.RenderState.CullMode = CullMode.None;
 
 			base.Draw(gameTime);
-
-            this.SpriteBatchManager.Flush();
 		}
 
 		#endregion

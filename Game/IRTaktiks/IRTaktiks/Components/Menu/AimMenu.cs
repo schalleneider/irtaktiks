@@ -174,8 +174,8 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// Draws the aim.
         /// </summary>
-        /// <param name="spriteBatch">SpriteBatch that will be used to draw the textures.</param>
-        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        /// <param name="spriteBatchManager">SpriteBatchManager used to draw.</param>
+        public void Draw(SpriteBatchManager spriteBatchManager, GameTime gameTime)
 		{
             // If the aim is enabled.
             if (this.Enabled)
@@ -220,7 +220,7 @@ namespace IRTaktiks.Components.Menu
                 }
 
                 Vector2 position = new Vector2(this.Position.X - this.AimAlly.Width / 2, this.Position.Y - this.AimAlly.Height / 2);
-                spriteBatch.Draw(this.TextureToDraw, position, Color.White);
+                spriteBatchManager.Draw(this.TextureToDraw, position, Color.White, 60);
             }
 		}
 

@@ -137,7 +137,10 @@ namespace IRTaktiks.Components.Screens
                         (component as DrawableGameComponent).Draw(gameTime);
                     }
                 }
-            } 
+            }
+
+            // Flushes all the sprites to be drawn.
+            (this.Game as IRTGame).SpriteBatchManager.Flush();
             
             base.Draw(gameTime);
         }

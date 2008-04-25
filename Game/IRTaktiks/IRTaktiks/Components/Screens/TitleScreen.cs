@@ -66,11 +66,9 @@ namespace IRTaktiks.Components.Screens
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Draw(GameTime gameTime)
         {
-            SpriteBatch spriteBatch = (this.Game as IRTGame).SpriteBatch;
+            IRTGame game = this.Game as IRTGame;
             
-            spriteBatch.Begin();
-            spriteBatch.Draw(TextureManager.Instance.Sprites.TitleScreen, new Vector2(0, 0), Color.White);
-            spriteBatch.End();
+            game.SpriteBatchManager.Draw(TextureManager.Instance.Sprites.TitleScreen, new Vector2(0, 0), Color.White, 100);
             
             base.Draw(gameTime);
         }

@@ -85,11 +85,11 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// Draws the subitem.
         /// </summary>
-        /// <param name="spriteBatch">SpriteBatch that will be used to draw the textures.</param>
-        public override void Draw(SpriteBatch spriteBatch)
+        /// <param name="spriteBatchManager">SpriteBatchManager used to draw.</param>
+        public override void Draw(SpriteBatchManager spriteBatchManager)
         {
             // Draws the item of the menu.
-            spriteBatch.Draw(this.IsSelected ? this.SelectedItemTexture : this.ItemTexture, this.Position, Color.White);
+            spriteBatchManager.Draw(this.IsSelected ? this.SelectedItemTexture : this.ItemTexture, this.Position, Color.White, 50);
 
             // Measure the text and attribute size.
             Vector2 textSize = this.TextSpriteFont.MeasureString(this.Text);
@@ -100,8 +100,8 @@ namespace IRTaktiks.Components.Menu
             Vector2 attributePosition = new Vector2(this.Position.X + 125 - attributeSize.X / 2, this.Position.Y + this.ItemTexture.Height / 2 - attributeSize.Y / 2);
 
             // Draws the text and attribute.
-            spriteBatch.DrawString(this.TextSpriteFont, this.Text, textPosition, Color.White);
-            spriteBatch.DrawString(this.AttributeSpriteFont, this.Attribute.ToString(), attributePosition, Color.White);
+            spriteBatchManager.DrawString(this.TextSpriteFont, this.Text, textPosition, Color.White, 51);
+            spriteBatchManager.DrawString(this.AttributeSpriteFont, this.Attribute.ToString(), attributePosition, Color.White, 51);
         }
 
         #endregion
