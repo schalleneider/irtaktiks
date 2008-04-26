@@ -62,19 +62,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Logic\FPS.cs" />
-    <Compile Include="Components\Managers\Commands\MagicManager.cs" />
+    <Compile Include="Components\Managers\AreaManager.cs" />
+    <Compile Include="Components\Managers\MagicManager.cs" />
     <Compile Include="Components\Managers\ActionManager.cs" />
-    <Compile Include="Components\Managers\SpriteBatchManager.cs" />
+    <Compile Include="Components\Managers\SpriteManager.cs" />
     <Compile Include="Components\Menu\ActionMenu.cs" />
     <Compile Include="Components\Menu\CommandMenu.cs" />
     <Compile Include="Components\Menu\StatusMenu.cs" />
+    <Compile Include="Components\Scenario\Area.cs" />
     <Compile Include="Components\Scenario\Camera.cs" />
     <Compile Include="Components\Menu\AimMenu.cs" />
     <Compile Include="Components\Menu\PlayerMenu.cs" />
     <Compile Include="Components\Scenario\Map.cs" />
     <Compile Include="Components\Logic\UnitAttributes.cs" />
     <Compile Include="Components\Logic\UnitOrientation.cs" />
-    <Compile Include="Components\Managers\SpriteFontManager.cs" />
+    <Compile Include="Components\Managers\FontManager.cs" />
     <Compile Include="Components\Managers\EffectManager.cs" />
     <Compile Include="Components\Playables\Unit.cs" />
     <Compile Include="Components\Playables\Player.cs" />
@@ -108,9 +110,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="IRTaktiks.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components\Managers\Actions\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\v2.0\Microsoft.Xna.GameStudio.Common.targets" />

@@ -7,8 +7,11 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 
-namespace IRTaktiks.Components.Managers.Commands
+namespace IRTaktiks.Components.Managers
 {
+    /// <summary>
+    /// Manager of magic's units.
+    /// </summary>
     public class MagicManager
     {
         #region Singleton

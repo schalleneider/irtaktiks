@@ -140,8 +140,9 @@ namespace IRTaktiks.Components.Screens
             }
 
             // Flushes all the sprites to be drawn.
-            (this.Game as IRTGame).SpriteBatchManager.Flush();
+            (this.Game as IRTGame).SpriteManager.Flush();
             
+
             base.Draw(gameTime);
         }
 

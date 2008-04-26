@@ -22,19 +22,6 @@ namespace IRTaktiks.Components.Screens
     {
         #region Properties
 
-        /// <summary>
-        /// The instance of the camera of the game.
-        /// </summary>
-        private Camera CameraField;
-
-        /// <summary>
-        /// The instance of the camera of the game.
-        /// </summary>
-        public Camera Camera
-        {
-            get { return CameraField; }
-        }
-
 		/// <summary>
 		/// The instance of the map of the game.
 		/// </summary>
@@ -61,11 +48,7 @@ namespace IRTaktiks.Components.Screens
             : base(game, priority)
 		{
 			// Create the children components of the screen.
-            this.CameraField = new Camera(game);
             this.MapField = new Map(game);
-
-			// Add the children components to the list.
-            this.Components.Add(this.Camera);
 		}
 
 		#endregion
@@ -125,22 +108,24 @@ namespace IRTaktiks.Components.Screens
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Draw(GameTime gameTime)
         {
+            IRTGame game = this.Game as IRTGame;
+
             // Set the effects parameters.
-            EffectManager.Instance.TerrainEffect.Parameters["World"].SetValue(Matrix.Identity);
-            EffectManager.Instance.TerrainEffect.Parameters["View"].SetValue(this.Camera.View);
-            EffectManager.Instance.TerrainEffect.Parameters["Projection"].SetValue(this.Camera.Projection);
-            EffectManager.Instance.TerrainEffect.Parameters["MaxHeight"].SetValue(this.Map.MaxHeight);
-            EffectManager.Instance.TerrainEffect.Parameters["TerrainHeightmap"].SetValue(TextureManager.Instance.Terrains.Terrain);
-            EffectManager.Instance.TerrainEffect.Parameters["SandTexture"].SetValue(TextureManager.Instance.Textures.Sand);
-            EffectManager.Instance.TerrainEffect.Parameters["GrassTexture"].SetValue(TextureManager.Instance.Textures.Grass);
-            EffectManager.Instance.TerrainEffect.Parameters["RockTexture"].SetValue(TextureManager.Instance.Textures.Rock);
-            EffectManager.Instance.TerrainEffect.Parameters["SnowTexture"].SetValue(TextureManager.Instance.Textures.Snow);
+            this.Map.Effect.Parameters["World"].SetValue(Matrix.Identity);
+            this.Map.Effect.Parameters["View"].SetValue(game.Camera.View);
+            this.Map.Effect.Parameters["Projection"].SetValue(game.Camera.Projection);
+            this.Map.Effect.Parameters["MaxHeight"].SetValue(this.Map.MaxHeight);
+            this.Map.Effect.Parameters["TerrainHeightmap"].SetValue(TextureManager.Instance.Terrains.Terrain);
+            this.Map.Effect.Parameters["SandTexture"].SetValue(TextureManager.Instance.Textures.Sand);
+            this.Map.Effect.Parameters["GrassTexture"].SetValue(TextureManager.Instance.Textures.Grass);
+            this.Map.Effect.Parameters["RockTexture"].SetValue(TextureManager.Instance.Textures.Rock);
+            this.Map.Effect.Parameters["SnowTexture"].SetValue(TextureManager.Instance.Textures.Snow);
 
             // Start the effect.
-            EffectManager.Instance.TerrainEffect.Begin();
+            this.Map.Effect.Begin();
 
             // Draws all passes of the current technique.
-            foreach (EffectPass pass in EffectManager.Instance.TerrainEffect.CurrentTechnique.Passes)
+            foreach (EffectPass pass in this.Map.Effect.CurrentTechnique.Passes)
             {
                 pass.Begin();
                 // this.Map.Draw(gameTime);
@@ -148,7 +133,7 @@ namespace IRTaktiks.Components.Screens
             }
 
             // End the effect.
-            EffectManager.Instance.TerrainEffect.End(); 
+            this.Map.Effect.End(); 
             
             base.Draw(gameTime);
         }

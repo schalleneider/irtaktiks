@@ -202,7 +202,7 @@ namespace IRTaktiks.Components.Managers
             // Draw the items.
             for (int index = 0; index < this.Actions.Count; index++)
             {
-                this.Actions[index].Draw(game.SpriteBatchManager);
+                this.Actions[index].Draw(game.SpriteManager);
 
                 // If the item is selected, draws the subitems.
                 if (this.Actions[index].IsSelected)
@@ -210,13 +210,13 @@ namespace IRTaktiks.Components.Managers
                     // Draws all the subitems.
                     for (int subindex = 0; subindex < this.Actions[index].Commands.Count; subindex++)
                     {
-                        this.Actions[index].Commands[subindex].Draw(game.SpriteBatchManager);
+                        this.Actions[index].Commands[subindex].Draw(game.SpriteManager);
                     }
                 }
             }
 
             // Draw the aim.
-            this.Aim.Draw(game.SpriteBatchManager, gameTime);
+            this.Aim.Draw(game.SpriteManager, gameTime);
 
             base.Draw(gameTime);
         }

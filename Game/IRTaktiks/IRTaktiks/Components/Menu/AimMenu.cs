@@ -175,7 +175,7 @@ namespace IRTaktiks.Components.Menu
         /// Draws the aim.
         /// </summary>
         /// <param name="spriteBatchManager">SpriteBatchManager used to draw.</param>
-        public void Draw(SpriteBatchManager spriteBatchManager, GameTime gameTime)
+        public void Draw(SpriteManager spriteBatchManager, GameTime gameTime)
 		{
             // If the aim is enabled.
             if (this.Enabled)

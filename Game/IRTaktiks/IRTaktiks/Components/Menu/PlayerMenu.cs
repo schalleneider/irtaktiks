@@ -76,8 +76,8 @@ namespace IRTaktiks.Components.Menu
             this.PlayerField = player;
 
 			// Set the spritefonts that will be used.
-			this.NameSpriteFont = SpriteFontManager.Instance.Chilopod20;
-			this.UnitSpriteFont = SpriteFontManager.Instance.Chilopod20;
+			this.NameSpriteFont = FontManager.Instance.Chilopod20;
+			this.UnitSpriteFont = FontManager.Instance.Chilopod20;
 
 			// Player one informations.
 			if (this.Player.PlayerIndex == PlayerIndex.One)
@@ -128,10 +128,10 @@ namespace IRTaktiks.Components.Menu
             IRTGame game = this.Game as IRTGame;
 			
 			// Draws the background of menu.
-            game.SpriteBatchManager.Draw(TextureManager.Instance.Sprites.Menu.Background, this.Position, Color.White, 40);
+            game.SpriteManager.Draw(TextureManager.Instance.Sprites.Menu.Background, this.Position, Color.White, 40);
 			
 			// Draws the player status background.
-            game.SpriteBatchManager.Draw(this.PlayerTexture, this.Position, Color.White, 50);
+            game.SpriteManager.Draw(this.PlayerTexture, this.Position, Color.White, 50);
 
 			// Get the unit information text.
 			string unitInformation = String.Format("0{0}/0{1}", this.Player.Units.FindAll(delegate(Unit unit) { return unit.Life > 0; }).Count, this.Player.Units.Count);
@@ -145,10 +145,10 @@ namespace IRTaktiks.Components.Menu
 			Vector2 unitPosition = new Vector2(this.Position.X + this.PlayerTexture.Width - unitSize.X - 10, this.Position.Y + 85);
 
 			// Draws the name of the player.
-            game.SpriteBatchManager.DrawString(this.NameSpriteFont, this.Player.Name, namePosition, Color.White, 51);
+            game.SpriteManager.DrawString(this.NameSpriteFont, this.Player.Name, namePosition, Color.White, 51);
 
 			// Draws the unit information.
-            game.SpriteBatchManager.DrawString(this.UnitSpriteFont, unitInformation, unitPosition, Color.White, 51);
+            game.SpriteManager.DrawString(this.UnitSpriteFont, unitInformation, unitPosition, Color.White, 51);
             
             base.Draw(gameTime);
 		}

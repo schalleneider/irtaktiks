@@ -141,7 +141,7 @@ namespace IRTaktiks.Components.Menu
             this.SelectedItemTexture = TextureManager.Instance.Sprites.Menu.SelectedItem;
 
             // Set the font to draw the text.
-            this.TextSpriteFont = SpriteFontManager.Instance.Chilopod16;
+            this.TextSpriteFont = FontManager.Instance.Chilopod16;
             
             // Create the commands.
             this.CommandsField = new List<CommandMenu>();
@@ -177,7 +177,7 @@ namespace IRTaktiks.Components.Menu
         /// Draws the item.
         /// </summary>
         /// <param name="spriteBatchManager">SpriteBatchManager used to draw.</param>
-        public virtual void Draw(SpriteBatchManager spriteBatchManager)
+        public virtual void Draw(SpriteManager spriteBatchManager)
         {
             // Draws the item of the menu.
             spriteBatchManager.Draw(this.IsSelected ? this.SelectedItemTexture : this.ItemTexture, this.Position, Color.White, 50);

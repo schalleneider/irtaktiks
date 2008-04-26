@@ -74,8 +74,8 @@ namespace IRTaktiks.Components.Menu
             this.ItemTexture = TextureManager.Instance.Sprites.Menu.SubmenuItem;
             this.SelectedItemTexture = TextureManager.Instance.Sprites.Menu.SubmenuSelectedItem;
 
-            this.TextSpriteFont = SpriteFontManager.Instance.Chilopod14;
-            this.AttributeSpriteFont = SpriteFontManager.Instance.Chilopod12;
+            this.TextSpriteFont = FontManager.Instance.Chilopod14;
+            this.AttributeSpriteFont = FontManager.Instance.Chilopod12;
         }
 
         #endregion
@@ -86,7 +86,7 @@ namespace IRTaktiks.Components.Menu
         /// Draws the subitem.
         /// </summary>
         /// <param name="spriteBatchManager">SpriteBatchManager used to draw.</param>
-        public override void Draw(SpriteBatchManager spriteBatchManager)
+        public override void Draw(SpriteManager spriteBatchManager)
         {
             // Draws the item of the menu.
             spriteBatchManager.Draw(this.IsSelected ? this.SelectedItemTexture : this.ItemTexture, this.Position, Color.White, 50);

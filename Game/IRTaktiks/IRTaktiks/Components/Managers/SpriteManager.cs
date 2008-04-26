@@ -13,8 +13,10 @@ namespace IRTaktiks.Components.Managers
     /// <summary>
     /// Manager of spritebatchs.
     /// </summary>
-    public class SpriteBatchManager
+    public class SpriteManager
     {
+        #region Helpers
+
         #region Interface
 
         /// <summary>
@@ -159,6 +161,8 @@ namespace IRTaktiks.Components.Managers
 
         #endregion
 
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -194,7 +198,8 @@ namespace IRTaktiks.Components.Managers
         /// <summary>
         /// Constructor of the class.
         /// </summary>
-        public SpriteBatchManager(Game game)
+        /// <param name="game">The instance of the game.</param>
+        public SpriteManager(Game game)
         {
             this.ListField = new List<SpriteDraw>(50);
             this.SpriteBatchField = new SpriteBatch(game.GraphicsDevice);
@@ -205,7 +210,7 @@ namespace IRTaktiks.Components.Managers
         #region Draw
 
         /// <summary>
-        /// Queue the texture to be drawn at the flush of the SpriteBatchManager, according its priority.
+        /// Queue the texture to be drawn at the flush, according its priority.
         /// </summary>
         /// <param name="texture">The sprite texture.</param>
         /// <param name="position">The location, in screen coordinates, where the sprite will be drawn.</param>
@@ -217,7 +222,7 @@ namespace IRTaktiks.Components.Managers
         }
         
         /// <summary>
-        /// Queue the texture to be drawn at the flush of the SpriteBatchManager, according its priority.
+        /// Queue the texture to be drawn at the flush, according its priority.
         /// </summary>
         /// <param name="texture">The sprite texture.</param>
         /// <param name="destinationRectangle">A rectangle specifying, in screen coordinates, where the sprite will be drawn. If this rectangle is not the same size as sourcerectangle, the sprite is scaled to fit.</param>
@@ -229,7 +234,7 @@ namespace IRTaktiks.Components.Managers
         }
 
         /// <summary>
-        /// Queue the texture to be drawn at the flush of the SpriteBatchManager, according its priority.
+        /// Queue the texture to be drawn at the flush, according its priority.
         /// </summary>
         /// <param name="texture">The sprite texture.</param>
         /// <param name="position">The location, in screen coordinates, where the sprite will be drawn.</param>
@@ -242,7 +247,7 @@ namespace IRTaktiks.Components.Managers
         }
 
         /// <summary>
-        /// Queue the texture to be drawn at the flush of the SpriteBatchManager, according its priority.
+        /// Queue the texture to be drawn at the flush, according its priority.
         /// </summary>
         /// <param name="texture">The sprite texture.</param>
         /// <param name="destinationRectangle">A rectangle specifying, in screen coordinates, where the sprite will be drawn. If this rectangle is not the same size as sourcerectangle, the sprite is scaled to fit.</param>
@@ -255,7 +260,7 @@ namespace IRTaktiks.Components.Managers
         }
 
         /// <summary>
-        /// Queue the text to be write at the flush of the SpriteBatchManager.
+        /// Queue the text to be write at the flush, according its priority.
         /// </summary>
         /// <param name="spriteFont">The sprite font.</param>
         /// <param name="text">The string to draw.</param>
@@ -272,7 +277,7 @@ namespace IRTaktiks.Components.Managers
         #region Flush
 
         /// <summary>
-        /// Flushes all queued items to be drawn.
+        /// Flushes all queued sprites to be drawn.
         /// </summary>
         public void Flush()
         {

@@ -68,7 +68,7 @@ namespace IRTaktiks.Components.Screens
         {
             IRTGame game = this.Game as IRTGame;
             
-            game.SpriteBatchManager.Draw(TextureManager.Instance.Sprites.TitleScreen, new Vector2(0, 0), Color.White, 100);
+            game.SpriteManager.Draw(TextureManager.Instance.Sprites.TitleScreen, new Vector2(0, 0), Color.White, 100);
             
             base.Draw(gameTime);
         }
