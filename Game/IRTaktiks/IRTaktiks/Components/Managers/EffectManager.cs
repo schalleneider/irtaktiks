@@ -45,6 +45,7 @@ namespace IRTaktiks.Components.Managers
         public void Initialize(Game game)
         {
             this.TerrainEffectField = game.Content.Load<Effect>("Shaders/Terrain");
+            this.AliasingEffectField = game.Content.Load<Effect>("Shaders/Aliasing");
         }
 
         #endregion
@@ -64,6 +65,19 @@ namespace IRTaktiks.Components.Managers
             get { return TerrainEffectField; }
         }
 
+        /// <summary>
+        /// The hlsl effect for anti-aliasing in 2D sprites.
+        /// </summary>
+        private Effect AliasingEffectField;
+
+        /// <summary>
+        /// The hlsl effect for anti-aliasing in 2D sprites.
+        /// </summary>
+        public Effect AliasingEffect
+        {
+            get { return AliasingEffectField; }
+        }
+        
         #endregion
     }
 }

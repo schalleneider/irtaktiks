@@ -12,27 +12,27 @@ namespace IRTaktiks.Components.Managers
     /// <summary>
     /// Manager of sprite fonts.
     /// </summary>
-    public class SpriteFontManager
+    public class FontManager
     {
         #region Singleton
 
         /// <summary>
         /// The instance of the class.
         /// </summary>
-        private static SpriteFontManager InstanceField;
+        private static FontManager InstanceField;
 
         /// <summary>
         /// The instance of the class.
         /// </summary>
-        public static SpriteFontManager Instance
+        public static FontManager Instance
         {
-            get { if (InstanceField == null) InstanceField = new SpriteFontManager(); return InstanceField; }
+            get { if (InstanceField == null) InstanceField = new FontManager(); return InstanceField; }
         }
 
         /// <summary>
         /// Private constructor.
         /// </summary>
-		private SpriteFontManager()
+		private FontManager()
         { }
 
         #endregion

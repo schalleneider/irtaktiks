@@ -81,9 +81,9 @@ namespace IRTaktiks.Components.Menu
 			this.UnitField = unit;
             
             // Set the spritefonts that will be used.
-            this.NameSpriteFont = SpriteFontManager.Instance.Chilopod16;
-            this.LifeSpriteFont = SpriteFontManager.Instance.Chilopod12;
-            this.ManaSpriteFont = SpriteFontManager.Instance.Chilopod12;
+            this.NameSpriteFont = FontManager.Instance.Chilopod16;
+            this.LifeSpriteFont = FontManager.Instance.Chilopod12;
+            this.ManaSpriteFont = FontManager.Instance.Chilopod12;
 
 			// Player one informations.
 			if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
@@ -144,7 +144,7 @@ namespace IRTaktiks.Components.Menu
             }
 
             // Draws the unit's status background.
-            game.SpriteBatchManager.Draw(this.UnitTexture, this.Position, Color.White, 50);
+            game.SpriteManager.Draw(this.UnitTexture, this.Position, Color.White, 50);
 
             // Get the unit's life points text.
             string lifeInformation = String.Format("{0}/{1}", this.Unit.Life, this.Unit.FullLife);
@@ -163,13 +163,13 @@ namespace IRTaktiks.Components.Menu
             Vector2 manaPosition = new Vector2(this.Position.X + this.UnitTexture.Width - manaSize.X - 5, this.Position.Y + 53);
 
             // Draws the name of the unit.
-            game.SpriteBatchManager.DrawString(this.NameSpriteFont, this.Unit.Name, namePosition, Color.White, 52);
+            game.SpriteManager.DrawString(this.NameSpriteFont, this.Unit.Name, namePosition, Color.White, 52);
 
             // Draws the life points information.
-            game.SpriteBatchManager.DrawString(this.LifeSpriteFont, lifeInformation, lifePosition, Color.White, 52);
+            game.SpriteManager.DrawString(this.LifeSpriteFont, lifeInformation, lifePosition, Color.White, 52);
 
             // Draws the mana points information.
-            game.SpriteBatchManager.DrawString(this.ManaSpriteFont, manaInformation, manaPosition, Color.White, 52);
+            game.SpriteManager.DrawString(this.ManaSpriteFont, manaInformation, manaPosition, Color.White, 52);
 
             // Measure the maximum width and height for the bars.
             int barMaxWidth = 136;
@@ -186,9 +186,9 @@ namespace IRTaktiks.Components.Menu
             Rectangle timeBar = new Rectangle((int)timeBarPosition.X, (int)timeBarPosition.Y, (int)(barMaxWidth * this.Unit.Time), barMaxHeight);
 
             // Draws the life, mana and time bars.
-            game.SpriteBatchManager.Draw(TextureManager.Instance.Sprites.Unit.LifeBar, lifeBar, Color.White, 51);
-            game.SpriteBatchManager.Draw(TextureManager.Instance.Sprites.Unit.ManaBar, manaBar, Color.White, 51);
-            game.SpriteBatchManager.Draw(TextureManager.Instance.Sprites.Unit.TimeBar, timeBar, Color.White, 51);
+            game.SpriteManager.Draw(TextureManager.Instance.Sprites.Unit.LifeBar, lifeBar, Color.White, 51);
+            game.SpriteManager.Draw(TextureManager.Instance.Sprites.Unit.ManaBar, manaBar, Color.White, 51);
+            game.SpriteManager.Draw(TextureManager.Instance.Sprites.Unit.TimeBar, timeBar, Color.White, 51);
 
             base.Draw(gameTime);
 		}

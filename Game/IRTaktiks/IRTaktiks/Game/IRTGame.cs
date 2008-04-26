@@ -13,6 +13,7 @@ using IRTaktiks.Components.Screens;
 using IRTaktiks.Components.Managers;
 using IRTaktiks.Components.Playables;
 using IRTaktiks.Components.Logic;
+using IRTaktiks.Components.Scenario;
 
 namespace IRTaktiks
 {
@@ -114,18 +115,44 @@ namespace IRTaktiks
 		{
 			get { return GraphicsDeviceManagerField; }
 		}
+        
+        /// <summary>
+        /// The instance of the camera.
+        /// </summary>
+        private Camera CameraField;
+
+        /// <summary>
+        /// The instance of the camera.
+        /// </summary>
+        public Camera Camera
+        {
+            get { return CameraField; }
+        }
 
 		/// <summary>
 		/// Manager of sprites.
 		/// </summary>
-        private SpriteBatchManager SpriteBatchManagerField;
+        private SpriteManager SpriteManagerField;
 
 		/// <summary>
 		/// Manager of sprites.
 		/// </summary>
-        public SpriteBatchManager SpriteBatchManager
+        public SpriteManager SpriteManager
 		{
-            get { return SpriteBatchManagerField; }
+            get { return SpriteManagerField; }
+        }
+
+        /// <summary>
+        /// Manager of areas.
+        /// </summary>
+        private AreaManager AreaManagerField;
+
+        /// <summary>
+        /// Manager of areas.
+        /// </summary>
+        public AreaManager AreaManager
+        {
+            get { return AreaManagerField; }
         }
 
         #endregion
@@ -219,27 +246,21 @@ namespace IRTaktiks
 		/// </summary>
 		protected override void Initialize()
 		{
-            // Texture loading.
+            // Resources loading.
             TextureManager.Instance.Initialize(this);
-
-            // Effect loading.
             EffectManager.Instance.Initialize(this);
+			FontManager.Instance.Initialize(this);
 
-			// Spritefont loading.
-			SpriteFontManager.Instance.Initialize(this);
-
-            // Create the sprite batch manager.
-            this.SpriteBatchManagerField = new SpriteBatchManager(this);
-            
-            // Create the FPS component.
+            // Components creation.
+            this.CameraField = new Camera(this);
+            this.SpriteManagerField = new SpriteManager(this);
+            this.AreaManagerField = new AreaManager(this.GraphicsDevice, this.Camera);
             this.FPSField = new FPS(this);
 
 			// Screen construction.
 			this.TitleScreenField = new TitleScreen(this, 0);
             this.ConfigScreenField = new ConfigScreen(this, 0);
 			this.GameScreenField = new GameScreen(this, 0);
-
-			// Managers construction.
 			this.ScreenManagerField = new ScreenManager(this);
 
 			// Screen addiction.
@@ -247,14 +268,13 @@ namespace IRTaktiks
             this.ScreenManager.Screens.Add(this.ConfigScreen);
 			this.ScreenManager.Screens.Add(this.GameScreen);
 
-			// Components creation.
-			this.Components.Add(this.ScreenManager);
+			// Components addiction.
+			this.Components.Add(this.Camera);
+            this.Components.Add(this.ScreenManager);
+            this.Components.Add(this.FPS);
 
 			// Change the game to its first status.
-			this.ChangeGameStatus(GameStatus.TitleScreen);
-
-            // Add the fps component to the game's components.
-            this.Components.Add(this.FPS);
+			this.ChangeGameStatus(GameStatus.TitleScreen);            
 
 			base.Initialize();
 		}

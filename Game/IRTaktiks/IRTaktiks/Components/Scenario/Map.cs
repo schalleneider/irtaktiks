@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
+using IRTaktiks.Components.Managers;
 
 namespace IRTaktiks.Components.Scenario
 {
@@ -16,6 +17,32 @@ namespace IRTaktiks.Components.Scenario
 	public class Map : DrawableGameComponent
 	{
 		#region Properties
+
+        /// <summary>
+        /// Graphics device of the game.
+        /// </summary>
+        private GraphicsDevice DeviceField;
+
+        /// <summary>
+        /// Graphics device of the game.
+        /// </summary>
+        public GraphicsDevice Device
+        {
+            get { return DeviceField; }
+        }
+
+        /// <summary>
+        /// The effect of the map
+        /// </summary>
+        private Effect EffectField;
+        
+        /// <summary>
+        /// The effect of the map
+        /// </summary>
+        public Effect Effect
+        {
+            get { return EffectField; }
+        }
 
         /// <summary>
         /// List of 3D vertices to be streamed to the graphics device.
@@ -109,19 +136,6 @@ namespace IRTaktiks.Components.Scenario
             get { return DimensionField; }
         }
 
-        /// <summary>
-        /// Graphics device of the game.
-        /// </summary>
-        private GraphicsDevice DeviceField;
-
-        /// <summary>
-        /// Graphics device of the game.
-        /// </summary>
-        public GraphicsDevice Device
-        {
-            get { return DeviceField; }
-        }
-
 		#endregion
 
         #region Constructor
@@ -136,6 +150,8 @@ namespace IRTaktiks.Components.Scenario
             this.MaxHeightField = 2048;
             this.CellSizeField = 32;
             this.DimensionField = 256;
+
+            this.EffectField = EffectManager.Instance.TerrainEffect;
 		}
 
 		#endregion
