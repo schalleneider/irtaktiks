@@ -11,6 +11,7 @@ using IRTaktiks.Components.Menu;
 using IRTaktiks.Components.Playables;
 using IRTaktiks.Input.EventArgs;
 using IRTaktiks.Input;
+using IRTaktiks.Components.Scenario;
 
 namespace IRTaktiks.Components.Managers
 {
@@ -45,6 +46,19 @@ namespace IRTaktiks.Components.Managers
         public List<ActionMenu> Actions
         {
             get { return ActionsField; }
+        }
+
+        /// <summary>
+        /// The action area of the unit.
+        /// </summary>
+        private Area AreaField;
+        
+        /// <summary>
+        /// The action area of the unit.
+        /// </summary>
+        public Area Area
+        {
+            get { return AreaField; }
         }
 
         /// <summary>
@@ -218,6 +232,12 @@ namespace IRTaktiks.Components.Managers
             // Draw the aim.
             this.Aim.Draw(game.SpriteManager, gameTime);
 
+            // Draw the area if its active.
+            if (this.Area != null)
+            {
+                game.AreaManager.Draw(this.Area);
+            }
+
             base.Draw(gameTime);
         }
 
@@ -305,6 +325,8 @@ namespace IRTaktiks.Components.Managers
 
             this.Aim.Deactivate();
             this.Aim.Reset();
+
+            this.AreaField = null;
         }
 
         #endregion
@@ -449,7 +471,9 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void healMagicCommand_Execute()
         {
-            this.Aim.Activate();
+            Vector2 areaPosition = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 4);
+            this.AreaField = new Area(areaPosition, 500, Color.Orange);
+            this.Aim.Activate(this.Area.Radius);
             this.Aim.Aimed += new AimMenu.AimedEventHandler(HealMagic_Aimed);
         }
 
