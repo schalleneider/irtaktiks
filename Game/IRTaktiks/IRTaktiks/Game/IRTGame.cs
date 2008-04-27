@@ -274,7 +274,7 @@ namespace IRTaktiks
             this.Components.Add(this.FPS);
 
 			// Change the game to its first status.
-			this.ChangeGameStatus(GameStatus.TitleScreen);            
+			this.ChangeGameStatus(GameStatus.TitleScreen);
 
 			base.Initialize();
 		}
@@ -347,6 +347,8 @@ namespace IRTaktiks
 		{
 			this.GraphicsDeviceManager.GraphicsDevice.Clear(Color.DimGray);
             this.GraphicsDeviceManager.GraphicsDevice.RenderState.CullMode = CullMode.None;
+
+            //this.AreaManager.Flush();
 
 			base.Draw(gameTime);
 		}

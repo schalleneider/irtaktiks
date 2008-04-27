@@ -222,7 +222,7 @@ namespace IRTaktiks.Components.Managers
 
             short[] indices = new short[this.IndicesNumber];
 
-            for (int pIndex = 0, iIndex = 0; pIndex < this.PrimitivesNumber - 1; pIndex++)
+            for (int pIndex = 0, iIndex = 0; pIndex < this.PrimitivesNumber; pIndex++)
             {
                 indices[iIndex++] = 0;
                 indices[iIndex++] = (short)(pIndex + 1);
@@ -273,11 +273,11 @@ namespace IRTaktiks.Components.Managers
                 for (int index = 0; index < this.Areas.Count; index++)
                 {
                     world = this.Areas[index].World;
-                    worldViewProjection = world * this.Camera.View * this.Camera.Projection;
+                    worldViewProjection = world * this.Camera.AreaView * this.Camera.AreaProjection;
 
                     this.Effect.Parameters["worldViewProj"].SetValue(worldViewProjection);
                     this.Effect.Parameters["color"].SetValue(this.Areas[index].Color.ToVector4());
-                    this.Effect.Parameters["blurThreshold"].SetValue(0.98f);
+                    this.Effect.Parameters["blurThreshold"].SetValue(0.95f);
 
                     this.Effect.CommitChanges();
 
