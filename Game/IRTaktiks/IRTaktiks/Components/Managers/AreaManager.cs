@@ -287,6 +287,8 @@ namespace IRTaktiks.Components.Managers
                 pass.End();
 
                 this.Effect.End();
+
+                this.Areas.Clear();
             }
         }
 

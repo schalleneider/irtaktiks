@@ -59,7 +59,33 @@ namespace IRTaktiks.Components.Menu
 		{
             get { return PositionField; }
 		}
+        
+        /// <summary>
+        /// Indicates if the aim is being moved.
+        /// </summary>
+        private bool AimingField;
+        
+        /// <summary>
+        /// Indicates if the aim is being moved.
+        /// </summary>
+        public bool Aiming
+        {
+            get { return AimingField; }
+        }
 
+        /// <summary>
+        /// The limit distance that the aim can be away from the unit.
+        /// </summary>
+        private float LimitField;
+
+        /// <summary>
+        /// The limit distance that the aim can be away from the unit.
+        /// </summary>
+        public float Limit
+        {
+            get { return LimitField; }
+        }
+                
         /// <summary>
         /// The texture of the aim when its over nothing.
         /// </summary>
@@ -79,23 +105,6 @@ namespace IRTaktiks.Components.Menu
         /// The texture that will be used to draw the aim.
         /// </summary>
         private Texture2D TextureToDraw;
-
-        #endregion
-
-        #region Logic Properties
-        
-        /// <summary>
-        /// Indicates if the aim is being moved.
-        /// </summary>
-        private bool AimingField;
-        
-        /// <summary>
-        /// Indicates if the aim is being moved.
-        /// </summary>
-        public bool Aiming
-        {
-            get { return AimingField; }
-        }
 
         #endregion
 
@@ -142,9 +151,11 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// Activate the input handling.
         /// </summary>
-        public void Activate()
+        /// <param name="limit">The limit distance that the aim can be away from the unit.</param>
+        public void Activate(float limit)
         {
             this.EnabledField = true;
+            this.LimitField = limit;
 
             InputManager.Instance.CursorDown += new EventHandler<CursorDownArgs>(CursorDown_Handler);
             InputManager.Instance.CursorUpdate += new EventHandler<CursorUpdateArgs>(CursorUpdate_Handler);
@@ -157,6 +168,7 @@ namespace IRTaktiks.Components.Menu
         public void Deactivate()
         {
             this.EnabledField = false;
+            this.LimitField = 0;
 
             InputManager.Instance.CursorDown -= new EventHandler<CursorDownArgs>(CursorDown_Handler);
             InputManager.Instance.CursorUpdate -= new EventHandler<CursorUpdateArgs>(CursorUpdate_Handler);
@@ -257,8 +269,13 @@ namespace IRTaktiks.Components.Menu
             // If the aim is enabled and aiming.
             if (this.Enabled && this.Aiming)
             {
-                // Updates the position of the aim.
-                this.PositionField = e.Position;
+                // If the aim is inside the area
+                Vector2 areaPosition = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 4);
+                if (Vector2.Distance(e.Position, areaPosition) < this.Limit / 2)
+                {
+                    // Updates the position of the aim.
+                    this.PositionField = e.Position;
+                }
             }
         }
 

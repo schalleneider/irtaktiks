@@ -21,17 +21,17 @@ namespace IRTaktiks.Components.Scenario
         /// <summary>
         /// The scaled factor for X.
         /// </summary>
-        public const float ScaledFactorX = 1.00f;
+        public const float ScaledFactorX = +1.00f;
 
         /// <summary>
         /// The scaled factor for Y.
         /// </summary>
-        public const float ScaledFactorY = 0.85f;
+        public const float ScaledFactorY = -0.85f;
 
         /// <summary>
         /// The scaled factor for the radius.
         /// </summary>
-        public const float ScaledFactorRadius = 1.00f;
+        public const float ScaledFactorRadius = +1.00f;
 
         #endregion
 
