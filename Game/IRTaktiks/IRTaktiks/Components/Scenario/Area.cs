@@ -16,6 +16,25 @@ namespace IRTaktiks.Components.Scenario
     /// </summary>
     public class Area
     {
+        #region Constants
+
+        /// <summary>
+        /// The scaled factor for X.
+        /// </summary>
+        public const float ScaledFactorX = 1.00f;
+
+        /// <summary>
+        /// The scaled factor for Y.
+        /// </summary>
+        public const float ScaledFactorY = 0.85f;
+
+        /// <summary>
+        /// The scaled factor for the radius.
+        /// </summary>
+        public const float ScaledFactorRadius = 1.00f;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -30,7 +49,20 @@ namespace IRTaktiks.Components.Scenario
         {
             get { return PositionField; }
         }
-
+        
+        /// <summary>
+        /// The scaled position of the area.
+        /// </summary>
+        private Vector2 ScaledPositionField;
+        
+        /// <summary>
+        /// The scaled position of the area.
+        /// </summary>
+        public Vector2 ScaledPosition
+        {
+            get { return ScaledPositionField; }
+        }
+        
         /// <summary>
         /// The radius of the area.
         /// </summary>
@@ -45,6 +77,19 @@ namespace IRTaktiks.Components.Scenario
         }
 
         /// <summary>
+        /// The scaled radius of the area.
+        /// </summary>
+        private float ScaledRadiusField;
+        
+        /// <summary>
+        /// The scaled radius of the area.
+        /// </summary>
+        public float ScaledRadius
+        {
+            get { return ScaledRadiusField; }
+        }
+        
+        /// <summary>
         /// The color of the area.
         /// </summary>
         private Color ColorField;
@@ -58,13 +103,26 @@ namespace IRTaktiks.Components.Scenario
         }
 
         /// <summary>
+        /// The blur threshold value.
+        /// </summary>
+        private float BlurThresholdField;
+
+        /// <summary>
+        /// The blur threshold value.
+        /// </summary>
+        public float BlurThreshold
+        {
+            get { return BlurThresholdField; }
+        }
+        
+        /// <summary>
         /// The world matrix of the area.
         /// </summary>
         public Matrix World
         {
             get
             {
-                return Matrix.CreateScale(this.Radius) * Matrix.CreateTranslation(this.Position.X, this.Position.Y, 0);
+                return Matrix.CreateScale(this.ScaledRadius) * Matrix.CreateTranslation(this.ScaledPosition.X, this.ScaledPosition.Y, 0);
             }
         }
 
@@ -83,7 +141,26 @@ namespace IRTaktiks.Components.Scenario
             this.PositionField = position;
             this.RadiusField = radius;
             this.ColorField = color;
+
+            this.Scale();
         }	
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Calculates the scaled position and radius, basead in the min and max values of x an y.
+        /// </summary>
+        private void Scale()
+        {
+            float scaledX = Area.ScaledFactorX * (2 * (this.Position.X / (float)IRTGame.Width) - 1);
+            float scaledY = Area.ScaledFactorY * (2 * (this.Position.Y / (float)IRTGame.Height) - 1);
+            float scaledRadius = Area.ScaledFactorRadius * (this.Radius / (float)IRTGame.Width);
+
+            this.ScaledPositionField = new Vector2(scaledX, scaledY);
+            this.ScaledRadiusField = scaledRadius;
+        }
 
         #endregion
     }

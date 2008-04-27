@@ -57,24 +57,50 @@ namespace IRTaktiks.Components.Scenario
         }
 
         /// <summary>
-        /// Vision matrix of the camera.
+        /// Vision matrix of the map.
         /// </summary>
-        public Matrix View
+        public Matrix MapView
         {
             get
             {
+                //return Matrix.Identity;
                 return Matrix.CreateTranslation(0, -10, 0) * Matrix.CreateRotationY(MathHelper.ToRadians(this.CameraRotation)) * Matrix.CreateRotationX(MathHelper.ToRadians(this.CameraArc)) * Matrix.CreateLookAt(new Vector3(0, 0, -this.CameraDistance), new Vector3(0, 0, 0), Vector3.Up);
             }
         }
 
         /// <summary>
-        /// Projection matrix of the camera.
+        /// Projection matrix of the map.
         /// </summary>
-        public Matrix Projection
+        public Matrix MapProjection
         {
             get
             {
+                //return Matrix.CreateScale(1.0f, IRTGame.Width / IRTGame.Height, 0.0f);
                 return Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, (float)(Game.Window.ClientBounds.Width / Game.Window.ClientBounds.Height), 1, 10000);
+            }
+        }
+
+        /// <summary>
+        /// Vision matrix of the map.
+        /// </summary>
+        public Matrix AreaView
+        {
+            get
+            {
+                return Matrix.Identity;
+            }
+        }
+
+        /// <summary>
+        /// Projection matrix of the map.
+        /// </summary>
+        public Matrix AreaProjection
+        {
+            get
+            {
+                float scaleX = 1.0f;
+                float scaleY = (float)this.Game.GraphicsDevice.Viewport.Width / (float)this.Game.GraphicsDevice.Viewport.Height;
+                return Matrix.CreateScale(scaleX, scaleY , 0.0f);
             }
         }
 

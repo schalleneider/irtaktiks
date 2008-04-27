@@ -112,8 +112,8 @@ namespace IRTaktiks.Components.Screens
 
             // Set the effects parameters.
             this.Map.Effect.Parameters["World"].SetValue(Matrix.Identity);
-            this.Map.Effect.Parameters["View"].SetValue(game.Camera.View);
-            this.Map.Effect.Parameters["Projection"].SetValue(game.Camera.Projection);
+            this.Map.Effect.Parameters["View"].SetValue(game.Camera.MapView);
+            this.Map.Effect.Parameters["Projection"].SetValue(game.Camera.MapProjection);
             this.Map.Effect.Parameters["MaxHeight"].SetValue(this.Map.MaxHeight);
             this.Map.Effect.Parameters["TerrainHeightmap"].SetValue(TextureManager.Instance.Terrains.Terrain);
             this.Map.Effect.Parameters["SandTexture"].SetValue(TextureManager.Instance.Textures.Sand);
@@ -128,7 +128,7 @@ namespace IRTaktiks.Components.Screens
             foreach (EffectPass pass in this.Map.Effect.CurrentTechnique.Passes)
             {
                 pass.Begin();
-                // this.Map.Draw(gameTime);
+                this.Map.Draw(gameTime);
                 pass.End();
             }
 
