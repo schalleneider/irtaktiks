@@ -73,6 +73,8 @@
     <Compile Include="Components\Scenario\Camera.cs" />
     <Compile Include="Components\Menu\AimMenu.cs" />
     <Compile Include="Components\Menu\PlayerMenu.cs" />
+    <Compile Include="Components\Scenario\Drawable.cs" />
+    <Compile Include="Components\Scenario\Text.cs" />
     <Compile Include="Components\Scenario\Map.cs" />
     <Compile Include="Components\Logic\UnitAttributes.cs" />
     <Compile Include="Components\Logic\UnitOrientation.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Components\Playables\Unit.cs" />
     <Compile Include="Components\Playables\Player.cs" />
     <Compile Include="Components\Managers\ScreenManager.cs" />
+    <Compile Include="Components\Scenario\Sprite.cs" />
     <Compile Include="Components\Screens\ConfigScreen.cs" />
     <Compile Include="Components\Screens\GameScreen.cs" />
     <Compile Include="Components\Screens\Screen.cs" />
