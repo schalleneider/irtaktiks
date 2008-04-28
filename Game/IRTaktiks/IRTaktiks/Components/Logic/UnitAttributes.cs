@@ -115,6 +115,22 @@ namespace IRTaktiks.Components.Logic
 
         #region Methods
 
+        #region Areas
+
+        /// <summary>
+        /// Calculates the area that a magic can be spelled.
+        /// Based on dexterity and magic.
+        /// </summary>
+        /// <returns>The area.</returns>
+        public double CalculateMagicArea()
+        {
+            return 200 + 1.5 * (double)this.Dexterity + 1.0 * (double)this.Magic;
+        }
+
+        #endregion
+
+        #region Factors
+
         /// <summary>
         /// Calculates the time factor, used on time update.
         /// Based on agility.
@@ -126,14 +142,24 @@ namespace IRTaktiks.Components.Logic
         }
 
         /// <summary>
-        /// Calculates the area that a magic can be spelled.
-        /// Based on dexterity and magic.
+        /// Calculates the magic attack factor.
         /// </summary>
-        /// <returns>The area.</returns>
-        public double CalculateMagicArea()
+        /// <returns>The magic attack factor.</returns>
+        public double CalculateMagicAttackFactor()
         {
-            return 200 + 1.5 * (double)this.Dexterity + 1.0 * (double)this.Magic;
+            return 3.25 * (double)this.Magic;
         }
+
+        /// <summary>
+        /// Calculates the magic defense factor.
+        /// </summary>
+        /// <returns>The magic defense factor.</returns>
+        public double CalculateMagicDefenseFactor()
+        {
+            return 3.05 * (double)this.Magic;
+        }
+
+        #endregion
 
         #endregion
     }

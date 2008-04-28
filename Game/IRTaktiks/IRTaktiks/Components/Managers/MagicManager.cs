@@ -38,12 +38,21 @@ namespace IRTaktiks.Components.Managers
 
         #endregion 
 
-        #region Constants
+        #region Costs
 
         /// <summary>
         /// The cost of mp of the heal magic.
         /// </summary>
         public const int HealCost = 200;
+
+        #endregion
+
+        #region Bases
+
+        /// <summary>
+        /// The base calculation factor of the heal.
+        /// </summary>
+        public const float HealBase = 22;  
 
         #endregion
 
@@ -70,9 +79,16 @@ namespace IRTaktiks.Components.Managers
         /// <param name="target">The unit targeted by the magic.</param>
         public void Heal(Unit caster, Unit target)
         {
-            caster.Mana -= MagicManager.HealCost;
-            
+            // Effects on caster.
+            caster.Mana -= MagicManager.HealCost;            
             caster.Time = 0;
+
+            // Effects on target.
+            if (target != null)
+            {
+                double heal = MagicManager.HealBase * 2.95 * caster.Attributes.CalculateMagicAttackFactor() * 0.1;
+                target.Life -= (int)heal;
+            }
         }
 
         #endregion
