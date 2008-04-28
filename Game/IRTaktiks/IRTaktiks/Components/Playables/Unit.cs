@@ -33,7 +33,10 @@ namespace IRTaktiks.Components.Playables
         public int Life
         {
             get { return LifeField; }
-            set { LifeField = value; }
+            set
+            {
+                LifeField = value;
+            }
 
         }
 
@@ -48,7 +51,10 @@ namespace IRTaktiks.Components.Playables
         public int Mana
         {
             get { return ManaField; }
-            set { ManaField = value; }
+            set
+            {
+                ManaField = value;
+            }
         }
 
         /// <summary>
@@ -64,7 +70,10 @@ namespace IRTaktiks.Components.Playables
         public double Time
         {
             get { return TimeField; }
-            set { TimeField = value; }
+            set
+            {
+                TimeField = value;
+            }
         }
 
         /// <summary>
@@ -347,7 +356,7 @@ namespace IRTaktiks.Components.Playables
             this.ActionManager.Visible = this.IsSelected && !this.IsDead && this.CanAct;
 
             // Update the actual time of the unit.
-            this.TimeField = this.Time < 1 ? this.Time + this.Attributes.CalculateTimeFactor() : 1; 
+            this.TimeField = this.Time < 1 ? this.Time + this.Attributes.CalculateTimeFactor() : 1;
 
             base.Update(gameTime);
         }

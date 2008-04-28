@@ -53,7 +53,7 @@ namespace IRTaktiks.Components.Screens
             game.PlayerTwo = new Player(this.Game, "Camila", PlayerIndex.Two);
             
             // Create the units for player one.
-            Unit fighterOne = new Unit(this.Game, game.PlayerOne, new Vector2(200, 200), new UnitAttributes(80, 99, 60, 10, 40), UnitOrientation.Left, TextureManager.Instance.Characters.Knight, "Azn Flames", 11358, 758);
+            Unit fighterOne = new Unit(this.Game, game.PlayerOne, new Vector2(500, 400), new UnitAttributes(80, 99, 60, 10, 40), UnitOrientation.Left, TextureManager.Instance.Characters.Knight, "Azn Flames", 11358, 758);
             Unit wizardOne = new Unit(this.Game, game.PlayerOne, new Vector2(200, 300), new UnitAttributes(1, 1, 1, 99, 99), UnitOrientation.Right, TextureManager.Instance.Characters.Knight, "Ben Kildan", 1521, 2536);
 
             // Create the units for player two.

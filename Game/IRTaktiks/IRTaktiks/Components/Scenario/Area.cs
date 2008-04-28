@@ -101,19 +101,6 @@ namespace IRTaktiks.Components.Scenario
         {
             get { return ColorField; }
         }
-
-        /// <summary>
-        /// The blur threshold value.
-        /// </summary>
-        private float BlurThresholdField;
-
-        /// <summary>
-        /// The blur threshold value.
-        /// </summary>
-        public float BlurThreshold
-        {
-            get { return BlurThresholdField; }
-        }
         
         /// <summary>
         /// The world matrix of the area.
