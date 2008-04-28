@@ -52,7 +52,7 @@ namespace IRTaktiks.Components.Managers
         /// The action area of the unit.
         /// </summary>
         private Area AreaField;
-        
+
         /// <summary>
         /// The action area of the unit.
         /// </summary>
@@ -188,7 +188,7 @@ namespace IRTaktiks.Components.Managers
                     this.Actions[index].Position = new Vector2(this.Position.X, this.Position.Y + (positionIndex++ * TextureManager.Instance.Sprites.Menu.Item.Height));
 
                     // If the menu item is selected, must set the position for its subitems.
-                    if (this.Actions[index].IsSelected)
+                    if (this.Actions[index].Selected)
                     {
                         // Set the position for all the subitems.
                         for (int subindex = 0; subindex < this.Actions[index].Commands.Count; subindex++)
@@ -219,7 +219,7 @@ namespace IRTaktiks.Components.Managers
                 this.Actions[index].Draw(game.SpriteManager);
 
                 // If the item is selected, draws the subitems.
-                if (this.Actions[index].IsSelected)
+                if (this.Actions[index].Selected)
                 {
                     // Draws all the subitems.
                     for (int subindex = 0; subindex < this.Actions[index].Commands.Count; subindex++)
@@ -262,16 +262,16 @@ namespace IRTaktiks.Components.Managers
             defendAction.Execute += new ActionMenu.ExecuteEventHandler(defendAction_Execute);
 
             // Create the commands.
-            CommandMenu longAttackCommand = new CommandMenu(this.Unit, "Long", 5);
-            CommandMenu shortAttackCommand = new CommandMenu(this.Unit, "Short", 0);
+            CommandMenu longAttackCommand = new CommandMenu(this.Unit, "Long", 5, delegate(Unit unit) { return false; });
+            CommandMenu shortAttackCommand = new CommandMenu(this.Unit, "Short", 0, delegate(Unit unit) { return false; });
 
-            CommandMenu healMagicCommand = new CommandMenu(this.Unit, "Heal", 200);
-            CommandMenu fireMagicCommand = new CommandMenu(this.Unit, "Fire", 75);
-            CommandMenu iceMagicCommand = new CommandMenu(this.Unit, "Ice", 105);
-            CommandMenu thunderMagicCommand = new CommandMenu(this.Unit, "Thunder", 145);
+            CommandMenu healMagicCommand = new CommandMenu(this.Unit, "Heal", MagicManager.HealCost, MagicManager.Instance.CanHeal);
+            CommandMenu fireMagicCommand = new CommandMenu(this.Unit, "Fire", 75, delegate(Unit unit) { return false; });
+            CommandMenu iceMagicCommand = new CommandMenu(this.Unit, "Ice", 105, delegate(Unit unit) { return false; });
+            CommandMenu thunderMagicCommand = new CommandMenu(this.Unit, "Thunder", 145, delegate(Unit unit) { return false; });
 
-            CommandMenu potionItemCommand = new CommandMenu(this.Unit, "Potion", 5);
-            CommandMenu elixirItemCommand = new CommandMenu(this.Unit, "Elixir", 1);
+            CommandMenu potionItemCommand = new CommandMenu(this.Unit, "Potion", 5, delegate(Unit unit) { return false; });
+            CommandMenu elixirItemCommand = new CommandMenu(this.Unit, "Elixir", 1, delegate(Unit unit) { return false; });
 
             // Handle the Execute event.
             longAttackCommand.Execute += new ActionMenu.ExecuteEventHandler(longAttackCommand_Execute);
@@ -314,10 +314,10 @@ namespace IRTaktiks.Components.Managers
             {
                 for (int subindex = 0; subindex < this.Actions[index].Commands.Count; subindex++)
                 {
-                    this.Actions[index].Commands[subindex].IsSelected = false;
+                    this.Actions[index].Commands[subindex].Selected = false;
                 }
 
-                this.Actions[index].IsSelected = false;
+                this.Actions[index].Selected = false;
             }
 
             this.ChangedField = true;
@@ -351,14 +351,14 @@ namespace IRTaktiks.Components.Managers
                     for (int index = 0; index < this.Actions.Count; index++)
                     {
                         // Guard the item that is selected.
-                        if (this.Actions[index].IsSelected)
+                        if (this.Actions[index].Selected)
                         {
                             count += this.Actions[index].Commands.Count;
                             selected = index;
                         }
 
                         // Unselect all the items.
-                        this.Actions[index].IsSelected = false;
+                        this.Actions[index].Selected = false;
                     }
 
                     // Define if the touch was inside the action menu area.
@@ -385,15 +385,25 @@ namespace IRTaktiks.Components.Managers
                                             int subindex = (int)(e.Position.Y - this.Actions[index].Commands[0].Position.Y) / TextureManager.Instance.Sprites.Menu.Item.Height;
 
                                             // Reselect the item that was selected.
-                                            this.Actions[index].IsSelected = true;
+                                            this.Actions[index].Selected = true;
 
-                                            // Select and queue the Execute event of the subitem touched.
-                                            this.Actions[index].Commands[subindex].IsSelected = true;
-                                            this.Actions[index].Commands[subindex].RaiseExecute();
+                                            // Check if the subitem is enabled.
+                                            if (this.Actions[index].Commands[subindex].Enabled)
+                                            {
+                                                // Select and queue the Execute event of the subitem touched.
+                                                this.Actions[index].Commands[subindex].Selected = true;
+                                                this.Actions[index].Commands[subindex].RaiseExecute();
 
-                                            this.FreezedField = true;
-                                            this.ChangedField = true;
+                                                this.FreezedField = true;
+                                                this.ChangedField = true;
+                                            }
                                         }
+
+                                        this.ChangedField = true;
+                                    }
+                                    else
+                                    {
+                                        this.ChangedField = true;
                                     }
                                 }
                                 else
@@ -402,7 +412,7 @@ namespace IRTaktiks.Components.Managers
                                     limitY = this.Actions[index].Position.Y + TextureManager.Instance.Sprites.Menu.Item.Height;
                                     if (e.Position.Y < limitY && e.Position.Y > this.Actions[index].Position.Y)
                                     {
-                                        this.Actions[index].IsSelected = true;
+                                        this.Actions[index].Selected = true;
                                         this.Actions[index].RaiseExecute();
 
                                         this.ChangedField = true;
@@ -416,7 +426,7 @@ namespace IRTaktiks.Components.Managers
                             int index = (int)(e.Position.Y - this.Position.Y) / TextureManager.Instance.Sprites.Menu.Item.Height;
 
                             // Selects the menu item for the first time and queue the Execute event for dispatch.
-                            this.Actions[index].IsSelected = true;
+                            this.Actions[index].Selected = true;
                             this.Actions[index].RaiseExecute();
 
                             this.ChangedField = true;
@@ -435,7 +445,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void moveAction_Execute()
         {
-            
+
         }
 
         /// <summary>
@@ -443,7 +453,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void defendAction_Execute()
         {
-            
+
         }
 
         #endregion
@@ -455,7 +465,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void longAttackCommand_Execute()
         {
-            
+
         }
 
         /// <summary>
@@ -463,7 +473,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void shortAttackCommand_Execute()
         {
-            
+
         }
 
         /// <summary>
@@ -472,7 +482,7 @@ namespace IRTaktiks.Components.Managers
         private void healMagicCommand_Execute()
         {
             Vector2 areaPosition = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 4);
-            this.AreaField = new Area(areaPosition, 500, Color.Orange);
+            this.AreaField = new Area(areaPosition, (float)this.Unit.Attributes.CalculateMagicArea(), Color.Orange);
             this.Aim.Activate(this.Area.Radius);
             this.Aim.Aimed += new AimMenu.AimedEventHandler(HealMagic_Aimed);
         }
@@ -482,7 +492,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void fireMagicCommand_Execute()
         {
-            
+
         }
 
         /// <summary>
@@ -490,7 +500,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void iceMagicCommand_Execute()
         {
-            
+
         }
 
         /// <summary>
@@ -498,7 +508,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void thunderMagicCommand_Execute()
         {
-            
+
         }
 
         /// <summary>
@@ -506,7 +516,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void potionItemCommand_Execute()
         {
-            
+
         }
 
         /// <summary>
@@ -514,7 +524,7 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void elixirItemCommand_Execute()
         {
-            
+
         }
 
         #endregion
@@ -523,6 +533,8 @@ namespace IRTaktiks.Components.Managers
 
         private void HealMagic_Aimed(Vector2 position)
         {
+            MagicManager.Instance.Heal(this.Unit, null);
+            this.Reset();
         }
 
         #endregion

@@ -116,14 +116,23 @@ namespace IRTaktiks.Components.Logic
         #region Methods
 
         /// <summary>
-        /// Calculates the time factor.
-        /// Used on time update.
+        /// Calculates the time factor, used on time update.
         /// Based on agility.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The time factor.</returns>
         public double CalculateTimeFactor()
         {
             return 0.001 + 0.001 * ((double)this.Agility / (double)UnitAttributes.Maximum);
+        }
+
+        /// <summary>
+        /// Calculates the area that a magic can be spelled.
+        /// Based on dexterity and magic.
+        /// </summary>
+        /// <returns>The area.</returns>
+        public double CalculateMagicArea()
+        {
+            return 200 + 1.5 * (double)this.Dexterity + 1.0 * (double)this.Magic;
         }
 
         #endregion

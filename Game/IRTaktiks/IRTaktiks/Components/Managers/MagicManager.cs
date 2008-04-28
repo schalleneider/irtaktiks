@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
+using IRTaktiks.Components.Playables;
 
 namespace IRTaktiks.Components.Managers
 {
@@ -37,9 +38,42 @@ namespace IRTaktiks.Components.Managers
 
         #endregion 
 
-        #region Methods
+        #region Constants
 
-        
+        /// <summary>
+        /// The cost of mp of the heal magic.
+        /// </summary>
+        public const int HealCost = 200;
+
+        #endregion
+
+        #region Validations
+
+        /// <summary>
+        /// Check if the caster can use the Heal magic.
+        /// </summary>
+        /// <param name="caster">The unit that cast the magic.</param>
+        /// <returns>True, if the unit can cast the magic. False otherwise.</returns>
+        public bool CanHeal(Unit caster)
+        {
+            return caster.Mana >= MagicManager.HealCost;
+        }
+
+        #endregion
+
+        #region Magics
+
+        /// <summary>
+        /// Cast the Heal magic.
+        /// </summary>
+        /// <param name="caster">The unit that cast the magic.</param>
+        /// <param name="target">The unit targeted by the magic.</param>
+        public void Heal(Unit caster, Unit target)
+        {
+            caster.Mana -= MagicManager.HealCost;
+            
+            caster.Time = 0;
+        }
 
         #endregion
     }

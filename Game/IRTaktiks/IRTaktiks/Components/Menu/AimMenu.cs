@@ -113,7 +113,7 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// The method template who will used to handle the Aimed event.
         /// </summary>
-        /// <param name="position"></param>
+        /// <param name="position">The final position of the aim.</param>
         public delegate void AimedEventHandler(Vector2 position);
 
         /// <summary>
@@ -187,6 +187,7 @@ namespace IRTaktiks.Components.Menu
         /// Draws the aim.
         /// </summary>
         /// <param name="spriteBatchManager">SpriteBatchManager used to draw.</param>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public void Draw(SpriteManager spriteBatchManager, GameTime gameTime)
 		{
             // If the aim is enabled.
@@ -271,7 +272,7 @@ namespace IRTaktiks.Components.Menu
             {
                 // If the aim is inside the area
                 Vector2 areaPosition = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 4);
-                if (Vector2.Distance(e.Position, areaPosition) < this.Limit / 2)
+                if (Vector2.Distance(e.Position, areaPosition) < (this.Limit / 2) - (this.AimAlly.Width / 2))
                 {
                     // Updates the position of the aim.
                     this.PositionField = e.Position;

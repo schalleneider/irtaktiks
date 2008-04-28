@@ -77,15 +77,15 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// For actions who have commands, indicates its selection.
         /// </summary>
-        private bool IsSelectedField;
+        private bool SelectedField;
 
         /// <summary>
         /// For actions who have commands, indicates its selection.
         /// </summary>
-        public bool IsSelected
+        public bool Selected
         {
-            get { return IsSelectedField; }
-            set { IsSelectedField = value; }
+            get { return SelectedField; }
+            set { SelectedField = value; }
         }
 
         #endregion
@@ -180,7 +180,7 @@ namespace IRTaktiks.Components.Menu
         public virtual void Draw(SpriteManager spriteBatchManager)
         {
             // Draws the item of the menu.
-            spriteBatchManager.Draw(this.IsSelected ? this.SelectedItemTexture : this.ItemTexture, this.Position, Color.White, 50);
+            spriteBatchManager.Draw(this.Selected ? this.SelectedItemTexture : this.ItemTexture, this.Position, Color.White, 50);
 
             // Measure the text size.
             Vector2 textSize = this.TextSpriteFont.MeasureString(this.Text);
