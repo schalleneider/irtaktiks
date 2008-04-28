@@ -87,7 +87,7 @@ namespace IRTaktiks.Components.Managers
             if (target != null)
             {
                 double heal = MagicManager.HealBase * 2.95 * caster.Attributes.CalculateMagicAttackFactor() * 0.1;
-                target.Life -= (int)heal;
+                target.Life += (int)heal;
             }
         }
 
