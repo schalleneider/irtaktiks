@@ -531,10 +531,16 @@ namespace IRTaktiks.Components.Managers
 
         #region Aim
 
-        private void HealMagic_Aimed(Vector2 position)
+        /// <summary>
+        /// Called when the aim of the Heal magic is released.
+        /// </summary>
+        /// <param name="target">The unit targeted by the aim. Null if the aim is over anything.</param>
+        private void HealMagic_Aimed(Unit target)
         {
-            MagicManager.Instance.Heal(this.Unit, null);
+            MagicManager.Instance.Heal(this.Unit, target);
             this.Reset();
+
+            this.Aim.Aimed -= this.HealMagic_Aimed;
         }
 
         #endregion

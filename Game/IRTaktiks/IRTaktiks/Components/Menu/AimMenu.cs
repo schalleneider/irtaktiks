@@ -33,7 +33,7 @@ namespace IRTaktiks.Components.Menu
         {
             get { return UnitField; }
         }
-        
+                
         /// <summary>
         /// Indicates if the aim is enabled.
         /// </summary>
@@ -85,7 +85,12 @@ namespace IRTaktiks.Components.Menu
         {
             get { return LimitField; }
         }
-                
+
+        /// <summary>
+        /// The unit targeted by the aim. Null when the unit is over anything.
+        /// </summary>
+        private Unit Target;
+
         /// <summary>
         /// The texture of the aim when its over nothing.
         /// </summary>
@@ -113,8 +118,8 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// The method template who will used to handle the Aimed event.
         /// </summary>
-        /// <param name="position">The final position of the aim.</param>
-        public delegate void AimedEventHandler(Vector2 position);
+        /// <param name="target">The unit targeted by the aim. Null when the aim is over nothing.</param>
+        public delegate void AimedEventHandler(Unit target);
 
         /// <summary>
         /// The Aimed event.
@@ -223,12 +228,15 @@ namespace IRTaktiks.Components.Menu
                             {
                                 this.TextureToDraw = this.AimAlly;
                             }
+
+                            this.Target = units[index];
                         }
                     }
 
                     if (!isOverSomething)
                     {
                         this.TextureToDraw = this.AimNothing;
+                        this.Target = null;
                     }
                 }
 
@@ -296,7 +304,7 @@ namespace IRTaktiks.Components.Menu
                 // Dispatch the Aimed event.
                 if (this.Aimed != null)
                 {
-                    this.Aimed(this.Position);
+                    this.Aimed(this.Target);
                 }
 
                 // Unregister the event handler.

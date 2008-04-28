@@ -424,7 +424,7 @@ namespace IRTaktiks.Components.Playables
                 if (e.Position.X < (this.Position.X + this.Texture.Width) && e.Position.X > this.Position.X)
                 {
                     // Touch was inside of the Y area of the character.
-                    if (e.Position.Y < (this.Position.Y + this.Texture.Height) && e.Position.Y > this.Position.Y)
+                    if (e.Position.Y < (this.Position.Y + this.Texture.Height / 4) && e.Position.Y > this.Position.Y)
                     {
                         // Unselect the player's units.                
                         foreach (Unit unit in this.Player.Units)
