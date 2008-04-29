@@ -12,6 +12,7 @@ using IRTaktiks.Components.Playables;
 using IRTaktiks.Input.EventArgs;
 using IRTaktiks.Input;
 using IRTaktiks.Components.Scenario;
+using IRTaktiks.Components.Interaction;
 
 namespace IRTaktiks.Components.Managers
 {
@@ -49,27 +50,14 @@ namespace IRTaktiks.Components.Managers
         }
 
         /// <summary>
-        /// The action area of the unit.
+        /// The aim of the unit.
         /// </summary>
-        private Area AreaField;
-
-        /// <summary>
-        /// The action area of the unit.
-        /// </summary>
-        public Area Area
-        {
-            get { return AreaField; }
-        }
+        private Aim AimField;
 
         /// <summary>
         /// The aim of the unit.
         /// </summary>
-        private AimMenu AimField;
-
-        /// <summary>
-        /// The aim of the unit.
-        /// </summary>
-        public AimMenu Aim
+        public Aim Aim
         {
             get { return AimField; }
         }
@@ -135,7 +123,7 @@ namespace IRTaktiks.Components.Managers
             this.ActionsField = new List<ActionMenu>();
 
             // Create the aim.
-            this.AimField = new AimMenu(unit);
+            this.AimField = new Aim(unit);
 
             // Set the top left position for the player one.
             if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
@@ -226,13 +214,7 @@ namespace IRTaktiks.Components.Managers
             }
 
             // Draw the aim.
-            this.Aim.Draw(game.SpriteManager, gameTime);
-
-            // Draw the area if its active.
-            if (this.Area != null)
-            {
-                game.AreaManager.Draw(this.Area);
-            }
+            this.Aim.Draw(game.SpriteManager, game.AreaManager, gameTime);
 
             base.Draw(gameTime);
         }
@@ -320,9 +302,6 @@ namespace IRTaktiks.Components.Managers
             this.FreezedField = false;
 
             this.Aim.Deactivate();
-            this.Aim.Reset();
-
-            this.AreaField = null;
         }
 
         #endregion
@@ -479,10 +458,8 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void healMagicCommand_Execute()
         {
-            Vector2 areaPosition = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 4);
-            this.AreaField = new Area(areaPosition, (float)this.Unit.Attributes.CalculateMagicArea(), Color.Orange);
-            this.Aim.Activate(this.Area.Radius);
-            this.Aim.Aimed += new AimMenu.AimedEventHandler(HealMagic_Aimed);
+            this.Aim.Activate((float)this.Unit.Attributes.CalculateMagicArea());
+            this.Aim.Aimed += new Aim.AimedEventHandler(HealMagic_Aimed);
         }
 
         /// <summary>

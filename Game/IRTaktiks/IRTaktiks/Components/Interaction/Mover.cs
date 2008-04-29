@@ -17,7 +17,7 @@ namespace IRTaktiks.Components.Menu
 	/// <summary>
 	/// Representation of move area of the unit.
 	/// </summary>
-	public class MoveMenu
+	public class Mover
 	{
 		#region Properties
 
@@ -33,7 +33,20 @@ namespace IRTaktiks.Components.Menu
         {
             get { return UnitField; }
         }
-                
+
+        /// <summary>
+        /// The area that the unit can move.
+        /// </summary>
+        private Area AreaField;
+
+        /// <summary>
+        /// The area that the unit can move.
+        /// </summary>
+        public Area Area
+        {
+            get { return AreaField; }
+        }
+                        
         /// <summary>
         /// Indicates if the area is enabled.
         /// </summary>
@@ -108,7 +121,7 @@ namespace IRTaktiks.Components.Menu
 		/// Constructor of class.
 		/// </summary>
         /// <param name="unit">The unit who will move.</param>
-        public MoveMenu(Unit unit)
+        public Mover(Unit unit)
         {
             this.UnitField = unit;
 
@@ -168,16 +181,6 @@ namespace IRTaktiks.Components.Menu
         /// <param name="e">Data of event.</param>
         private void CursorDown_Handler(object sender, CursorDownArgs e)
         {
-            // Handles the event only if the aim is enabled.
-            if (this.Enabled)
-            {
-                // If the touch was in the area of the aim
-                if ((e.Position.X < (this.Position.X + this.AimAlly.Width / 2) && e.Position.X > (this.Position.X - this.AimAlly.Width / 2)) &&
-                    (e.Position.Y < (this.Position.Y + this.AimAlly.Height / 2) && e.Position.Y > (this.Position.Y - this.AimAlly.Height / 2)))
-                {
-                    this.AimingField = true;
-                }
-            }
         }
 
         /// <summary>
@@ -187,17 +190,6 @@ namespace IRTaktiks.Components.Menu
         /// <param name="e">Data of event.</param>
         private void CursorUpdate_Handler(object sender, CursorUpdateArgs e)
         {
-            // If the aim is enabled and aiming.
-            if (this.Enabled && this.Aiming)
-            {
-                // If the aim is inside the area
-                Vector2 areaPosition = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 4);
-                if (Vector2.Distance(e.Position, areaPosition) < (this.Limit / 2) - (this.AimAlly.Width / 2))
-                {
-                    // Updates the position of the aim.
-                    this.PositionField = e.Position;
-                }
-            }
         }
 
         /// <summary>
@@ -207,21 +199,6 @@ namespace IRTaktiks.Components.Menu
         /// <param name="e">Data of event.</param>
         private void CursorUp_Handler(object sender, CursorUpArgs e)
         {
-            // If the aim is enabled and aiming.
-            if (this.Enabled && this.Aiming)
-            {
-                // End the aiming and set the aimed true.
-                this.AimingField = false;
-
-                // Dispatch the Aimed event.
-                if (this.Aimed != null)
-                {
-                    this.Aimed(this.Target);
-                }
-
-                // Unregister the event handler.
-                this.Deactivate();
-            }
         }
 
         #endregion

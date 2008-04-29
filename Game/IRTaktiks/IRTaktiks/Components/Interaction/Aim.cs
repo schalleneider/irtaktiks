@@ -11,13 +11,14 @@ using IRTaktiks.Components.Playables;
 using IRTaktiks.Components.Managers;
 using IRTaktiks.Input;
 using IRTaktiks.Input.EventArgs;
+using IRTaktiks.Components.Scenario;
 
-namespace IRTaktiks.Components.Menu
+namespace IRTaktiks.Components.Interaction
 {
 	/// <summary>
 	/// Representation of the aim of attack of the unit.
 	/// </summary>
-	public class AimMenu
+	public class Aim
 	{
 		#region Properties
 
@@ -32,6 +33,19 @@ namespace IRTaktiks.Components.Menu
         public Unit Unit
         {
             get { return UnitField; }
+        }
+
+        /// <summary>
+        /// The area that the aim can be.
+        /// </summary>
+        private Area AreaField;
+
+        /// <summary>
+        /// The area that the aim can be.
+        /// </summary>
+        public Area Area
+        {
+            get { return AreaField; }
         }
                 
         /// <summary>
@@ -134,7 +148,7 @@ namespace IRTaktiks.Components.Menu
 		/// Constructor of class.
 		/// </summary>
         /// <param name="unit">The unit who will be the owner of the aim.</param>
-        public AimMenu(Unit unit)
+        public Aim(Unit unit)
         {
             this.UnitField = unit;
 
@@ -159,12 +173,18 @@ namespace IRTaktiks.Components.Menu
         /// <param name="limit">The limit distance that the aim can be away from the unit.</param>
         public void Activate(float limit)
         {
+            // Enables the aim with the specified limit.
             this.EnabledField = true;
             this.LimitField = limit;
 
+            // Register the aim to listen the input events.
             InputManager.Instance.CursorDown += new EventHandler<CursorDownArgs>(CursorDown_Handler);
             InputManager.Instance.CursorUpdate += new EventHandler<CursorUpdateArgs>(CursorUpdate_Handler);
             InputManager.Instance.CursorUp += new EventHandler<CursorUpArgs>(CursorUp_Handler);
+
+            // Create the area of action.
+            Vector2 areaPosition = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 4);
+            this.AreaField = new Area(areaPosition, limit, this.Unit.Player.PlayerIndex == PlayerIndex.One ? Color.Orange : Color.Brown);
         }
 
         /// <summary>
@@ -172,28 +192,29 @@ namespace IRTaktiks.Components.Menu
         /// </summary>
         public void Deactivate()
         {
+            // Disables the aim.
             this.EnabledField = false;
             this.LimitField = 0;
 
+            // Unregister the aim to listen the input events.
             InputManager.Instance.CursorDown -= new EventHandler<CursorDownArgs>(CursorDown_Handler);
             InputManager.Instance.CursorUpdate -= new EventHandler<CursorUpdateArgs>(CursorUpdate_Handler);
             InputManager.Instance.CursorUp -= new EventHandler<CursorUpArgs>(CursorUp_Handler);
-        }
 
-        /// <summary>
-        /// Reset the logic properties of the aim.
-        /// </summary>
-        public void Reset()
-        {
+            // Reset the position of the aim.
             this.PositionField = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 8);
+
+            // Destroy the area.
+            this.AreaField = null;
         }
 
         /// <summary>
         /// Draws the aim.
         /// </summary>
-        /// <param name="spriteBatchManager">SpriteBatchManager used to draw.</param>
+        /// <param name="spriteBatchManager">SpriteBatchManager used to draw sprites.</param>
+        /// <param name="areaManager">AreaManager used to draw areas.</param>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public void Draw(SpriteManager spriteBatchManager, GameTime gameTime)
+        public void Draw(SpriteManager spriteBatchManager, AreaManager areaManager, GameTime gameTime)
 		{
             // If the aim is enabled.
             if (this.Enabled)
@@ -240,8 +261,12 @@ namespace IRTaktiks.Components.Menu
                     }
                 }
 
+                // Draw the aim.
                 Vector2 position = new Vector2(this.Position.X - this.AimAlly.Width / 2, this.Position.Y - this.AimAlly.Height / 2);
                 spriteBatchManager.Draw(this.TextureToDraw, position, Color.White, 60);
+
+                // Draw the area.
+                areaManager.Draw(this.Area);
             }
 		}
 
