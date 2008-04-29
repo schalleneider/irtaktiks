@@ -86,11 +86,7 @@ namespace IRTaktiks.Components.Managers
         {
             get { return PositionField; }
         }
-
-        #endregion
-
-        #region Logic Properties
-
+        
         /// <summary>
         /// Indicates if the menu needs to be updated.
         /// </summary>
@@ -438,6 +434,8 @@ namespace IRTaktiks.Components.Managers
 
         #endregion
 
+        #region Menu
+
         #region Action Events
 
         /// <summary>
@@ -529,6 +527,16 @@ namespace IRTaktiks.Components.Managers
 
         #endregion
 
+        #endregion
+
+        #region Post Effects
+
+        #region Mover
+
+
+
+        #endregion
+
         #region Aim
 
         /// <summary>
@@ -542,6 +550,8 @@ namespace IRTaktiks.Components.Managers
 
             this.Aim.Aimed -= this.HealMagic_Aimed;
         }
+
+        #endregion
 
         #endregion
     }

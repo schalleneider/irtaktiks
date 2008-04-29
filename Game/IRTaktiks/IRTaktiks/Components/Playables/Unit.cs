@@ -35,7 +35,18 @@ namespace IRTaktiks.Components.Playables
             get { return LifeField; }
             set
             {
-                LifeField = value;
+                if (value >= this.FullLife)
+                {
+                    LifeField = this.FullLife;
+                }
+                else if (value <= 0)
+                {
+                    LifeField = 0;
+                }
+                else
+                {
+                    LifeField = value;
+                }
             }
 
         }
@@ -53,7 +64,18 @@ namespace IRTaktiks.Components.Playables
             get { return ManaField; }
             set
             {
-                ManaField = value;
+                if (value >= this.FullMana)
+                {
+                    ManaField = this.FullMana;
+                }
+                else if (value <= 0)
+                {
+                    ManaField = 0;
+                }
+                else
+                {
+                    ManaField = value;
+                }
             }
         }
 
@@ -72,7 +94,18 @@ namespace IRTaktiks.Components.Playables
             get { return TimeField; }
             set
             {
-                TimeField = value;
+                if (value >= 1)
+                {
+                    TimeField = 1;
+                }
+                else if (value <= 0)
+                {
+                    TimeField = 0;
+                }
+                else
+                {
+                    TimeField = value;
+                }
             }
         }
 
@@ -356,7 +389,7 @@ namespace IRTaktiks.Components.Playables
             this.ActionManager.Visible = this.IsSelected && !this.IsDead && this.CanAct;
 
             // Update the actual time of the unit.
-            this.TimeField = this.Time < 1 ? this.Time + this.Attributes.CalculateTimeFactor() : 1;
+            this.Time += this.Attributes.CalculateTimeFactor();
 
             base.Update(gameTime);
         }
