@@ -61,6 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Interaction\Aim.cs" />
+    <Compile Include="Components\Interaction\Mover.cs" />
     <Compile Include="Components\Logic\FPS.cs" />
     <Compile Include="Components\Managers\AreaManager.cs" />
     <Compile Include="Components\Managers\MagicManager.cs" />
@@ -68,11 +70,9 @@
     <Compile Include="Components\Managers\SpriteManager.cs" />
     <Compile Include="Components\Menu\ActionMenu.cs" />
     <Compile Include="Components\Menu\CommandMenu.cs" />
-    <Compile Include="Components\Menu\MoveMenu.cs" />
     <Compile Include="Components\Menu\StatusMenu.cs" />
     <Compile Include="Components\Scenario\Area.cs" />
     <Compile Include="Components\Scenario\Camera.cs" />
-    <Compile Include="Components\Menu\AimMenu.cs" />
     <Compile Include="Components\Menu\PlayerMenu.cs" />
     <Compile Include="Components\Scenario\Drawable.cs" />
     <Compile Include="Components\Scenario\Text.cs" />
