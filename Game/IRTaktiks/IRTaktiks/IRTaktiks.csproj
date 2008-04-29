@@ -68,6 +68,7 @@
     <Compile Include="Components\Managers\SpriteManager.cs" />
     <Compile Include="Components\Menu\ActionMenu.cs" />
     <Compile Include="Components\Menu\CommandMenu.cs" />
+    <Compile Include="Components\Menu\MoveMenu.cs" />
     <Compile Include="Components\Menu\StatusMenu.cs" />
     <Compile Include="Components\Scenario\Area.cs" />
     <Compile Include="Components\Scenario\Camera.cs" />
