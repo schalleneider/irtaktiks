@@ -320,6 +320,7 @@ namespace IRTaktiks.Components.Manager
             this.ChangedField = true;
             this.FreezedField = false;
 
+            this.Mover.Deactivate();
             this.Aim.Deactivate();
         }
 

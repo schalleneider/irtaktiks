@@ -464,7 +464,6 @@ namespace IRTaktiks.Components.Playable
                         foreach (Unit unit in this.Player.Units)
                         {
                             unit.IsSelected = false;
-                            //unit.ActionManager.Reset();
                         }
 
                         this.IsSelected = true;
