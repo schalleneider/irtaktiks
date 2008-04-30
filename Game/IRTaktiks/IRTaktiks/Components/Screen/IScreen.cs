@@ -8,12 +8,12 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 
-namespace IRTaktiks.Components.Screens
+namespace IRTaktiks.Components.Screen
 {
     /// <summary>
     /// Mother class of all screens in the game.
     /// </summary>
-    public class Screen : DrawableGameComponent, IComparable
+    public class IScreen : DrawableGameComponent, IComparable
     {
         #region Properties
 
@@ -67,7 +67,7 @@ namespace IRTaktiks.Components.Screens
 		/// </summary>
 		/// <param name="game">The instance of game that is running.</param>
         /// <param name="priority">Drawing priority of screen. Higher indicates that the screen will be at the top of the others.</param>
-        public Screen(Game game, int priority)
+        public IScreen(Game game, int priority)
             : base(game)
 		{
 			this.ComponentsField = new GameComponentCollection();
@@ -157,7 +157,7 @@ namespace IRTaktiks.Components.Screens
 		/// <returns>The diference between the priorities.</returns>
 		public int CompareTo(object screen)
 		{
-			return this.Priority - (screen as Screen).Priority;
+			return this.Priority - (screen as IScreen).Priority;
 		}
 
 		#endregion

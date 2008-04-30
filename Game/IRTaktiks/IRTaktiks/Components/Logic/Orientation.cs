@@ -7,7 +7,7 @@ namespace IRTaktiks.Components.Logic
     /// <summary>
     /// Representation of the orientation of the unit.
     /// </summary>
-    public enum UnitOrientation
+    public enum Orientation
     {
         /// <summary>
         /// Unit looking to down.

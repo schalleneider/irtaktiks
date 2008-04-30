@@ -13,8 +13,8 @@ namespace IRTaktiks
         {
 			#warning Not listening TUIO messages
 
-			/* Start the listening of TUIO messages. *
-			IRTTuioDump listener = new IRTTuioDump();
+			/* Start the listening of TUIO messages. */
+			TuioDump listener = new TuioDump();
 			ThreadPool.QueueUserWorkItem(listener.Run, null);
 			/**/
 

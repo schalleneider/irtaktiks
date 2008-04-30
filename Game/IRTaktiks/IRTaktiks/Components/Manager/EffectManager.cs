@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 
-namespace IRTaktiks.Components.Managers
+namespace IRTaktiks.Components.Manager
 {
     /// <summary>
     /// Manager of effects.

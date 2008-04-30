@@ -7,7 +7,7 @@ namespace IRTaktiks.Components.Logic
     /// <summary>
     /// The logic representation of the unit's atributes.
     /// </summary>
-    public class UnitAttributes
+    public class Attributes
     {
         #region Constants
 
@@ -102,7 +102,7 @@ namespace IRTaktiks.Components.Logic
         /// <param name="vitality">The vitality value.</param>
         /// <param name="magic">The magic value.</param>
         /// <param name="dexterity">The dexterity value.</param>
-        public UnitAttributes(int strength, int agility, int vitality, int magic, int dexterity)
+        public Attributes(int strength, int agility, int vitality, int magic, int dexterity)
         {
             this.StrengthField = strength;
             this.AgilityField = agility;
@@ -124,7 +124,7 @@ namespace IRTaktiks.Components.Logic
         /// <returns>The area.</returns>
         public double CalculateMagicArea()
         {
-            return 200 + 1.5 * (double)this.Dexterity + 1.0 * (double)this.Magic;
+            return 100 + 1.5 * (double)this.Dexterity + 1.0 * (double)this.Magic;
         }
 
         #endregion
@@ -138,7 +138,7 @@ namespace IRTaktiks.Components.Logic
         /// <returns>The time factor.</returns>
         public double CalculateTimeFactor()
         {
-            return 0.001 + 0.001 * ((double)this.Agility / (double)UnitAttributes.Maximum);
+            return 0.001 + 0.001 * ((double)this.Agility / (double)Attributes.Maximum);
         }
 
         /// <summary>

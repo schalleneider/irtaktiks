@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Menu;
 
-namespace IRTaktiks.Components.Playables
+namespace IRTaktiks.Components.Playable
 {
     /// <summary>
     /// Representation of one player of game.

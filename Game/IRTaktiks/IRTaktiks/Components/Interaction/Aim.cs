@@ -7,8 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
-using IRTaktiks.Components.Playables;
-using IRTaktiks.Components.Managers;
+using IRTaktiks.Components.Playable;
+using IRTaktiks.Components.Manager;
 using IRTaktiks.Input;
 using IRTaktiks.Input.EventArgs;
 using IRTaktiks.Components.Scenario;
@@ -168,7 +168,7 @@ namespace IRTaktiks.Components.Interaction
 		#region Methods
 
         /// <summary>
-        /// Activate the input handling.
+        /// Activate the aim.
         /// </summary>
         /// <param name="limit">The limit distance that the aim can be away from the unit.</param>
         public void Activate(float limit)
@@ -184,11 +184,11 @@ namespace IRTaktiks.Components.Interaction
 
             // Create the area of action.
             Vector2 areaPosition = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 4);
-            this.AreaField = new Area(areaPosition, limit, this.Unit.Player.PlayerIndex == PlayerIndex.One ? Color.Orange : Color.Brown);
+            this.AreaField = new Area(areaPosition, limit, this.Unit.Player.PlayerIndex == PlayerIndex.One ? AreaManager.PlayerOneAreaColor : AreaManager.PlayerTwoAreaColor);
         }
 
         /// <summary>
-        /// Deactivate the input handling.
+        /// Deactivate the aim.
         /// </summary>
         public void Deactivate()
         {
@@ -209,7 +209,7 @@ namespace IRTaktiks.Components.Interaction
         }
 
         /// <summary>
-        /// Draws the aim.
+        /// Draw the aim.
         /// </summary>
         /// <param name="spriteBatchManager">SpriteBatchManager used to draw sprites.</param>
         /// <param name="areaManager">AreaManager used to draw areas.</param>
@@ -303,9 +303,8 @@ namespace IRTaktiks.Components.Interaction
             // If the aim is enabled and aiming.
             if (this.Enabled && this.Aiming)
             {
-                // If the aim is inside the area
-                Vector2 areaPosition = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 4);
-                if (Vector2.Distance(e.Position, areaPosition) < (this.Limit / 2) - (this.AimAlly.Width / 2))
+                // If the aim is inside the area.
+                if (Vector2.Distance(e.Position, this.Area.Position) < this.Area.Radius - (this.AimAlly.Width / 2))
                 {
                     // Updates the position of the aim.
                     this.PositionField = e.Position;
@@ -323,7 +322,7 @@ namespace IRTaktiks.Components.Interaction
             // If the aim is enabled and aiming.
             if (this.Enabled && this.Aiming)
             {
-                // End the aiming and set the aimed true.
+                // End the aiming.
                 this.AimingField = false;
 
                 // Dispatch the Aimed event.
@@ -332,7 +331,7 @@ namespace IRTaktiks.Components.Interaction
                     this.Aimed(this.Target);
                 }
 
-                // Unregister the event handler.
+                // Deactivate the aim.
                 this.Deactivate();
             }
         }

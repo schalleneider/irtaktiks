@@ -6,9 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
-using IRTaktiks.Components.Playables;
+using IRTaktiks.Components.Playable;
 
-namespace IRTaktiks.Components.Managers
+namespace IRTaktiks.Components.Manager
 {
     /// <summary>
     /// Manager of magic's units.

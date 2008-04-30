@@ -123,10 +123,10 @@ namespace IRTaktiks.Components.Scenario
         /// <param name="position">The position of the area.</param>
         /// <param name="radius">The radius of the area.</param>
         /// <param name="color">The color of the area.</param>
-        public Area(Vector2 position, float radius, Color color)
+        public Area(Vector2 position, float diameter, Color color)
         {
             this.PositionField = position;
-            this.RadiusField = radius;
+            this.RadiusField = diameter;
             this.ColorField = color;
 
             this.Scale();
@@ -143,7 +143,7 @@ namespace IRTaktiks.Components.Scenario
         {
             float scaledX = Area.ScaledFactorX * (2 * (this.Position.X / (float)IRTGame.Width) - 1);
             float scaledY = Area.ScaledFactorY * (2 * (this.Position.Y / (float)IRTGame.Height) - 1);
-            float scaledRadius = Area.ScaledFactorRadius * (this.Radius / (float)IRTGame.Width);
+            float scaledRadius = Area.ScaledFactorRadius * (2 * this.Radius / (float)IRTGame.Width);
 
             this.ScaledPositionField = new Vector2(scaledX, scaledY);
             this.ScaledRadiusField = scaledRadius;
