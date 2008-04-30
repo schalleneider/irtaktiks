@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
-using IRTaktiks.Components.Screens;
+using IRTaktiks.Components.Screen;
 
-namespace IRTaktiks.Components.Managers
+namespace IRTaktiks.Components.Manager
 {
 	/// <summary>
 	/// Manager of screens.
@@ -21,12 +21,12 @@ namespace IRTaktiks.Components.Managers
         /// <summary>
         /// All screens of game.
         /// </summary>
-        private List<Screen> ScreensField;
+        private List<IScreen> ScreensField;
 
         /// <summary>
         /// All screens of game.
         /// </summary>
-        public List<Screen> Screens
+        public List<IScreen> Screens
         {
             get { return ScreensField; }
         }
@@ -42,7 +42,7 @@ namespace IRTaktiks.Components.Managers
 		public ScreenManager(Game game)
 			: base(game)
 		{
-            this.ScreensField = new List<Screen>();
+            this.ScreensField = new List<IScreen>();
 		}
 
 		#endregion
@@ -68,7 +68,7 @@ namespace IRTaktiks.Components.Managers
 		public override void Update(GameTime gameTime)
 		{
 			// Update screens.
-            foreach (Screen screen in this.ScreensField)
+            foreach (IScreen screen in this.ScreensField)
             {
                 // Check if the screen can be updated.
                 if (screen.Enabled && screen.Initialized)
@@ -88,7 +88,7 @@ namespace IRTaktiks.Components.Managers
         public override void Draw(GameTime gameTime)
         {
             // Draw screens.
-            foreach (Screen screen in this.ScreensField)
+            foreach (IScreen screen in this.ScreensField)
             {
                 // Check if the screen can be drawed.
                 if (screen.Visible && screen.Initialized)

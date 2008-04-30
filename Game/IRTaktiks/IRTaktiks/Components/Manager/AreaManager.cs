@@ -10,13 +10,27 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Scenario;
 
-namespace IRTaktiks.Components.Managers
+namespace IRTaktiks.Components.Manager
 {
     /// <summary>
     /// Manager of areas.
     /// </summary>
     public class AreaManager
     {
+        #region Constants
+
+        /// <summary>
+        /// The color of the player one's areas.
+        /// </summary>
+        public static Color PlayerOneAreaColor = Color.Orange;
+
+        /// <summary>
+        /// The color of the player two's areas.
+        /// </summary>
+        public static Color PlayerTwoAreaColor = Color.Olive;
+
+        #endregion
+
         #region Properties
 
         /// <summary>

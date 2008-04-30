@@ -8,8 +8,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
-using IRTaktiks.Components.Playables;
-using IRTaktiks.Components.Managers;
+using IRTaktiks.Components.Playable;
+using IRTaktiks.Components.Manager;
 using System.Threading;
 
 namespace IRTaktiks.Components.Menu

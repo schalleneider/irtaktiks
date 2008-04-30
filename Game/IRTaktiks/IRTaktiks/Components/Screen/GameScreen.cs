@@ -9,16 +9,16 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Input;
 using IRTaktiks.Input.EventArgs;
-using IRTaktiks.Components.Playables;
-using IRTaktiks.Components.Managers;
+using IRTaktiks.Components.Playable;
+using IRTaktiks.Components.Manager;
 using IRTaktiks.Components.Scenario;
 
-namespace IRTaktiks.Components.Screens
+namespace IRTaktiks.Components.Screen
 {
     /// <summary>
     /// Game screen of the game.
     /// </summary>
-    public class GameScreen : Screen
+    public class GameScreen : IScreen
     {
         #region Properties
 

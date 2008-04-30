@@ -9,11 +9,11 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Logic;
 using IRTaktiks.Components.Menu;
-using IRTaktiks.Components.Managers;
+using IRTaktiks.Components.Manager;
 using IRTaktiks.Input;
 using IRTaktiks.Input.EventArgs;
 
-namespace IRTaktiks.Components.Playables
+namespace IRTaktiks.Components.Playable
 {
     /// <summary>
     /// Representation of one combat unit of the game.
@@ -112,12 +112,12 @@ namespace IRTaktiks.Components.Playables
         /// <summary>
         /// The orientation of the unit.
         /// </summary>
-        private UnitOrientation OrientationField;
+        private Orientation OrientationField;
 
         /// <summary>
         /// The orientation of the unit.
         /// </summary>
-        public UnitOrientation Orientation
+        public Orientation Orientation
         {
             get { return OrientationField; }
             set { OrientationField = value; }
@@ -247,12 +247,12 @@ namespace IRTaktiks.Components.Playables
         /// <summary>
         /// The attributes of the unit.
         /// </summary>
-        private UnitAttributes AttributesField;
+        private Attributes AttributesField;
 
         /// <summary>
         /// The attributes of the unit.
         /// </summary>
-        public UnitAttributes Attributes
+        public Attributes Attributes
         {
             get { return AttributesField; }
         }
@@ -268,6 +268,7 @@ namespace IRTaktiks.Components.Playables
         public Vector2 Position
         {
             get { return PositionField; }
+            set { PositionField = value; }
         }
 
         /// <summary>
@@ -334,7 +335,7 @@ namespace IRTaktiks.Components.Playables
         /// <param name="name">The name of unit.</param>
         /// <param name="life">The total life points.</param>
         /// <param name="mana">The total mana points.</param>
-        public Unit(Game game, Player player, Vector2 position, UnitAttributes attributes, UnitOrientation orientation, Texture2D texture, String name, int life, int mana)
+        public Unit(Game game, Player player, Vector2 position, Attributes attributes, Orientation orientation, Texture2D texture, String name, int life, int mana)
             : base(game)
         {
             this.PositionField = position;

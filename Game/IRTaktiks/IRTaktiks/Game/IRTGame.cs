@@ -9,9 +9,9 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 using IRTaktiks.Input;
-using IRTaktiks.Components.Screens;
-using IRTaktiks.Components.Managers;
-using IRTaktiks.Components.Playables;
+using IRTaktiks.Components.Screen;
+using IRTaktiks.Components.Manager;
+using IRTaktiks.Components.Playable;
 using IRTaktiks.Components.Logic;
 using IRTaktiks.Components.Scenario;
 
@@ -27,17 +27,17 @@ namespace IRTaktiks
         /// <summary>
         /// Width of the window.
         /// </summary>
-        public const int Width = 5 * 224; // 5 * 256 = 1920
+        public const int Width = 5 * 256; // 5 * 256 = 1280
         
         /// <summary>
         /// Height of the window.
         /// </summary>
-        public const int Height = 4 * 224; // 4 * 256 = 1024
+        public const int Height = 4 * 256; // 4 * 256 = 1024
 
         /// <summary>
         /// Indicates if the game will be started at fullscreen mode.
         /// </summary>
-        public const bool IsFullScreen = false;
+        public const bool IsFullScreen = true;
 
         #endregion
 

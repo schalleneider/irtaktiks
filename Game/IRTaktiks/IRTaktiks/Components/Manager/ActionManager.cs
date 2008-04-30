@@ -8,13 +8,13 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Menu;
-using IRTaktiks.Components.Playables;
+using IRTaktiks.Components.Playable;
 using IRTaktiks.Input.EventArgs;
 using IRTaktiks.Input;
 using IRTaktiks.Components.Scenario;
 using IRTaktiks.Components.Interaction;
 
-namespace IRTaktiks.Components.Managers
+namespace IRTaktiks.Components.Manager
 {
     /// <summary>
     /// Manager of unit's commands.
@@ -49,6 +49,19 @@ namespace IRTaktiks.Components.Managers
             get { return ActionsField; }
         }
 
+        /// <summary>
+        /// The mover of the unit.
+        /// </summary>
+        private Mover MoverField;
+
+        /// <summary>
+        /// The mover of the unit.
+        /// </summary>
+        public Mover Mover
+        {
+            get { return MoverField; }
+        }
+        
         /// <summary>
         /// The aim of the unit.
         /// </summary>
@@ -121,6 +134,9 @@ namespace IRTaktiks.Components.Managers
 
             // Create the actions.
             this.ActionsField = new List<ActionMenu>();
+
+            // Create the mover.
+            this.MoverField = new Mover(this.Unit);
 
             // Create the aim.
             this.AimField = new Aim(unit);
@@ -212,6 +228,9 @@ namespace IRTaktiks.Components.Managers
                     }
                 }
             }
+
+            // Draw the mover.
+            this.Mover.Draw(game.AreaManager, gameTime);
 
             // Draw the aim.
             this.Aim.Draw(game.SpriteManager, game.AreaManager, gameTime);
@@ -422,7 +441,8 @@ namespace IRTaktiks.Components.Managers
         /// </summary>
         private void moveAction_Execute()
         {
-
+            this.Mover.Activate(250);
+            this.Mover.Moved += new Mover.MovedEventHandler(MoveAction_Moved);
         }
 
         /// <summary>
@@ -510,7 +530,13 @@ namespace IRTaktiks.Components.Managers
 
         #region Mover
 
-
+        /// <summary>
+        /// Called when the unit end its movement.
+        /// </summary>
+        private void MoveAction_Moved()
+        {
+            
+        }
 
         #endregion
 
