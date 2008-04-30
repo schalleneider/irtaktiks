@@ -49,8 +49,8 @@ namespace IRTaktiks.Components.Screen
             IRTGame game = this.Game as IRTGame;
 
             // Create the players
-            game.PlayerOne = new Player(this.Game, "One", PlayerIndex.One);
-            game.PlayerTwo = new Player(this.Game, "Two", PlayerIndex.Two);
+            game.PlayerOne = new Player(this.Game, "Willians", PlayerIndex.One);
+            game.PlayerTwo = new Player(this.Game, "Camila", PlayerIndex.Two);
             
             // Create the units for player one.
             Unit fighterOne = new Unit(this.Game, game.PlayerOne, new Vector2(500, 400), new Attributes(80, 99, 60, 10, 40), Orientation.Left, TextureManager.Instance.Characters.Knight, "Azn Flames", 11358, 758);
