@@ -26,13 +26,17 @@ namespace IRTaktiks
 
         /// <summary>
         /// Width of the window.
+        /// 5 * 192: 960
+        /// 5 * 256: 1280    
         /// </summary>
-        public const int Width = 5 * 224; // 5 * 256 = 1280
+        public const int Width = 5 * 224;
         
         /// <summary>
         /// Height of the window.
+        /// 4 * 192: 768
+        /// 4 * 256: 1024
         /// </summary>
-        public const int Height = 4 * 224; // 4 * 256 = 1024
+        public const int Height = 4 * 224;
 
         /// <summary>
         /// Indicates if the game will be started at fullscreen mode.

@@ -410,6 +410,18 @@ namespace IRTaktiks.Components.Manager
                                         this.Actions[index].Selected = true;
                                         this.Actions[index].RaiseExecute();
 
+                                        // Deactives the mover.
+                                        if (this.Mover.Enabled)
+                                        {
+                                            this.Mover.Deactivate();
+                                        }
+
+                                        // Deactives the aim.
+                                        if (this.Aim.Enabled)
+                                        {
+                                            this.Aim.Deactivate();
+                                        }
+
                                         this.ChangedField = true;
                                     }
                                 }
@@ -536,7 +548,8 @@ namespace IRTaktiks.Components.Manager
         /// </summary>
         private void MoveAction_Moved()
         {
-            
+            this.Reset();
+            this.Mover.Moved -= this.MoveAction_Moved;
         }
 
         #endregion

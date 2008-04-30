@@ -23,7 +23,7 @@ namespace IRTaktiks.Components.Logic
 
         #endregion
 
-        #region Properties
+        #region Basic Attributes
 
         /// <summary>
         /// The strength of the unit. Influences the attack power.
@@ -88,6 +88,30 @@ namespace IRTaktiks.Components.Logic
         public int Dexterity
         {
             get { return DexterityField; }
+        }
+
+        #endregion
+
+        #region Calculated Attributes
+
+        public int Attack
+        {
+            get { }
+        }
+
+        public int Defense
+        {
+            get { }
+        }
+
+        public int MagicAttack
+        {
+            get { }
+        }
+
+        public int MagicDefense
+        {
+            get { }
         }
 
         #endregion
