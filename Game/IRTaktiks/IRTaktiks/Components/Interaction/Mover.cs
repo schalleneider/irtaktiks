@@ -228,11 +228,12 @@ namespace IRTaktiks.Components.Menu
             // If the mover is enabled and the unit is moving.
             if (this.Enabled && this.Moving)
             {
-                // If the unit is inside the area.
-                if (Vector2.Distance(e.Position, this.Area.Position) < this.Limit)
+                // If the foot of the unit is inside the area.
+                Vector2 footPosition = new Vector2(e.Position.X, e.Position.Y + this.Unit.Texture.Height / 8 - 10);
+                if (Vector2.Distance(footPosition, this.Area.Position) < this.Limit)
                 {
                     // Updates the position of the aim.
-                    this.Unit.Position = e.Position;
+                    this.Unit.Position = new Vector2(e.Position.X - this.Unit.Texture.Width / 2, e.Position.Y - this.Unit.Texture.Height / 8);
                 }
             }
         }
@@ -250,7 +251,7 @@ namespace IRTaktiks.Components.Menu
                 // End the moving of the unit.
                 this.MovingField = false;
 
-                // Dispatch the Aimed event.
+                // Dispatch the Moved event.
                 if (this.Moved != null)
                 {
                     this.Moved();

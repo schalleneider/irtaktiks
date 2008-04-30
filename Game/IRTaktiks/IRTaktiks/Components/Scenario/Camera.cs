@@ -76,7 +76,7 @@ namespace IRTaktiks.Components.Scenario
             get
             {
                 //return Matrix.CreateScale(1.0f, IRTGame.Width / IRTGame.Height, 0.0f);
-                return Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, (float)(Game.Window.ClientBounds.Width / Game.Window.ClientBounds.Height), 1, 10000);
+                return Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, (float)(IRTGame.Width / IRTGame.Height), 1, 10000);
             }
         }
 
@@ -99,7 +99,7 @@ namespace IRTaktiks.Components.Scenario
             get
             {
                 float scaleX = 1.0f;
-                float scaleY = (float)this.Game.GraphicsDevice.Viewport.Width / (float)this.Game.GraphicsDevice.Viewport.Height;
+                float scaleY = (float)IRTGame.Width / (float)IRTGame.Height;
                 return Matrix.CreateScale(scaleX, scaleY , 0.0f);
             }
         }
