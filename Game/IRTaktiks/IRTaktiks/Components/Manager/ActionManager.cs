@@ -563,8 +563,8 @@ namespace IRTaktiks.Components.Manager
         private void HealMagic_Aimed(Unit target)
         {
             MagicManager.Instance.Heal(this.Unit, target);
+            
             this.Reset();
-
             this.Aim.Aimed -= this.HealMagic_Aimed;
         }
 
