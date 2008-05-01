@@ -148,8 +148,8 @@ namespace IRTaktiks.Components.Scenario
 			: base(game)
 		{
             this.MaxHeightField = 2048;
-            this.CellSizeField = 32;
-            this.DimensionField = 256;
+            this.CellSizeField = 128;
+            this.DimensionField = 48;
 
             this.EffectField = EffectManager.Instance.TerrainEffect;
 		}

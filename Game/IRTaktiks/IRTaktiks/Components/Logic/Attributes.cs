@@ -94,6 +94,7 @@ namespace IRTaktiks.Components.Logic
 
         #region Calculated Attributes
 
+        /*
         public int Attack
         {
             get { }
@@ -113,7 +114,8 @@ namespace IRTaktiks.Components.Logic
         {
             get { }
         }
-
+        */
+        
         #endregion
 
         #region Constructor

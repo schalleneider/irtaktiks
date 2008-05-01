@@ -63,7 +63,6 @@ namespace IRTaktiks.Components.Scenario
         {
             get
             {
-                //return Matrix.Identity;
                 return Matrix.CreateTranslation(0, -10, 0) * Matrix.CreateRotationY(MathHelper.ToRadians(this.CameraRotation)) * Matrix.CreateRotationX(MathHelper.ToRadians(this.CameraArc)) * Matrix.CreateLookAt(new Vector3(0, 0, -this.CameraDistance), new Vector3(0, 0, 0), Vector3.Up);
             }
         }
@@ -75,8 +74,7 @@ namespace IRTaktiks.Components.Scenario
         {
             get
             {
-                //return Matrix.CreateScale(1.0f, IRTGame.Width / IRTGame.Height, 0.0f);
-                return Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, (float)(IRTGame.Width / IRTGame.Height), 1, 10000);
+                return Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, (float)(IRTGame.Width / IRTGame.Height), 1000, 15000);
             }
         }
 
@@ -117,7 +115,7 @@ namespace IRTaktiks.Components.Scenario
         {
             this.CameraArcField = -65;
             this.CameraRotationField = 0;
-            this.CameraDistanceField = 7800;
+            this.CameraDistanceField = 7000;
         }
 
         #endregion
