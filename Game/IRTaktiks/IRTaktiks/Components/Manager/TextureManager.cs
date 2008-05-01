@@ -134,6 +134,42 @@ namespace IRTaktiks.Components.Manager
 
             #endregion
 
+            #region Sprites/Debug
+
+            /// <summary>
+            /// Abstration for Sprites/Debug folder.
+            /// </summary>
+            public class DebugFolder
+            {
+                #region Folders
+
+                #endregion
+
+                #region Properties
+
+                #endregion
+
+                #region Textures
+
+                /// <summary>
+                /// Texture of Sprites/Debug/Background.
+                /// </summary>
+                private Texture2D ArrowField;
+
+                /// <summary>
+                /// Texture of Sprites/Debug/Background.
+                /// </summary>
+                public Texture2D Arrow
+                {
+                    get { return ArrowField; }
+                    set { ArrowField = value; }
+                }
+
+                #endregion
+            }
+
+            #endregion
+
             #region Sprites/Menu
 
             /// <summary>
@@ -469,18 +505,31 @@ namespace IRTaktiks.Components.Manager
             #endregion
 
             #region Properties
-           
+
             /// <summary>
             /// Abstration for Sprites/Config folder.
             /// </summary>
             private ConfigFolder ConfigField;
-            
+
             /// <summary>
             /// Abstration for Sprites/Config folder.
             /// </summary>
             public ConfigFolder Config
             {
                 get { if (ConfigField == null) ConfigField = new ConfigFolder(); return ConfigField; }
+            }
+
+            /// <summary>
+            /// Abstration for Sprites/Debug folder.
+            /// </summary>
+            private DebugFolder DebugField;
+
+            /// <summary>
+            /// Abstration for Sprites/Debug folder.
+            /// </summary>
+            public DebugFolder Debug
+            {
+                get { if (DebugField == null) DebugField = new DebugFolder(); return DebugField; }
             }
             
             /// <summary>
@@ -728,6 +777,8 @@ namespace IRTaktiks.Components.Manager
             this.Characters.Wizard = game.Content.Load<Texture2D>("Characters/Wizard");
 
             this.Sprites.Config.Background = game.Content.Load<Texture2D>("Sprites/Config/Background");
+
+            this.Sprites.Debug.Arrow = game.Content.Load<Texture2D>("Sprites/Debug/Arrow");
 
             this.Sprites.Menu.AimAlly = game.Content.Load<Texture2D>("Sprites/Menu/AimAlly");
             this.Sprites.Menu.AimEnemy = game.Content.Load<Texture2D>("Sprites/Menu/AimEnemy");

@@ -88,6 +88,19 @@ namespace IRTaktiks.Components.Menu
         }
 
         /// <summary>
+        /// Indicates if the unit is orienting.
+        /// </summary>
+        private bool OrientingField;
+
+        /// <summary>
+        /// Indicates if the unit is orienting.
+        /// </summary>
+        public bool Orienting
+        {
+            get { return OrientingField; }
+        }
+        
+        /// <summary>
         /// The limit distance that the unit can move.
         /// </summary>
         private float LimitField;
@@ -129,6 +142,7 @@ namespace IRTaktiks.Components.Menu
             this.PositionField = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 4);
             
             this.MovingField = false;
+            this.OrientingField = false;
             this.EnabledField = false;
 		}
 
@@ -144,6 +158,7 @@ namespace IRTaktiks.Components.Menu
         {
             // Enables the mover with the specified limit.
             this.EnabledField = true;
+            this.OrientingField = false;
             this.LimitField = limit;
 
             // Register the mover to listen the input events.
@@ -163,6 +178,7 @@ namespace IRTaktiks.Components.Menu
         {
             // Disables the mover.
             this.EnabledField = false;
+            this.OrientingField = false;
             this.LimitField = 0;
 
             // Unregister the mover to listen the input events.
@@ -187,8 +203,16 @@ namespace IRTaktiks.Components.Menu
             // If the mover is enabled.
             if (this.Enabled)
             {
-                // Draw the area.
-                areaManager.Draw(this.Area);
+                // If the unit is orienting.
+                if (this.Orienting)
+                {
+                    // Draw the arrows.
+                }
+                else
+                {
+                    // Draw the area.
+                    areaManager.Draw(this.Area);
+                }
             }
         }
 
@@ -206,13 +230,31 @@ namespace IRTaktiks.Components.Menu
             // Handles the event only if the mover is enabled.
             if (this.Enabled)
             {
-                // Touch was inside of the X area of the unit.
-                if (e.Position.X < (this.Unit.Position.X + this.Unit.Texture.Width) && e.Position.X > this.Unit.Position.X)
+                // If the unit is orienting
+                if (this.Orienting)
                 {
-                    // Touch was inside of the Y area of the unit.
-                    if (e.Position.Y < (this.Unit.Position.Y + this.Unit.Texture.Height / 4) && e.Position.Y > this.Unit.Position.Y)
+                    // Touch was inside of the area of the arrows.
+
+
+                    // Dispatch the Moved event.
+                    if (this.Moved != null)
                     {
-                        this.MovingField = true;
+                        this.Moved();
+                    }
+
+                    // Deactivate the mover.
+                    this.Deactivate();
+                }
+                else
+                {
+                    // Touch was inside of the X area of the unit.
+                    if (e.Position.X < (this.Unit.Position.X + this.Unit.Texture.Width) && e.Position.X > this.Unit.Position.X)
+                    {
+                        // Touch was inside of the Y area of the unit.
+                        if (e.Position.Y < (this.Unit.Position.Y + this.Unit.Texture.Height / 4) && e.Position.Y > this.Unit.Position.Y)
+                        {
+                            this.MovingField = true;
+                        }
                     }
                 }
             }
@@ -232,7 +274,7 @@ namespace IRTaktiks.Components.Menu
                 Vector2 footPosition = new Vector2(e.Position.X, e.Position.Y + this.Unit.Texture.Height / 8 - 10);
                 if (Vector2.Distance(footPosition, this.Area.Position) < this.Limit)
                 {
-                    // Updates the position of the aim.
+                    // Updates the position of the unit.
                     this.Unit.Position = new Vector2(e.Position.X - this.Unit.Texture.Width / 2, e.Position.Y - this.Unit.Texture.Height / 8);
                 }
             }
@@ -251,14 +293,8 @@ namespace IRTaktiks.Components.Menu
                 // End the moving of the unit.
                 this.MovingField = false;
 
-                // Dispatch the Moved event.
-                if (this.Moved != null)
-                {
-                    this.Moved();
-                }
-
-                // Deactivate the mover.
-                this.Deactivate();
+                // Start the orienting of the unit.
+                this.OrientingField = true;
             }
         }
 

@@ -12,6 +12,7 @@ using IRTaktiks.Components.Manager;
 using IRTaktiks.Input;
 using IRTaktiks.Input.EventArgs;
 using IRTaktiks.Components.Scenario;
+using IRTaktiks.Components.Logic;
 
 namespace IRTaktiks.Components.Interaction
 {
@@ -308,6 +309,34 @@ namespace IRTaktiks.Components.Interaction
                 {
                     // Updates the position of the aim.
                     this.PositionField = e.Position;
+
+                    // Calculates the angle between the aim and the unit.
+                    Vector2 distance = new Vector2(this.Position.X - this.Area.Position.X, this.Position.Y - this.Area.Position.Y);
+                    double angle = MathHelper.ToDegrees((float)Math.Atan2(distance.X, distance.Y));
+
+                    // Unit looking to down.
+                    if (angle >= -45 && angle <= 45)
+                    {
+                        this.Unit.Orientation = Orientation.Down;
+                    }
+
+                    // Unit looking to right.
+                    else if (angle >= 45 && angle <= 135)
+                    {
+                        this.Unit.Orientation = Orientation.Right;
+                    }
+
+                    // Unit looking to left.
+                    else if (angle >= -135 && angle <= -45)
+                    {
+                        this.Unit.Orientation = Orientation.Left;
+                    }
+                    
+                    // Unit looking to up.
+                    else
+                    {
+                        this.Unit.Orientation = Orientation.Up;
+                    }
                 }
             }
         }

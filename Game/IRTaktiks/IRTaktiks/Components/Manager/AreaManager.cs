@@ -22,12 +22,12 @@ namespace IRTaktiks.Components.Manager
         /// <summary>
         /// The color of the player one's areas.
         /// </summary>
-        public static Color PlayerOneAreaColor = Color.Orange;
+        public static Color PlayerOneAreaColor = Color.White;
 
         /// <summary>
         /// The color of the player two's areas.
         /// </summary>
-        public static Color PlayerTwoAreaColor = Color.Olive;
+        public static Color PlayerTwoAreaColor = Color.Black;
 
         #endregion
 

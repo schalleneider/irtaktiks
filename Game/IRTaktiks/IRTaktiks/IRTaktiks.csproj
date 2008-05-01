@@ -61,9 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Debug\Console.cs" />
+    <Compile Include="Components\Debug\TouchDebug.cs" />
     <Compile Include="Components\Interaction\Aim.cs" />
     <Compile Include="Components\Interaction\Mover.cs" />
-    <Compile Include="Components\Logic\FPS.cs" />
+    <Compile Include="Components\Debug\FPS.cs" />
     <Compile Include="Components\Manager\AreaManager.cs" />
     <Compile Include="Components\Manager\MagicManager.cs" />
     <Compile Include="Components\Manager\ActionManager.cs" />

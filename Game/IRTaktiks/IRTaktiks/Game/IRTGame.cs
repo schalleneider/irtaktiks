@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 using IRTaktiks.Input;
+using IRTaktiks.Components.Debug;
 using IRTaktiks.Components.Screen;
 using IRTaktiks.Components.Manager;
 using IRTaktiks.Components.Playable;
@@ -63,6 +64,19 @@ namespace IRTaktiks
 		#region Game Properties
 
         /// <summary>
+        /// The console component.
+        /// </summary>
+        private IRTaktiks.Components.Debug.Console ConsoleField;
+
+        /// <summary>
+        /// The console component.
+        /// </summary>
+        public IRTaktiks.Components.Debug.Console Console
+        {
+            get { return ConsoleField; }
+        }
+        
+        /// <summary>
         /// The FPS component.
         /// </summary>
         private FPS FPSField;
@@ -73,6 +87,19 @@ namespace IRTaktiks
         public FPS FPS
         {
             get { return FPSField; }
+        }
+
+        /// <summary>
+        /// The touch debug component.
+        /// </summary>
+        private TouchDebug TouchDebugField;
+
+        /// <summary>
+        /// The touch debug component.
+        /// </summary>
+        public TouchDebug TouchDebug
+        {
+            get { return TouchDebugField; }
         }
 
         /// <summary>
@@ -255,11 +282,16 @@ namespace IRTaktiks
             EffectManager.Instance.Initialize(this);
 			FontManager.Instance.Initialize(this);
 
+            // Debug
+            this.ConsoleField = new IRTaktiks.Components.Debug.Console(this);
+            this.FPSField = new FPS(this);
+            this.TouchDebugField = new TouchDebug(this);
+            
             // Components creation.
             this.CameraField = new Camera(this);
             this.SpriteManagerField = new SpriteManager(this);
             this.AreaManagerField = new AreaManager(this.GraphicsDevice, this.Camera);
-            this.FPSField = new FPS(this);
+            
 
 			// Screen construction.
 			this.TitleScreenField = new TitleScreen(this, 0);
@@ -272,10 +304,14 @@ namespace IRTaktiks
             this.ScreenManager.Screens.Add(this.ConfigScreen);
 			this.ScreenManager.Screens.Add(this.GameScreen);
 
-			// Components addiction.
+            // Debug
+            this.Components.Add(this.Console);
+			this.Components.Add(this.FPS);
+            this.Components.Add(this.TouchDebug);
+            
+            // Components addiction.
 			this.Components.Add(this.Camera);
             this.Components.Add(this.ScreenManager);
-            this.Components.Add(this.FPS);
 
 			// Change the game to its first status.
 			this.ChangeGameStatus(GameStatus.TitleScreen);
@@ -349,10 +385,8 @@ namespace IRTaktiks
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime)
 		{
-			this.GraphicsDeviceManager.GraphicsDevice.Clear(Color.DimGray);
+			this.GraphicsDeviceManager.GraphicsDevice.Clear(Color.Black);
             this.GraphicsDeviceManager.GraphicsDevice.RenderState.CullMode = CullMode.None;
-
-            //this.AreaManager.Flush();
 
 			base.Draw(gameTime);
 		}
