@@ -9,10 +9,10 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Manager;
 
-namespace IRTaktiks.Components.Logic
+namespace IRTaktiks.Components.Debug
 {
 	/// <summary>
-	/// Shows the Frame per Second value.
+	/// Debug component for FPS.
 	/// </summary>
 	public class FPS : DrawableGameComponent
 	{
@@ -63,10 +63,10 @@ namespace IRTaktiks.Components.Logic
 		public override void Update(GameTime gameTime)
 		{
             float timeElapsed = Convert.ToSingle(gameTime.ElapsedRealTime.TotalSeconds);
-            if ((this.Delta += timeElapsed) > 1)
+            if ((this.Delta += timeElapsed) > 0.5)
             {
                 this.Value = 1 / timeElapsed;
-                this.Delta -= 1;
+                this.Delta -= 0.5f;
             }
 
 			base.Update(gameTime);
@@ -79,7 +79,10 @@ namespace IRTaktiks.Components.Logic
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public override void Draw(GameTime gameTime)
 		{
-            this.Game.Window.Title = String.Format("IRTAKTIKS - FPS: {0:N}", this.Value);
+            Vector2 textSize = FontManager.Instance.Debug.MeasureString(String.Format("{0:N}", this.Value));
+            Vector2 textPosition = new Vector2(IRTGame.Width - textSize.X, IRTGame.Height - textSize.Y);
+
+            (this.Game as IRTGame).SpriteManager.DrawString(FontManager.Instance.Debug, String.Format("{0:N}", this.Value), textPosition, Color.Yellow, 100);
 
             base.Draw(gameTime);
 		}

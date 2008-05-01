@@ -45,6 +45,8 @@ namespace IRTaktiks.Components.Manager
         public void Initialize(Game game)
         {
 			// Load the spritefonts
+            this.DebugField = game.Content.Load<SpriteFont>("Fonts/Debug");
+
             this.Chilopod12Field = game.Content.Load<SpriteFont>("Fonts/Chilopod12");
             this.Chilopod14Field = game.Content.Load<SpriteFont>("Fonts/Chilopod14");
             this.Chilopod16Field = game.Content.Load<SpriteFont>("Fonts/Chilopod16");
@@ -63,6 +65,19 @@ namespace IRTaktiks.Components.Manager
 
 		#region Sprite Font
 
+        /// <summary>
+        /// The debug font.
+        /// </summary>
+        private SpriteFont DebugField;
+        
+        /// <summary>
+        /// The debug font.
+        /// </summary>
+        public SpriteFont Debug
+        {
+            get { return DebugField; }
+        }	
+        
         /// <summary>
         /// The spritefont for the chilopod font type, 12pt of size.
         /// </summary>
