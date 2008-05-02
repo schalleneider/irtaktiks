@@ -77,6 +77,7 @@
     <Compile Include="Components\Scenario\Camera.cs" />
     <Compile Include="Components\Menu\PlayerMenu.cs" />
     <Compile Include="Components\Scenario\Drawable.cs" />
+    <Compile Include="Components\Scenario\Firework.cs" />
     <Compile Include="Components\Scenario\Text.cs" />
     <Compile Include="Components\Scenario\Map.cs" />
     <Compile Include="Components\Logic\Attributes.cs" />
