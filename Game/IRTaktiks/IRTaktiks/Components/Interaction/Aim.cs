@@ -185,7 +185,7 @@ namespace IRTaktiks.Components.Interaction
 
             // Create the area of action.
             Vector2 areaPosition = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 4);
-            this.AreaField = new Area(areaPosition, limit, this.Unit.Player.PlayerIndex == PlayerIndex.One ? AreaManager.PlayerOneAreaColor : AreaManager.PlayerTwoAreaColor);
+            this.AreaField = new Area(areaPosition, limit, this.Unit.Player.PlayerIndex == PlayerIndex.One ? AreaManager.PlayerOneMovementAreaColor : AreaManager.PlayerTwoMovementAreaColor);
         }
 
         /// <summary>
