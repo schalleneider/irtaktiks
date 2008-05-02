@@ -20,14 +20,24 @@ namespace IRTaktiks.Components.Manager
         #region Constants
 
         /// <summary>
-        /// The color of the player one's areas.
+        /// The color of the movement area of player one.
         /// </summary>
-        public static Color PlayerOneAreaColor = Color.White;
+        public static Color PlayerOneMovementAreaColor = Color.White;
 
         /// <summary>
-        /// The color of the player two's areas.
+        /// The color of the movement area of player two.
         /// </summary>
-        public static Color PlayerTwoAreaColor = Color.Black;
+        public static Color PlayerTwoMovementAreaColor = Color.Black;
+
+        /// <summary>
+        /// The color of the orientation area of player one.
+        /// </summary>
+        public static Color PlayerOneOrientationAreaColor = Color.Silver;
+
+        /// <summary>
+        /// The color of the orientation area of player two.
+        /// </summary>
+        public static Color PlayerTwoOrientationAreaColor = Color.Gold;
 
         #endregion
 

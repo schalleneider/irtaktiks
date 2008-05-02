@@ -12,6 +12,7 @@ using IRTaktiks.Components.Scenario;
 using IRTaktiks.Input.EventArgs;
 using IRTaktiks.Input;
 using IRTaktiks.Components.Manager;
+using IRTaktiks.Components.Logic;
 
 namespace IRTaktiks.Components.Menu
 {
@@ -75,32 +76,6 @@ namespace IRTaktiks.Components.Menu
 		}
         
         /// <summary>
-        /// Indicates if the unit is moving.
-        /// </summary>
-        private bool MovingField;
-        
-        /// <summary>
-        /// Indicates if the unit is moving.
-        /// </summary>
-        public bool Moving
-        {
-            get { return MovingField; }
-        }
-
-        /// <summary>
-        /// Indicates if the unit is orienting.
-        /// </summary>
-        private bool OrientingField;
-
-        /// <summary>
-        /// Indicates if the unit is orienting.
-        /// </summary>
-        public bool Orienting
-        {
-            get { return OrientingField; }
-        }
-        
-        /// <summary>
         /// The limit distance that the unit can move.
         /// </summary>
         private float LimitField;
@@ -112,6 +87,26 @@ namespace IRTaktiks.Components.Menu
         {
             get { return LimitField; }
         }
+
+        /// <summary>
+        /// Indicates if the unit is moving.
+        /// </summary>
+        private bool Moving;
+
+        /// <summary>
+        /// Indicates if the mover is ready to orient.
+        /// </summary>
+        private bool ReadyToOrient;
+
+        /// <summary>
+        /// Indicates if the unit is orienting.
+        /// </summary>
+        private bool Orienting;
+        
+        /// <summary>
+        /// The cursor identifier to track the CursorUpdate and CursorUp event.
+        /// </summary>
+        private int CursorIdentifier;
 
         #endregion
 
@@ -141,9 +136,11 @@ namespace IRTaktiks.Components.Menu
 
             this.PositionField = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 4);
             
-            this.MovingField = false;
-            this.OrientingField = false;
             this.EnabledField = false;
+            
+            this.Moving = false;
+            this.Orienting = false;
+            this.ReadyToOrient = false;
 		}
 
 		#endregion
@@ -158,8 +155,11 @@ namespace IRTaktiks.Components.Menu
         {
             // Enables the mover with the specified limit.
             this.EnabledField = true;
-            this.OrientingField = false;
             this.LimitField = limit;
+
+            this.Moving = false;
+            this.Orienting = false;
+            this.ReadyToOrient = false;
 
             // Register the mover to listen the input events.
             InputManager.Instance.CursorDown += new EventHandler<CursorDownArgs>(CursorDown_Handler);
@@ -168,7 +168,7 @@ namespace IRTaktiks.Components.Menu
 
             // Create the area.
             Vector2 areaPosition = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 4);
-            this.AreaField = new Area(areaPosition, limit, this.Unit.Player.PlayerIndex == PlayerIndex.One ? AreaManager.PlayerOneAreaColor : AreaManager.PlayerTwoAreaColor);
+            this.AreaField = new Area(areaPosition, limit, this.Unit.Player.PlayerIndex == PlayerIndex.One ? AreaManager.PlayerOneMovementAreaColor : AreaManager.PlayerTwoMovementAreaColor);
         }
 
         /// <summary>
@@ -178,8 +178,11 @@ namespace IRTaktiks.Components.Menu
         {
             // Disables the mover.
             this.EnabledField = false;
-            this.OrientingField = false;
             this.LimitField = 0;
+
+            this.Moving = false;
+            this.Orienting = false;
+            this.ReadyToOrient = false;
 
             // Unregister the mover to listen the input events.
             InputManager.Instance.CursorDown -= new EventHandler<CursorDownArgs>(CursorDown_Handler);
@@ -196,23 +199,16 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// Draw the mover's area.
         /// </summary>
+        /// <param name="spriteBatchManager">SpriteBatchManager used to draw sprites.</param>
         /// <param name="areaManager">AreaManager used to draw areas.</param>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public void Draw(AreaManager areaManager, GameTime gameTime)
+        public void Draw(SpriteManager spriteBatchManager, AreaManager areaManager, GameTime gameTime)
         {
             // If the mover is enabled.
             if (this.Enabled)
             {
-                // If the unit is orienting.
-                if (this.Orienting)
-                {
-                    // Draw the arrows.
-                }
-                else
-                {
-                    // Draw the area.
-                    areaManager.Draw(this.Area);
-                }
+                // Draw the area.
+                areaManager.Draw(this.Area);
             }
         }
 
@@ -230,20 +226,14 @@ namespace IRTaktiks.Components.Menu
             // Handles the event only if the mover is enabled.
             if (this.Enabled)
             {
-                // If the unit is orienting
-                if (this.Orienting)
+                if (this.ReadyToOrient)
                 {
-                    // Touch was inside of the area of the arrows.
-
-
-                    // Dispatch the Moved event.
-                    if (this.Moved != null)
+                    // Touch was inside of the area to orient.
+                    if (Vector2.Distance(e.Position, this.Area.Position) < this.Area.Radius)
                     {
-                        this.Moved();
+                        this.ReadyToOrient = false;
+                        this.Orienting = true;
                     }
-
-                    // Deactivate the mover.
-                    this.Deactivate();
                 }
                 else
                 {
@@ -253,10 +243,13 @@ namespace IRTaktiks.Components.Menu
                         // Touch was inside of the Y area of the unit.
                         if (e.Position.Y < (this.Unit.Position.Y + this.Unit.Texture.Height / 4) && e.Position.Y > this.Unit.Position.Y)
                         {
-                            this.MovingField = true;
+                            this.Moving = true;
                         }
                     }
                 }
+
+                // Store the cursor identifier to track the CursorUpdate and CursorUp event.
+                this.CursorIdentifier = e.Identifier;
             }
         }
 
@@ -267,15 +260,55 @@ namespace IRTaktiks.Components.Menu
         /// <param name="e">Data of event.</param>
         private void CursorUpdate_Handler(object sender, CursorUpdateArgs e)
         {
-            // If the mover is enabled and the unit is moving.
-            if (this.Enabled && this.Moving)
+            // Check the cursor identifier 
+            if (this.CursorIdentifier == e.Identifier)
             {
-                // If the foot of the unit is inside the area.
-                Vector2 footPosition = new Vector2(e.Position.X, e.Position.Y + this.Unit.Texture.Height / 8 - 10);
-                if (Vector2.Distance(footPosition, this.Area.Position) < this.Limit)
+                if (this.Enabled)
                 {
-                    // Updates the position of the unit.
-                    this.Unit.Position = new Vector2(e.Position.X - this.Unit.Texture.Width / 2, e.Position.Y - this.Unit.Texture.Height / 8);
+                    if (this.Moving)
+                    {
+                        // If the foot of the unit is inside the area.
+                        Vector2 footPosition = new Vector2(e.Position.X, e.Position.Y + this.Unit.Texture.Height / 8);
+                        if (Vector2.Distance(footPosition, this.Area.Position) < this.Limit - 10)
+                        {
+                            // Updates the position of the unit.
+                            this.Unit.Position = new Vector2(e.Position.X - this.Unit.Texture.Width / 2, e.Position.Y - this.Unit.Texture.Height / 8);
+                        }
+                    }
+                    else if (this.Orienting)
+                    {
+                        // Touch was inside of the area to orient.
+                        if (Vector2.Distance(e.Position, this.Area.Position) < this.Area.Radius)
+                        {
+                            // Calculates the angle between the unit and the touch.
+                            Vector2 distance = new Vector2(e.Position.X - this.Area.Position.X, e.Position.Y - this.Area.Position.Y);
+                            double angle = MathHelper.ToDegrees((float)Math.Atan2(distance.X, distance.Y));
+
+                            // Unit looking to down.
+                            if (angle >= -45 && angle <= 45)
+                            {
+                                this.Unit.Orientation = Orientation.Down;
+                            }
+
+                            // Unit looking to right.
+                            else if (angle >= 45 && angle <= 135)
+                            {
+                                this.Unit.Orientation = Orientation.Right;
+                            }
+
+                            // Unit looking to left.
+                            else if (angle >= -135 && angle <= -45)
+                            {
+                                this.Unit.Orientation = Orientation.Left;
+                            }
+
+                            // Unit looking to up.
+                            else
+                            {
+                                this.Unit.Orientation = Orientation.Up;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -287,14 +320,34 @@ namespace IRTaktiks.Components.Menu
         /// <param name="e">Data of event.</param>
         private void CursorUp_Handler(object sender, CursorUpArgs e)
         {
-            // If the mover is enabled and the unit is moving.
-            if (this.Enabled && this.Moving)
+            // Check the cursor identifier 
+            if (this.CursorIdentifier == e.Identifier)
             {
-                // End the moving of the unit.
-                this.MovingField = false;
+                if (this.Enabled)
+                {
+                    if (this.Moving)
+                    {
+                        // End the moving of the unit.
+                        this.Moving = false;
 
-                // Start the orienting of the unit.
-                this.OrientingField = true;
+                        // Start the orienting of the unit.
+                        this.ReadyToOrient = true;
+
+                        Vector2 areaPosition = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 4);
+                        this.AreaField = new Area(areaPosition, 150, this.Unit.Player.PlayerIndex == PlayerIndex.One ? AreaManager.PlayerOneOrientationAreaColor : AreaManager.PlayerTwoOrientationAreaColor);
+                    }
+                    else if (this.Orienting)
+                    {
+                        // Dispatch the Moved event.
+                        if (this.Moved != null)
+                        {
+                            this.Moved();
+                        }
+
+                        // Deactivate the mover.
+                        this.Deactivate();
+                    }
+                }
             }
         }
 

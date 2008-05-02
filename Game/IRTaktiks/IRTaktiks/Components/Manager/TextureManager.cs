@@ -242,12 +242,12 @@ namespace IRTaktiks.Components.Manager
                     get { return BackgroundField; }
                     set { BackgroundField = value; }
                 }
-                
+
                 /// <summary>
                 /// Texture of Sprites/Menu/Item.
                 /// </summary>
                 private Texture2D ItemField;
-                
+
                 /// <summary>
                 /// Texture of Sprites/Menu/Item.
                 /// </summary>
@@ -255,6 +255,20 @@ namespace IRTaktiks.Components.Manager
                 {
                     get { return ItemField; }
                     set { ItemField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Menu/Orientation.
+                /// </summary>
+                private Texture2D OrientationField;
+
+                /// <summary>
+                /// Texture of Sprites/Menu/Orientation.
+                /// </summary>
+                public Texture2D Orientation
+                {
+                    get { return OrientationField; }
+                    set { OrientationField = value; }
                 }
 
                 /// <summary>
@@ -785,6 +799,7 @@ namespace IRTaktiks.Components.Manager
             this.Sprites.Menu.AimNothing = game.Content.Load<Texture2D>("Sprites/Menu/AimNothing");
             this.Sprites.Menu.Background = game.Content.Load<Texture2D>("Sprites/Menu/Background");
             this.Sprites.Menu.Item = game.Content.Load<Texture2D>("Sprites/Menu/Item");
+            this.Sprites.Menu.Orientation = game.Content.Load<Texture2D>("Sprites/Menu/Orientation");
             this.Sprites.Menu.SelectedItem = game.Content.Load<Texture2D>("Sprites/Menu/SelectedItem");
             this.Sprites.Menu.SubmenuDisabledItem = game.Content.Load<Texture2D>("Sprites/Menu/SubmenuDisabledItem");
             this.Sprites.Menu.SubmenuItem = game.Content.Load<Texture2D>("Sprites/Menu/SubmenuItem");

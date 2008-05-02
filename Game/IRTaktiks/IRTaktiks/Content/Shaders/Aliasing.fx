@@ -41,13 +41,13 @@ float4 MyPS( float4 col : TEXCOORD0, float2 polar : TEXCOORD1 ) : COLOR0
 	
 	if(rho < blurThreshold )
 	{
-		a = 0.3;
+		a = 0.5;
 	}
 	else
 	{
 		float normrho = (rho - blurThreshold) * 1 / (1 - blurThreshold);
 		a = cos(normrho * 3.14159268 / 2);
-		a = a > 0.3 ? 0.3 : a;
+		a = a > 0.5 ? 0.5 : a;
 	}
 	
 	float4 finalColor = float4(r, g, b, a);

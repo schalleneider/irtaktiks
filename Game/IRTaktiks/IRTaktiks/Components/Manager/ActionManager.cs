@@ -230,7 +230,7 @@ namespace IRTaktiks.Components.Manager
             }
 
             // Draw the mover.
-            this.Mover.Draw(game.AreaManager, gameTime);
+            this.Mover.Draw(game.SpriteManager, game.AreaManager, gameTime);
 
             // Draw the aim.
             this.Aim.Draw(game.SpriteManager, game.AreaManager, gameTime);
@@ -548,6 +548,8 @@ namespace IRTaktiks.Components.Manager
         /// </summary>
         private void MoveAction_Moved()
         {
+            
+            
             this.Reset();
             this.Mover.Moved -= this.MoveAction_Moved;
         }
