@@ -61,7 +61,7 @@ namespace IRTaktiks
 
 		#endregion
 
-		#region Game Properties
+        #region Debug
 
         /// <summary>
         /// The console component.
@@ -102,6 +102,10 @@ namespace IRTaktiks
             get { return TouchDebugField; }
         }
 
+        #endregion
+
+        #region Game Properties
+
         /// <summary>
         /// The player one of the game.
         /// </summary>
@@ -135,19 +139,6 @@ namespace IRTaktiks
         #region Graphic Properties
 
         /// <summary>
-		/// Handles the configuration and management of the graphics device.
-		/// </summary>
-		private GraphicsDeviceManager GraphicsDeviceManagerField;
-
-		/// <summary>
-		/// Handles the configuration and management of the graphics device.
-		/// </summary>
-		public GraphicsDeviceManager GraphicsDeviceManager
-		{
-			get { return GraphicsDeviceManagerField; }
-		}
-        
-        /// <summary>
         /// The instance of the camera.
         /// </summary>
         private Camera CameraField;
@@ -159,6 +150,19 @@ namespace IRTaktiks
         {
             get { return CameraField; }
         }
+        
+        /// <summary>
+		/// Handles the configuration and management of the graphics device.
+		/// </summary>
+		private GraphicsDeviceManager GraphicsDeviceManagerField;
+
+		/// <summary>
+		/// Handles the configuration and management of the graphics device.
+		/// </summary>
+		public GraphicsDeviceManager GraphicsDeviceManager
+		{
+			get { return GraphicsDeviceManagerField; }
+		}
 
 		/// <summary>
 		/// Manager of sprites.
@@ -184,6 +188,19 @@ namespace IRTaktiks
         public AreaManager AreaManager
         {
             get { return AreaManagerField; }
+        }
+
+        /// <summary>
+        /// Manager of particle effects.
+        /// </summary>
+        private ParticleManager ParticleManagerField;
+
+        /// <summary>
+        /// Manager of particle effects.
+        /// </summary>
+        public ParticleManager ParticleManager
+        {
+            get { return ParticleManagerField; }
         }
 
         #endregion
@@ -262,6 +279,9 @@ namespace IRTaktiks
             this.GraphicsDeviceManager.PreferredBackBufferHeight = IRTGame.Height;
             this.GraphicsDeviceManager.IsFullScreen = IRTGame.IsFullScreen;
 
+            this.GraphicsDeviceManager.SynchronizeWithVerticalRetrace = true;
+            this.GraphicsDeviceManager.PreferMultiSampling = true;
+
 			this.GraphicsDeviceManager.ApplyChanges();
 		}
 
@@ -291,7 +311,7 @@ namespace IRTaktiks
             this.CameraField = new Camera(this);
             this.SpriteManagerField = new SpriteManager(this);
             this.AreaManagerField = new AreaManager(this.GraphicsDevice, this.Camera);
-            
+            this.ParticleManagerField = new ParticleManager(new Vector3(0, 0, -100), this.GraphicsDevice, this.Camera);
 
 			// Screen construction.
 			this.TitleScreenField = new TitleScreen(this, 0);

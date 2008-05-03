@@ -47,6 +47,8 @@ namespace IRTaktiks.Components.Screen
             // Input Event registration.
             InputManager.Instance.CursorUp += new EventHandler<CursorUpArgs>(CursorUp_Handler);
 
+            (this.Game as IRTGame).ParticleManager.Queue(new IRTaktiks.Components.Scenario.ParticleEffect(5000, IRTaktiks.Components.Scenario.ParticleEffect.EffectType.Firework, 500, Color.Red));
+
             base.Initialize();
 		}
 
@@ -68,7 +70,7 @@ namespace IRTaktiks.Components.Screen
         {
             IRTGame game = this.Game as IRTGame;
             
-            game.SpriteManager.Draw(TextureManager.Instance.Sprites.TitleScreen, new Vector2(0, 0), Color.White, 100);
+            //game.SpriteManager.Draw(TextureManager.Instance.Sprites.TitleScreen, new Vector2(0, 0), Color.White, 100);
             
             base.Draw(gameTime);
         }

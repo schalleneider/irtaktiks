@@ -676,6 +676,20 @@ namespace IRTaktiks.Components.Manager
             }
 
             /// <summary>
+            /// Texture of Textures/Particle.
+            /// </summary>
+            private Texture2D ParticleField;
+
+            /// <summary>
+            /// Texture of Textures/Particle.
+            /// </summary>
+            public Texture2D Particle
+            {
+                get { return ParticleField; }
+                set { ParticleField = value; }
+            }
+
+            /// <summary>
             /// Texture of Textures/Rock.
             /// </summary>
             private Texture2D RockField;
@@ -822,6 +836,7 @@ namespace IRTaktiks.Components.Manager
             this.Terrains.Terrain = game.Content.Load<Texture2D>("Terrains/Terrain");
 
             this.Textures.Grass = game.Content.Load<Texture2D>("Textures/Grass");
+            this.Textures.Particle = game.Content.Load<Texture2D>("Textures/Particle");
             this.Textures.Rock = game.Content.Load<Texture2D>("Textures/Rock");
             this.Textures.Sand = game.Content.Load<Texture2D>("Textures/Sand");
             this.Textures.Snow = game.Content.Load<Texture2D>("Textures/Snow");

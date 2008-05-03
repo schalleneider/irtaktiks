@@ -79,7 +79,7 @@ namespace IRTaktiks.Components.Scenario
         }
 
         /// <summary>
-        /// Vision matrix of the map.
+        /// Vision matrix of the areas.
         /// </summary>
         public Matrix AreaView
         {
@@ -90,7 +90,7 @@ namespace IRTaktiks.Components.Scenario
         }
 
         /// <summary>
-        /// Projection matrix of the map.
+        /// Projection matrix of the areas.
         /// </summary>
         public Matrix AreaProjection
         {
@@ -99,6 +99,28 @@ namespace IRTaktiks.Components.Scenario
                 float scaleX = 1.0f;
                 float scaleY = (float)IRTGame.Width / (float)IRTGame.Height;
                 return Matrix.CreateScale(scaleX, scaleY , 0.0f);
+            }
+        }
+        
+        /// <summary>
+        /// Vision matrix of the particles.
+        /// </summary>
+        public Matrix ParticleView
+        {
+            get
+            {
+                return Matrix.Invert(Matrix.CreateFromQuaternion(new Quaternion(0, 0, 0, 1)) * Matrix.CreateTranslation(new Vector3(0, 0, 0)));
+            }
+        }
+        
+        /// <summary>
+        /// Projection matrix of the particles.
+        /// </summary>
+        public Matrix ParticleProjection
+        {
+            get
+            {
+                return Matrix.CreatePerspectiveFieldOfView(MathHelper.Pi / 3.0f, ((float)IRTGame.Width / (float)IRTGame.Height), 1.0f, 1000.0f);
             }
         }
 
