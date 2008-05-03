@@ -114,6 +114,12 @@ namespace IRTaktiks.Components.Screen
                     component.Update(gameTime);
                 }
             }
+
+            // Instance of the game.
+            IRTGame game = this.Game as IRTGame;
+
+            // Updates all the 3d effects.
+            game.ParticleManager.Update(gameTime);
             
             base.Update(gameTime);
 		}
@@ -139,10 +145,16 @@ namespace IRTaktiks.Components.Screen
                 }
             }
 
-            // Flushes all the sprites to be drawn.
-            (this.Game as IRTGame).AreaManager.Flush();
-            (this.Game as IRTGame).SpriteManager.Flush();
+            // Instance of the game.
+            IRTGame game = this.Game as IRTGame;
+
+            // Flush all the drawable managers to be drawn.
+            game.AreaManager.Flush();
+            game.SpriteManager.Flush();
             
+            // Draw all the 3d effects.
+            game.ParticleManager.Draw();
+
             base.Draw(gameTime);
         }
 

@@ -46,6 +46,7 @@ namespace IRTaktiks.Components.Manager
         {
             this.TerrainEffectField = game.Content.Load<Effect>("Shaders/Terrain");
             this.AliasingEffectField = game.Content.Load<Effect>("Shaders/Aliasing");
+            this.ParticleEffectField = game.Content.Load<Effect>("Shaders/ScaledParticle");
         }
 
         #endregion
@@ -76,6 +77,19 @@ namespace IRTaktiks.Components.Manager
         public Effect AliasingEffect
         {
             get { return AliasingEffectField; }
+        }
+
+        /// <summary>
+        /// The hlsl effect for particle drawing in 3D particles.
+        /// </summary>
+        private Effect ParticleEffectField;
+
+        /// <summary>
+        /// The hlsl effect for particle drawing in 3D particles.
+        /// </summary>
+        public Effect ParticleEffect
+        {
+            get { return ParticleEffectField; }
         }
         
         #endregion
