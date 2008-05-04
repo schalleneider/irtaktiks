@@ -432,11 +432,14 @@ namespace IRTaktiks.Components.Manager
                             // Calculates the index of the item touched.
                             int index = (int)(e.Position.Y - this.Position.Y) / TextureManager.Instance.Sprites.Menu.Item.Height;
 
-                            // Selects the menu item for the first time and queue the Execute event for dispatch.
-                            this.Actions[index].Selected = true;
-                            this.Actions[index].RaiseExecute();
+                            if (index < count)
+                            {
+                                // Selects the menu item for the first time and queue the Execute event for dispatch.
+                                this.Actions[index].Selected = true;
+                                this.Actions[index].RaiseExecute();
 
-                            this.ChangedField = true;
+                                this.ChangedField = true;
+                            }
                         }
                     }
                 }

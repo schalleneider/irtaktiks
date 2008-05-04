@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Manager;
 using IRTaktiks.Input;
 using IRTaktiks.Input.EventArgs;
+using IRTaktiks.Components.Scenario;
 
 namespace IRTaktiks.Components.Debug
 {
@@ -19,25 +20,6 @@ namespace IRTaktiks.Components.Debug
     public class TouchDebug : DrawableGameComponent
     {
         #region Properties
-
-        /// <summary>
-        /// The text to be displayed.
-        /// </summary>
-        private string TextField;
-
-        /// <summary>
-        /// The text to be displayed.
-        /// </summary>
-        public string Text
-        {
-            get { return TextField; }
-            set { TextField = value; }
-        }
-
-        /// <summary>
-        /// The Size of the arrow.
-        /// </summary>
-        private Rectangle Size;
                 
         #endregion
 
@@ -50,9 +32,6 @@ namespace IRTaktiks.Components.Debug
         public TouchDebug(Game game)
 			: base(game)
 		{
-            this.Enabled = false;
-            this.Visible = false;
-
             InputManager.Instance.CursorDown += new EventHandler<CursorDownArgs>(Touch_CursorDown);
         }
 
@@ -75,18 +54,6 @@ namespace IRTaktiks.Components.Debug
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public override void Update(GameTime gameTime)
 		{
-            if (gameTime.TotalGameTime.Milliseconds % 1 == 0)
-            {
-                this.Size.Width += 2;
-                this.Size.Height += 2;
-            }
-
-            if (this.Size.Width >= TextureManager.Instance.Sprites.Debug.Arrow.Width / 2)
-            {
-                this.Enabled = false;
-                this.Visible = false;
-            }
-            
             base.Update(gameTime);
 		}
 
@@ -97,12 +64,6 @@ namespace IRTaktiks.Components.Debug
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public override void Draw(GameTime gameTime)
 		{
-            IRTGame game = this.Game as IRTGame;
-
-            Vector2 arrowPosition = new Vector2(this.Size.X - this.Size.Width / 2, this.Size.Y - this.Size.Height / 2);
-
-            game.SpriteManager.Draw(TextureManager.Instance.Sprites.Debug.Arrow, new Rectangle((int)arrowPosition.X, (int)arrowPosition.Y, this.Size.Width, this.Size.Height), Color.White, 100);
-
             base.Draw(gameTime);
 		}
 
@@ -115,10 +76,9 @@ namespace IRTaktiks.Components.Debug
         /// </summary>
         private void Touch_CursorDown(object sender, CursorDownArgs e)
         {
-            this.Enabled = true;
-            this.Visible = true;
-
-            this.Size = new Rectangle((int)e.Position.X, (int)e.Position.Y, 0, 0); 
+            (this.Game as IRTGame).ParticleManager.Queue(
+                new ParticleEffect(e.Position, 50, ParticleEffect.EffectType.Ring, 0.1f, 5, Color.Yellow)
+                );
         }
 
         #endregion
