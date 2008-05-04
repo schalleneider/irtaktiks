@@ -120,7 +120,7 @@ namespace IRTaktiks.Components.Scenario
         {
             get
             {
-                return Matrix.CreatePerspectiveFieldOfView(MathHelper.Pi / 3.0f, ((float)IRTGame.Width / (float)IRTGame.Height), 1.0f, 1000.0f);
+                return Matrix.CreatePerspectiveFieldOfView(1, ((float)IRTGame.Width / (float)IRTGame.Height), 1.0f, 1000.0f);
             }
         }
 
