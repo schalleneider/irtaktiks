@@ -134,7 +134,8 @@ namespace IRTaktiks.Components.Interaction
         /// The method template who will used to handle the Aimed event.
         /// </summary>
         /// <param name="target">The unit targeted by the aim. Null when the aim is over nothing.</param>
-        public delegate void AimedEventHandler(Unit target);
+        /// <param name="position">The last valid position of the aim.</param>
+        public delegate void AimedEventHandler(Unit target, Vector2 position);
 
         /// <summary>
         /// The Aimed event.
@@ -357,7 +358,7 @@ namespace IRTaktiks.Components.Interaction
                 // Dispatch the Aimed event.
                 if (this.Aimed != null)
                 {
-                    this.Aimed(this.Target);
+                    this.Aimed(this.Target, e.Position);
                 }
 
                 // Deactivate the aim.

@@ -67,6 +67,7 @@
     <Compile Include="Components\Interaction\Mover.cs" />
     <Compile Include="Components\Debug\FPS.cs" />
     <Compile Include="Components\Manager\AreaManager.cs" />
+    <Compile Include="Components\Manager\AnimationManager.cs" />
     <Compile Include="Components\Manager\ParticleManager.cs" />
     <Compile Include="Components\Manager\MagicManager.cs" />
     <Compile Include="Components\Manager\ActionManager.cs" />
