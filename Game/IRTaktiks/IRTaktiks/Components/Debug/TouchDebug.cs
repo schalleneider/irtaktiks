@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Manager;
+using IRTaktiks.Components.Scenario;
 using IRTaktiks.Input;
 using IRTaktiks.Input.EventArgs;
-using IRTaktiks.Components.Scenario;
 
 namespace IRTaktiks.Components.Debug
 {
@@ -77,8 +77,10 @@ namespace IRTaktiks.Components.Debug
         private void Touch_CursorDown(object sender, CursorDownArgs e)
         {
             (this.Game as IRTGame).ParticleManager.Queue(
-                new ParticleEffect(e.Position, 50, ParticleEffect.EffectType.Ring, 0.1f, 5, Color.Yellow)
+                new ParticleEffect(e.Position, 50, ParticleEffect.EffectType.Ring, 0.1f, 5, null)
                 );
+
+            //AnimationManager.Instance.Animate(AnimationManager.AnimationType.Healing, e.Position);
         }
 
         #endregion

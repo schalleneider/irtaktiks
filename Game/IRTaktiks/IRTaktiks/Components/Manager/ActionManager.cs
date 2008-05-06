@@ -565,8 +565,12 @@ namespace IRTaktiks.Components.Manager
         /// Called when the aim of the Heal magic is released.
         /// </summary>
         /// <param name="target">The unit targeted by the aim. Null if the aim is over anything.</param>
-        private void HealMagic_Aimed(Unit target)
+        /// <param name="position">The last valid position of the aim.</param>
+        private void HealMagic_Aimed(Unit target, Vector2 position)
         {
+            Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
+            AnimationManager.Instance.Animate(AnimationManager.AnimationType.Healing, animationPosition); 
+            
             MagicManager.Instance.Heal(this.Unit, target);
             
             this.Reset();

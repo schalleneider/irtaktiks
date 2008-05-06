@@ -312,6 +312,7 @@ namespace IRTaktiks
             this.SpriteManagerField = new SpriteManager(this);
             this.AreaManagerField = new AreaManager(this.GraphicsDevice, this.Camera);
             this.ParticleManagerField = new ParticleManager(new Vector3(0, 0, -100), this.GraphicsDevice, this.Camera);
+            AnimationManager.Instance.Initialize(this);
 
 			// Screen construction.
 			this.TitleScreenField = new TitleScreen(this, 0);
