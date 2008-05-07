@@ -128,7 +128,7 @@ namespace IRTaktiks.Components.Screen
             foreach (EffectPass pass in this.Map.Effect.CurrentTechnique.Passes)
             {
                 pass.Begin();
-                //this.Map.Draw(gameTime);
+                this.Map.Draw(gameTime);
                 pass.End();
             }
 
