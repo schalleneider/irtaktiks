@@ -42,7 +42,7 @@ namespace IRTaktiks
         /// <summary>
         /// Indicates if the game will be started at fullscreen mode.
         /// </summary>
-        public const bool IsFullScreen = true;
+        public const bool IsFullScreen = false;
 
         #endregion
 

@@ -76,11 +76,13 @@ namespace IRTaktiks.Components.Debug
         /// </summary>
         private void Touch_CursorDown(object sender, CursorDownArgs e)
         {
-            (this.Game as IRTGame).ParticleManager.Queue(
+            /*(this.Game as IRTGame).ParticleManager.Queue(
                 new ParticleEffect(e.Position, 500, ParticleEffect.EffectType.Firework, 0.1f, 15, null)
-                );
+                );*/
 
             //AnimationManager.Instance.Animate(AnimationManager.AnimationType.Healing, e.Position);
+
+            (this.Game as IRTGame).DamageManager.Queue(new Damage(1000, e.Position, Damage.DamageType.Harmful, 0.1f, 10)); 
         }
 
         #endregion

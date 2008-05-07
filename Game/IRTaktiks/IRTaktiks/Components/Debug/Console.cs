@@ -34,8 +34,6 @@ namespace IRTaktiks.Components.Debug
         
         #endregion
 
-        
-
         #region Constructor
 
         /// <summary>
