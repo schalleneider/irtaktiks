@@ -120,6 +120,7 @@ namespace IRTaktiks.Components.Screen
 
             // Updates all the 3d effects.
             game.ParticleManager.Update(gameTime);
+            game.DamageManager.Update(gameTime);
             
             base.Update(gameTime);
 		}
@@ -154,6 +155,7 @@ namespace IRTaktiks.Components.Screen
             
             // Draw all the 3d effects.
             game.ParticleManager.Draw();
+            game.DamageManager.Draw();
 
             base.Draw(gameTime);
         }
