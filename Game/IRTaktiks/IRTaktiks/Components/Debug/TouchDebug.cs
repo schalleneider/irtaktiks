@@ -77,7 +77,7 @@ namespace IRTaktiks.Components.Debug
         private void Touch_CursorDown(object sender, CursorDownArgs e)
         {
             (this.Game as IRTGame).ParticleManager.Queue(
-                new ParticleEffect(e.Position, 50, ParticleEffect.EffectType.Ring, 0.1f, 5, null)
+                new ParticleEffect(e.Position, 500, ParticleEffect.EffectType.Firework, 0.1f, 15, null)
                 );
 
             //AnimationManager.Instance.Animate(AnimationManager.AnimationType.Healing, e.Position);
