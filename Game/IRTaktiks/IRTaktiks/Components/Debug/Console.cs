@@ -34,6 +34,8 @@ namespace IRTaktiks.Components.Debug
         
         #endregion
 
+        
+
         #region Constructor
 
         /// <summary>
@@ -78,7 +80,7 @@ namespace IRTaktiks.Components.Debug
                 Vector2 textSize = FontManager.Instance.Debug.MeasureString(this.Text);
                 Vector2 textPosition = new Vector2(IRTGame.Width / 2 - textSize.X / 2, IRTGame.Height - textSize.Y);
 
-                (this.Game as IRTGame).SpriteManager.DrawString(FontManager.Instance.Debug, this.Text, textPosition, Color.Yellow, 100);
+                (this.Game as IRTGame).SpriteManager.DrawString(FontManager.Instance.Debug, this.Text, textPosition, Color.Black, 100);
             }
 
             base.Draw(gameTime);
