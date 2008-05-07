@@ -68,6 +68,7 @@
     <Compile Include="Components\Debug\FPS.cs" />
     <Compile Include="Components\Manager\AreaManager.cs" />
     <Compile Include="Components\Manager\AnimationManager.cs" />
+    <Compile Include="Components\Manager\DamageManager.cs" />
     <Compile Include="Components\Manager\ParticleManager.cs" />
     <Compile Include="Components\Manager\MagicManager.cs" />
     <Compile Include="Components\Manager\ActionManager.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Components\Scenario\Area.cs" />
     <Compile Include="Components\Scenario\Camera.cs" />
     <Compile Include="Components\Menu\PlayerMenu.cs" />
+    <Compile Include="Components\Scenario\Damage.cs" />
     <Compile Include="Components\Scenario\Drawable.cs" />
     <Compile Include="Components\Scenario\ParticleEffect.cs" />
     <Compile Include="Components\Scenario\Text.cs" />

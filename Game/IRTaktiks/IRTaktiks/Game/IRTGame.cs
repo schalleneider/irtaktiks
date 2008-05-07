@@ -42,7 +42,7 @@ namespace IRTaktiks
         /// <summary>
         /// Indicates if the game will be started at fullscreen mode.
         /// </summary>
-        public const bool IsFullScreen = false;
+        public const bool IsFullScreen = true;
 
         #endregion
 
@@ -203,6 +203,19 @@ namespace IRTaktiks
             get { return ParticleManagerField; }
         }
 
+        /// <summary>
+        /// Manager of damages.
+        /// </summary>
+        private DamageManager DamageManagerField;
+
+        /// <summary>
+        /// Manager of damages.
+        /// </summary>
+        public DamageManager DamageManager
+        {
+            get { return DamageManagerField; }
+        }
+
         #endregion
 
         #region Screens
@@ -312,6 +325,7 @@ namespace IRTaktiks
             this.SpriteManagerField = new SpriteManager(this);
             this.AreaManagerField = new AreaManager(this.GraphicsDevice, this.Camera);
             this.ParticleManagerField = new ParticleManager(new Vector3(0, 0, -100), this.GraphicsDevice, this.Camera);
+            this.DamageManagerField = new DamageManager(this);
             AnimationManager.Instance.Initialize(this);
 
 			// Screen construction.
