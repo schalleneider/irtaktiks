@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Playable;
+using IRTaktiks.Components.Scenario;
 
 namespace IRTaktiks.Components.Manager
 {
@@ -79,15 +80,25 @@ namespace IRTaktiks.Components.Manager
         /// <param name="target">The unit targeted by the magic.</param>
         public void Heal(Unit caster, Unit target)
         {
+            // Obtain the game instance.
+            IRTGame game = caster.Game as IRTGame;
+
             // Effects on caster.
             caster.Mana -= MagicManager.HealCost;            
             caster.Time = 0;
 
+            // Show the mp cost.
+            game.DamageManager.Queue(new Damage(MagicManager.HealCost, "mp", caster.Position, Damage.DamageType.Harmful, 0.1f, 10f));
+
             // Effects on target.
             if (target != null)
             {
+                // Heal the target
                 double heal = MagicManager.HealBase * 2.95 * caster.Attributes.CalculateMagicAttackFactor() * 0.1;
                 target.Life += (int)heal;
+
+                // Show the hp gain.
+                (target.Game as IRTGame).DamageManager.Queue(new Damage((int)heal, null, target.Position, Damage.DamageType.Benefit, 0.1f, 10f));
             }
         }
 

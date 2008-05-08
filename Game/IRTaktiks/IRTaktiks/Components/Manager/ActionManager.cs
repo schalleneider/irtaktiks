@@ -144,13 +144,13 @@ namespace IRTaktiks.Components.Manager
             // Set the top left position for the player one.
             if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
             {
-                this.PositionField = new Vector2(0, 300);
+                this.PositionField = new Vector2(0, 323);
             }
 
             // Set the top left position for the player two
             if (this.Unit.Player.PlayerIndex == PlayerIndex.Two)
             {
-                this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.Item.Width, 300);
+                this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.Item.Width, 323);
             }
 
             // Construct the menu.
@@ -213,8 +213,10 @@ namespace IRTaktiks.Components.Manager
         {
             IRTGame game = this.Game as IRTGame;
 
+            int items = 0;
+
             // Draw the items.
-            for (int index = 0; index < this.Actions.Count; index++)
+            for (int index = 0; index < this.Actions.Count; index++, items++)
             {
                 this.Actions[index].Draw(game.SpriteManager);
 
@@ -222,12 +224,15 @@ namespace IRTaktiks.Components.Manager
                 if (this.Actions[index].Selected)
                 {
                     // Draws all the subitems.
-                    for (int subindex = 0; subindex < this.Actions[index].Commands.Count; subindex++)
+                    for (int subindex = 0; subindex < this.Actions[index].Commands.Count; subindex++, items++)
                     {
                         this.Actions[index].Commands[subindex].Draw(game.SpriteManager);
                     }
                 }
             }
+
+            // Draws the background of menu.
+            game.SpriteManager.Draw(TextureManager.Instance.Sprites.Menu.Background, new Vector2(this.Position.X, 292), new Rectangle(0, 292, TextureManager.Instance.Sprites.Menu.Item.Width, items * TextureManager.Instance.Sprites.Menu.Item.Height + ((int)this.Position.Y) - 292), Color.White, 40);
 
             // Draw the mover.
             this.Mover.Draw(game.SpriteManager, game.AreaManager, gameTime);
