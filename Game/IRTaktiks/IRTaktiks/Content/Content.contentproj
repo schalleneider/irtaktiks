@@ -291,13 +291,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fonts\Franklin20G.png">
-      <Name>Franklin20G</Name>
+    <Compile Include="Fonts\Franklin20R.png">
+      <Name>Franklin20R</Name>
       <Importer>TextureImporter</Importer>
       <Processor>FontTextureProcessor</Processor>
     </Compile>
-    <Compile Include="Fonts\Franklin20R.png">
-      <Name>Franklin20R</Name>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Fonts\Franklin20G.png">
+      <Name>Franklin20G</Name>
       <Importer>TextureImporter</Importer>
       <Processor>FontTextureProcessor</Processor>
     </Compile>

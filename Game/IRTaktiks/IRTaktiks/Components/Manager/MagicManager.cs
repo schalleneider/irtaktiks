@@ -88,7 +88,10 @@ namespace IRTaktiks.Components.Manager
             caster.Time = 0;
 
             // Show the mp cost.
-            game.DamageManager.Queue(new Damage(MagicManager.HealCost, "mp", caster.Position, Damage.DamageType.Harmful, 0.1f, 10f));
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(MagicManager.HealCost, "MP", caster.Position, Damage.DamageType.Harmful, 0.1f, 10f));
+            }
 
             // Effects on target.
             if (target != null)
@@ -98,7 +101,7 @@ namespace IRTaktiks.Components.Manager
                 target.Life += (int)heal;
 
                 // Show the hp gain.
-                (target.Game as IRTGame).DamageManager.Queue(new Damage((int)heal, null, target.Position, Damage.DamageType.Benefit, 0.1f, 10f));
+                game.DamageManager.Queue(new Damage((int)heal, null, target.Position, Damage.DamageType.Benefit, 0.1f, 10f));
             }
         }
 

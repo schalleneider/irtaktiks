@@ -63,8 +63,8 @@ namespace IRTaktiks.Components.Manager
             this.Chilopod18.Spacing = -3.5f;
 			this.Chilopod20.Spacing = -3.5f;
 
-            this.Franklin20G.Spacing = -4.5f;
-            this.Franklin20R.Spacing = -4.5f;
+            this.Franklin20G.Spacing = -3.0f;
+            this.Franklin20R.Spacing = -3.0f;
         }
 
         #endregion

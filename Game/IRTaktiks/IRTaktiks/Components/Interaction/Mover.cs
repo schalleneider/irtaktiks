@@ -233,6 +233,9 @@ namespace IRTaktiks.Components.Menu
                     {
                         this.ReadyToOrient = false;
                         this.Orienting = true;
+                        
+                        // Store the cursor identifier to track the CursorUpdate and CursorUp event.
+                        this.CursorIdentifier = e.Identifier;
                     }
                 }
                 else
@@ -244,12 +247,12 @@ namespace IRTaktiks.Components.Menu
                         if (e.Position.Y < (this.Unit.Position.Y + this.Unit.Texture.Height / 4) && e.Position.Y > this.Unit.Position.Y)
                         {
                             this.Moving = true;
+                            
+                            // Store the cursor identifier to track the CursorUpdate and CursorUp event.
+                            this.CursorIdentifier = e.Identifier;
                         }
                     }
                 }
-
-                // Store the cursor identifier to track the CursorUpdate and CursorUp event.
-                this.CursorIdentifier = e.Identifier;
             }
         }
 
