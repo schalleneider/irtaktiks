@@ -126,6 +126,11 @@ namespace IRTaktiks.Components.Interaction
         /// </summary>
         private Texture2D TextureToDraw;
 
+        /// <summary>
+        /// The cursor identifier to track the CursorUpdate and CursorUp event.
+        /// </summary>
+        private int CursorIdentifier;
+
         #endregion
 
         #region Event
@@ -291,6 +296,9 @@ namespace IRTaktiks.Components.Interaction
                     (e.Position.Y < (this.Position.Y + this.AimAlly.Height / 2) && e.Position.Y > (this.Position.Y - this.AimAlly.Height / 2)))
                 {
                     this.AimingField = true;
+
+                    // Store the cursor identifier to track the CursorUpdate and CursorUp event.
+                    this.CursorIdentifier = e.Identifier;
                 }
             }
         }
@@ -302,41 +310,45 @@ namespace IRTaktiks.Components.Interaction
         /// <param name="e">Data of event.</param>
         private void CursorUpdate_Handler(object sender, CursorUpdateArgs e)
         {
-            // If the aim is enabled and aiming.
-            if (this.Enabled && this.Aiming)
+            // Check the cursor identifier 
+            if (this.CursorIdentifier == e.Identifier)
             {
-                // If the aim is inside the area.
-                if (Vector2.Distance(e.Position, this.Area.Position) < this.Area.Radius - (this.AimAlly.Width / 2))
+                // If the aim is enabled and aiming.
+                if (this.Enabled && this.Aiming)
                 {
-                    // Updates the position of the aim.
-                    this.PositionField = e.Position;
-
-                    // Calculates the angle between the aim and the unit.
-                    Vector2 distance = new Vector2(this.Position.X - this.Area.Position.X, this.Position.Y - this.Area.Position.Y);
-                    double angle = MathHelper.ToDegrees((float)Math.Atan2(distance.X, distance.Y));
-
-                    // Unit looking to down.
-                    if (angle >= -45 && angle <= 45)
+                    // If the aim is inside the area.
+                    if (Vector2.Distance(e.Position, this.Area.Position) < this.Area.Radius - (this.AimAlly.Width / 2))
                     {
-                        this.Unit.Orientation = Orientation.Down;
-                    }
+                        // Updates the position of the aim.
+                        this.PositionField = e.Position;
 
-                    // Unit looking to right.
-                    else if (angle >= 45 && angle <= 135)
-                    {
-                        this.Unit.Orientation = Orientation.Right;
-                    }
+                        // Calculates the angle between the aim and the unit.
+                        Vector2 distance = new Vector2(this.Position.X - this.Area.Position.X, this.Position.Y - this.Area.Position.Y);
+                        double angle = MathHelper.ToDegrees((float)Math.Atan2(distance.X, distance.Y));
 
-                    // Unit looking to left.
-                    else if (angle >= -135 && angle <= -45)
-                    {
-                        this.Unit.Orientation = Orientation.Left;
-                    }
-                    
-                    // Unit looking to up.
-                    else
-                    {
-                        this.Unit.Orientation = Orientation.Up;
+                        // Unit looking to down.
+                        if (angle >= -45 && angle <= 45)
+                        {
+                            this.Unit.Orientation = Orientation.Down;
+                        }
+
+                        // Unit looking to right.
+                        else if (angle >= 45 && angle <= 135)
+                        {
+                            this.Unit.Orientation = Orientation.Right;
+                        }
+
+                        // Unit looking to left.
+                        else if (angle >= -135 && angle <= -45)
+                        {
+                            this.Unit.Orientation = Orientation.Left;
+                        }
+
+                        // Unit looking to up.
+                        else
+                        {
+                            this.Unit.Orientation = Orientation.Up;
+                        }
                     }
                 }
             }
@@ -349,20 +361,24 @@ namespace IRTaktiks.Components.Interaction
         /// <param name="e">Data of event.</param>
         private void CursorUp_Handler(object sender, CursorUpArgs e)
         {
-            // If the aim is enabled and aiming.
-            if (this.Enabled && this.Aiming)
+            // Check the cursor identifier 
+            if (this.CursorIdentifier == e.Identifier)
             {
-                // End the aiming.
-                this.AimingField = false;
-
-                // Dispatch the Aimed event.
-                if (this.Aimed != null)
+                // If the aim is enabled and aiming.
+                if (this.Enabled && this.Aiming)
                 {
-                    this.Aimed(this.Target, e.Position);
-                }
+                    // End the aiming.
+                    this.AimingField = false;
 
-                // Deactivate the aim.
-                this.Deactivate();
+                    // Dispatch the Aimed event.
+                    if (this.Aimed != null)
+                    {
+                        this.Aimed(this.Target, e.Position);
+                    }
+
+                    // Deactivate the aim.
+                    this.Deactivate();
+                }
             }
         }
 

@@ -76,7 +76,9 @@ namespace IRTaktiks.Components.Debug
         /// </summary>
         private void Touch_CursorDown(object sender, CursorDownArgs e)
         {
-            (this.Game as IRTGame).ParticleManager.Queue(
+            IRTGame game = this.Game as IRTGame;
+
+            game.ParticleManager.Queue(
                 new ParticleEffect(e.Position, 25, ParticleEffect.EffectType.Ring, 0.1f, 5, null)
                 );
 
