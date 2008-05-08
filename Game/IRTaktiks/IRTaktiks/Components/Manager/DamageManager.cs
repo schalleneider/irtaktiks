@@ -102,15 +102,9 @@ namespace IRTaktiks.Components.Manager
                 for (int index = 0; index < this.Damages.Count; index++)
 		        {
                     this.SpriteBatch.Begin();
-
-                    this.SpriteBatch.DrawString(FontManager.Instance.Debug, this.Damages[index].Value.ToString(), this.Damages[index].Position, this.Damages[index].Color);
-
+                    this.SpriteBatch.DrawString(this.Damages[index].Font, this.Damages[index].Text.ToString(), this.Damages[index].Position, this.Damages[index].Color);
                     this.SpriteBatch.End();
-
 		        }
-                    
-                
-                
             }
         }
 

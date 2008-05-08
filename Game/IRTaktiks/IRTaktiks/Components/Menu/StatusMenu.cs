@@ -82,19 +82,19 @@ namespace IRTaktiks.Components.Menu
             
             // Set the spritefonts that will be used.
             this.NameSpriteFont = FontManager.Instance.Chilopod16;
-            this.LifeSpriteFont = FontManager.Instance.Chilopod12;
-            this.ManaSpriteFont = FontManager.Instance.Chilopod12;
+            this.LifeSpriteFont = FontManager.Instance.Chilopod14;
+            this.ManaSpriteFont = FontManager.Instance.Chilopod14;
 
 			// Player one informations.
 			if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
 			{
-				this.PositionField = new Vector2(0, 125);
+				this.PositionField = new Vector2(0, 192);
 			}
 
 			// Player two informations.
 			if (this.Unit.Player.PlayerIndex == PlayerIndex.Two)
 			{
-				this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.Background.Width, 125);
+                this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.Background.Width, 192);
 			}
 		}
 
@@ -143,6 +143,9 @@ namespace IRTaktiks.Components.Menu
                 this.UnitTexture = TextureManager.Instance.Sprites.Unit.FullStatusDeading;
             }
 
+            // Draws the background of menu.
+            game.SpriteManager.Draw(TextureManager.Instance.Sprites.Menu.Background, new Vector2(this.Position.X, 158), new Rectangle(0, 158, this.UnitTexture.Width, this.UnitTexture.Height + ((int)this.Position.Y) - 158), Color.White, 40);
+
             // Draws the unit's status background.
             game.SpriteManager.Draw(this.UnitTexture, this.Position, Color.White, 50);
 
@@ -159,8 +162,8 @@ namespace IRTaktiks.Components.Menu
 
             // Calculate the position of the texts.
             Vector2 namePosition = new Vector2(this.Position.X + this.UnitTexture.Width / 2 - nameSize.X / 2, this.Position.Y + 5);
-            Vector2 lifePosition = new Vector2(this.Position.X + this.UnitTexture.Width - lifeSize.X - 5, this.Position.Y + 30);
-            Vector2 manaPosition = new Vector2(this.Position.X + this.UnitTexture.Width - manaSize.X - 5, this.Position.Y + 53);
+            Vector2 lifePosition = new Vector2(this.Position.X + this.UnitTexture.Width - lifeSize.X - 5, this.Position.Y + 28);
+            Vector2 manaPosition = new Vector2(this.Position.X + this.UnitTexture.Width - manaSize.X - 5, this.Position.Y + 51);
 
             // Draws the name of the unit.
             game.SpriteManager.DrawString(this.NameSpriteFont, this.Unit.Name, namePosition, Color.White, 52);

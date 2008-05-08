@@ -67,8 +67,7 @@ namespace IRTaktiks.Components.Debug
 		}
 
 		/// <summary>
-		/// Called when the DrawableGameComponent needs to be drawn. Override this method
-		//  with component-specific drawing code.
+		/// Called when the DrawableGameComponent needs to be drawn. Override this method with component-specific drawing code.
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public override void Draw(GameTime gameTime)
@@ -78,7 +77,7 @@ namespace IRTaktiks.Components.Debug
                 Vector2 textSize = FontManager.Instance.Debug.MeasureString(this.Text);
                 Vector2 textPosition = new Vector2(IRTGame.Width / 2 - textSize.X / 2, IRTGame.Height - textSize.Y);
 
-                (this.Game as IRTGame).SpriteManager.DrawString(FontManager.Instance.Debug, this.Text, textPosition, Color.Black, 100);
+                (this.Game as IRTGame).SpriteManager.DrawString(FontManager.Instance.Debug, this.Text, textPosition, Color.Yellow, 100);
             }
 
             base.Draw(gameTime);

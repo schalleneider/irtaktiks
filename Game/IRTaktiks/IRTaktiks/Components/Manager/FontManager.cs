@@ -53,12 +53,18 @@ namespace IRTaktiks.Components.Manager
             this.Chilopod18Field = game.Content.Load<SpriteFont>("Fonts/Chilopod18");
             this.Chilopod20Field = game.Content.Load<SpriteFont>("Fonts/Chilopod20");
 
+            this.Franklin20GField = game.Content.Load<SpriteFont>("Fonts/Franklin20G");
+            this.Franklin20RField = game.Content.Load<SpriteFont>("Fonts/Franklin20R");
+
             // Set the correct spacing.
             this.Chilopod12.Spacing = -3.5f;
             this.Chilopod14.Spacing = -3.5f;
             this.Chilopod16.Spacing = -3.5f;
             this.Chilopod18.Spacing = -3.5f;
 			this.Chilopod20.Spacing = -3.5f;
+
+            this.Franklin20G.Spacing = -4.5f;
+            this.Franklin20R.Spacing = -4.5f;
         }
 
         #endregion
@@ -130,18 +136,44 @@ namespace IRTaktiks.Components.Manager
             get { return Chilopod18Field; }
         }
 
-		/// <summary>
-		/// The spritefont for the chilopod font type, 20pt of size.
-		/// </summary>
-		private SpriteFont Chilopod20Field;
+        /// <summary>
+        /// The spritefont for the chilopod font type, 20pt of size.
+        /// </summary>
+        private SpriteFont Chilopod20Field;
 
-		/// <summary>
-		/// The spritefont for the chilopod font type, 20pt of size.
-		/// </summary>
-		public SpriteFont Chilopod20
-		{
-			get { return Chilopod20Field; }
-		}
+        /// <summary>
+        /// The spritefont for the chilopod font type, 20pt of size.
+        /// </summary>
+        public SpriteFont Chilopod20
+        {
+            get { return Chilopod20Field; }
+        }
+
+        /// <summary>
+        /// The spritefont for the franklin font type, 20pt of size, green color.
+        /// </summary>
+        private SpriteFont Franklin20GField;
+
+        /// <summary>
+        /// The spritefont for the franklin font type, 20pt of size, green color.
+        /// </summary>
+        public SpriteFont Franklin20G
+        {
+            get { return Franklin20GField; }
+        }
+
+        /// <summary>
+        /// The spritefont for the franklin font type, 20pt of size, red color.
+        /// </summary>
+        private SpriteFont Franklin20RField;
+
+        /// <summary>
+        /// The spritefont for the franklin font type, 20pt of size, red color.
+        /// </summary>
+        public SpriteFont Franklin20R
+        {
+            get { return Franklin20RField; }
+        }
 
         #endregion
     }
