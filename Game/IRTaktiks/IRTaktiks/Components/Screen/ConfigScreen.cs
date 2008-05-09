@@ -49,24 +49,28 @@ namespace IRTaktiks.Components.Screen
             IRTGame game = this.Game as IRTGame;
 
             // Create the players
-            game.PlayerOne = new Player(this.Game, "Willians", PlayerIndex.One);
-            game.PlayerTwo = new Player(this.Game, "Camila", PlayerIndex.Two);
+            game.PlayerOne = new Player(this.Game, "Metatron", PlayerIndex.One);
+            game.PlayerTwo = new Player(this.Game, "Lilith", PlayerIndex.Two);
             
             // Create the units for player one.
-            Unit fighterOne = new Unit(this.Game, game.PlayerOne, new Vector2(500, 400), new Attributes(80, 99, 60, 10, 40), Orientation.Left, TextureManager.Instance.Characters.Knight, "Azn Flames", 11358, 758);
-            Unit wizardOne = new Unit(this.Game, game.PlayerOne, new Vector2(500, 300), new Attributes(1, 1, 1, 99, 99), Orientation.Right, TextureManager.Instance.Characters.Wizard, "Ben Kildan", 1521, 2536);
+            Attributes attributesKnight = new Attributes(99, Job.Knight, Element.Fire, 99, 1, 50, 1, 50);
+            Attributes attributesThief = new Attributes(99, Job.Thief, Element.Wind, 20, 99, 20, 1, 40);
+            Unit knightOne = new Unit(this.Game, game.PlayerOne, new Vector2(500, 400), attributesKnight, Orientation.Left, TextureManager.Instance.Characters.Knight, "Knight");
+            Unit thiefOne = new Unit(this.Game, game.PlayerOne, new Vector2(500, 300), attributesThief, Orientation.Right, TextureManager.Instance.Characters.Wizard, "Thief");
 
             // Create the units for player two.
-            Unit fighterTwo = new Unit(this.Game, game.PlayerTwo, new Vector2(800, 200), new Attributes(80, 99, 60, 10, 40), Orientation.Up, TextureManager.Instance.Characters.Knight, "Spanker", 5012, 612);
-            Unit wizardTwo = new Unit(this.Game, game.PlayerTwo, new Vector2(800, 300), new Attributes(1, 1, 1, 99, 99), Orientation.Down, TextureManager.Instance.Characters.Wizard, "Mr. Light", 1105, 3452);
+            Attributes attributesMonk = new Attributes(99, Job.Monk, Element.Earth, 50, 30, 10, 30, 10);
+            Attributes attributesPriest = new Attributes(99, Job.Priest, Element.Holy, 1, 1, 1, 99, 99);            
+            Unit monkTwo = new Unit(this.Game, game.PlayerTwo, new Vector2(800, 200), attributesMonk, Orientation.Up, TextureManager.Instance.Characters.Knight, "Monk");
+            Unit priestTwo = new Unit(this.Game, game.PlayerTwo, new Vector2(800, 300), attributesPriest, Orientation.Down, TextureManager.Instance.Characters.Wizard, "Priest");
 
             // Add the units for player one.
-            game.PlayerOne.Units.Add(fighterOne);
-            game.PlayerOne.Units.Add(wizardOne);
+            game.PlayerOne.Units.Add(knightOne);
+            game.PlayerOne.Units.Add(thiefOne);
 
             // Add the units for player two.
-            game.PlayerTwo.Units.Add(fighterTwo);
-            game.PlayerTwo.Units.Add(wizardTwo);
+            game.PlayerTwo.Units.Add(monkTwo);
+            game.PlayerTwo.Units.Add(priestTwo);
 
             // Input Event registration.
             InputManager.Instance.CursorUp += new EventHandler<CursorUpArgs>(CursorUp_Handler);

@@ -66,6 +66,8 @@
     <Compile Include="Components\Interaction\Aim.cs" />
     <Compile Include="Components\Interaction\Mover.cs" />
     <Compile Include="Components\Debug\FPS.cs" />
+    <Compile Include="Components\Logic\Element.cs" />
+    <Compile Include="Components\Logic\Job.cs" />
     <Compile Include="Components\Manager\AreaManager.cs" />
     <Compile Include="Components\Manager\AnimationManager.cs" />
     <Compile Include="Components\Manager\DamageManager.cs" />

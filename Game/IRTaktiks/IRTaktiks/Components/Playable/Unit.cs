@@ -35,9 +35,9 @@ namespace IRTaktiks.Components.Playable
             get { return LifeField; }
             set
             {
-                if (value >= this.FullLife)
+                if (value >= this.Attributes.MaximumLife)
                 {
-                    LifeField = this.FullLife;
+                    LifeField = this.Attributes.MaximumLife;
                 }
                 else if (value <= 0)
                 {
@@ -64,9 +64,9 @@ namespace IRTaktiks.Components.Playable
             get { return ManaField; }
             set
             {
-                if (value >= this.FullMana)
+                if (value >= this.Attributes.MaximumMana)
                 {
-                    ManaField = this.FullMana;
+                    ManaField = this.Attributes.MaximumMana;
                 }
                 else if (value <= 0)
                 {
@@ -148,7 +148,7 @@ namespace IRTaktiks.Components.Playable
         /// </summary>
         public bool IsStatusAlive
         {
-            get { return ((float)this.Life / (float)this.FullLife) > 0.5; }
+            get { return ((float)this.Life / (float)this.Attributes.MaximumLife) > 0.5; }
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace IRTaktiks.Components.Playable
         /// </summary>
         public bool IsStatusDamaged
         {
-            get { return (((float)this.Life / (float)this.FullLife) <= 0.5 && (((float)this.Life / (float)this.FullLife) >= 0.1)); }
+            get { return (((float)this.Life / (float)this.Attributes.MaximumLife) <= 0.5 && (((float)this.Life / (float)this.Attributes.MaximumLife) >= 0.1)); }
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace IRTaktiks.Components.Playable
         /// </summary>
         public bool IsStatusDeading
         {
-            get { return ((float)this.Life / (float)this.FullLife) < 0.1; }
+            get { return ((float)this.Life / (float)this.Attributes.MaximumLife) < 0.1; }
         }
 
         /// <summary>
@@ -216,32 +216,6 @@ namespace IRTaktiks.Components.Playable
         public StatusMenu StatusMenu
         {
             get { return StatusMenuField; }
-        }
-
-        /// <summary>
-        /// The total life points of the unit.
-        /// </summary>
-        private int FullLifeField;
-
-        /// <summary>
-        /// The total life points of the unit.
-        /// </summary>
-        public int FullLife
-        {
-            get { return FullLifeField; }
-        }
-
-        /// <summary>
-        /// The total mana points of the unit.
-        /// </summary>
-        private int FullManaField;
-
-        /// <summary>
-        /// The total mana points of the unit.
-        /// </summary>
-        public int FullMana
-        {
-            get { return FullManaField; }
         }
 
         /// <summary>
@@ -333,9 +307,7 @@ namespace IRTaktiks.Components.Playable
         /// <param name="orientation">The orientation of the unit.</param>
         /// <param name="texture">The texture of the unit.</param>
         /// <param name="name">The name of unit.</param>
-        /// <param name="life">The total life points.</param>
-        /// <param name="mana">The total mana points.</param>
-        public Unit(Game game, Player player, Vector2 position, Attributes attributes, Orientation orientation, Texture2D texture, String name, int life, int mana)
+        public Unit(Game game, Player player, Vector2 position, Attributes attributes, Orientation orientation, Texture2D texture, String name)
             : base(game)
         {
             this.PositionField = position;
@@ -345,11 +317,8 @@ namespace IRTaktiks.Components.Playable
             this.PlayerField = player;
             this.NameField = name;
 
-            this.LifeField = life;
-            this.FullLifeField = life;
-
-            this.ManaField = mana;
-            this.FullManaField = mana;
+            this.LifeField = this.Attributes.MaximumLife;
+            this.ManaField = this.Attributes.MaximumMana;
 
             this.TimeField = 0;
 
@@ -421,8 +390,8 @@ namespace IRTaktiks.Components.Playable
             Vector2 timePosition = new Vector2(statusPosition.X + 1, statusPosition.Y + 3 + (2 * barMaxHeight));
 
             // Calculates the area of the life, mana and time bars, based in unit's values.
-            Rectangle lifeBar = new Rectangle((int)lifePosition.X, (int)lifePosition.Y, (int)((barMaxWidth * this.Life) / this.FullLife), barMaxHeight);
-            Rectangle manaBar = new Rectangle((int)manaPosition.X, (int)manaPosition.Y, (int)((barMaxWidth * this.Mana) / this.FullMana), barMaxHeight);
+            Rectangle lifeBar = new Rectangle((int)lifePosition.X, (int)lifePosition.Y, (int)((barMaxWidth * this.Life) / this.Attributes.MaximumLife), barMaxHeight);
+            Rectangle manaBar = new Rectangle((int)manaPosition.X, (int)manaPosition.Y, (int)((barMaxWidth * this.Mana) / this.Attributes.MaximumMana), barMaxHeight);
             Rectangle timeBar = new Rectangle((int)timePosition.X, (int)timePosition.Y, (int)(barMaxWidth * this.Time), barMaxHeight);
 
             // Draws the life, mana and time bars.
