@@ -574,7 +574,7 @@ namespace IRTaktiks.Components.Manager
         private void HealMagic_Aimed(Unit target, Vector2 position)
         {
             Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
-            AnimationManager.Instance.Animate(AnimationManager.AnimationType.Healing, animationPosition); 
+            AnimationManager.Instance.Animate(AnimationManager.AnimationType.Heal, animationPosition); 
             
             MagicManager.Instance.Heal(this.Unit, target);
             

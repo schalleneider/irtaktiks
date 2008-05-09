@@ -48,32 +48,37 @@ namespace IRTaktiks.Components.Manager
         public enum AnimationType
         {
             /// <summary>
-            /// The basic animation for attacks.
+            /// The animation for short attacks.
             /// </summary>
-            Attack,
+            ShortAttack,
 
             /// <summary>
-            /// The animation for healings magics
+            /// The animation for long attacks.
             /// </summary>
-            Healing,
+            LongAttack,
+
+            /// <summary>
+            /// The animation for heal magic
+            /// </summary>
+            Heal,
             
             /// <summary>
-            /// The animation for fire magics.
+            /// The animation for fire magic.
             /// </summary>
             Fire,
 
             /// <summary>
-            /// The animation for ice magics.
+            /// The animation for ice magic.
             /// </summary>
             Ice,
 
             /// <summary>
-            /// The animation for thunder magics.
+            /// The animation for thunder magic.
             /// </summary>
             Thunder,
 
             /// <summary>
-            /// The basic animation for item usage.
+            /// The animation for item usage.
             /// </summary>
             Item,
         }
@@ -132,12 +137,16 @@ namespace IRTaktiks.Components.Manager
 
             switch (type)
             {
-                case AnimationType.Attack:
+                case AnimationType.ShortAttack:
+                    this.ShortAttack(position);
+                    break;
+
+                case AnimationType.LongAttack:
 
                     break;
 
-                case AnimationType.Healing:
-                    this.Healing(position);
+                case AnimationType.Heal:
+                    this.Heal(position);
                     break;
 
                 case AnimationType.Fire:
@@ -163,32 +172,57 @@ namespace IRTaktiks.Components.Manager
         #region Animations
 
         /// <summary>
-        /// Animation of healing magics.
+        /// Animation of short attack.
         /// </summary>
         /// <param name="position">The target position.</param>
-        private void Healing(Vector2 position)
+        private void ShortAttack(Vector2 position)
+        {
+            Vector2 firstPosition = new Vector2(position.X - 5, position.Y + 10);
+            ParticleManager.Queue(new ParticleEffect(firstPosition, 100, ParticleEffect.EffectType.Flash45, 0.1f, 3f, Color.Orchid));
+
+            Thread.Sleep(200);
+
+            Vector2 secondPosition = new Vector2(position.X + 5, position.Y - 10);
+            ParticleManager.Queue(new ParticleEffect(secondPosition, 100, ParticleEffect.EffectType.Flash135, 0.1f, 3f, Color.Aquamarine));
+
+            Thread.Sleep(200);
+
+            Vector2 thirdPosition = new Vector2(position.X - 5, position.Y - 10);
+            ParticleManager.Queue(new ParticleEffect(thirdPosition, 100, ParticleEffect.EffectType.Flash45, 0.1f, 3f, Color.Orchid));
+
+            Thread.Sleep(200);
+
+            Vector2 fourthPosition = new Vector2(position.X + 5, position.Y + 10);
+            ParticleManager.Queue(new ParticleEffect(fourthPosition, 100, ParticleEffect.EffectType.Flash135, 0.1f, 3f, Color.Aquamarine));
+        }
+
+        /// <summary>
+        /// Animation of heal magic.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Heal(Vector2 position)
         {
             Vector2 firstPosition = new Vector2(position.X - 10, position.Y + 10);
-            ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.SkyBlue));
-            ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.SkyBlue));
-            ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.SkyBlue));
-            ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.SkyBlue));
+            ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.ForestGreen));
+            ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.ForestGreen));
+            ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.ForestGreen));
+            ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.ForestGreen));
 
             Thread.Sleep(200);
             
             Vector2 secondPosition = new Vector2(position.X + 10, position.Y - 10);
-            ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.LightGreen));
-            ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.LightGreen));
-            ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.LightGreen));
-            ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.LightGreen));
+            ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.Crimson));
+            ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.Crimson));
+            ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.Crimson));
+            ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.Crimson));
 
             Thread.Sleep(200);
             
             Vector2 thirdPosition = new Vector2(position.X + 10, position.Y + 10);
-            ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.Goldenrod));
-            ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.Goldenrod));
-            ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.Goldenrod));
-            ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.Goldenrod));
+            ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.Chocolate));
+            ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.Chocolate));
+            ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.Chocolate));
+            ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.Chocolate));
         }
         
         #endregion

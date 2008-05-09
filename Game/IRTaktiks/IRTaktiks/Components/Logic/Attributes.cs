@@ -9,83 +9,108 @@ namespace IRTaktiks.Components.Logic
     /// </summary>
     public class Attributes
     {
-        #region Constants
-
-        /// <summary>
-        /// The minimum value for an attribute.
-        /// </summary>
-        public const int Minimum = 1;
-
-        /// <summary>
-        /// The maximum value for an attribute.
-        /// </summary>
-        public const int Maximum = 99;
-
-        #endregion
-
         #region Basic Attributes
 
         /// <summary>
-        /// The strength of the unit. Influences the attack power.
+        /// The level of the unit.
         /// </summary>
-        private int StrengthField;
+        private float LevelField;
 
         /// <summary>
-        /// The strength of the unit. Influences the attack power.
+        /// The level of the unit.
         /// </summary>
-        public int Strength
+        public float Level
+        {
+            get { return LevelField; }
+        }
+
+        /// <summary>
+        /// The job of the unit.
+        /// </summary>
+        private Job JobField;
+
+        /// <summary>
+        /// The job of the unit.
+        /// </summary>
+        public Job Job
+        {
+            get { return JobField; }
+        }
+
+        /// <summary>
+        /// The element of the unit.
+        /// </summary>
+        private Element ElementField;
+
+        /// <summary>
+        /// The element of the unit.
+        /// </summary>
+        public Element Element
+        {
+            get { return ElementField; }
+        }
+
+        /// <summary>
+        /// The strength of the unit.
+        /// </summary>
+        private float StrengthField;
+
+        /// <summary>
+        /// The strength of the unit.
+        /// </summary>
+        public float Strength
         {
             get { return StrengthField; }
         }
 
         /// <summary>
-        /// The agility of the unit. Influences the time.
+        /// The agility of the unit.
         /// </summary>
-        private int AgilityField;
+        private float AgilityField;
 
         /// <summary>
-        /// The agility of the unit. Influences the time.
+        /// The agility of the unit.
         /// </summary>
-        public int Agility
+        public float Agility
         {
             get { return AgilityField; }
         }
 
         /// <summary>
-        /// The vitality of the unit. Influences the deffense.
+        /// The vitality of the unit.
         /// </summary>
-        private int VitalityField;
-        
+        private float VitalityField;
+
         /// <summary>
-        /// The vitality of the unit. Influences the deffense.
+        /// The vitality of the unit.
         /// </summary>
-        public int Vitality
+        public float Vitality
         {
             get { return VitalityField; }
         }
 
         /// <summary>
-        /// The magic of the unit. Influences the magic attack and deffense.
+        /// The magic of the unit.
         /// </summary>
-        private int MagicField;
+        private float InteligenceField;
 
         /// <summary>
-        /// The magic of the unit. Influences the magic attack and deffense.
+        /// The magic of the unit.
         /// </summary>
-        public int Magic
+        public float Inteligence
         {
-            get { return MagicField; }
+            get { return InteligenceField; }
         }
 
         /// <summary>
-        /// The dexteriry of unit. Influences the range of attacks.
+        /// The dexteriry of unit.
         /// </summary>
-        private int DexterityField;
+        private float DexterityField;
 
         /// <summary>
-        /// The dexteriry of unit. Influences the range of attacks.
+        /// The dexteriry of unit.
         /// </summary>
-        public int Dexterity
+        public float Dexterity
         {
             get { return DexterityField; }
         }
@@ -94,28 +119,120 @@ namespace IRTaktiks.Components.Logic
 
         #region Calculated Attributes
 
-        /*
+        /// <summary>
+        /// The maximum life value of the unit.
+        /// (1 + (VIT / 80)) * (20 + (5 * LVL) + (@ * ((1 + LVL) * (LVL / 2.5)))))
+        /// </summary>
+        public int MaximumLife
+        {
+            get
+            {
+                float jobHP = 0.85f;
+                return Convert.ToInt32((1 + (this.Vitality / 80)) * (20 + (5 * this.Level) + (jobHP * ((1 + this.Level) * (this.Level / 2.5)))));
+            }
+        }
+
+        /// <summary>
+        /// The maximum mana value of the unit.
+        /// (1 + (INT / 50)) * (5 + (@ * LVL * 10)))
+        /// </summary>
+        public int MaximumMana
+        {
+            get
+            {
+                float jobMP = 0.70f;
+                return Convert.ToInt32((1 + (this.Inteligence / 50)) * (5 + (jobMP * this.Level * 10))); ;
+            }
+        }
+
+        /// <summary>
+        /// The attack value of the unit.
+        /// </summary>
         public int Attack
         {
-            get { }
+            get
+            {
+                return 0;
+            }
         }
 
+        /// <summary>
+        /// The defense value of the unit.
+        /// </summary>
         public int Defense
         {
-            get { }
+            get
+            {
+                return 0;
+            }
         }
 
+        /// <summary>
+        /// The magic attack value of the unit.
+        /// </summary>
         public int MagicAttack
         {
-            get { }
+            get
+            {
+                return 0;
+            }
         }
 
+        /// <summary>
+        /// The magic defense value of the unit.
+        /// </summary>
         public int MagicDefense
         {
-            get { }
+            get
+            {
+                return 0;
+            }
         }
-        */
-        
+
+        /// <summary>
+        /// The flee value of the unit.
+        /// </summary>
+        public int Flee
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// The hit value of the unit.
+        /// </summary>
+        public int Hit
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// The range value of the unit.
+        /// </summary>
+        public int Range
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// The delay value of the unit.
+        /// </summary>
+        public int Delay
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -123,17 +240,24 @@ namespace IRTaktiks.Components.Logic
         /// <summary>
         /// Constructor of class.
         /// </summary>
+        /// <param name="level">The level of the unit.</param>
+        /// <param name="job">The job of the unit.</param>
+        /// <param name="element">The element of the unit.</param>
         /// <param name="strength">The strenght value.</param>
         /// <param name="agility">The agility value.</param>
         /// <param name="vitality">The vitality value.</param>
         /// <param name="magic">The magic value.</param>
         /// <param name="dexterity">The dexterity value.</param>
-        public Attributes(int strength, int agility, int vitality, int magic, int dexterity)
+        public Attributes(int level, Job job, Element element, int strength, int agility, int vitality, int magic, int dexterity)
         {
+            this.LevelField = level;
+            this.JobField = job;
+            this.ElementField = element;
+
             this.StrengthField = strength;
             this.AgilityField = agility;
             this.VitalityField = vitality;
-            this.MagicField = magic;
+            this.InteligenceField = magic;
             this.DexterityField = dexterity;
         }
 
@@ -150,7 +274,7 @@ namespace IRTaktiks.Components.Logic
         /// <returns>The area.</returns>
         public double CalculateMagicArea()
         {
-            return 100 + 1.5 * (double)this.Dexterity + 1.0 * (double)this.Magic;
+            return 100 + 1.5 * (double)this.Dexterity + 1.0 * (double)this.Inteligence;
         }
 
         #endregion
@@ -164,7 +288,7 @@ namespace IRTaktiks.Components.Logic
         /// <returns>The time factor.</returns>
         public double CalculateTimeFactor()
         {
-            return 0.001 + 0.001 * ((double)this.Agility / (double)Attributes.Maximum);
+            return 0.001 + 0.001 * ((double)this.Agility / 99);
         }
 
         /// <summary>
@@ -173,7 +297,7 @@ namespace IRTaktiks.Components.Logic
         /// <returns>The magic attack factor.</returns>
         public double CalculateMagicAttackFactor()
         {
-            return 3.25 * (double)this.Magic;
+            return 3.25 * (double)this.Inteligence;
         }
 
         /// <summary>
@@ -182,7 +306,7 @@ namespace IRTaktiks.Components.Logic
         /// <returns>The magic defense factor.</returns>
         public double CalculateMagicDefenseFactor()
         {
-            return 3.05 * (double)this.Magic;
+            return 3.05 * (double)this.Inteligence;
         }
 
         #endregion

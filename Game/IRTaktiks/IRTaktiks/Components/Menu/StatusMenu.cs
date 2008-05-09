@@ -150,10 +150,10 @@ namespace IRTaktiks.Components.Menu
             game.SpriteManager.Draw(this.UnitTexture, this.Position, Color.White, 50);
 
             // Get the unit's life points text.
-            string lifeInformation = String.Format("{0}/{1}", this.Unit.Life, this.Unit.FullLife);
+            string lifeInformation = String.Format("{0}/{1}", this.Unit.Life, this.Unit.Attributes.MaximumLife);
             
             // Get the unit's mana points text.
-            string manaInformation = String.Format("{0}/{1}", this.Unit.Mana, this.Unit.FullMana);
+            string manaInformation = String.Format("{0}/{1}", this.Unit.Mana, this.Unit.Attributes.MaximumMana);
 
             // Measure the texts size.
             Vector2 nameSize = this.NameSpriteFont.MeasureString(this.Unit.Name);
@@ -184,8 +184,8 @@ namespace IRTaktiks.Components.Menu
             Vector2 timeBarPosition = new Vector2(this.Position.X + 7, this.Position.Y + 91);
 
             // Calculates the area of the life, mana and time bars, based in unit's values.
-            Rectangle lifeBar = new Rectangle((int)lifeBarPosition.X, (int)lifeBarPosition.Y, (int)((barMaxWidth * this.Unit.Life) / this.Unit.FullLife), barMaxHeight);
-            Rectangle manaBar = new Rectangle((int)manaBarPosition.X, (int)manaBarPosition.Y, (int)((barMaxWidth * this.Unit.Mana) / this.Unit.FullMana), barMaxHeight);
+            Rectangle lifeBar = new Rectangle((int)lifeBarPosition.X, (int)lifeBarPosition.Y, (int)((barMaxWidth * this.Unit.Life) / this.Unit.Attributes.MaximumLife), barMaxHeight);
+            Rectangle manaBar = new Rectangle((int)manaBarPosition.X, (int)manaBarPosition.Y, (int)((barMaxWidth * this.Unit.Mana) / this.Unit.Attributes.MaximumMana), barMaxHeight);
             Rectangle timeBar = new Rectangle((int)timeBarPosition.X, (int)timeBarPosition.Y, (int)(barMaxWidth * this.Unit.Time), barMaxHeight);
 
             // Draws the life, mana and time bars.
