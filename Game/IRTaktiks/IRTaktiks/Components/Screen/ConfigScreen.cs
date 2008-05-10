@@ -65,11 +65,11 @@ namespace IRTaktiks.Components.Screen
             Unit priestTwo = new Unit(this.Game, game.PlayerTwo, new Vector2(800, 300), attributesPriest, Orientation.Down, TextureManager.Instance.Characters.Wizard, "Priest");
 
             // Add the units for player one.
-            game.PlayerOne.Units.Add(knightOne);
-            game.PlayerOne.Units.Add(thiefOne);
+            //game.PlayerOne.Units.Add(knightOne);
+            //game.PlayerOne.Units.Add(thiefOne);
 
             // Add the units for player two.
-            game.PlayerTwo.Units.Add(monkTwo);
+            //game.PlayerTwo.Units.Add(monkTwo);
             game.PlayerTwo.Units.Add(priestTwo);
 
             // Input Event registration.

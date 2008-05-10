@@ -37,21 +37,22 @@ namespace IRTaktiks.Components.Action
         /// </summary>
         public bool Enabled
         {
-            get { return this.ItemEnabled(this.Unit, this.Quantity); }
+            get { return this.Quantity > 0; }
         }
-                
+
         #endregion
 
         #region Constructor
-
+        
         /// <summary>
         /// Constructor of class.
         /// </summary>
         /// <param name="unit">The owner of the item.</param>
         /// <param name="name">The name of the item.</param>
-        /// <param name="quantity">The quantity of items.</param>
-        public Item(Unit unit, string name, int quantity)
-            : base(unit, name)
+        /// <param name="quantity">The quantity of items that the unit have.</param>
+        /// <param name="commandExecute">Method that will be invoked when the item is used.</param>
+        public Item(Unit unit, string name, int quantity, CommandExecuteDelegate commandExecute)
+            : base(unit, name, commandExecute)
         {
             this.QuantityField = quantity;
         }
@@ -61,12 +62,13 @@ namespace IRTaktiks.Components.Action
         #region Methods
 
         /// <summary>
-        /// Use the item.
+        /// Execute the skill.
         /// </summary>
-        /// <param name="target">The target of the item.</param>
-        public void Use(Unit target)
+        /// <param name="target">The target of the skill.</param>
+        public override void Execute(Unit target)
         {
-            this.ItemUse(this.Unit, target);
+            this.QuantityField--;
+            base.Execute(target);
         }
 
         #endregion
