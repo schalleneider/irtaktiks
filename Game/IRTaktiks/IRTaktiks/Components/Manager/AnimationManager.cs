@@ -114,21 +114,21 @@ namespace IRTaktiks.Components.Manager
         /// </summary>
         /// <param name="type">Type of animation.</param>
         /// <param name="position">The central position of the animation.</param>
-        public void Animate(AnimationType type, Vector2 position)
+        public void QueueAnimation(AnimationType type, Vector2 position)
         {
             object[] parameters = new object[2];
 
             parameters[0] = type;
             parameters[1] = position;
 
-            ThreadPool.QueueUserWorkItem(DoAnimation, parameters);
+            ThreadPool.QueueUserWorkItem(Animate, parameters);
         }
 
         /// <summary>
         /// Do some animation.
         /// </summary>
-        /// <param name="data">Animation data.</param>
-        private void DoAnimation(object data)
+        /// <param name="data">Data tranferred across the threads.</param>
+        private void Animate(object data)
         {
             object[] parameters = data as object[];
 

@@ -14,14 +14,6 @@ using IRTaktiks.Components.Manager;
 namespace IRTaktiks.Components.Action
 {
     /// <summary>
-    /// Delegate to check if the unit can use the command.
-    /// </summary>
-    /// <param name="unit">The command.</param>
-    /// <param name="cost">The unit.</param>
-    /// <returns>True, if the unit can use the command, false otherwise.</returns>
-    public delegate bool CommandEnabledDelegate(Command command, Unit unit);
-
-    /// <summary>
     /// Delegate to execute the command.
     /// </summary>
     /// <param name="command">The command.</param>
@@ -35,11 +27,6 @@ namespace IRTaktiks.Components.Action
     public class Command
     {
         #region Delegates
-
-        /// <summary>
-        /// Delegate to check if the unit can use the item.
-        /// </summary>
-        public CommandEnabledDelegate CommandEnabled;
 
         /// <summary>
         /// Delegate to execute the item.
@@ -75,27 +62,6 @@ namespace IRTaktiks.Components.Action
         {
             get { return UnitField; }
         }
-
-        /// <summary>
-        /// The type of the animation that the skill will display.
-        /// </summary>
-        private AnimationManager.AnimationType AnimationTypeField;
-
-        /// <summary>
-        /// The type of the animation that the skill will display.
-        /// </summary>
-        public AnimationManager.AnimationType AnimationType
-        {
-            get { return AnimationTypeField; }
-        }
-
-        /// <summary>
-        /// Check if the command can be used.
-        /// </summary>
-        public bool Enabled
-        {
-            get { return this.CommandEnabled(this, this.Unit); }
-        }
       
         #endregion
 
@@ -106,12 +72,13 @@ namespace IRTaktiks.Components.Action
         /// </summary>
         /// <param name="unit">The owner of the command.</param>
         /// <param name="name">The name of the command.</param>
-        /// <param name="animationType">The type of the animation that the skill will display.</param>
-        public Command(Unit unit, string name, AnimationManager.AnimationType animationType)
+        /// <param name="commandExecute">Method that will be invoked when the command executes.</param>
+        public Command(Unit unit, string name, CommandExecuteDelegate commandExecute)
         {
-            this.UnitField = unit;
             this.NameField = name;
-            this.AnimationTypeField = animationType;
+            this.UnitField = unit;
+
+            this.CommandExecute = commandExecute;
         }
 
         #endregion
@@ -122,9 +89,9 @@ namespace IRTaktiks.Components.Action
         /// Execute the command.
         /// </summary>
         /// <param name="target">The target of the command.</param>
-        public void Execute(Unit target)
+        public virtual void Execute(Unit target)
         {
-            this.SkillCast(this.Unit, target);
+            this.CommandExecute(this, this.Unit, target);
         }
 
         #endregion

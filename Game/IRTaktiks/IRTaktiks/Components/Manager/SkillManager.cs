@@ -57,11 +57,6 @@ namespace IRTaktiks.Components.Manager
             {
                 case Job.Assasin:
                     {
-                        Skill doubleCut = new Skill(unit, "Double Cut",50);
-
-
-
-
                         return skills;
                     }
 
@@ -82,10 +77,19 @@ namespace IRTaktiks.Components.Manager
 
                 case Job.Priest:
                     {
+                        skills.Add(new Skill(unit, "Heal", 95, Skill.SkillType.Heal, QueueCast));
+                        skills.Add(new Skill(unit, "Barrier", 70, Skill.SkillType.Barrier, QueueCast));
+                        skills.Add(new Skill(unit, "Holy", 182, Skill.SkillType.Holy, QueueCast)); 
+                        
                         return skills;
                     }
 
                 case Job.Wizard:
+                    {
+                        return skills;
+                    }
+
+                default:
                     {
                         return skills;
                     }
@@ -94,49 +98,33 @@ namespace IRTaktiks.Components.Manager
 
         #endregion
 
-        #region Check
+        #region Queue
 
         /// <summary>
-        /// Check if the unit can use the skill.
+        /// Queue the cast of the skill.
         /// </summary>
-        /// <param name="unit">The unit.</param>
-        /// <param name="cost">The cost of the skill.</param>
-        /// <returns>True if the unit can use the skill. False otherwise.</returns>
-        private bool CanUse(Skill skill, Unit unit)
+        /// <param name="command">Skill that will be casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        private void QueueCast(Command command, Unit caster, Unit target)
         {
-            return unit.Mana >= cost;
+            Skill skill = command as Skill;
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="data">Data tranferred across the threads.</param>
+        private void Cast(object data)
+        {
+
         }
 
         #endregion
 
-        #region Cast
+        #region Casts
 
-        private bool Cast(Skill skill, Unit caster, Unit target)
-        {
-            // Obtain the game instance.
-            IRTGame game = caster.Game as IRTGame;
 
-            // Effects on caster.
-            caster.Mana -= MagicManager.HealCost;
-            caster.Time = 0;
-
-            // Show the mp cost.
-            if (caster != target)
-            {
-                game.DamageManager.Queue(new Damage(MagicManager.HealCost, "MP", caster.Position, Damage.DamageType.Harmful, 0.1f, 10f));
-            }
-
-            // Effects on target.
-            if (target != null)
-            {
-                // Heal the target
-                double heal = MagicManager.HealBase * 2.95 * caster.Attributes.CalculateMagicAttackFactor() * 0.1;
-                target.Life += (int)heal;
-
-                // Show the hp gain.
-                game.DamageManager.Queue(new Damage((int)heal, null, target.Position, Damage.DamageType.Benefit, 0.1f, 10f));
-            }
-        }
 
         #endregion
     }
