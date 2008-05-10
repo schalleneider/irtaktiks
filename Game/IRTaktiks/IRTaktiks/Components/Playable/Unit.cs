@@ -12,6 +12,7 @@ using IRTaktiks.Components.Menu;
 using IRTaktiks.Components.Manager;
 using IRTaktiks.Input;
 using IRTaktiks.Input.EventArgs;
+using IRTaktiks.Components.Action;
 
 namespace IRTaktiks.Components.Playable
 {
@@ -232,6 +233,32 @@ namespace IRTaktiks.Components.Playable
         }
 
         /// <summary>
+        /// The skill list of the unit.
+        /// </summary>
+        private List<Skill> SkillsField;
+
+        /// <summary>
+        /// The skill list of the unit.
+        /// </summary>
+        public List<Skill> Skills
+        {
+            get { return SkillsField; }
+        }
+
+        /// <summary>
+        /// The item list of the unit.
+        /// </summary>
+        private List<Item> ItemsField;
+
+        /// <summary>
+        /// The item list of the unit.
+        /// </summary>
+        public List<Item> Items
+        {
+            get { return ItemsField; }
+        }
+                
+        /// <summary>
         /// The position of the Unit.
         /// </summary>
         private Vector2 PositionField;
@@ -261,7 +288,7 @@ namespace IRTaktiks.Components.Playable
         #endregion
 
         #region Managers
-
+                
         /// <summary>
         /// The action manager of the unit.
         /// </summary>
