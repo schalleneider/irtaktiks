@@ -54,7 +54,7 @@ namespace IRTaktiks.Components.Screen
             
             // Create the units for player one.
             Attributes attributesKnight = new Attributes(99, Job.Knight, Element.Fire, 99, 1, 50, 1, 50);
-            Attributes attributesThief = new Attributes(99, Job.Thief, Element.Wind, 20, 99, 20, 1, 40);
+            Attributes attributesThief = new Attributes(99, Job.Assasin, Element.Wind, 20, 99, 20, 1, 40);
             Unit knightOne = new Unit(this.Game, game.PlayerOne, new Vector2(500, 400), attributesKnight, Orientation.Left, TextureManager.Instance.Characters.Knight, "Knight");
             Unit thiefOne = new Unit(this.Game, game.PlayerOne, new Vector2(500, 300), attributesThief, Orientation.Right, TextureManager.Instance.Characters.Wizard, "Thief");
 

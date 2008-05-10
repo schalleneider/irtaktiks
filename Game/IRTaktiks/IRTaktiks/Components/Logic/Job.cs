@@ -15,9 +15,9 @@ namespace IRTaktiks.Components.Logic
         Knight,
         
         /// <summary>
-        /// Crusader. High str and int.
+        /// Paladin. High str and int.
         /// </summary>
-        Crusader,
+        Paladin,
 
         /// <summary>
         /// Wizard. Hight int and dex.
@@ -30,9 +30,9 @@ namespace IRTaktiks.Components.Logic
         Priest,
 
         /// <summary>
-        /// Thief. High agi and dex.
+        /// Assasin. High agi and dex.
         /// </summary>
-        Thief,
+        Assasin,
 
         /// <summary>
         /// Monk. High agi and int.

@@ -422,7 +422,7 @@ namespace IRTaktiks
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime)
 		{
-			this.GraphicsDeviceManager.GraphicsDevice.Clear(Color.LightSlateGray);
+			this.GraphicsDeviceManager.GraphicsDevice.Clear(new Color(64, 64, 64));
             this.GraphicsDeviceManager.GraphicsDevice.RenderState.CullMode = CullMode.None;
 
 			base.Draw(gameTime);
