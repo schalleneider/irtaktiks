@@ -56,50 +56,165 @@ namespace IRTaktiks.Components.Manager
             switch (unit.Attributes.Job)
             {
                 case Job.Assasin:
-                    {
-                        return skills;
-                    }
+
+                    skills.Add(new Skill(unit, "Focus", 10, Skill.SkillType.Self, Focus));
+                    skills.Add(new Skill(unit, "Deathblow", 10, Skill.SkillType.Target, Deathblow));
+                    skills.Add(new Skill(unit, "Curse", 10, Skill.SkillType.Target, Curse));
+                    break;
 
                 case Job.Knight:
-                    {
-                        return skills;
-                    }
+
+                    skills.Add(new Skill(unit, "Quick", 10, Skill.SkillType.Self, Quick));
+                    skills.Add(new Skill(unit, "Impact", 10, Skill.SkillType.Target, Impact));
+                    skills.Add(new Skill(unit, "Moonslash", 10, Skill.SkillType.Target, Moonslash));
+                    break;
 
                 case Job.Monk:
-                    {
-                        return skills;
-                    }
+
+                    skills.Add(new Skill(unit, "Warcry", 10, Skill.SkillType.Self, Warcry));
+                    skills.Add(new Skill(unit, "Insane", 10, Skill.SkillType.Target, Insane));
+                    skills.Add(new Skill(unit, "Reject", 10, Skill.SkillType.Target, Reject));
+                    break;
 
                 case Job.Paladin:
-                    {
-                        return skills;
-                    }
+
+                    skills.Add(new Skill(unit, "Fortitude", 10, Skill.SkillType.Self, Fortitude));
+                    skills.Add(new Skill(unit, "Heal", 10, Skill.SkillType.Target, Heal));
+                    skills.Add(new Skill(unit, "Final", 10, Skill.SkillType.Target, Final));
+                    break;
 
                 case Job.Priest:
-                    {
-                        skills.Add(new Skill(unit, "Heal", 95, Skill.SkillType.Target, Heal));
-                        skills.Add(new Skill(unit, "Barrier", 70, Skill.SkillType.Target, Barrier));
-                        skills.Add(new Skill(unit, "Holy", 182, Skill.SkillType.Target, Holy)); 
-                        
-                        return skills;
-                    }
+
+                    skills.Add(new Skill(unit, "Heal", 10, Skill.SkillType.Target, Heal));
+                    skills.Add(new Skill(unit, "Barrier", 10, Skill.SkillType.Target, Barrier));
+                    skills.Add(new Skill(unit, "Holy", 10, Skill.SkillType.Target, Holy));
+                    break;
 
                 case Job.Wizard:
-                    {
-                        return skills;
-                    }
 
-                default:
-                    {
-                        return skills;
-                    }
+                    skills.Add(new Skill(unit, "Drain", 10, Skill.SkillType.Target, Drain));
+                    skills.Add(new Skill(unit, "Firework", 10, Skill.SkillType.Target, Firework));
+                    skills.Add(new Skill(unit, "Snowstorm", 10, Skill.SkillType.Target, Snowstorm));
+                    break;
             }
+            
+            return skills;
         }
 
         #endregion
 
         #region Skills
 
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Focus(Command command, Unit caster, Unit target, Vector2 position)
+        {
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Deathblow(Command command, Unit caster, Unit target, Vector2 position)
+        {
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Curse(Command command, Unit caster, Unit target, Vector2 position)
+        {
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Quick(Command command, Unit caster, Unit target, Vector2 position)
+        {
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Impact(Command command, Unit caster, Unit target, Vector2 position)
+        {
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Moonslash(Command command, Unit caster, Unit target, Vector2 position)
+        {
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Warcry(Command command, Unit caster, Unit target, Vector2 position)
+        {
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Insane(Command command, Unit caster, Unit target, Vector2 position)
+        {
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Reject(Command command, Unit caster, Unit target, Vector2 position)
+        {
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Fortitude(Command command, Unit caster, Unit target, Vector2 position)
+        {
+        }
+        
         /// <summary>
         /// Cast the skill.
         /// </summary>
@@ -145,9 +260,19 @@ namespace IRTaktiks.Components.Manager
         /// <param name="caster">The caster of the skill.</param>
         /// <param name="target">The target of the skill.</param>
         /// <param name="position">The position of the target.</param>
+        private void Final(Command command, Unit caster, Unit target, Vector2 position)
+        {
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
         private void Barrier(Command command, Unit caster, Unit target, Vector2 position)
         {
-            Skill skill = command as Skill;
         }
 
         /// <summary>
@@ -159,7 +284,39 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The position of the target.</param>
         private void Holy(Command command, Unit caster, Unit target, Vector2 position)
         {
-            Skill skill = command as Skill;
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Drain(Command command, Unit caster, Unit target, Vector2 position)
+        {
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Firework(Command command, Unit caster, Unit target, Vector2 position)
+        {
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Snowstorm(Command command, Unit caster, Unit target, Vector2 position)
+        {
         }
 
         #endregion

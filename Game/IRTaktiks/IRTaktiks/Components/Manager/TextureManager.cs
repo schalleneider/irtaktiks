@@ -414,6 +414,20 @@ namespace IRTaktiks.Components.Manager
                 }
 
                 /// <summary>
+                /// Texture of Sprites/Unit/Attributes.
+                /// </summary>
+                private Texture2D AttributesField;
+
+                /// <summary>
+                /// Texture of Sprites/Unit/Attributes.
+                /// </summary>
+                public Texture2D Attributes
+                {
+                    get { return AttributesField; }
+                    set { AttributesField = value; }
+                }
+
+                /// <summary>
                 /// Texture of Sprites/Unit/FullStatusAlive.
                 /// </summary>
                 private Texture2D FullStatusAliveField;
@@ -823,6 +837,7 @@ namespace IRTaktiks.Components.Manager
             this.Sprites.Player.PlayerTwoBackground = game.Content.Load<Texture2D>("Sprites/Player/PlayerTwoBackground");
 
             this.Sprites.Unit.Arrow = game.Content.Load<Texture2D>("Sprites/Unit/Arrow");
+            this.Sprites.Unit.Attributes = game.Content.Load<Texture2D>("Sprites/Unit/Attributes");
             this.Sprites.Unit.FullStatusAlive = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusAlive");
             this.Sprites.Unit.FullStatusDamaged = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusDamaged");
             this.Sprites.Unit.FullStatusDeading = game.Content.Load<Texture2D>("Sprites/Unit/FullStatusDeading");

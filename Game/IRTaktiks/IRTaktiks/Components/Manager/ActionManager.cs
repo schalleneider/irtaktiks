@@ -436,6 +436,10 @@ namespace IRTaktiks.Components.Manager
                             }
                         }
                     }
+                    else
+                    {
+                        this.ChangedField = true;
+                    }
                 }
             }
         }

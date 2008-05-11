@@ -408,7 +408,23 @@ namespace IRTaktiks.Components.Playable
             this.ActionManager.Visible = this.IsSelected && !this.IsDead && this.CanAct;
 
             // Update the actual time of the unit.
-            this.Time += this.Attributes.CalculateTimeFactor();
+            this.Time += this.Attributes.Delay;
+
+            #warning Attributes Debug
+            if (this.IsSelected)
+            {
+                (this.Game as IRTGame).Console.Text = String.Format(
+                    "ATK: {0} | MATK: {1} | DEF: {2} | MDEF: {3} | FLEE: {4} | HIT: {5}",
+                    new object[] {
+                        this.Attributes.Attack.ToString(),
+                        this.Attributes.MagicAttack.ToString(),
+                        this.Attributes.Defense.ToString(),
+                        this.Attributes.MagicDefense.ToString(),
+                        this.Attributes.Flee.ToString(),
+                        this.Attributes.Hit.ToString(),
+                    }
+                    );
+            }
 
             base.Update(gameTime);
         }
