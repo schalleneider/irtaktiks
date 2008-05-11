@@ -45,7 +45,7 @@ namespace IRTaktiks.Components.Manager
         #region Construct
 
         /// <summary>
-        /// Construct the list of the skills based on attributes .
+        /// Construct the list of the skills based on attributes.
         /// </summary>
         /// <param name="unit">The unit that the skills will be constructed.</param>
         /// <returns>The list of skills.</returns>
@@ -77,9 +77,9 @@ namespace IRTaktiks.Components.Manager
 
                 case Job.Priest:
                     {
-                        skills.Add(new Skill(unit, "Heal", 95, Skill.SkillType.Heal, QueueCast));
-                        skills.Add(new Skill(unit, "Barrier", 70, Skill.SkillType.Barrier, QueueCast));
-                        skills.Add(new Skill(unit, "Holy", 182, Skill.SkillType.Holy, QueueCast)); 
+                        skills.Add(new Skill(unit, "Heal", 95, Skill.SkillType.Target, Heal));
+                        skills.Add(new Skill(unit, "Barrier", 70, Skill.SkillType.Target, Barrier));
+                        skills.Add(new Skill(unit, "Holy", 182, Skill.SkillType.Target, Holy)); 
                         
                         return skills;
                     }
@@ -98,15 +98,54 @@ namespace IRTaktiks.Components.Manager
 
         #endregion
 
-        #region Queue
+        #region Skills
 
         /// <summary>
-        /// Queue the cast of the skill.
+        /// Cast the skill.
         /// </summary>
-        /// <param name="command">Skill that will be casted.</param>
+        /// <param name="command">Skill casted.</param>
         /// <param name="caster">The caster of the skill.</param>
         /// <param name="target">The target of the skill.</param>
-        private void QueueCast(Command command, Unit caster, Unit target)
+        /// <param name="position">The position of the target.</param>
+        private void Heal(Command command, Unit caster, Unit target, Vector2 position)
+        {
+            // Obtain the game instance.
+            IRTGame game = caster.Game as IRTGame;
+
+            // Show the animation.
+            Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
+            AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Heal, animationPosition);
+
+            // Effects on caster.
+            caster.Mana -= command.Attribute;
+            caster.Time = 0;
+
+            // Show the mp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
+            }
+
+            // Effects on target.
+            if (target != null)
+            {
+                // Heal the target
+                double heal = ((caster.Attributes.Level + caster.Attributes.Inteligence) / 8) * 44;
+                target.Life += (int)heal;
+
+                // Show the hp gain.
+                game.DamageManager.Queue(new Damage((int)heal, null, target.Position, Damage.DamageType.Benefit));
+            }
+        }
+
+        /// <summary>
+        /// Cast the skill.
+        /// </summary>
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Barrier(Command command, Unit caster, Unit target, Vector2 position)
         {
             Skill skill = command as Skill;
         }
@@ -114,17 +153,14 @@ namespace IRTaktiks.Components.Manager
         /// <summary>
         /// Cast the skill.
         /// </summary>
-        /// <param name="data">Data tranferred across the threads.</param>
-        private void Cast(object data)
+        /// <param name="command">Skill casted.</param>
+        /// <param name="caster">The caster of the skill.</param>
+        /// <param name="target">The target of the skill.</param>
+        /// <param name="position">The position of the target.</param>
+        private void Holy(Command command, Unit caster, Unit target, Vector2 position)
         {
-
+            Skill skill = command as Skill;
         }
-
-        #endregion
-
-        #region Casts
-
-
 
         #endregion
     }

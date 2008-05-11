@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Action\Command.cs" />
+    <Compile Include="Components\Action\Attack.cs" />
     <Compile Include="Components\Action\Item.cs" />
     <Compile Include="Components\Action\Skill.cs" />
     <Compile Include="Components\Debug\Console.cs" />
@@ -73,9 +74,10 @@
     <Compile Include="Components\Logic\Job.cs" />
     <Compile Include="Components\Manager\AreaManager.cs" />
     <Compile Include="Components\Manager\AnimationManager.cs" />
+    <Compile Include="Components\Manager\AttackManager.cs" />
+    <Compile Include="Components\Manager\ItemManager.cs" />
     <Compile Include="Components\Manager\DamageManager.cs" />
     <Compile Include="Components\Manager\ParticleManager.cs" />
-    <Compile Include="Components\Manager\MagicManager.cs" />
     <Compile Include="Components\Manager\ActionManager.cs" />
     <Compile Include="Components\Manager\SkillManager.cs" />
     <Compile Include="Components\Manager\SpriteManager.cs" />

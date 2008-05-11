@@ -37,6 +37,19 @@ namespace IRTaktiks.Components.Menu
         }
 
         /// <summary>
+        /// The menu that requested the mover.
+        /// </summary>
+        private ActionMenu MenuField;
+        
+        /// <summary>
+        /// The menu that requested the mover.
+        /// </summary>
+        public ActionMenu Menu
+        {
+            get { return MenuField; }
+        }
+        
+        /// <summary>
         /// The area that the unit can move.
         /// </summary>
         private Area AreaField;
@@ -115,7 +128,8 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// The method template who will used to handle the Moved event.
         /// </summary>
-        public delegate void MovedEventHandler();
+        /// <param name="actionMenu">The menu that requested the mover.</param>
+        public delegate void MovedEventHandler(ActionMenu actionMenu);
 
         /// <summary>
         /// The Moved event.
@@ -150,9 +164,13 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// Activate the mover.
         /// </summary>
+        /// <param name="actionMenu">The menu that requested the mover.</param>
         /// <param name="limit">The limit distance that the unit can move.</param>
-        public void Activate(float limit)
+        public void Activate(ActionMenu actionMenu, float limit)
         {
+            // Store the menu.
+            this.MenuField = actionMenu;
+
             // Enables the mover with the specified limit.
             this.EnabledField = true;
             this.LimitField = limit;
@@ -176,6 +194,9 @@ namespace IRTaktiks.Components.Menu
         /// </summary>
         public void Deactivate()
         {
+            // Delete the menu.
+            this.MenuField = null;
+
             // Disables the mover.
             this.EnabledField = false;
             this.LimitField = 0;
@@ -344,7 +365,7 @@ namespace IRTaktiks.Components.Menu
                         // Dispatch the Moved event.
                         if (this.Moved != null)
                         {
-                            this.Moved();
+                            this.Moved(this.Menu);
                         }
 
                         // Deactivate the mover.

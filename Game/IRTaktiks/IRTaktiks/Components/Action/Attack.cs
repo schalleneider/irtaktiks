@@ -13,51 +13,51 @@ using IRTaktiks.Components.Playable;
 namespace IRTaktiks.Components.Action
 {
     /// <summary>
-    /// The logic representation of one skill.
+    /// The logic representation of one attack.
     /// </summary>
-    public class Skill : Command
+    public class Attack : Command
     {
-        #region SkillType
+        #region AttackType
 
         /// <summary>
-        /// The types of skills.
+        /// The types of attacks
         /// </summary>
-        public enum SkillType
+        public enum AttackType
         {
             /// <summary>
-            /// Skill self-usable.
+            /// Close range attacks.
             /// </summary>
-            Self,
+            Short,
 
             /// <summary>
-            /// Skill target-usable.
+            /// Long range attacks.
             /// </summary>
-            Target
+            Long
         }
 
         #endregion
 
         #region Properties
-        
-        /// <summary>
-        /// The type of the skill.
-        /// </summary>
-        private SkillType TypeField;
 
         /// <summary>
-        /// The type of the skill.
+        /// The type of the attack.
         /// </summary>
-        public SkillType Type
+        private AttackType TypeField;
+
+        /// <summary>
+        /// The type of the attack.
+        /// </summary>
+        public AttackType Type
         {
             get { return TypeField; }
         }
-
+        
         /// <summary>
-        /// Check if the skill can be used.
+        /// Check if the attack can be used.
         /// </summary>
         public override bool Enabled
         {
-            get { return this.Unit.Mana >= this.Attribute; }
+            get { return true; }
         }
 
         #endregion
@@ -67,13 +67,12 @@ namespace IRTaktiks.Components.Action
         /// <summary>
         /// Constructor of class.
         /// </summary>
-        /// <param name="unit">The owner of the skill.</param>
-        /// <param name="name">The name of the skill.</param>
-        /// <param name="type">The type of the skill.</param>
-        /// <param name="type">The type of the skill.</param>
-        /// <param name="commandExecute">Method that will be invoked when the skill executes.</param>
-        public Skill(Unit unit, string name, int cost, SkillType type, CommandExecuteDelegate commandExecute)
-            : base(unit, name, cost, commandExecute)
+        /// <param name="unit">The owner of the attack.</param>
+        /// <param name="name">The name of the attack.</param>
+        /// <param name="type">The type of the attack.</param>
+        /// <param name="commandExecute">Method that will be invoked when the attack executes.</param>
+        public Attack(Unit unit, string name, AttackType type, CommandExecuteDelegate commandExecute)
+            : base(unit, name, 0, commandExecute)
         {
             this.TypeField = type;
         }
@@ -83,9 +82,9 @@ namespace IRTaktiks.Components.Action
         #region Methods
 
         /// <summary>
-        /// Execute the skill.
+        /// Execute the attack.
         /// </summary>
-        /// <param name="target">The target of the skill.</param>
+        /// <param name="target">The target of the attack.</param>
         /// <param name="position">The position of the target.</param>
         public override void Execute(Unit target, Vector2 position)
         {

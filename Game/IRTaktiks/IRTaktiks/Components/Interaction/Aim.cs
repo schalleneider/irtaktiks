@@ -13,6 +13,7 @@ using IRTaktiks.Input;
 using IRTaktiks.Input.EventArgs;
 using IRTaktiks.Components.Scenario;
 using IRTaktiks.Components.Logic;
+using IRTaktiks.Components.Menu;
 
 namespace IRTaktiks.Components.Interaction
 {
@@ -35,14 +36,27 @@ namespace IRTaktiks.Components.Interaction
         {
             get { return UnitField; }
         }
+        
+        /// <summary>
+        /// The menu that requested the aim.
+        /// </summary>
+        private ActionMenu MenuField;
 
         /// <summary>
-        /// The area that the aim can be.
+        /// The menu that requested the aim.
+        /// </summary>
+        public ActionMenu Menu
+        {
+            get { return MenuField; }
+        }
+        
+        /// <summary>
+        /// The area that the aim can move.
         /// </summary>
         private Area AreaField;
 
         /// <summary>
-        /// The area that the aim can be.
+        /// The area that the aim can move.
         /// </summary>
         public Area Area
         {
@@ -138,9 +152,10 @@ namespace IRTaktiks.Components.Interaction
         /// <summary>
         /// The method template who will used to handle the Aimed event.
         /// </summary>
+        /// <param name="actionMenu">The menu that requested the aim.</param>
         /// <param name="target">The unit targeted by the aim. Null when the aim is over nothing.</param>
         /// <param name="position">The last valid position of the aim.</param>
-        public delegate void AimedEventHandler(Unit target, Vector2 position);
+        public delegate void AimedEventHandler(ActionMenu actionMenu, Unit target, Vector2 position);
 
         /// <summary>
         /// The Aimed event.
@@ -177,9 +192,13 @@ namespace IRTaktiks.Components.Interaction
         /// <summary>
         /// Activate the aim.
         /// </summary>
+        /// <param name="actionMenu">The menu that requested the mover.</param>
         /// <param name="limit">The limit distance that the aim can be away from the unit.</param>
-        public void Activate(float limit)
+        public void Activate(ActionMenu actionMenu, float limit)
         {
+            // Store the menu.
+            this.MenuField = actionMenu;
+            
             // Enables the aim with the specified limit.
             this.EnabledField = true;
             this.LimitField = limit;
@@ -199,6 +218,9 @@ namespace IRTaktiks.Components.Interaction
         /// </summary>
         public void Deactivate()
         {
+            // Delete the menu.
+            this.MenuField = null;
+            
             // Disables the aim.
             this.EnabledField = false;
             this.LimitField = 0;
@@ -373,7 +395,7 @@ namespace IRTaktiks.Components.Interaction
                     // Dispatch the Aimed event.
                     if (this.Aimed != null)
                     {
-                        this.Aimed(this.Target, e.Position);
+                        this.Aimed(this.Menu, this.Target, e.Position);
                     }
 
                     // Deactivate the aim.

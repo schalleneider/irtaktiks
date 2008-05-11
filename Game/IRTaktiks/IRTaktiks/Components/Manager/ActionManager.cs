@@ -13,6 +13,7 @@ using IRTaktiks.Input.EventArgs;
 using IRTaktiks.Input;
 using IRTaktiks.Components.Scenario;
 using IRTaktiks.Components.Interaction;
+using IRTaktiks.Components.Action;
 
 namespace IRTaktiks.Components.Manager
 {
@@ -253,57 +254,45 @@ namespace IRTaktiks.Components.Manager
         private void Construct()
         {
             // Create the actions.
-            ActionMenu moveAction = new ActionMenu(this.Unit, "Move");
-            ActionMenu defendAction = new ActionMenu(this.Unit, "Defend");
-            ActionMenu attackAction = new ActionMenu(this.Unit, "Attack");
-            ActionMenu magicAction = new ActionMenu(this.Unit, "Magic");
-            ActionMenu itemsAction = new ActionMenu(this.Unit, "Items");
+            ActionMenu moveAction = new ActionMenu(this.Unit, "Move", ActionMenu.ActionMenuType.Move);
+            ActionMenu attackAction = new ActionMenu(this.Unit, "Attack", ActionMenu.ActionMenuType.Attack);
+            ActionMenu skillsAction = new ActionMenu(this.Unit, "Skills", ActionMenu.ActionMenuType.Skills);
+            ActionMenu itemsAction = new ActionMenu(this.Unit, "Items", ActionMenu.ActionMenuType.Items);
 
-            // Handle the Execute event.
-            moveAction.Execute += new ActionMenu.ExecuteEventHandler(moveAction_Execute);
-            defendAction.Execute += new ActionMenu.ExecuteEventHandler(defendAction_Execute);
+            // Handle the Execute events.
+            moveAction.Execute += new ActionMenu.ExecuteEventHandler(Action_Execute);
+            attackAction.Execute += new ActionMenu.ExecuteEventHandler(Action_Execute);
+            skillsAction.Execute += new ActionMenu.ExecuteEventHandler(Action_Execute);
+            itemsAction.Execute += new ActionMenu.ExecuteEventHandler(Action_Execute);
 
-            // Create the commands.
-            CommandMenu longAttackCommand = new CommandMenu(this.Unit, "Long", 5, delegate(Unit unit) { return false; });
-            CommandMenu shortAttackCommand = new CommandMenu(this.Unit, "Short", 0, delegate(Unit unit) { return false; });
+            // Add the attacks.
+            foreach (Attack attack in this.Unit.Attacks)
+            {
+                CommandMenu menu = new CommandMenu(attack, ActionMenu.ActionMenuType.Attack);
+                menu.Execute += new ActionMenu.ExecuteEventHandler(Attack_Execute);
+                attackAction.Commands.Add(menu);
+            }
 
-            CommandMenu healMagicCommand = new CommandMenu(this.Unit, "Heal", MagicManager.HealCost, MagicManager.Instance.CanHeal);
-            CommandMenu fireMagicCommand = new CommandMenu(this.Unit, "Fire", 75, delegate(Unit unit) { return false; });
-            CommandMenu iceMagicCommand = new CommandMenu(this.Unit, "Ice", 105, delegate(Unit unit) { return false; });
-            CommandMenu thunderMagicCommand = new CommandMenu(this.Unit, "Thunder", 145, delegate(Unit unit) { return false; });
+            // Add the skills.
+            foreach (Skill skill in this.Unit.Skills)
+            {
+                CommandMenu menu = new CommandMenu(skill, ActionMenu.ActionMenuType.Skills);
+                menu.Execute += new ActionMenu.ExecuteEventHandler(Skill_Execute);
+                skillsAction.Commands.Add(menu);
+            }
 
-            CommandMenu potionItemCommand = new CommandMenu(this.Unit, "Potion", 5, delegate(Unit unit) { return false; });
-            CommandMenu elixirItemCommand = new CommandMenu(this.Unit, "Elixir", 1, delegate(Unit unit) { return false; });
-
-            // Handle the Execute event.
-            longAttackCommand.Execute += new ActionMenu.ExecuteEventHandler(longAttackCommand_Execute);
-            shortAttackCommand.Execute += new ActionMenu.ExecuteEventHandler(shortAttackCommand_Execute);
-
-            healMagicCommand.Execute += new ActionMenu.ExecuteEventHandler(healMagicCommand_Execute);
-            fireMagicCommand.Execute += new ActionMenu.ExecuteEventHandler(fireMagicCommand_Execute);
-            iceMagicCommand.Execute += new ActionMenu.ExecuteEventHandler(iceMagicCommand_Execute);
-            thunderMagicCommand.Execute += new ActionMenu.ExecuteEventHandler(thunderMagicCommand_Execute);
-
-            potionItemCommand.Execute += new ActionMenu.ExecuteEventHandler(potionItemCommand_Execute);
-            elixirItemCommand.Execute += new ActionMenu.ExecuteEventHandler(elixirItemCommand_Execute);
-
-            // Add the commands.
-            attackAction.Commands.Add(longAttackCommand);
-            attackAction.Commands.Add(shortAttackCommand);
-
-            magicAction.Commands.Add(healMagicCommand);
-            magicAction.Commands.Add(fireMagicCommand);
-            magicAction.Commands.Add(iceMagicCommand);
-            magicAction.Commands.Add(thunderMagicCommand);
-
-            itemsAction.Commands.Add(potionItemCommand);
-            itemsAction.Commands.Add(elixirItemCommand);
+            // Add the items.
+            foreach (Item item in this.Unit.Items)
+            {
+                CommandMenu menu = new CommandMenu(item, ActionMenu.ActionMenuType.Items);
+                menu.Execute += new ActionMenu.ExecuteEventHandler(Item_Execute);
+                itemsAction.Commands.Add(menu);
+            }
 
             // Add the actions.
             this.Actions.Add(moveAction);
-            this.Actions.Add(defendAction);
             this.Actions.Add(attackAction);
-            this.Actions.Add(magicAction);
+            this.Actions.Add(skillsAction);
             this.Actions.Add(itemsAction);
         }
 
@@ -388,7 +377,7 @@ namespace IRTaktiks.Components.Manager
                                             this.Actions[index].Selected = true;
 
                                             // Check if the subitem is enabled.
-                                            if (this.Actions[index].Commands[subindex].Enabled)
+                                            if (this.Actions[index].Commands[subindex].Command.Enabled)
                                             {
                                                 // Select and queue the Execute event of the subitem touched.
                                                 this.Actions[index].Commands[subindex].Selected = true;
@@ -453,136 +442,130 @@ namespace IRTaktiks.Components.Manager
 
         #endregion
 
-        #region Menu
-
-        #region Action Events
+        #region Events
 
         /// <summary>
-        /// Handle the Execute event for the Move action.
+        /// Handle the Execute event for actions.
         /// </summary>
-        private void moveAction_Execute()
+        /// <param name="actionMenu">The menu that dispatched the event.</param>
+        private void Action_Execute(ActionMenu actionMenu)
         {
-            this.Mover.Activate(250);
-            this.Mover.Moved += new Mover.MovedEventHandler(MoveAction_Moved);
+            switch (actionMenu.Type)
+            {
+                case ActionMenu.ActionMenuType.Attack:
+                    break;
+
+                case ActionMenu.ActionMenuType.Items:
+                    break;
+
+                case ActionMenu.ActionMenuType.Move:
+                    
+                    this.Mover.Activate(actionMenu, 250);
+                    this.Mover.Moved += new Mover.MovedEventHandler(Mover_Moved);
+                    break;
+
+                case ActionMenu.ActionMenuType.Skills:
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         /// <summary>
-        /// Handle the Execute event for the Defend action.
+        /// Handle the Execute event for attack commands.
         /// </summary>
-        private void defendAction_Execute()
+        /// <param name="actionMenu">The menu that dispatched the event.</param>
+        private void Attack_Execute(ActionMenu actionMenu)
         {
+            CommandMenu commandMenu = actionMenu as CommandMenu;
 
-        }
+            switch ((commandMenu.Command as Attack).Type)
+            {
+                case Attack.AttackType.Long:
 
-        #endregion
+                    this.Aim.Activate(actionMenu, 250);
+                    this.Aim.Aimed += new Aim.AimedEventHandler(Aim_Aimed);
+                    break;
 
-        #region Command Events
+                case Attack.AttackType.Short:
 
-        /// <summary>
-        /// Handle the Execute event for the Long command.
-        /// </summary>
-        private void longAttackCommand_Execute()
-        {
-
-        }
-
-        /// <summary>
-        /// Handle the Execute event for the Short command.
-        /// </summary>
-        private void shortAttackCommand_Execute()
-        {
-
+                    this.Aim.Activate(actionMenu, 250);
+                    this.Aim.Aimed += new Aim.AimedEventHandler(Aim_Aimed);
+                    break;
+            }
         }
 
         /// <summary>
-        /// Handle the Execute event for the Heal command.
+        /// Handle the Execute event for skill commands.
         /// </summary>
-        private void healMagicCommand_Execute()
+        /// <param name="actionMenu">The menu that dispatched the event.</param>
+        private void Skill_Execute(ActionMenu actionMenu)
         {
-            this.Aim.Activate((float)this.Unit.Attributes.CalculateMagicArea());
-            this.Aim.Aimed += new Aim.AimedEventHandler(HealMagic_Aimed);
+            CommandMenu commandMenu = actionMenu as CommandMenu;
+
+            switch ((commandMenu.Command as Skill).Type)
+            {
+                case Skill.SkillType.Self:
+                    break;
+
+                case Skill.SkillType.Target:
+                    
+                    this.Aim.Activate(actionMenu, 250);
+                    this.Aim.Aimed += new Aim.AimedEventHandler(Aim_Aimed);
+                    break;
+            }
         }
 
         /// <summary>
-        /// Handle the Execute event for the Fire command.
+        /// Handle the Execute event for item commands.
         /// </summary>
-        private void fireMagicCommand_Execute()
+        /// <param name="actionMenu">The menu that dispatched the event.</param>
+        private void Item_Execute(ActionMenu actionMenu)
         {
+            CommandMenu commandMenu = actionMenu as CommandMenu;
 
+            switch ((commandMenu.Command as Item).Type)
+            {
+                case Item.ItemType.Self:
+                    break;
+
+                case Item.ItemType.Target:
+
+                    this.Aim.Activate(actionMenu, 250);
+                    this.Aim.Aimed += new Aim.AimedEventHandler(Aim_Aimed);
+                    break;
+            }
         }
 
         /// <summary>
-        /// Handle the Execute event for the Ice command.
+        /// Handle the Moved event from the mover.
         /// </summary>
-        private void iceMagicCommand_Execute()
+        /// <param name="actionMenu">The menu that requested the mover.</param>
+        private void Mover_Moved(ActionMenu actionMenu)
         {
+            // End the movement.
+            this.Unit.Time = 0;
 
-        }
-
-        /// <summary>
-        /// Handle the Execute event for the Thunder command.
-        /// </summary>
-        private void thunderMagicCommand_Execute()
-        {
-
-        }
-
-        /// <summary>
-        /// Handle the Execute event for the Potion command.
-        /// </summary>
-        private void potionItemCommand_Execute()
-        {
-
-        }
-
-        /// <summary>
-        /// Handle the Execute event for the Elixir command.
-        /// </summary>
-        private void elixirItemCommand_Execute()
-        {
-
-        }
-
-        #endregion
-
-        #endregion
-
-        #region Post Effects
-
-        #region Mover
-
-        /// <summary>
-        /// Called when the unit end its movement.
-        /// </summary>
-        private void MoveAction_Moved()
-        {
-            
-            
             this.Reset();
-            this.Mover.Moved -= this.MoveAction_Moved;
+            this.Mover.Moved -= this.Mover_Moved;
         }
-
-        #endregion
-
-        #region Aim
 
         /// <summary>
         /// Called when the aim of the Heal magic is released.
         /// </summary>
+        /// <param name="actionMenu">The menu that requested the mover.</param>
         /// <param name="target">The unit targeted by the aim. Null if the aim is over anything.</param>
         /// <param name="position">The last valid position of the aim.</param>
-        private void HealMagic_Aimed(Unit target, Vector2 position)
+        private void Aim_Aimed(ActionMenu actionMenu, Unit target, Vector2 position)
         {
-            Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
-            AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Heal, animationPosition); 
-            
-            MagicManager.Instance.Heal(this.Unit, target);
+            // Execute the command.
+            CommandMenu commandMenu = actionMenu as CommandMenu;
+            commandMenu.Command.Execute(target, position);
             
             this.Reset();
-            this.Aim.Aimed -= this.HealMagic_Aimed;
+            this.Aim.Aimed -= this.Aim_Aimed;
         }
-
-        #endregion
 
         #endregion
     }

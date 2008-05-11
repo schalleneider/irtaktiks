@@ -233,32 +233,6 @@ namespace IRTaktiks.Components.Playable
         }
 
         /// <summary>
-        /// The skill list of the unit.
-        /// </summary>
-        private List<Skill> SkillsField;
-
-        /// <summary>
-        /// The skill list of the unit.
-        /// </summary>
-        public List<Skill> Skills
-        {
-            get { return SkillsField; }
-        }
-
-        /// <summary>
-        /// The item list of the unit.
-        /// </summary>
-        private List<Item> ItemsField;
-
-        /// <summary>
-        /// The item list of the unit.
-        /// </summary>
-        public List<Item> Items
-        {
-            get { return ItemsField; }
-        }
-                
-        /// <summary>
         /// The position of the Unit.
         /// </summary>
         private Vector2 PositionField;
@@ -283,6 +257,49 @@ namespace IRTaktiks.Components.Playable
         public Texture2D Texture
         {
             get { return TextureField; }
+        }
+
+        #endregion
+
+        #region Actions
+
+        /// <summary>
+        /// The attack list of the unit.
+        /// </summary>
+        private List<Attack> AttacksField;
+
+        /// <summary>
+        /// The attack list of the unit.
+        /// </summary>
+        public List<Attack> Attacks
+        {
+            get { return AttacksField; }
+        }
+        
+        /// <summary>
+        /// The skill list of the unit.
+        /// </summary>
+        private List<Skill> SkillsField;
+
+        /// <summary>
+        /// The skill list of the unit.
+        /// </summary>
+        public List<Skill> Skills
+        {
+            get { return SkillsField; }
+        }
+
+        /// <summary>
+        /// The item list of the unit.
+        /// </summary>
+        private List<Item> ItemsField;
+
+        /// <summary>
+        /// The item list of the unit.
+        /// </summary>
+        public List<Item> Items
+        {
+            get { return ItemsField; }
         }
 
         #endregion
@@ -337,6 +354,7 @@ namespace IRTaktiks.Components.Playable
         public Unit(Game game, Player player, Vector2 position, Attributes attributes, Orientation orientation, Texture2D texture, String name)
             : base(game)
         {
+            // Set the properties.
             this.PositionField = position;
             this.AttributesField = attributes;
             this.OrientationField = orientation;
@@ -344,15 +362,19 @@ namespace IRTaktiks.Components.Playable
             this.PlayerField = player;
             this.NameField = name;
 
+            // Set the logic properties.
             this.LifeField = this.Attributes.MaximumLife;
             this.ManaField = this.Attributes.MaximumMana;
-
             this.TimeField = 0;
-
             this.IsSelectedField = false;
 
-            this.ActionManagerField = new ActionManager(game, this);
+            // Load the actions
+            this.AttacksField = AttackManager.Instance.Construct(this);
+            this.SkillsField = SkillManager.Instance.Construct(this);
+            this.ItemsField = ItemManager.Instance.Construct(this);
 
+            // Create the menus.
+            this.ActionManagerField = new ActionManager(game, this);
             this.StatusMenuField = new StatusMenu(game, this);
 
             InputManager.Instance.CursorDown += new EventHandler<CursorDownArgs>(CursorDown_Handler);
