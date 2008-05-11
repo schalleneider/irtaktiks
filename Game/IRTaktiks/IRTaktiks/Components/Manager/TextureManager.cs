@@ -809,7 +809,7 @@ namespace IRTaktiks.Components.Manager
         #endregion
 
         #region Initialize
-
+        
         /// <summary>
         /// Initialize the instance of the class.
         /// </summary>

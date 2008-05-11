@@ -428,7 +428,7 @@ namespace IRTaktiks.Components.Playable
             // Draws the quick status.
             Vector2 statusPosition = new Vector2(this.Position.X + (this.Texture.Width / 2) - (TextureManager.Instance.Sprites.Unit.QuickStatus.Width / 2), this.Position.Y + 50);
             game.SpriteManager.Draw(TextureManager.Instance.Sprites.Unit.QuickStatus, statusPosition, Color.White, 31);
-
+            
             // Measure the maximum width and height for the bars.
             int barMaxWidth = TextureManager.Instance.Sprites.Unit.QuickStatus.Width - 2;
             int barMaxHeight = (TextureManager.Instance.Sprites.Unit.QuickStatus.Height - 2) / 3;

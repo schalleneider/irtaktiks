@@ -18,7 +18,7 @@ namespace IRTaktiks.Components.Logic
         /// Paladin. High str and int.
         /// </summary>
         Paladin,
-
+        
         /// <summary>
         /// Wizard. Hight int and dex.
         /// </summary>
