@@ -76,7 +76,12 @@ namespace IRTaktiks.Components.Menu
         /// The sprite font that will be used to write the unit's attributes.
         /// </summary>
         private SpriteFont AttributesSpriteFont;
-
+        
+        /// <summary>
+        /// The position of the attributes.
+        /// </summary>
+        private Vector2 AttributesPosition;
+        
         /// <summary>
         /// Indicates that the attributes are visible.
         /// </summary>
@@ -103,22 +108,24 @@ namespace IRTaktiks.Components.Menu
             this.LifeSpriteFont = FontManager.Instance.Chilopod14;
             this.ManaSpriteFont = FontManager.Instance.Chilopod14;
             this.AttributesSpriteFont = FontManager.Instance.Chilopod14;
+            
+            // Textures.
+            this.UnitTexture = TextureManager.Instance.Sprites.Unit.FullStatusAlive;
+            this.AttributesTexture = TextureManager.Instance.Sprites.Unit.Attributes;
 
             // Player one informations.
             if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
             {
                 this.PositionField = new Vector2(0, 192);
+                this.AttributesPosition = new Vector2(this.Position.X + this.UnitTexture.Width, this.Position.Y);
             }
 
             // Player two informations.
             if (this.Unit.Player.PlayerIndex == PlayerIndex.Two)
             {
                 this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.Background.Width, 192);
+                this.AttributesPosition = new Vector2(this.Position.X - this.AttributesTexture.Width, this.Position.Y);
             }
-
-            // Textures.
-            this.UnitTexture = TextureManager.Instance.Sprites.Unit.FullStatusAlive;
-            this.AttributesTexture = TextureManager.Instance.Sprites.Unit.Attributes;
 
             InputManager.Instance.CursorDown += new EventHandler<IRTaktiks.Input.EventArgs.CursorDownArgs>(Instance_CursorDown);
         }
@@ -221,10 +228,8 @@ namespace IRTaktiks.Components.Menu
             // If the attributes are visible.
             if (this.AttributesVisible)
             {
-                Vector2 attributesPosition = new Vector2(this.Position.X + this.UnitTexture.Width, this.Position.Y);
-
                 // Draws the unit's attributes background.
-                game.SpriteManager.Draw(this.AttributesTexture, attributesPosition, Color.White, 50);
+                game.SpriteManager.Draw(this.AttributesTexture, this.AttributesPosition, Color.White, 50);
 
                 // Calculate the size of the texts
                 Vector2 strengthSize = this.AttributesSpriteFont.MeasureString("STR");
@@ -249,20 +254,20 @@ namespace IRTaktiks.Components.Menu
                 int start1st = 10; 
                 int start2nd = 105;
 
-                Vector2 strengthPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - strengthSize.X + offsetLabel, attributesPosition.Y + start1st + distance * 0);
-                Vector2 agilityPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - agilitySize.X + offsetLabel, attributesPosition.Y + start1st + distance * 1);
-                Vector2 vitalityPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - vitalitySize.X + offsetLabel, attributesPosition.Y + start1st + distance * 2);
-                Vector2 inteligencePosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - inteligenceSize.X + offsetLabel, attributesPosition.Y + start1st + distance * 3);
-                Vector2 dexterityPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - dexteritySize.X + offsetLabel, attributesPosition.Y + start1st + distance * 4);
+                Vector2 strengthPosition = new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 - strengthSize.X + offsetLabel, this.AttributesPosition.Y + start1st + distance * 0);
+                Vector2 agilityPosition = new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 - agilitySize.X + offsetLabel, this.AttributesPosition.Y + start1st + distance * 1);
+                Vector2 vitalityPosition = new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 - vitalitySize.X + offsetLabel, this.AttributesPosition.Y + start1st + distance * 2);
+                Vector2 inteligencePosition = new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 - inteligenceSize.X + offsetLabel, this.AttributesPosition.Y + start1st + distance * 3);
+                Vector2 dexterityPosition = new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 - dexteritySize.X + offsetLabel, this.AttributesPosition.Y + start1st + distance * 4);
 
-                Vector2 attackPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - attackSize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 0);
-                Vector2 defensePosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - defenseSize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 1);
-                Vector2 magicAttackPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - magicAttackSize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 2);
-                Vector2 magicDefensePosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - magicDefenseSize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 3);
-                Vector2 fleePosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - fleeSize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 4);
-                Vector2 hitPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - hitSize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 5);
-                Vector2 rangePosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - rangeSize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 6);
-                Vector2 delayPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - delaySize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 7);
+                Vector2 attackPosition = new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 - attackSize.X + offsetLabel, this.AttributesPosition.Y + start2nd + distance * 0);
+                Vector2 defensePosition = new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 - defenseSize.X + offsetLabel, this.AttributesPosition.Y + start2nd + distance * 1);
+                Vector2 magicAttackPosition = new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 - magicAttackSize.X + offsetLabel, this.AttributesPosition.Y + start2nd + distance * 2);
+                Vector2 magicDefensePosition = new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 - magicDefenseSize.X + offsetLabel, this.AttributesPosition.Y + start2nd + distance * 3);
+                Vector2 fleePosition = new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 - fleeSize.X + offsetLabel, this.AttributesPosition.Y + start2nd + distance * 4);
+                Vector2 hitPosition = new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 - hitSize.X + offsetLabel, this.AttributesPosition.Y + start2nd + distance * 5);
+                Vector2 rangePosition = new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 - rangeSize.X + offsetLabel, this.AttributesPosition.Y + start2nd + distance * 6);
+                Vector2 delayPosition = new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 - delaySize.X + offsetLabel, this.AttributesPosition.Y + start2nd + distance * 7);
 
                 // Draws the texts.
                 game.SpriteManager.DrawString(this.AttributesSpriteFont, "STR", strengthPosition, Color.White, 52);
@@ -281,20 +286,20 @@ namespace IRTaktiks.Components.Menu
                 game.SpriteManager.DrawString(this.AttributesSpriteFont, "DELAY", delayPosition, Color.White, 52);
 
                 // Draw the values.
-                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Strength.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, strengthPosition.Y), Color.White, 52);
-                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Agility.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, agilityPosition.Y), Color.White, 52);
-                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Vitality.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, vitalityPosition.Y), Color.White, 52);
-                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Inteligence.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, inteligencePosition.Y), Color.White, 52);
-                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Dexterity.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, dexterityPosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Strength.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, strengthPosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Agility.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, agilityPosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Vitality.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, vitalityPosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Inteligence.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, inteligencePosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Dexterity.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, dexterityPosition.Y), Color.White, 52);
 
-                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Attack.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, attackPosition.Y), Color.White, 52);
-                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Defense.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, defensePosition.Y), Color.White, 52);
-                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.MagicAttack.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, magicAttackPosition.Y), Color.White, 52);
-                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.MagicDefense.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, magicDefensePosition.Y), Color.White, 52);
-                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Flee.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, fleePosition.Y), Color.White, 52);
-                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Hit.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, hitPosition.Y), Color.White, 52);
-                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.SkillRange.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, rangePosition.Y), Color.White, 52);
-                game.SpriteManager.DrawString(this.AttributesSpriteFont, ((int)(300 - this.Unit.Attributes.Delay * 100000)).ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, delayPosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Attack.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, attackPosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Defense.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, defensePosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.MagicAttack.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, magicAttackPosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.MagicDefense.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, magicDefensePosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Flee.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, fleePosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Hit.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, hitPosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.SkillRange.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, rangePosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, ((int)(300 - this.Unit.Attributes.Delay * 100000)).ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, delayPosition.Y), Color.White, 52);
 
             }
 
