@@ -17,27 +17,47 @@ namespace IRTaktiks.Components.Action
     /// </summary>
     public class Item : Command
     {
+        #region ItemType
+
+        /// <summary>
+        /// The types of items
+        /// </summary>
+        public enum ItemType
+        {
+            /// <summary>
+            /// Item target-usable.
+            /// </summary>
+            Target,
+
+            /// <summary>
+            /// Item self-usable.
+            /// </summary>
+            Self
+        }
+
+        #endregion
+
         #region Properties
 
         /// <summary>
-        /// The quantity of items that the unit have.
+        /// The type of the item.
         /// </summary>
-        protected int QuantityField;
+        private ItemType TypeField;
 
         /// <summary>
-        /// The quantity of items that the unit have.
+        /// The type of the item.
         /// </summary>
-        public int Quantity
+        public ItemType Type
         {
-            get { return QuantityField; }
+            get { return TypeField; }
         }
 
         /// <summary>
         /// Check if the item can be used.
         /// </summary>
-        public bool Enabled
+        public override bool Enabled
         {
-            get { return this.Quantity > 0; }
+            get { return this.Attribute > 0; }
         }
 
         #endregion
@@ -49,12 +69,13 @@ namespace IRTaktiks.Components.Action
         /// </summary>
         /// <param name="unit">The owner of the item.</param>
         /// <param name="name">The name of the item.</param>
+        /// <param name="type">The type of the item.</param>
         /// <param name="quantity">The quantity of items that the unit have.</param>
         /// <param name="commandExecute">Method that will be invoked when the item is used.</param>
-        public Item(Unit unit, string name, int quantity, CommandExecuteDelegate commandExecute)
-            : base(unit, name, commandExecute)
+        public Item(Unit unit, string name, int quantity, ItemType type, CommandExecuteDelegate commandExecute)
+            : base(unit, name, quantity, commandExecute)
         {
-            this.QuantityField = quantity;
+            this.TypeField = type;
         }
 
         #endregion
@@ -65,10 +86,11 @@ namespace IRTaktiks.Components.Action
         /// Execute the skill.
         /// </summary>
         /// <param name="target">The target of the skill.</param>
-        public override void Execute(Unit target)
+        /// <param name="position">The position of the target.</param>
+        public override void Execute(Unit target, Vector2 position)
         {
-            this.QuantityField--;
-            base.Execute(target);
+            this.Attribute -= 1;
+            base.Execute(target, position);
         }
 
         #endregion

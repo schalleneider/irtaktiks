@@ -10,53 +10,30 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Playable;
 using IRTaktiks.Components.Manager;
+using IRTaktiks.Components.Action;
 
 namespace IRTaktiks.Components.Menu
 {
-    /// <summary>
-    /// The method template who will used to handle the enabled property.
-    /// </summary> 
-    /// <param name="unit">The unit who want to use the command associated with this menu.</param>
-    /// <returns>True, if the unit can use the command. False otherwise.</returns>
-    public delegate bool EnabledDelegate(Unit unit);
-    
     /// <summary>
     /// Representation of one command from the unit.
     /// </summary>
     public class CommandMenu : ActionMenu
     {
-        #region Delegate
-
-        /// <summary>
-        /// The pointer to the method who will check if the unit can execute the command.
-        /// </summary>
-        private EnabledDelegate CheckEnabled;
-
-        #endregion
-
         #region Properties
 
         /// <summary>
-        /// The attribute of the command.
+        /// The command of the unit.
         /// </summary>
-        private int AttributeField;
+        private Command CommandField;
         
         /// <summary>
-        /// The attribute of the command.
+        /// The command of the unit.
         /// </summary>
-        public int Attribute
+        public Command Command
         {
-            get { return AttributeField; }
+            get { return CommandField; }
         }
-
-        /// <summary>
-        /// Indicates that the command can be executed.
-        /// </summary>
-        public bool Enabled
-        {
-            get { return this.CheckEnabled(this.Unit); }
-        }
-
+        
         #endregion
         
         #region Textures and SpriteFonts
@@ -78,15 +55,12 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// Constructor of the class.
         /// </summary>
-        /// <param name="unit">The unit that will be the actor of the command.</param>
-        /// <param name="text">The text of the command that will be displayed.</param>
-        /// <param name="attribute">The attribute of the command.</param>
-        /// <param name="checkEnabled">The method who will check if the unit can execute the command.</param>
-        public CommandMenu(Unit unit, string text, int attribute, EnabledDelegate checkEnabled)
-            : base(unit, text)
+        /// <param name="command">The command of the unit.</param>
+        /// <param name="type">The type of the action owner of the command.</param>
+        public CommandMenu(Command command, ActionMenuType type)
+            : base(command.Unit, command.Name, type)
         {
-            this.AttributeField = attribute;
-            this.CheckEnabled = checkEnabled; 
+            this.CommandField = command;
 
             this.ItemTexture = TextureManager.Instance.Sprites.Menu.SubmenuItem;
             this.SelectedItemTexture = TextureManager.Instance.Sprites.Menu.SubmenuSelectedItem;
@@ -108,7 +82,7 @@ namespace IRTaktiks.Components.Menu
         {
             Texture2D textureToDraw = this.DisabledItemTexture;
 
-            if (this.Enabled)
+            if (this.Command.Enabled)
             {
                 if (this.Selected)
                 {
@@ -122,7 +96,7 @@ namespace IRTaktiks.Components.Menu
 
             // Measure the text and attribute size.
             Vector2 textSize = this.TextSpriteFont.MeasureString(this.Text);
-            Vector2 attributeSize = this.AttributeSpriteFont.MeasureString(this.Attribute.ToString());
+            Vector2 attributeSize = this.AttributeSpriteFont.MeasureString(this.Command.Attribute.ToString());
 
             // Calculate the position of the text and attribute.
             Vector2 textPosition = new Vector2(this.Position.X + 54 - textSize.X / 2, this.Position.Y + this.ItemTexture.Height / 2 - textSize.Y / 2);
@@ -133,7 +107,7 @@ namespace IRTaktiks.Components.Menu
 
             // Draws the text and attribute.
             spriteBatchManager.DrawString(this.TextSpriteFont, this.Text, textPosition, Color.White, 51);
-            spriteBatchManager.DrawString(this.AttributeSpriteFont, this.Attribute.ToString(), attributePosition, Color.White, 51);
+            spriteBatchManager.DrawString(this.AttributeSpriteFont, this.Command.Attribute.ToString(), attributePosition, Color.White, 51);
         }
 
         #endregion

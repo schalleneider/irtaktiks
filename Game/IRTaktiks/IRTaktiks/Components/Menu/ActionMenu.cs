@@ -14,11 +14,41 @@ using System.Threading;
 
 namespace IRTaktiks.Components.Menu
 {
-	/// <summary>
+    /// <summary>
 	/// Representation of one action from the unit.
 	/// </summary>
 	public class ActionMenu
-	{
+    {
+        #region ActionMenuType
+
+        /// <summary>
+        /// Representation of the types of the ActionMenu.
+        /// </summary>
+        public enum ActionMenuType
+        {
+            /// <summary>
+            /// Move action menu.
+            /// </summary>
+            Move,
+
+            /// <summary>
+            /// Attack action menu.
+            /// </summary>
+            Attack,
+
+            /// <summary>
+            /// Skills action menu.
+            /// </summary>
+            Skills,
+
+            /// <summary>
+            /// Items action menu.
+            /// </summary>
+            Items
+        }
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -34,6 +64,19 @@ namespace IRTaktiks.Components.Menu
             get { return UnitField; }
         }
 
+        /// <summary>
+        /// The type of the action.
+        /// </summary>
+        private ActionMenuType TypeField;
+
+        /// <summary>
+        /// The type of the action.
+        /// </summary>
+        public ActionMenuType Type
+        {
+            get { return TypeField; }
+        }
+        
         /// <summary>
         /// The commands of this action.
         /// </summary>
@@ -95,12 +138,13 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// The method template who will used to handle the Execute event.
         /// </summary>
-        public delegate void ExecuteEventHandler();
+        /// <param name="actionMenu">The menu that dispacted the event.</param>
+        public delegate void ExecuteEventHandler(ActionMenu actionMenu);
 
         /// <summary>
         /// The Execute event.
         /// </summary>
-        public event ExecuteEventHandler Execute;
+        public virtual event ExecuteEventHandler Execute;
 
         #endregion
 
@@ -128,13 +172,15 @@ namespace IRTaktiks.Components.Menu
         /// <summary>
         /// Constructor of the class.
         /// </summary>
-        /// <param name="unit">The unit that will be the actor of the command.</param>
-        /// <param name="text">The text of the command that will be displayed.</param>
-        public ActionMenu(Unit unit, string text)
+        /// <param name="unit">The unit owner of the action.</param>
+        /// <param name="text">The text of the action.</param>
+        /// <param name="type">The type of the action.</param>
+        public ActionMenu(Unit unit, string text, ActionMenuType type)
         {
             // Set the properties.
             this.UnitField = unit;
             this.TextField = text;
+            this.TypeField = type;
 
             // Set the correct textures.
             this.ItemTexture = TextureManager.Instance.Sprites.Menu.Item;
@@ -166,7 +212,7 @@ namespace IRTaktiks.Components.Menu
         public void ExecuteNow(object data)
         {
             if (this.Execute != null)
-                this.Execute();
+                this.Execute(this);
         }
 
         #endregion
