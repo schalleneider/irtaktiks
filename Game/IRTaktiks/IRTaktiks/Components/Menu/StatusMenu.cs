@@ -9,17 +9,19 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Playable;
 using IRTaktiks.Components.Manager;
+using IRTaktiks.Input;
+using IRTaktiks.Input.EventArgs;
 
 namespace IRTaktiks.Components.Menu
 {
-	/// <summary>
-	/// Representation of the menu of the player.
-	/// </summary>
-	public class StatusMenu : DrawableGameComponent
-	{
-		#region Properties
-			
-		/// <summary>
+    /// <summary>
+    /// Representation of the menu of the player.
+    /// </summary>
+    public class StatusMenu : DrawableGameComponent
+    {
+        #region Properties
+
+        /// <summary>
         /// The unit whose information will be displayed.
         /// </summary>
         private Unit UnitField;
@@ -32,101 +34,124 @@ namespace IRTaktiks.Components.Menu
             get { return UnitField; }
         }
 
-		/// <summary>
-		/// The position of the menu.
-		/// </summary>
-		private Vector2 PositionField;
+        /// <summary>
+        /// The position of the menu.
+        /// </summary>
+        private Vector2 PositionField;
 
-		/// <summary>
-		/// The position of the menu.
-		/// </summary>
-		public Vector2 Position
-		{
-			get { return PositionField; }
-		}
+        /// <summary>
+        /// The position of the menu.
+        /// </summary>
+        public Vector2 Position
+        {
+            get { return PositionField; }
+        }
 
-		/// <summary>
-		/// The texture that will be used to draw the unit information.
-		/// </summary>
-		private Texture2D UnitTexture;
+        /// <summary>
+        /// The texture that will be used to draw the unit information.
+        /// </summary>
+        private Texture2D UnitTexture;
 
-		/// <summary>
-		/// The sprite font that will be used to write the unit's name.
-		/// </summary>
-		private SpriteFont NameSpriteFont;
+        /// <summary>
+        /// The texture that will be used to draw the unit's attributes.
+        /// </summary>
+        private Texture2D AttributesTexture;
 
-		/// <summary>
-		/// The sprite font that will be used to write the unit's life points.
-		/// </summary>
-		private SpriteFont LifeSpriteFont;
+        /// <summary>
+        /// The sprite font that will be used to write the unit's name.
+        /// </summary>
+        private SpriteFont NameSpriteFont;
 
-		/// <summary>
-		/// The sprite font that will be used to write the unit's mana points.
-		/// </summary>
-		private SpriteFont ManaSpriteFont;
+        /// <summary>
+        /// The sprite font that will be used to write the unit's life points.
+        /// </summary>
+        private SpriteFont LifeSpriteFont;
+
+        /// <summary>
+        /// The sprite font that will be used to write the unit's mana points.
+        /// </summary>
+        private SpriteFont ManaSpriteFont;
+
+        /// <summary>
+        /// The sprite font that will be used to write the unit's attributes.
+        /// </summary>
+        private SpriteFont AttributesSpriteFont;
+
+        /// <summary>
+        /// Indicates that the attributes are visible.
+        /// </summary>
+        private bool AttributesVisible;
 
         #endregion
 
         #region Constructor
 
         /// <summary>
-		/// Constructor of class.
-		/// </summary>
-		/// <param name="game">The instance of game that is running.</param>
+        /// Constructor of class.
+        /// </summary>
+        /// <param name="game">The instance of game that is running.</param>
         /// <param name="unit">The unit who is the owner of the menu.</param>
-		public StatusMenu(Game game, Unit unit)
-			: base(game)
-		{
-            // Set the unit whose information will be displayed.
-			this.UnitField = unit;
-            
+        public StatusMenu(Game game, Unit unit)
+            : base(game)
+        {
+            // Set the properties.
+            this.UnitField = unit;
+            this.AttributesVisible = false;
+
             // Set the spritefonts that will be used.
             this.NameSpriteFont = FontManager.Instance.Chilopod16;
             this.LifeSpriteFont = FontManager.Instance.Chilopod14;
             this.ManaSpriteFont = FontManager.Instance.Chilopod14;
+            this.AttributesSpriteFont = FontManager.Instance.Chilopod14;
 
-			// Player one informations.
-			if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
-			{
-				this.PositionField = new Vector2(0, 192);
-			}
+            // Player one informations.
+            if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
+            {
+                this.PositionField = new Vector2(0, 192);
+            }
 
-			// Player two informations.
-			if (this.Unit.Player.PlayerIndex == PlayerIndex.Two)
-			{
+            // Player two informations.
+            if (this.Unit.Player.PlayerIndex == PlayerIndex.Two)
+            {
                 this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.Background.Width, 192);
-			}
-		}
+            }
 
-		#endregion
+            // Textures.
+            this.UnitTexture = TextureManager.Instance.Sprites.Unit.FullStatusAlive;
+            this.AttributesTexture = TextureManager.Instance.Sprites.Unit.Attributes;
 
-		#region Component Methods
+            InputManager.Instance.CursorDown += new EventHandler<IRTaktiks.Input.EventArgs.CursorDownArgs>(Instance_CursorDown);
+        }
 
-		/// <summary>
-		/// Allows the game component to perform any initialization it needs to before starting
-		/// to run. This is where it can query for any required services and load content.
-		/// </summary>
-		public override void Initialize()
-		{
+        #endregion
+
+        #region Component Methods
+
+        /// <summary>
+        /// Allows the game component to perform any initialization it needs to before starting
+        /// to run. This is where it can query for any required services and load content.
+        /// </summary>
+        public override void Initialize()
+        {
             base.Initialize();
-		}
+        }
 
-		/// <summary>
-		/// Allows the game component to update itself.
-		/// </summary>
-		/// <param name="gameTime">Provides a snapshot of timing values.</param>
-		public override void Update(GameTime gameTime)
-		{
-			base.Update(gameTime);
-		}
+        /// <summary>
+        /// Allows the game component to update itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+        }
 
-		/// <summary>
-		/// Called when the DrawableGameComponent needs to be drawn. Override this method
-		//  with component-specific drawing code.
-		/// </summary>
-		/// <param name="gameTime">Provides a snapshot of timing values.</param>
-		public override void Draw(GameTime gameTime)
-		{
+        /// <summary>
+        /// Called when the DrawableGameComponent needs to be drawn. Override this method
+        //  with component-specific drawing code.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public override void Draw(GameTime gameTime)
+        {
             IRTGame game = this.Game as IRTGame;
 
             // Set texture according the unit status.
@@ -151,7 +176,7 @@ namespace IRTaktiks.Components.Menu
 
             // Get the unit's life points text.
             string lifeInformation = String.Format("{0}/{1}", this.Unit.Life, this.Unit.Attributes.MaximumLife);
-            
+
             // Get the unit's mana points text.
             string manaInformation = String.Format("{0}/{1}", this.Unit.Mana, this.Unit.Attributes.MaximumMana);
 
@@ -193,9 +218,111 @@ namespace IRTaktiks.Components.Menu
             game.SpriteManager.Draw(TextureManager.Instance.Sprites.Unit.ManaBar, manaBar, Color.White, 51);
             game.SpriteManager.Draw(TextureManager.Instance.Sprites.Unit.TimeBar, timeBar, Color.White, 51);
 
-            base.Draw(gameTime);
-		}
+            // If the attributes are visible.
+            if (this.AttributesVisible)
+            {
+                Vector2 attributesPosition = new Vector2(this.Position.X + this.UnitTexture.Width, this.Position.Y);
 
-		#endregion
+                // Draws the unit's attributes background.
+                game.SpriteManager.Draw(this.AttributesTexture, attributesPosition, Color.White, 50);
+
+                // Calculate the size of the texts
+                Vector2 strengthSize = this.AttributesSpriteFont.MeasureString("STR");
+                Vector2 agilitySize = this.AttributesSpriteFont.MeasureString("AGI");
+                Vector2 vitalitySize = this.AttributesSpriteFont.MeasureString("VIT");
+                Vector2 inteligenceSize = this.AttributesSpriteFont.MeasureString("INT");
+                Vector2 dexteritySize = this.AttributesSpriteFont.MeasureString("DEX");
+
+                Vector2 attackSize = this.AttributesSpriteFont.MeasureString("ATK");
+                Vector2 defenseSize = this.AttributesSpriteFont.MeasureString("DEF");
+                Vector2 magicAttackSize = this.AttributesSpriteFont.MeasureString("MATK");
+                Vector2 magicDefenseSize = this.AttributesSpriteFont.MeasureString("MDEF");
+                Vector2 fleeSize = this.AttributesSpriteFont.MeasureString("FLEE");
+                Vector2 hitSize = this.AttributesSpriteFont.MeasureString("HIT");
+                Vector2 rangeSize = this.AttributesSpriteFont.MeasureString("RANGE");
+                Vector2 delaySize = this.AttributesSpriteFont.MeasureString("DELAY");
+
+                // Calculate the position of the texts
+                int offsetLabel = 7;
+                int offsetValue = offsetLabel + 7;
+                int distance = 17; 
+                int start1st = 10; 
+                int start2nd = 105;
+
+                Vector2 strengthPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - strengthSize.X + offsetLabel, attributesPosition.Y + start1st + distance * 0);
+                Vector2 agilityPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - agilitySize.X + offsetLabel, attributesPosition.Y + start1st + distance * 1);
+                Vector2 vitalityPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - vitalitySize.X + offsetLabel, attributesPosition.Y + start1st + distance * 2);
+                Vector2 inteligencePosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - inteligenceSize.X + offsetLabel, attributesPosition.Y + start1st + distance * 3);
+                Vector2 dexterityPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - dexteritySize.X + offsetLabel, attributesPosition.Y + start1st + distance * 4);
+
+                Vector2 attackPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - attackSize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 0);
+                Vector2 defensePosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - defenseSize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 1);
+                Vector2 magicAttackPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - magicAttackSize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 2);
+                Vector2 magicDefensePosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - magicDefenseSize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 3);
+                Vector2 fleePosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - fleeSize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 4);
+                Vector2 hitPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - hitSize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 5);
+                Vector2 rangePosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - rangeSize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 6);
+                Vector2 delayPosition = new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 - delaySize.X + offsetLabel, attributesPosition.Y + start2nd + distance * 7);
+
+                // Draws the texts.
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, "STR", strengthPosition, Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, "AGI", agilityPosition, Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, "VIT", vitalityPosition, Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, "INT", inteligencePosition, Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, "DEX", dexterityPosition, Color.White, 52);
+
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, "ATK", attackPosition, Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, "DEF", defensePosition, Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, "MATK", magicAttackPosition, Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, "MDEF", magicDefensePosition, Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, "FLEE", fleePosition, Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, "HIT", hitPosition, Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, "RANGE", rangePosition, Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, "DELAY", delayPosition, Color.White, 52);
+
+                // Draw the values.
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Strength.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, strengthPosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Agility.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, agilityPosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Vitality.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, vitalityPosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Inteligence.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, inteligencePosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Dexterity.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, dexterityPosition.Y), Color.White, 52);
+
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Attack.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, attackPosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Defense.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, defensePosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.MagicAttack.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, magicAttackPosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.MagicDefense.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, magicDefensePosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Flee.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, fleePosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Hit.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, hitPosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.SkillRange.ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, rangePosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, ((int)(300 - this.Unit.Attributes.Delay * 100000)).ToString(), new Vector2(attributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, delayPosition.Y), Color.White, 52);
+
+            }
+
+            base.Draw(gameTime);
+        }
+
+        #endregion
+
+        #region Input Handling
+
+        /// <summary>
+        /// Handles the CursorDown event.
+        /// </summary>
+        /// <param name="sender">Always null.</param>
+        /// <param name="e">Data of event.</param>
+        private void Instance_CursorDown(object sender, CursorDownArgs e)
+        {
+            // Check if the touch was inside the x area of the menu.
+            if (e.Position.X < (this.Position.X + this.UnitTexture.Width) && e.Position.X > this.Position.X)
+            {
+                // Check if the touch was inside the y area of the menu.
+                if (e.Position.Y < (this.Position.Y + this.UnitTexture.Height) && e.Position.Y > this.Position.Y)
+                {
+                    this.AttributesVisible = !this.AttributesVisible;
+                }
+            }
+        }
+
+        #endregion
     }
 }

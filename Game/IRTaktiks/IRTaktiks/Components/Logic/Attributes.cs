@@ -147,89 +147,121 @@ namespace IRTaktiks.Components.Logic
 
         /// <summary>
         /// The attack value of the unit.
+        /// ((STR + (((STR / 10)^3) + (2 * LVL)) / 2) * @) + (DEX / 5))
         /// </summary>
         public int Attack
         {
             get
             {
-                return 0;
+                float jobAtk = 1.0f;
+                return Convert.ToInt32(((this.Strength + (((this.Strength / 10) * (this.Strength / 10) * (this.Strength / 10)) + (2 * this.Level)) / 2) * jobAtk) + (this.Dexterity / 5));
             }
         }
 
         /// <summary>
         /// The defense value of the unit.
+        /// ((2.5 * VIT + (VIT / 3) + (INT / 5) + LVL) * @)
         /// </summary>
         public int Defense
         {
             get
             {
-                return 0;
+                float jobDef = 1.0f;
+                return Convert.ToInt32((2.5f * this.Vitality + (this.Vitality / 3) + (this.Inteligence / 5) + this.Level) * jobDef);
             }
         }
 
         /// <summary>
         /// The magic attack value of the unit.
+        /// (((INT / 5) * (INT / 5) + LVL) * @)
         /// </summary>
         public int MagicAttack
         {
             get
             {
-                return 0;
+                float jobMAtk = 1.0f;
+                return Convert.ToInt32(((this.Inteligence / 5) * (this.Inteligence / 5) + this.Level) * jobMAtk);
             }
         }
 
         /// <summary>
         /// The magic defense value of the unit.
+        /// ((2.5 * INT + (INT / 3) + (VIT / 5) + LVL) * @)
         /// </summary>
         public int MagicDefense
         {
             get
             {
-                return 0;
+                float jobMDef = 1.0f;
+                return Convert.ToInt32((2.5f * this.Inteligence + (this.Inteligence / 3) + (this.Vitality / 5) + this.Level) * jobMDef);
             }
         }
 
         /// <summary>
         /// The flee value of the unit.
+        /// (20 + AGI)
         /// </summary>
         public int Flee
         {
             get
             {
-                return 0;
+                return Convert.ToInt32(20 + this.Agility);
             }
         }
 
         /// <summary>
         /// The hit value of the unit.
+        /// (80 + DEX)
         /// </summary>
         public int Hit
         {
             get
             {
-                return 0;
+                return Convert.ToInt32(80 + this.Dexterity);
             }
         }
 
         /// <summary>
-        /// The range value of the unit.
+        /// The skill range value of the unit.
         /// </summary>
-        public int Range
+        public int ShortAttackRange
         {
             get
             {
-                return 0;
+                return 100;
+            }
+        }
+
+        /// <summary>
+        /// The skill range value of the unit.
+        /// </summary>
+        public int LongAttackRange
+        {
+            get
+            {
+                return Convert.ToInt32(100 + (2 * this.Dexterity));
+            }
+        }
+
+        /// <summary>
+        /// The skill range value of the unit.
+        /// </summary>
+        public int SkillRange
+        {
+            get
+            {
+                return Convert.ToInt32(100 + (1.5 * this.Inteligence) + (1.5 * this.Dexterity));
             }
         }
 
         /// <summary>
         /// The delay value of the unit.
         /// </summary>
-        public int Delay
+        public double Delay
         {
             get
             {
-                return 0;
+                return (0.001 + 0.001 * ((double)this.Agility / 99));
             }
         }
 
@@ -260,56 +292,6 @@ namespace IRTaktiks.Components.Logic
             this.InteligenceField = magic;
             this.DexterityField = dexterity;
         }
-
-        #endregion
-
-        #region Methods
-
-        #region Areas
-
-        /// <summary>
-        /// Calculates the area that a magic can be spelled.
-        /// Based on dexterity and magic.
-        /// </summary>
-        /// <returns>The area.</returns>
-        public double CalculateMagicArea()
-        {
-            return 100 + 1.5 * (double)this.Dexterity + 1.0 * (double)this.Inteligence;
-        }
-
-        #endregion
-
-        #region Factors
-
-        /// <summary>
-        /// Calculates the time factor, used on time update.
-        /// Based on agility.
-        /// </summary>
-        /// <returns>The time factor.</returns>
-        public double CalculateTimeFactor()
-        {
-            return 0.001 + 0.001 * ((double)this.Agility / 99);
-        }
-
-        /// <summary>
-        /// Calculates the magic attack factor.
-        /// </summary>
-        /// <returns>The magic attack factor.</returns>
-        public double CalculateMagicAttackFactor()
-        {
-            return 3.25 * (double)this.Inteligence;
-        }
-
-        /// <summary>
-        /// Calculates the magic defense factor.
-        /// </summary>
-        /// <returns>The magic defense factor.</returns>
-        public double CalculateMagicDefenseFactor()
-        {
-            return 3.05 * (double)this.Inteligence;
-        }
-
-        #endregion
 
         #endregion
     }

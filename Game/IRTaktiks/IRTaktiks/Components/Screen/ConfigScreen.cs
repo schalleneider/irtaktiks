@@ -20,10 +20,6 @@ namespace IRTaktiks.Components.Screen
     /// </summary>
     public class ConfigScreen : IScreen
     {
-        #region Properties
-
-        #endregion
-
         #region Constructor
 
         /// <summary>
@@ -49,28 +45,35 @@ namespace IRTaktiks.Components.Screen
             IRTGame game = this.Game as IRTGame;
 
             // Create the players
-            game.PlayerOne = new Player(this.Game, "Metatron", PlayerIndex.One);
-            game.PlayerTwo = new Player(this.Game, "Lilith", PlayerIndex.Two);
+            game.PlayerOne = new Player(this.Game, "Willians", PlayerIndex.One);
+            game.PlayerTwo = new Player(this.Game, "Sakura", PlayerIndex.Two);
             
-            // Create the units for player one.
+            // Create attributes
+            Attributes attributesAssasin = new Attributes(99, Job.Assasin, Element.Wind, 20, 99, 20, 1, 40);
             Attributes attributesKnight = new Attributes(99, Job.Knight, Element.Fire, 99, 1, 50, 1, 50);
-            Attributes attributesThief = new Attributes(99, Job.Assasin, Element.Wind, 20, 99, 20, 1, 40);
-            Unit knightOne = new Unit(this.Game, game.PlayerOne, new Vector2(500, 400), attributesKnight, Orientation.Left, TextureManager.Instance.Characters.Knight, "Knight");
-            Unit thiefOne = new Unit(this.Game, game.PlayerOne, new Vector2(500, 300), attributesThief, Orientation.Right, TextureManager.Instance.Characters.Wizard, "Thief");
-
-            // Create the units for player two.
             Attributes attributesMonk = new Attributes(99, Job.Monk, Element.Earth, 50, 30, 10, 30, 10);
-            Attributes attributesPriest = new Attributes(99, Job.Priest, Element.Holy, 1, 1, 1, 99, 99);            
-            Unit monkTwo = new Unit(this.Game, game.PlayerTwo, new Vector2(800, 200), attributesMonk, Orientation.Up, TextureManager.Instance.Characters.Knight, "Monk");
-            Unit priestTwo = new Unit(this.Game, game.PlayerTwo, new Vector2(800, 300), attributesPriest, Orientation.Down, TextureManager.Instance.Characters.Wizard, "Priest");
+            
+            Attributes attributesPaladin = new Attributes(99, Job.Paladin, Element.Water, 80, 1, 60, 80, 20);
+            Attributes attributesPriest = new Attributes(99, Job.Priest, Element.Holy, 1, 1, 80, 99, 30);
+            Attributes attributesWizard = new Attributes(99, Job.Wizard, Element.Dark, 1, 1, 1, 99, 99);
+
+            Unit assasin = new Unit(this.Game, game.PlayerOne, new Vector2(300, 300), attributesAssasin, Orientation.Right, TextureManager.Instance.Characters.Knight, "Assasin");
+            Unit knight = new Unit(this.Game, game.PlayerOne, new Vector2(300, 400), attributesKnight, Orientation.Right, TextureManager.Instance.Characters.Knight, "Knight");
+            Unit monk = new Unit(this.Game, game.PlayerOne, new Vector2(300, 500), attributesMonk, Orientation.Right, TextureManager.Instance.Characters.Knight, "Monk");
+
+            Unit paladin = new Unit(this.Game, game.PlayerTwo, new Vector2(800, 300), attributesPaladin, Orientation.Left, TextureManager.Instance.Characters.Wizard, "Paladin");
+            Unit priest = new Unit(this.Game, game.PlayerTwo, new Vector2(800, 400), attributesPriest, Orientation.Left, TextureManager.Instance.Characters.Wizard, "Priest");
+            Unit wizard = new Unit(this.Game, game.PlayerTwo, new Vector2(800, 500), attributesWizard, Orientation.Left, TextureManager.Instance.Characters.Wizard, "Wizard");
 
             // Add the units for player one.
-            //game.PlayerOne.Units.Add(knightOne);
-            //game.PlayerOne.Units.Add(thiefOne);
+            game.PlayerOne.Units.Add(knight);
+            game.PlayerOne.Units.Add(assasin);
+            game.PlayerOne.Units.Add(monk);
 
             // Add the units for player two.
-            //game.PlayerTwo.Units.Add(monkTwo);
-            game.PlayerTwo.Units.Add(priestTwo);
+            game.PlayerTwo.Units.Add(paladin);
+            game.PlayerTwo.Units.Add(priest);
+            game.PlayerTwo.Units.Add(wizard);
 
             // Input Event registration.
             InputManager.Instance.CursorUp += new EventHandler<CursorUpArgs>(CursorUp_Handler);
