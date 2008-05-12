@@ -38,9 +38,20 @@ namespace IRTaktiks.Components.Manager
         /// Private constructor.
         /// </summary>
         private ItemManager()
-        { }
+        {
+            this.Random = new Random();
+        }
 
         #endregion 
+
+        #region Properties
+
+        /// <summary>
+        /// Random number generator.
+        /// </summary>
+        private Random Random;
+
+        #endregion
 
         #region Construct
 

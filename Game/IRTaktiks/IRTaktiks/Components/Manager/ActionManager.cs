@@ -464,7 +464,7 @@ namespace IRTaktiks.Components.Manager
 
                 case ActionMenu.ActionMenuType.Move:
                     
-                    this.Mover.Activate(actionMenu, 250);
+                    this.Mover.Activate(actionMenu, this.Unit.Attributes.Range);
                     this.Mover.Moved += new Mover.MovedEventHandler(Mover_Moved);
                     break;
 
@@ -488,13 +488,13 @@ namespace IRTaktiks.Components.Manager
             {
                 case Attack.AttackType.Long:
 
-                    this.Aim.Activate(actionMenu, 250);
+                    this.Aim.Activate(actionMenu, this.Unit.Attributes.LongAttackRange);
                     this.Aim.Aimed += new Aim.AimedEventHandler(Aim_Aimed);
                     break;
 
                 case Attack.AttackType.Short:
 
-                    this.Aim.Activate(actionMenu, 250);
+                    this.Aim.Activate(actionMenu, this.Unit.Attributes.ShortAttackRange);
                     this.Aim.Aimed += new Aim.AimedEventHandler(Aim_Aimed);
                     break;
             }
@@ -511,11 +511,14 @@ namespace IRTaktiks.Components.Manager
             switch ((commandMenu.Command as Skill).Type)
             {
                 case Skill.SkillType.Self:
+                    
+                    commandMenu.Command.Execute(this.Unit, this.Unit.Position);
+                    this.Reset();
                     break;
 
                 case Skill.SkillType.Target:
                     
-                    this.Aim.Activate(actionMenu, 250);
+                    this.Aim.Activate(actionMenu, this.Unit.Attributes.SkillRange);
                     this.Aim.Aimed += new Aim.AimedEventHandler(Aim_Aimed);
                     break;
             }
@@ -531,12 +534,15 @@ namespace IRTaktiks.Components.Manager
 
             switch ((commandMenu.Command as Item).Type)
             {
-                case Item.ItemType.Self:
+                case Item.ItemType.Self: 
+                    
+                    commandMenu.Command.Execute(this.Unit, this.Unit.Position);
+                    this.Reset();
                     break;
 
                 case Item.ItemType.Target:
 
-                    this.Aim.Activate(actionMenu, 250);
+                    this.Aim.Activate(actionMenu, this.Unit.Attributes.SkillRange);
                     this.Aim.Aimed += new Aim.AimedEventHandler(Aim_Aimed);
                     break;
             }
