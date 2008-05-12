@@ -79,10 +79,10 @@ namespace IRTaktiks.Components.Debug
             IRTGame game = this.Game as IRTGame;
 
             game.ParticleManager.Queue(
-                new ParticleEffect(e.Position, 50, ParticleEffect.EffectType.Ring, 0.1f, 2.5f, null)
+                new ParticleEffect(e.Position, 50, ParticleEffect.EffectType.Slice, 0.3f, 2.5f, null)
                 );
 
-            //AnimationManager.Instance.Animate(AnimationManager.AnimationType.Heal, e.Position);
+            AnimationManager.Instance.Animate(AnimationManager.AnimationType.Heal, e.Position);
         }
 
         #endregion
