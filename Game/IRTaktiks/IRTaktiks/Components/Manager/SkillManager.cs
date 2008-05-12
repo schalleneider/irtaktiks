@@ -137,6 +137,12 @@ namespace IRTaktiks.Components.Manager
             caster.Mana -= command.Attribute;
             caster.Time = 0;
 
+            // Show the mp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
+            }
+
             ThreadPool.QueueUserWorkItem(delegate(object data)
             {
                 Unit unit = data as Unit;
@@ -167,6 +173,12 @@ namespace IRTaktiks.Components.Manager
             // Effects on caster.
             caster.Mana -= command.Attribute;
             caster.Time = 0;
+
+            // Show the mp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
+            }
 
             // Effects on target.
             if (target != null)
@@ -199,7 +211,7 @@ namespace IRTaktiks.Components.Manager
                 // Miss
                 else
                 {
-                    game.DamageManager.Queue(new Damage("MISS", caster.Position, Damage.DamageType.Harmful));
+                    game.DamageManager.Queue(new Damage("MISS", target.Position, Damage.DamageType.Harmful));
                 }
             }
         }
@@ -219,6 +231,12 @@ namespace IRTaktiks.Components.Manager
             // Effects on caster.
             caster.Mana -= command.Attribute;
             caster.Time = 0;
+
+            // Show the mp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
+            }
 
             // Effects on target.
             if (target != null)
@@ -244,7 +262,7 @@ namespace IRTaktiks.Components.Manager
                 // Miss
                 else
                 {
-                    game.DamageManager.Queue(new Damage("MISS", caster.Position, Damage.DamageType.Harmful));
+                    game.DamageManager.Queue(new Damage("MISS", target.Position, Damage.DamageType.Harmful));
                 }
             }
         }
@@ -268,6 +286,12 @@ namespace IRTaktiks.Components.Manager
             // Effects on caster.
             caster.Mana -= command.Attribute;
             caster.Time = 0;
+
+            // Show the mp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
+            }
 
             ThreadPool.QueueUserWorkItem(delegate(object data)
             {
@@ -299,6 +323,12 @@ namespace IRTaktiks.Components.Manager
             // Effects on caster.
             caster.Mana -= command.Attribute;
             caster.Time = 0;
+
+            // Show the mp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
+            }
 
             // Effects on target.
             if (target != null)
@@ -337,7 +367,7 @@ namespace IRTaktiks.Components.Manager
                 // Miss
                 else
                 {
-                    game.DamageManager.Queue(new Damage("MISS", caster.Position, Damage.DamageType.Harmful));
+                    game.DamageManager.Queue(new Damage("MISS", target.Position, Damage.DamageType.Harmful));
                 }
             }
         }
@@ -357,6 +387,12 @@ namespace IRTaktiks.Components.Manager
             // Effects on caster.
             caster.Mana -= command.Attribute;
             caster.Time = 0;
+
+            // Show the mp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
+            }
 
             // Effects on target.
             if (target != null)
@@ -389,14 +425,13 @@ namespace IRTaktiks.Components.Manager
                 // Miss
                 else
                 {
-                    game.DamageManager.Queue(new Damage("MISS", caster.Position, Damage.DamageType.Harmful));
+                    game.DamageManager.Queue(new Damage("MISS", target.Position, Damage.DamageType.Harmful));
                 }
             }
         }
 
         /// <summary>
         /// Increases the Strength of the caster for 30 seconds.
-        /// STR * 2
         /// </summary>
         /// <param name="command">Skill casted.</param>
         /// <param name="caster">The caster of the skill.</param>
@@ -414,6 +449,12 @@ namespace IRTaktiks.Components.Manager
             // Effects on caster.
             caster.Mana -= command.Attribute;
             caster.Time = 0;
+
+            // Show the mp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
+            }
 
             ThreadPool.QueueUserWorkItem(delegate(object data)
             {
@@ -445,6 +486,12 @@ namespace IRTaktiks.Components.Manager
             // Effects on caster.
             caster.Mana -= command.Attribute;
             caster.Time = 0;
+
+            // Show the mp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
+            }
 
             // Effects on target.
             if (target != null)
@@ -480,7 +527,7 @@ namespace IRTaktiks.Components.Manager
                     // Miss
                     else
                     {
-                        game.DamageManager.Queue(new Damage("MISS", caster.Position, Damage.DamageType.Harmful));
+                        game.DamageManager.Queue(new Damage("MISS", target.Position, Damage.DamageType.Harmful));
                     }
 
                     Thread.Sleep(500);
@@ -489,7 +536,8 @@ namespace IRTaktiks.Components.Manager
         }
 
         /// <summary>
-        /// Cast the skill.
+        /// Large amount of psysical and magic damage, based on level, strength, inteligence and mana left. Cost all mana points of the unit.
+        /// ((15 * (LVL / 100) * (ATK + MATK) - (0.5 * (DEF + MDEF)) * MANA / MAXMANA)
         /// </summary>
         /// <param name="command">Skill casted.</param>
         /// <param name="caster">The caster of the skill.</param>
@@ -497,11 +545,57 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The position of the target.</param>
         private void Reject(Command command, Unit caster, Unit target, Vector2 position)
         {
+            // Obtain the game instance.
+            IRTGame game = caster.Game as IRTGame;
+
+            // Effects on target.
+            if (target != null)
+            {
+                // Calcule the attack.
+                double damage;
+
+                damage = ((15 * (caster.Attributes.Level / 100) * (caster.Attributes.Attack + caster.Attributes.MagicAttack)) - (0.5 * (caster.Attributes.Defense + caster.Attributes.MagicDefense)) * (float)caster.Mana / (float)caster.Attributes.MaximumMana);
+                damage += this.Random.NextDouble() * 0.1f * damage;
+                damage = damage < 1 ? 1 : damage;
+
+                // Apply the hit and flee %.
+                int percent = caster.Attributes.Hit - target.Attributes.Flee;
+
+                // Limits of flee and hit.
+                if (percent > 100) percent = 100;
+                if (percent < 0) percent = 0;
+
+                // Hit
+                if (this.Random.Next(0, 100) <= percent)
+                {
+                    target.Life -= (int)damage;
+
+                    Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
+                    AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Reject, animationPosition);
+
+                    game.DamageManager.Queue(new Damage((int)damage, null, target.Position, Damage.DamageType.Harmful));
+                }
+
+                // Miss
+                else
+                {
+                    game.DamageManager.Queue(new Damage("MISS", target.Position, Damage.DamageType.Harmful));
+                }
+            }
+
+            // Show the mp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(caster.Mana, "MP", caster.Position, Damage.DamageType.Harmful));
+            }
+
+            // Effects on caster.
+            caster.Mana = 0;
+            caster.Time = 0;
         }
 
         /// <summary>
         /// Increases the Vitality of the caster for 60 seconds.
-        /// VIT * 2
         /// </summary>
         /// <param name="command">Skill casted.</param>
         /// <param name="caster">The caster of the skill.</param>
@@ -519,6 +613,12 @@ namespace IRTaktiks.Components.Manager
             // Effects on caster.
             caster.Mana -= command.Attribute;
             caster.Time = 0;
+
+            // Show the mp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
+            }
 
             ThreadPool.QueueUserWorkItem(delegate(object data)
             {
@@ -567,6 +667,9 @@ namespace IRTaktiks.Components.Manager
             {
                 // Heal the target
                 double damage = ((caster.Attributes.Level + caster.Attributes.Inteligence) / 8) * 44;
+                damage += this.Random.NextDouble() * 0.1f * damage;
+                damage = damage < 1 ? 1 : damage; 
+                
                 target.Life += (int)damage;
 
                 // Show the hp gain.
@@ -575,7 +678,7 @@ namespace IRTaktiks.Components.Manager
         }
 
         /// <summary>
-        /// Cast the skill.
+        /// Reduces 50% of the target life at the cost of the 50% of the caster life.
         /// </summary>
         /// <param name="command">Skill casted.</param>
         /// <param name="caster">The caster of the skill.</param>
@@ -583,12 +686,35 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The position of the target.</param>
         private void Unseal(Command command, Unit caster, Unit target, Vector2 position)
         {
+            // Obtain the game instance.
+            IRTGame game = caster.Game as IRTGame;
+
+            // Show the animation.
+            Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
+            AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Unseal, animationPosition);
+
+            // Effects on caster.
+            caster.Life /= 2;
+            caster.Time = 0;
+
+            // Show the hp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(caster.Life, null, caster.Position, Damage.DamageType.Harmful));
+            }
+
+            // Effects on target.
+            if (target != null)
+            {
+                target.Life /= 2;
+
+                // Show the damage.
+                game.DamageManager.Queue(new Damage(target.Life, null, target.Position, Damage.DamageType.Benefit));
+            }
         }
 
         /// <summary>
         /// Increases the DEF and MDEF of the target for 60 seconds.
-        /// DEF * 1.5f
-        /// MDEF * 1.5f
         /// </summary>
         /// <param name="command">Skill casted.</param>
         /// <param name="caster">The caster of the skill.</param>
