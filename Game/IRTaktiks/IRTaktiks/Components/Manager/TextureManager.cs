@@ -848,7 +848,7 @@ namespace IRTaktiks.Components.Manager
             
             this.Sprites.TitleScreen = game.Content.Load<Texture2D>("Sprites/TitleScreen");
 
-            this.Terrains.Terrain = game.Content.Load<Texture2D>("Terrains/Terrain");
+            //this.Terrains.Terrain = game.Content.Load<Texture2D>("Terrains/Terrain");
 
             this.Textures.Grass = game.Content.Load<Texture2D>("Textures/Grass");
             this.Textures.Particle = game.Content.Load<Texture2D>("Textures/Particle");

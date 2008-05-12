@@ -81,8 +81,6 @@ namespace IRTaktiks.Components.Debug
             game.ParticleManager.Queue(
                 new ParticleEffect(e.Position, 50, ParticleEffect.EffectType.Ring, 0.1f, 3.0f, null)
                 );
-
-            //AnimationManager.Instance.Animate(AnimationManager.AnimationType.Heal, e.Position);
         }
 
         #endregion

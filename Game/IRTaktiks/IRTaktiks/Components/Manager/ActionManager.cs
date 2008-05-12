@@ -354,6 +354,9 @@ namespace IRTaktiks.Components.Manager
                     float limitY = this.Position.Y + (TextureManager.Instance.Sprites.Menu.Item.Width * count);
                     if (e.Position.Y < limitY && e.Position.Y > this.Position.Y)
                     {
+                        this.Aim.Deactivate();
+                        this.Mover.Deactivate();
+                        
                         // If items were selected
                         if (selected != -1)
                         {
@@ -580,3 +583,126 @@ namespace IRTaktiks.Components.Manager
         #endregion
     }
 }
+/*
+        /// <summary>
+        /// Input Handling for Cursor Down event.
+        /// </summary>
+        private void CursorDown(object sender, CursorDownArgs e)
+        {
+            // Check if the items can be selected or executed.
+            if (this.Enabled && this.Visible && !this.Freezed)
+            {
+                // Define if the touch was inside the menu area.
+                float limitX = this.Position.X + TextureManager.Instance.Sprites.Menu.Item.Width;
+                if (e.Position.X < limitX && e.Position.X > this.Position.X)
+                {
+                    // Calculate the count of items displayed in the menu.
+                    int count = this.Actions.Count;
+                    int selected = -1;
+                    for (int index = 0; index < this.Actions.Count; index++)
+                    {
+                        // Guard the item that is selected.
+                        if (this.Actions[index].Selected)
+                        {
+                            count += this.Actions[index].Commands.Count;
+                            selected = index;
+                        }
+
+                        // Unselect all the items.
+                        this.Actions[index].Selected = false;
+                    }
+
+                    // Define if the touch was inside the action menu area.
+                    float limitY = this.Position.Y + (TextureManager.Instance.Sprites.Menu.Item.Width * count);
+                    if (e.Position.Y < limitY && e.Position.Y > this.Position.Y)
+                    {
+                        // If items were selected
+                        if (selected != -1)
+                        {
+                            // Verify the position in all items.
+                            for (int index = 0; index < this.Actions.Count; index++)
+                            {
+                                // Check if the actual item is that was selected.
+                                if (index == selected)
+                                {
+                                    // Check if the actual item has subitems
+                                    if (this.Actions[index].Commands.Count > 0)
+                                    {
+                                        // Check if the touch was inside a subitems of the selected item.
+                                        float sublimitY = this.Actions[index].Commands[this.Actions[index].Commands.Count - 1].Position.Y + TextureManager.Instance.Sprites.Menu.Item.Height;
+                                        if (e.Position.Y < sublimitY && e.Position.Y > this.Actions[index].Commands[0].Position.Y)
+                                        {
+                                            // Calculates the index of the subitem touched.
+                                            int subindex = (int)(e.Position.Y - this.Actions[index].Commands[0].Position.Y) / TextureManager.Instance.Sprites.Menu.Item.Height;
+
+                                            // Reselect the item that was selected.
+                                            this.Actions[index].Selected = true;
+
+                                            // Check if the subitem is enabled.
+                                            if (this.Actions[index].Commands[subindex].Command.Enabled)
+                                            {
+                                                // Select and queue the Execute event of the subitem touched.
+                                                this.Actions[index].Commands[subindex].Selected = true;
+                                                this.Actions[index].Commands[subindex].RaiseExecute();
+
+                                                this.FreezedField = true;
+                                                this.ChangedField = true;
+                                            }
+                                        }
+
+                                        this.ChangedField = true;
+                                    }
+                                    else
+                                    {
+                                        this.ChangedField = true;
+                                    }
+                                }
+                                else
+                                {
+                                    // Check if the touch was inside of the item.
+                                    limitY = this.Actions[index].Position.Y + TextureManager.Instance.Sprites.Menu.Item.Height;
+                                    if (e.Position.Y < limitY && e.Position.Y > this.Actions[index].Position.Y)
+                                    {
+                                        this.Actions[index].Selected = true;
+                                        this.Actions[index].RaiseExecute();
+
+                                        // Deactives the mover.
+                                        if (this.Mover.Enabled)
+                                        {
+                                            this.Mover.Deactivate();
+                                        }
+
+                                        // Deactives the aim.
+                                        if (this.Aim.Enabled)
+                                        {
+                                            this.Aim.Deactivate();
+                                        }
+
+                                        this.ChangedField = true;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Calculates the index of the item touched.
+                            int index = (int)(e.Position.Y - this.Position.Y) / TextureManager.Instance.Sprites.Menu.Item.Height;
+
+                            if (index < count)
+                            {
+                                // Selects the menu item for the first time and queue the Execute event for dispatch.
+                                this.Actions[index].Selected = true;
+                                this.Actions[index].RaiseExecute();
+
+                                this.ChangedField = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        this.ChangedField = true;
+                    }
+                }
+            }
+        }
+*/
