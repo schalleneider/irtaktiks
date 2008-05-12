@@ -48,37 +48,102 @@ namespace IRTaktiks.Components.Manager
         public enum AnimationType
         {
             /// <summary>
-            /// The animation for short attacks.
+            /// Animation for Short attack.
             /// </summary>
-            ShortAttack,
+            Short,
 
             /// <summary>
-            /// The animation for long attacks.
+            /// Animation for Long attack.
             /// </summary>
-            LongAttack,
+            Long,
 
             /// <summary>
-            /// The animation for heal magic
+            /// Animation for Stealth skill.
+            /// </summary>
+            Stealth,
+
+            /// <summary>
+            /// Animation for Ambush skill.
+            /// </summary>
+            Ambush,
+
+            /// <summary>
+            /// Animation for Curse skill.
+            /// </summary>
+            Curse,
+
+            /// <summary>
+            /// Animation for Quick skill.
+            /// </summary>
+            Quick,
+
+            /// <summary>
+            /// Animation for Impact skill.
+            /// </summary>
+            Impact,
+
+            /// <summary>
+            /// Animation for Revenge skill.
+            /// </summary>
+            Revenge,
+
+            /// <summary>
+            /// Animation for Warcry skill.
+            /// </summary>
+            Warcry,
+
+            /// <summary>
+            /// Animation for Insane skill.
+            /// </summary>
+            Insane,
+
+            /// <summary>
+            /// Animation for Reject skill.
+            /// </summary>
+            Reject,
+
+            /// <summary>
+            /// Animation for Might skill.
+            /// </summary>
+            Might,
+
+            /// <summary>
+            /// Animation for Heal skill.
             /// </summary>
             Heal,
-            
-            /// <summary>
-            /// The animation for fire magic.
-            /// </summary>
-            Fire,
 
             /// <summary>
-            /// The animation for ice magic.
+            /// Animation for Unseal skill.
             /// </summary>
-            Ice,
+            Unseal,
 
             /// <summary>
-            /// The animation for thunder magic.
+            /// Animation for Barrier skill.
             /// </summary>
-            Thunder,
+            Barrier,
 
             /// <summary>
-            /// The animation for item usage.
+            /// Animation for Holy skill.
+            /// </summary>
+            Holy,
+
+            /// <summary>
+            /// Animation for Drain skill.
+            /// </summary>
+            Drain,
+
+            /// <summary>
+            /// Animation for Flame skill.
+            /// </summary>
+            Flame,
+
+            /// <summary>
+            /// Animation for Frost skill.
+            /// </summary>
+            Frost,
+
+            /// <summary>
+            /// Animation for Item usage.
             /// </summary>
             Item,
         }
@@ -137,32 +202,84 @@ namespace IRTaktiks.Components.Manager
 
             switch (type)
             {
-                case AnimationType.ShortAttack:
-                    this.ShortAttack(position);
+                case AnimationType.Ambush:
+                    this.Ambush(position);
                     break;
 
-                case AnimationType.LongAttack:
+                case AnimationType.Barrier:
+                    this.Barrier(position);
+                    break;
 
+                case AnimationType.Curse:
+                    this.Curse(position);
+                    break;
+
+                case AnimationType.Drain:
+                    this.Drain(position);
+                    break;
+
+                case AnimationType.Flame:
+                    this.Flame(position);
+                    break;
+
+                case AnimationType.Frost:
+                    this.Frost(position);
                     break;
 
                 case AnimationType.Heal:
                     this.Heal(position);
                     break;
 
-                case AnimationType.Fire:
-
+                case AnimationType.Holy:
+                    this.Holy(position);
                     break;
 
-                case AnimationType.Ice:
-
+                case AnimationType.Impact:
+                    this.Impact(position);
                     break;
 
-                case AnimationType.Thunder:
-
+                case AnimationType.Insane:
+                    this.Insane(position);
                     break;
 
                 case AnimationType.Item:
+                    this.Item(position);
+                    break;
 
+                case AnimationType.Long:
+                    this.Long(position);
+                    break;
+
+                case AnimationType.Might:
+                    this.Might(position);
+                    break;
+
+                case AnimationType.Quick:
+                    this.Quick(position);
+                    break;
+
+                case AnimationType.Reject:
+                    this.Reject(position);
+                    break;
+
+                case AnimationType.Revenge:
+                    this.Revenge(position);
+                    break;
+
+                case AnimationType.Short:
+                    this.Short(position);
+                    break;
+
+                case AnimationType.Stealth:
+                    this.Stealth(position);
+                    break;
+
+                case AnimationType.Unseal:
+                    this.Unseal(position);
+                    break;
+
+                case AnimationType.Warcry:
+                    this.Warcry(position);
                     break;
             }
         }
@@ -172,57 +289,228 @@ namespace IRTaktiks.Components.Manager
         #region Animations
 
         /// <summary>
-        /// Animation of short attack.
+        /// Execute the Animation.
         /// </summary>
         /// <param name="position">The target position.</param>
-        private void ShortAttack(Vector2 position)
+        private void None(Vector2 position)
         {
-            Vector2 firstPosition = new Vector2(position.X - 5, position.Y + 10);
-            ParticleManager.Queue(new ParticleEffect(firstPosition, 100, ParticleEffect.EffectType.Flash45, 0.1f, 3f, Color.Orchid));
-
-            Thread.Sleep(200);
-
-            Vector2 secondPosition = new Vector2(position.X + 5, position.Y - 10);
-            ParticleManager.Queue(new ParticleEffect(secondPosition, 100, ParticleEffect.EffectType.Flash135, 0.1f, 3f, Color.Aquamarine));
-
-            Thread.Sleep(200);
-
-            Vector2 thirdPosition = new Vector2(position.X - 5, position.Y - 10);
-            ParticleManager.Queue(new ParticleEffect(thirdPosition, 100, ParticleEffect.EffectType.Flash45, 0.1f, 3f, Color.Orchid));
-
-            Thread.Sleep(200);
-
-            Vector2 fourthPosition = new Vector2(position.X + 5, position.Y + 10);
-            ParticleManager.Queue(new ParticleEffect(fourthPosition, 100, ParticleEffect.EffectType.Flash135, 0.1f, 3f, Color.Aquamarine));
+            this.ParticleManager.Queue(new ParticleEffect(position, 100, ParticleEffect.EffectType.Ring, 0.1f, 5.0f, Color.PowderBlue));
         }
 
         /// <summary>
-        /// Animation of heal magic.
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Ambush(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Barrier(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Curse(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Drain(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Flame(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Frost(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
         /// </summary>
         /// <param name="position">The target position.</param>
         private void Heal(Vector2 position)
         {
             Vector2 firstPosition = new Vector2(position.X - 10, position.Y + 10);
-            ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.ForestGreen));
-            ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.ForestGreen));
-            ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.ForestGreen));
-            ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.ForestGreen));
+            this.ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.ForestGreen));
+            this.ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.ForestGreen));
+            this.ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.ForestGreen));
+            this.ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.ForestGreen));
 
             Thread.Sleep(200);
-            
+
             Vector2 secondPosition = new Vector2(position.X + 10, position.Y - 10);
-            ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.Crimson));
-            ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.Crimson));
-            ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.Crimson));
-            ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.Crimson));
+            this.ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.Crimson));
+            this.ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.Crimson));
+            this.ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.Crimson));
+            this.ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.Crimson));
 
             Thread.Sleep(200);
-            
+
             Vector2 thirdPosition = new Vector2(position.X + 10, position.Y + 10);
-            ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.Chocolate));
-            ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.Chocolate));
-            ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.Chocolate));
-            ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.Chocolate));
+            this.ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.Chocolate));
+            this.ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.Chocolate));
+            this.ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.Chocolate));
+            this.ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.Chocolate));
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Holy(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Impact(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Insane(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Item(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Long(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Might(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Quick(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Reject(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Revenge(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Short(Vector2 position)
+        {
+            Vector2 firstPosition = new Vector2(position.X - 5, position.Y + 10);
+            this.ParticleManager.Queue(new ParticleEffect(firstPosition, 100, ParticleEffect.EffectType.Flash45, 0.1f, 3f, Color.Orchid));
+
+            Thread.Sleep(200);
+
+            Vector2 secondPosition = new Vector2(position.X + 5, position.Y - 10);
+            this.ParticleManager.Queue(new ParticleEffect(secondPosition, 100, ParticleEffect.EffectType.Flash135, 0.1f, 3f, Color.Aquamarine));
+
+            Thread.Sleep(200);
+
+            Vector2 thirdPosition = new Vector2(position.X - 5, position.Y - 10);
+            this.ParticleManager.Queue(new ParticleEffect(thirdPosition, 100, ParticleEffect.EffectType.Flash45, 0.1f, 3f, Color.Orchid));
+
+            Thread.Sleep(200);
+
+            Vector2 fourthPosition = new Vector2(position.X + 5, position.Y + 10);
+            this.ParticleManager.Queue(new ParticleEffect(fourthPosition, 100, ParticleEffect.EffectType.Flash135, 0.1f, 3f, Color.Aquamarine));
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Stealth(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Unseal(Vector2 position)
+        {
+            this.None(position);
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
+        private void Warcry(Vector2 position)
+        {
+            this.None(position);
         }
         
         #endregion

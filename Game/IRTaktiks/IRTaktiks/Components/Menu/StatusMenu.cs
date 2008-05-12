@@ -298,7 +298,7 @@ namespace IRTaktiks.Components.Menu
                 game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.MagicDefense.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, magicDefensePosition.Y), Color.White, 52);
                 game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Flee.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, fleePosition.Y), Color.White, 52);
                 game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Hit.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, hitPosition.Y), Color.White, 52);
-                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.SkillRange.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, rangePosition.Y), Color.White, 52);
+                game.SpriteManager.DrawString(this.AttributesSpriteFont, this.Unit.Attributes.Range.ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, rangePosition.Y), Color.White, 52);
                 game.SpriteManager.DrawString(this.AttributesSpriteFont, ((int)(300 - this.Unit.Attributes.Delay * 100000)).ToString(), new Vector2(this.AttributesPosition.X + this.AttributesTexture.Width / 2 + offsetValue, delayPosition.Y), Color.White, 52);
 
             }

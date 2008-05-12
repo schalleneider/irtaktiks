@@ -38,9 +38,20 @@ namespace IRTaktiks.Components.Manager
         /// Private constructor.
         /// </summary>
         private AttackManager()
-        { }
+        {
+            this.Random = new Random();
+        }
 
         #endregion 
+
+        #region Properties
+
+        /// <summary>
+        /// Random number generator.
+        /// </summary>
+        private Random Random;
+
+        #endregion
 
         #region Construct
 
@@ -107,6 +118,7 @@ namespace IRTaktiks.Components.Manager
 
         /// <summary>
         /// Cast the attack.
+        /// (ATK - 0.3 * DEF) + (0.1 * (ATK - 0.3 * DEF))
         /// </summary>
         /// <param name="command">attack casted.</param>
         /// <param name="caster">The caster of the attack.</param>
@@ -114,11 +126,51 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The position of the target.</param>
         private void Short(Command command, Unit caster, Unit target, Vector2 position)
         {
-            Attack attack = command as Attack;
+            // Obtain the game instance.
+            IRTGame game = caster.Game as IRTGame;
+
+            // Effects on caster.
+            caster.Time = 0;
+
+            // Effects on target.
+            if (target != null)
+            {
+                // Calcule the attack.
+                double attack;
+
+                attack = (caster.Attributes.Attack - 0.3f * target.Attributes.Defense);
+                attack += this.Random.NextDouble() * 0.1f * attack;
+                attack = attack < 1 ? 1 : attack;
+
+                // Apply the hit and flee %.
+                int percent = caster.Attributes.Hit - target.Attributes.Flee;
+
+                // Limits of flee and hit.
+                if (percent > 100) percent = 100;
+                if (percent < 0) percent = 0;
+
+                // Hit
+                if (this.Random.Next(0, 100) <= percent)
+                {
+                    target.Life -= (int)attack;
+                    
+                    Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
+                    AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Short, animationPosition);
+                    
+                    game.DamageManager.Queue(new Damage((int)attack, null, target.Position, Damage.DamageType.Harmful));
+                }
+
+                // Miss
+                else
+                {
+                    game.DamageManager.Queue(new Damage("MISS", caster.Position, Damage.DamageType.Harmful));
+                }
+            }
         }
 
         /// <summary>
         /// Cast the attack.
+        /// (1.5 * HIT - 0.3 * DEF) + (0.1 * (1.5 * HIT - 0.3 * DEF))
         /// </summary>
         /// <param name="command">attack casted.</param>
         /// <param name="caster">The caster of the attack.</param>
@@ -126,7 +178,46 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The position of the target.</param>
         private void Long(Command command, Unit caster, Unit target, Vector2 position)
         {
-            Attack attack = command as Attack;
+            // Obtain the game instance.
+            IRTGame game = caster.Game as IRTGame;
+
+            // Effects on caster.
+            caster.Time = 0;
+
+            // Effects on target.
+            if (target != null)
+            {
+                // Calcule the attack.
+                double attack;
+
+                attack = (1.5f * caster.Attributes.Hit - 0.3f * target.Attributes.Defense);
+                attack += this.Random.NextDouble() * 0.1f * attack;
+                attack = attack < 1 ? 1 : attack;
+
+                // Apply the hit and flee %.
+                int percent = caster.Attributes.Hit - target.Attributes.Flee;
+
+                // Limits of flee and hit.
+                if (percent > 100) percent = 100;
+                if (percent < 0) percent = 0;
+
+                // Hit
+                if (this.Random.Next(0, 100) <= percent)
+                {
+                    target.Life -= (int)attack; 
+                    
+                    Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
+                    AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Long, animationPosition);
+                    
+                    game.DamageManager.Queue(new Damage((int)attack, null, target.Position, Damage.DamageType.Harmful));
+                }
+
+                // Miss
+                else
+                {
+                    game.DamageManager.Queue(new Damage("MISS", caster.Position, Damage.DamageType.Harmful));
+                }
+            }
         }
 
         #endregion

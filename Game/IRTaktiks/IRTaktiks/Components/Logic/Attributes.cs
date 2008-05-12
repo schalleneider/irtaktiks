@@ -9,6 +9,62 @@ namespace IRTaktiks.Components.Logic
     /// </summary>
     public class Attributes
     {
+        #region Constants
+
+        /// <summary>
+        /// The job factor used in the formules.
+        /// </summary>
+        private static float[][] Factors = new float[][] {
+            // HP   : Knight | Paladin | Wizard | Priest | Assasin | Monk
+            new float[] { 0.85f, 1.00f, 0.55f, 0.60f, 0.75f, 0.70f },
+            // MP   : Knight | Paladin | Wizard | Priest | Assasin | Monk
+            new float[] { 0.50f, 0.75f, 0.90f, 1.00f, 0.55f, 0.65f },
+            // ATK  : Knight | Paladin | Wizard | Priest | Assasin | Monk
+            new float[] { 1.00f, 0.70f, 0.50f, 0.60f, 0.90f, 0.80f },
+            // DEF  : Knight | Paladin | Wizard | Priest | Assasin | Monk
+            new float[] { 0.60f, 1.00f, 0.80f, 0.85f, 0.55f, 0.65f },
+            // MATK : Knight | Paladin | Wizard | Priest | Assasin | Monk
+            new float[] { 0.40f, 0.85f, 1.00f, 0.90f, 0.50f, 0.60f },
+            // MDEF : Knight | Paladin | Wizard | Priest | Assasin | Monk
+            new float[] { 0.40f, 1.00f, 0.85f, 0.95f, 0.55f, 0.65f },
+        };
+
+        #endregion
+
+        #region Parameters
+
+        /// <summary>
+        /// Factor of the MaximumLife formula.
+        /// </summary>
+        public float LifeFactor;
+
+        /// <summary>
+        /// Factor of the MaximumMana formula.
+        /// </summary>
+        public float ManaFactor;
+
+        /// <summary>
+        /// Factor of the Attack formula.
+        /// </summary>
+        public float AttackFactor;
+
+        /// <summary>
+        /// Factor of the Defense formula.
+        /// </summary>
+        public float DefenseFactor;
+
+        /// <summary>
+        /// Factor of the MagicAttack formula.
+        /// </summary>
+        public float MagicAttackFactor;
+
+        /// <summary>
+        /// Factor of the MagicDefense formula.
+        /// </summary>
+        public float MagicDefenseFactor;
+
+        #endregion
+
         #region Basic Attributes
 
         /// <summary>
@@ -61,6 +117,7 @@ namespace IRTaktiks.Components.Logic
         public float Strength
         {
             get { return StrengthField; }
+            set { StrengthField = value; }
         }
 
         /// <summary>
@@ -74,6 +131,7 @@ namespace IRTaktiks.Components.Logic
         public float Agility
         {
             get { return AgilityField; }
+            set { AgilityField = value; }
         }
 
         /// <summary>
@@ -87,6 +145,7 @@ namespace IRTaktiks.Components.Logic
         public float Vitality
         {
             get { return VitalityField; }
+            set { VitalityField = value; }
         }
 
         /// <summary>
@@ -100,6 +159,7 @@ namespace IRTaktiks.Components.Logic
         public float Inteligence
         {
             get { return InteligenceField; }
+            set { InteligenceField = value; }
         }
 
         /// <summary>
@@ -113,6 +173,7 @@ namespace IRTaktiks.Components.Logic
         public float Dexterity
         {
             get { return DexterityField; }
+            set { DexterityField = value; }
         }
 
         #endregion
@@ -127,8 +188,7 @@ namespace IRTaktiks.Components.Logic
         {
             get
             {
-                float jobHP = 0.85f;
-                return Convert.ToInt32((1 + (this.Vitality / 80)) * (20 + (5 * this.Level) + (jobHP * ((1 + this.Level) * (this.Level / 2.5)))));
+                return Convert.ToInt32((1 + (this.Vitality / 80)) * (20 + (5 * this.Level) + (this.LifeFactor * ((1 + this.Level) * (this.Level / 2.5)))));
             }
         }
 
@@ -140,8 +200,7 @@ namespace IRTaktiks.Components.Logic
         {
             get
             {
-                float jobMP = 0.70f;
-                return Convert.ToInt32((1 + (this.Inteligence / 50)) * (5 + (jobMP * this.Level * 10))); ;
+                return Convert.ToInt32((1 + (this.Inteligence / 50)) * (5 + (this.ManaFactor * this.Level * 10))); ;
             }
         }
 
@@ -153,8 +212,7 @@ namespace IRTaktiks.Components.Logic
         {
             get
             {
-                float jobAtk = 1.0f;
-                return Convert.ToInt32(((this.Strength + (((this.Strength / 10) * (this.Strength / 10) * (this.Strength / 10)) + (2 * this.Level)) / 2) * jobAtk) + (this.Dexterity / 5));
+                return Convert.ToInt32(((this.Strength + (((this.Strength / 10) * (this.Strength / 10) * (this.Strength / 10)) + (2 * this.Level)) / 2) * this.AttackFactor) + (this.Dexterity / 5));
             }
         }
 
@@ -166,8 +224,7 @@ namespace IRTaktiks.Components.Logic
         {
             get
             {
-                float jobDef = 1.0f;
-                return Convert.ToInt32((2.5f * this.Vitality + (this.Vitality / 3) + (this.Inteligence / 5) + this.Level) * jobDef);
+                return Convert.ToInt32((2.5f * this.Vitality + (this.Vitality / 3) + (this.Inteligence / 5) + this.Level) * this.DefenseFactor);
             }
         }
 
@@ -179,8 +236,7 @@ namespace IRTaktiks.Components.Logic
         {
             get
             {
-                float jobMAtk = 1.0f;
-                return Convert.ToInt32(((this.Inteligence / 5) * (this.Inteligence / 5) + this.Level) * jobMAtk);
+                return Convert.ToInt32(((this.Inteligence / 5) * (this.Inteligence / 5) + this.Level) * this.MagicAttackFactor);
             }
         }
 
@@ -192,8 +248,7 @@ namespace IRTaktiks.Components.Logic
         {
             get
             {
-                float jobMDef = 1.0f;
-                return Convert.ToInt32((2.5f * this.Inteligence + (this.Inteligence / 3) + (this.Vitality / 5) + this.Level) * jobMDef);
+                return Convert.ToInt32((2.5f * this.Inteligence + (this.Inteligence / 3) + (this.Vitality / 5) + this.Level) * this.MagicDefenseFactor);
             }
         }
 
@@ -222,7 +277,18 @@ namespace IRTaktiks.Components.Logic
         }
 
         /// <summary>
-        /// The skill range value of the unit.
+        /// The range value of the unit.
+        /// </summary>
+        public int Range
+        {
+            get
+            {
+                return Convert.ToInt32(100 + this.Dexterity + this.Agility);
+            }
+        }
+
+        /// <summary>
+        /// The short attack range value of the unit.
         /// </summary>
         public int ShortAttackRange
         {
@@ -233,7 +299,7 @@ namespace IRTaktiks.Components.Logic
         }
 
         /// <summary>
-        /// The skill range value of the unit.
+        /// The long attack range value of the unit.
         /// </summary>
         public int LongAttackRange
         {
@@ -286,11 +352,18 @@ namespace IRTaktiks.Components.Logic
             this.JobField = job;
             this.ElementField = element;
 
-            this.StrengthField = strength;
-            this.AgilityField = agility;
-            this.VitalityField = vitality;
-            this.InteligenceField = magic;
-            this.DexterityField = dexterity;
+            this.Strength = strength;
+            this.Agility = agility;
+            this.Vitality = vitality;
+            this.Inteligence = magic;
+            this.Dexterity = dexterity;
+
+            this.LifeFactor = Attributes.Factors[0][(int)this.Job];
+            this.ManaFactor = Attributes.Factors[1][(int)this.Job];
+            this.AttackFactor = Attributes.Factors[2][(int)this.Job];
+            this.DefenseFactor = Attributes.Factors[3][(int)this.Job];
+            this.MagicAttackFactor = Attributes.Factors[4][(int)this.Job];
+            this.MagicDefenseFactor = Attributes.Factors[5][(int)this.Job];
         }
 
         #endregion
