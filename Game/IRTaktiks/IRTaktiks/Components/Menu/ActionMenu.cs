@@ -182,8 +182,15 @@ namespace IRTaktiks.Components.Menu
             this.TextField = text;
             this.TypeField = type;
 
-            // Set the correct textures.
-            this.ItemTexture = TextureManager.Instance.Sprites.Menu.Item;
+            if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
+            {
+                this.ItemTexture = TextureManager.Instance.Sprites.Menu.ItemPlayerOne;
+            }
+            else
+            {
+                this.ItemTexture = TextureManager.Instance.Sprites.Menu.ItemPlayerTwo;
+            }
+
             this.SelectedItemTexture = TextureManager.Instance.Sprites.Menu.SelectedItem;
 
             // Set the font to draw the text.

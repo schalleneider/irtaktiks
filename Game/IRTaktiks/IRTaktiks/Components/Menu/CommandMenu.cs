@@ -62,7 +62,15 @@ namespace IRTaktiks.Components.Menu
         {
             this.CommandField = command;
 
-            this.ItemTexture = TextureManager.Instance.Sprites.Menu.SubmenuItem;
+            if (this.Unit.Player.PlayerIndex == PlayerIndex.One)
+            {
+                this.ItemTexture = TextureManager.Instance.Sprites.Menu.SubmenuItemPlayerOne;
+            }
+            else
+            {
+                this.ItemTexture = TextureManager.Instance.Sprites.Menu.SubmenuItemPlayerTwo;
+            }
+
             this.SelectedItemTexture = TextureManager.Instance.Sprites.Menu.SubmenuSelectedItem;
             this.DisabledItemTexture = TextureManager.Instance.Sprites.Menu.SubmenuDisabledItem;
 

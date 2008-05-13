@@ -124,6 +124,11 @@ namespace IRTaktiks.Components.Menu
         #endregion
 
         #region Event
+        
+        /// <summary>
+        /// The method template who will used to handle the Started event.
+        /// </summary>
+        public delegate void StartedMoverEventHandler();
 
         /// <summary>
         /// The method template who will used to handle the Moved event.
@@ -131,6 +136,11 @@ namespace IRTaktiks.Components.Menu
         /// <param name="actionMenu">The menu that requested the mover.</param>
         public delegate void MovedEventHandler(ActionMenu actionMenu);
 
+        /// <summary>
+        /// The Started event.
+        /// </summary>
+        public event StartedMoverEventHandler Started;
+        
         /// <summary>
         /// The Moved event.
         /// </summary>
@@ -268,7 +278,13 @@ namespace IRTaktiks.Components.Menu
                         if (e.Position.Y < (this.Unit.Position.Y + this.Unit.Texture.Height / 4) && e.Position.Y > this.Unit.Position.Y)
                         {
                             this.Moving = true;
-                            
+
+                            // Dispatch the Started Event.
+                            if (this.Started != null)
+                            {
+                                this.Started();
+                            }
+
                             // Store the cursor identifier to track the CursorUpdate and CursorUp event.
                             this.CursorIdentifier = e.Identifier;
                         }

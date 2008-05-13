@@ -150,12 +150,22 @@ namespace IRTaktiks.Components.Interaction
         #region Event
 
         /// <summary>
+        /// The method template who will used to handle the Started event.
+        /// </summary>
+        public delegate void StartedAimEventHandler();
+        
+        /// <summary>
         /// The method template who will used to handle the Aimed event.
         /// </summary>
         /// <param name="actionMenu">The menu that requested the aim.</param>
         /// <param name="target">The unit targeted by the aim. Null when the aim is over nothing.</param>
         /// <param name="position">The last valid position of the aim.</param>
         public delegate void AimedEventHandler(ActionMenu actionMenu, Unit target, Vector2 position);
+
+        /// <summary>
+        /// The Started event.
+        /// </summary>
+        public event StartedAimEventHandler Started;
 
         /// <summary>
         /// The Aimed event.
@@ -226,9 +236,9 @@ namespace IRTaktiks.Components.Interaction
             this.LimitField = 0;
 
             // Unregister the aim to listen the input events.
-            InputManager.Instance.CursorDown -= new EventHandler<CursorDownArgs>(CursorDown_Handler);
-            InputManager.Instance.CursorUpdate -= new EventHandler<CursorUpdateArgs>(CursorUpdate_Handler);
-            InputManager.Instance.CursorUp -= new EventHandler<CursorUpArgs>(CursorUp_Handler);
+            InputManager.Instance.CursorDown -= this.CursorDown_Handler;
+            InputManager.Instance.CursorUpdate -= this.CursorUpdate_Handler;
+            InputManager.Instance.CursorUp -= this.CursorUp_Handler;
 
             // Reset the position of the aim.
             this.PositionField = new Vector2(this.Unit.Position.X + this.Unit.Texture.Width / 2, this.Unit.Position.Y + this.Unit.Texture.Height / 8);
@@ -318,6 +328,12 @@ namespace IRTaktiks.Components.Interaction
                     (e.Position.Y < (this.Position.Y + this.AimAlly.Height / 2) && e.Position.Y > (this.Position.Y - this.AimAlly.Height / 2)))
                 {
                     this.AimingField = true;
+
+                    // Dispatch the Started Event.
+                    if (this.Started != null)
+                    {
+                        this.Started();
+                    }
 
                     // Store the cursor identifier to track the CursorUpdate and CursorUp event.
                     this.CursorIdentifier = e.Identifier;
