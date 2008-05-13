@@ -80,8 +80,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Item.png">
-      <Name>Item</Name>
+    <Compile Include="Sprites\Menu\ItemPlayerOne.png">
+      <Name>ItemPlayerOne</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -211,8 +211,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\SubmenuItem.png">
-      <Name>SubmenuItem</Name>
+    <Compile Include="Sprites\Menu\SubmenuItemPlayerOne.png">
+      <Name>SubmenuItemPlayerOne</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -307,6 +307,20 @@
   <ItemGroup>
     <Compile Include="Sprites\Unit\Attributes.png">
       <Name>Attributes</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\ItemPlayerTwo.png">
+      <Name>ItemPlayerTwo</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\SubmenuItemPlayerTwo.png">
+      <Name>SubmenuItemPlayerTwo</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
