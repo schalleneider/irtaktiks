@@ -401,6 +401,8 @@ namespace IRTaktiks.Components.Manager
                                 }
                                 else
                                 {
+                                    this.UnselectMenu();
+                                    
                                     this.Actions[index].Selected = true;
                                     this.Actions[index].RaiseExecute();
                                 }
