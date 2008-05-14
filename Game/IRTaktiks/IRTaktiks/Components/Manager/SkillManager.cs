@@ -500,7 +500,7 @@ namespace IRTaktiks.Components.Manager
                 double damage;
 
                 // Five consecutive blows.
-                for (int index = 0; index < 5; index++)
+                for (int index = 0; index < 25; index++)
                 {
                     damage = (caster.Attributes.MagicAttack - 0.3f * target.Attributes.MagicDefense);
                     damage += this.Random.NextDouble() * 0.1f * damage;
@@ -727,7 +727,7 @@ namespace IRTaktiks.Components.Manager
 
             // Show the animation.
             Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
-            AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Might, animationPosition);
+            AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Barrier, animationPosition);
 
             // Effects on caster.
             caster.Mana -= command.Attribute;
@@ -756,7 +756,8 @@ namespace IRTaktiks.Components.Manager
         }
 
         /// <summary>
-        /// Cast the skill.
+        /// Holy property skill.
+        /// ((LVL + INT) / 6) * 60) - (2 * MDEF)
         /// </summary>
         /// <param name="command">Skill casted.</param>
         /// <param name="caster">The caster of the skill.</param>
@@ -764,10 +765,41 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The position of the target.</param>
         private void Holy(Command command, Unit caster, Unit target, Vector2 position)
         {
+            // Obtain the game instance.
+            IRTGame game = caster.Game as IRTGame;
+
+            // Show the animation.
+            Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
+            AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Holy, animationPosition);
+
+            // Effects on caster.
+            caster.Mana -= command.Attribute;
+            caster.Time = 0;
+
+            // Show the mp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
+            }
+
+            // Effects on target.
+            if (target != null)
+            {
+                // Calculate the damage.
+                double damage = ((caster.Attributes.Level + caster.Attributes.Inteligence) / 6) * 50 - (2 * target.Attributes.MagicDefense);
+                damage += this.Random.NextDouble() * 0.1f * damage;
+                damage = damage < 1 ? 1 : damage;
+
+                target.Life -= (int)damage;
+
+                // Show the damage.
+                game.DamageManager.Queue(new Damage((int)damage, null, target.Position, Damage.DamageType.Harmful));
+            }
         }
 
         /// <summary>
-        /// Cast the skill.
+        /// Steal the target's MP.
+        /// (((T.INT / C.INT) * 5% T.MP) + 5% T.MP)
         /// </summary>
         /// <param name="command">Skill casted.</param>
         /// <param name="caster">The caster of the skill.</param>
@@ -775,10 +807,40 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The position of the target.</param>
         private void Drain(Command command, Unit caster, Unit target, Vector2 position)
         {
+            // Obtain the game instance.
+            IRTGame game = caster.Game as IRTGame;
+
+            // Show the animation.
+            Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
+            AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Drain, animationPosition);
+                        
+            // Effects on target.
+            if (target != null)
+            {
+                // Calculate the damage.
+                double damage = (((target.Attributes.Inteligence / caster.Attributes.Inteligence) * (0.05f * target.Attributes.MaximumMana)) + (0.05f * target.Attributes.MaximumMana));
+                damage += this.Random.NextDouble() * 0.1f * damage;
+                damage = damage < 1 ? 1 : damage;
+
+                target.Mana -= (int)damage;
+                
+                // Show the damage.
+                game.DamageManager.Queue(new Damage((int)damage, "MP", target.Position, Damage.DamageType.Harmful));
+
+                caster.Mana += (int)damage;
+
+                // Show the gain.                
+                game.DamageManager.Queue(new Damage((int)damage, "MP", caster.Position, Damage.DamageType.Benefit));
+            }
+            
+            // Effects on caster.
+            caster.Mana -= command.Attribute;
+            caster.Time = 0;
         }
 
         /// <summary>
-        /// Cast the skill.
+        /// Fire property skill.
+        /// ((LVL + INT) / 6) * 60) - (2 * MDEF)
         /// </summary>
         /// <param name="command">Skill casted.</param>
         /// <param name="caster">The caster of the skill.</param>
@@ -786,10 +848,41 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The position of the target.</param>
         private void Flame(Command command, Unit caster, Unit target, Vector2 position)
         {
+            // Obtain the game instance.
+            IRTGame game = caster.Game as IRTGame;
+
+            // Show the animation.
+            Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
+            AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Flame, animationPosition);
+
+            // Effects on caster.
+            caster.Mana -= command.Attribute;
+            caster.Time = 0;
+
+            // Show the mp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
+            }
+
+            // Effects on target.
+            if (target != null)
+            {
+                // Calculate the damage.
+                double damage = ((caster.Attributes.Level + caster.Attributes.Inteligence) / 6) * 50 - (2 * target.Attributes.MagicDefense);
+                damage += this.Random.NextDouble() * 0.1f * damage;
+                damage = damage < 1 ? 1 : damage;
+
+                target.Life -= (int)damage;
+
+                // Show the damage.
+                game.DamageManager.Queue(new Damage((int)damage, null, target.Position, Damage.DamageType.Harmful));
+            }
         }
 
         /// <summary>
-        /// Cast the skill.
+        /// Ice property skill.
+        /// ((LVL + INT) / 6) * 100) - (2 * MDEF)
         /// </summary>
         /// <param name="command">Skill casted.</param>
         /// <param name="caster">The caster of the skill.</param>
@@ -797,6 +890,7 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The position of the target.</param>
         private void Frost(Command command, Unit caster, Unit target, Vector2 position)
         {
+            // 10 hits
         }
 
         #endregion

@@ -5,17 +5,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRTaktiks", "IRTaktiks\IRTa
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 2
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs07.codeplex.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = IRTaktiks\\Content\\Content.contentproj
-		SccProjectTopLevelParentUniqueName1 = IRTaktiks\\IRTaktiks.csproj
-		SccProjectName1 = IRTaktiks/Content
-		SccLocalPath1 = IRTaktiks\\Content
-		SccProjectUniqueName2 = IRTaktiks\\IRTaktiks.csproj
-		SccProjectName2 = IRTaktiks
-		SccLocalPath2 = IRTaktiks
+		SccProjectUniqueName0 = IRTaktiks\\Content\\Content.contentproj
+		SccProjectTopLevelParentUniqueName0 = IRTaktiks\\IRTaktiks.csproj
+		SccProjectName0 = ../../../Content
+		SccAuxPath0 = https://tfs07.codeplex.com
+		SccLocalPath0 = IRTaktiks\\Content
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = IRTaktiks\\IRTaktiks.csproj
+		SccProjectName1 = ../../../IRTaktiks
+		SccAuxPath1 = https://tfs07.codeplex.com
+		SccLocalPath1 = IRTaktiks
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
