@@ -146,6 +146,11 @@ namespace IRTaktiks.Components.Manager
             /// Animation for Item usage.
             /// </summary>
             Item,
+
+            /// <summary>
+            /// Animation for Elixir.
+            /// </summary>
+            Elixir
         }
 
         #endregion
@@ -216,6 +221,10 @@ namespace IRTaktiks.Components.Manager
 
                 case AnimationType.Drain:
                     this.Drain(position);
+                    break;
+
+                case AnimationType.Elixir:
+                    this.Elixir(position);
                     break;
 
                 case AnimationType.Flame:
@@ -337,6 +346,48 @@ namespace IRTaktiks.Components.Manager
         /// Execute the Animation.
         /// </summary>
         /// <param name="position">The target position.</param>
+        private void Elixir(Vector2 position)
+        {
+            int particles = 25;
+            float lifeIncrement = 0.07f;
+            float totalLife = 3.5f;
+            
+            Vector2 position1st = new Vector2(position.X - 15, position.Y + 15);
+            Vector2 position2nd = new Vector2(position.X - 05, position.Y + 05);
+            Vector2 position3rd = new Vector2(position.X + 05, position.Y - 05);
+            Vector2 position4th = new Vector2(position.X + 15, position.Y - 15);
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Flash0, lifeIncrement, totalLife, Color.ForestGreen));
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Flash45, lifeIncrement, totalLife, Color.ForestGreen));
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Flash90, lifeIncrement, totalLife, Color.ForestGreen));
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Flash135, lifeIncrement, totalLife, Color.ForestGreen));
+
+            Thread.Sleep(200);
+
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles, ParticleEffect.EffectType.Flash0, lifeIncrement, totalLife, Color.Crimson));
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles, ParticleEffect.EffectType.Flash45, lifeIncrement, totalLife, Color.Crimson));
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles, ParticleEffect.EffectType.Flash90, lifeIncrement, totalLife, Color.Crimson));
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles, ParticleEffect.EffectType.Flash135, lifeIncrement, totalLife, Color.Crimson));
+
+            Thread.Sleep(200);
+
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles, ParticleEffect.EffectType.Flash0, lifeIncrement, totalLife, Color.Chocolate));
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles, ParticleEffect.EffectType.Flash45, lifeIncrement, totalLife, Color.Chocolate));
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles, ParticleEffect.EffectType.Flash90, lifeIncrement, totalLife, Color.Chocolate));
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles, ParticleEffect.EffectType.Flash135, lifeIncrement, totalLife, Color.Chocolate));
+
+            Thread.Sleep(200);
+
+            this.ParticleManager.Queue(new ParticleEffect(position4th, particles, ParticleEffect.EffectType.Flash0, lifeIncrement, totalLife, Color.BlueViolet));
+            this.ParticleManager.Queue(new ParticleEffect(position4th, particles, ParticleEffect.EffectType.Flash45, lifeIncrement, totalLife, Color.BlueViolet));
+            this.ParticleManager.Queue(new ParticleEffect(position4th, particles, ParticleEffect.EffectType.Flash90, lifeIncrement, totalLife, Color.BlueViolet));
+            this.ParticleManager.Queue(new ParticleEffect(position4th, particles, ParticleEffect.EffectType.Flash135, lifeIncrement, totalLife, Color.BlueViolet));
+        }
+
+        /// <summary>
+        /// Execute the Animation.
+        /// </summary>
+        /// <param name="position">The target position.</param>
         private void Flame(Vector2 position)
         {
             this.None(position);
@@ -357,27 +408,32 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Heal(Vector2 position)
         {
-            Vector2 firstPosition = new Vector2(position.X - 10, position.Y + 10);
-            this.ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.ForestGreen));
-            this.ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.ForestGreen));
-            this.ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.ForestGreen));
-            this.ParticleManager.Queue(new ParticleEffect(firstPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.ForestGreen));
+            int particles = 50;
+            float lifeIncrement = 0.07f;
+            float totalLife = 5.0f;
+
+            Vector2 position1st = new Vector2(position.X - 10, position.Y + 10);
+            Vector2 position2nd = new Vector2(position.X + 10, position.Y - 10);
+            Vector2 position3rd = new Vector2(position.X + 10, position.Y + 10);
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Flash0, lifeIncrement, totalLife, Color.ForestGreen));
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Flash45, lifeIncrement, totalLife, Color.ForestGreen));
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Flash90, lifeIncrement, totalLife, Color.ForestGreen));
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Flash135, lifeIncrement, totalLife, Color.ForestGreen));
 
             Thread.Sleep(200);
 
-            Vector2 secondPosition = new Vector2(position.X + 10, position.Y - 10);
-            this.ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.Crimson));
-            this.ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.Crimson));
-            this.ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.Crimson));
-            this.ParticleManager.Queue(new ParticleEffect(secondPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.Crimson));
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles, ParticleEffect.EffectType.Flash0, lifeIncrement, totalLife, Color.Crimson));
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles, ParticleEffect.EffectType.Flash45, lifeIncrement, totalLife, Color.Crimson));
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles, ParticleEffect.EffectType.Flash90, lifeIncrement, totalLife, Color.Crimson));
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles, ParticleEffect.EffectType.Flash135, lifeIncrement, totalLife, Color.Crimson));
 
             Thread.Sleep(200);
 
-            Vector2 thirdPosition = new Vector2(position.X + 10, position.Y + 10);
-            this.ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash0, 0.07f, 5f, Color.Chocolate));
-            this.ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash45, 0.07f, 5f, Color.Chocolate));
-            this.ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash90, 0.07f, 5f, Color.Chocolate));
-            this.ParticleManager.Queue(new ParticleEffect(thirdPosition, 50, ParticleEffect.EffectType.Flash135, 0.07f, 5f, Color.Chocolate));
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles, ParticleEffect.EffectType.Flash0, lifeIncrement, totalLife, Color.Chocolate));
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles, ParticleEffect.EffectType.Flash45, lifeIncrement, totalLife, Color.Chocolate));
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles, ParticleEffect.EffectType.Flash90, lifeIncrement, totalLife, Color.Chocolate));
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles, ParticleEffect.EffectType.Flash135, lifeIncrement, totalLife, Color.Chocolate));
         }
 
         /// <summary>
@@ -413,7 +469,14 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Item(Vector2 position)
         {
-            this.None(position);
+            int particles = 75;
+            float lifeIncrement = 0.1f;
+            float totalLife = 7.0f;
+
+            Vector2 position1st = new Vector2(position.X, position.Y + 24);
+            Vector2 position2nd = new Vector2(position.X, position.Y);
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Pillar, lifeIncrement, totalLife, Color.IndianRed));
         }
 
         /// <summary>
@@ -422,7 +485,28 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Long(Vector2 position)
         {
-            this.None(position);
+            int particles = 50;
+            float lifeIncrement = 0.1f;
+            float totalLife = 2.5f;
+
+            Vector2 position1st = new Vector2(position.X - 5, position.Y - 5);
+            Vector2 position2nd = new Vector2(position.X - 5, position.Y + 5);
+            Vector2 position3rd = new Vector2(position.X + 5, position.Y - 5);
+            Vector2 position4th = new Vector2(position.X + 5, position.Y + 5);
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Firework, lifeIncrement, totalLife, Color.Orchid));
+
+            Thread.Sleep(50);
+            
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles, ParticleEffect.EffectType.Firework, lifeIncrement, totalLife, Color.CadetBlue));
+
+            Thread.Sleep(50);
+            
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles, ParticleEffect.EffectType.Firework, lifeIncrement, totalLife, Color.IndianRed));
+
+            Thread.Sleep(50);
+
+            this.ParticleManager.Queue(new ParticleEffect(position4th, particles, ParticleEffect.EffectType.Firework, lifeIncrement, totalLife, Color.Cornsilk));
         }
 
         /// <summary>
@@ -467,23 +551,21 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Short(Vector2 position)
         {
-            Vector2 firstPosition = new Vector2(position.X - 5, position.Y + 10);
-            this.ParticleManager.Queue(new ParticleEffect(firstPosition, 100, ParticleEffect.EffectType.Flash45, 0.1f, 3f, Color.Orchid));
+            int particles = 50;
+            float lifeIncrement = 0.1f;
+            float totalLife = 4.0f;
 
-            Thread.Sleep(200);
+            Vector2 position1st = new Vector2(position.X, position.Y - 10);
+            Vector2 position2nd = new Vector2(position.X, position.Y + 10);
+            Vector2 position3rd = new Vector2(position.X, position.Y);
 
-            Vector2 secondPosition = new Vector2(position.X + 5, position.Y - 10);
-            this.ParticleManager.Queue(new ParticleEffect(secondPosition, 100, ParticleEffect.EffectType.Flash135, 0.1f, 3f, Color.Aquamarine));
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Flash45, lifeIncrement, totalLife, Color.Crimson));
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Flash135, lifeIncrement, totalLife, Color.Chocolate));
 
-            Thread.Sleep(200);
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles, ParticleEffect.EffectType.Flash45, lifeIncrement, totalLife, Color.DarkSeaGreen));
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles, ParticleEffect.EffectType.Flash135, lifeIncrement, totalLife, Color.BlueViolet));
 
-            Vector2 thirdPosition = new Vector2(position.X - 5, position.Y - 10);
-            this.ParticleManager.Queue(new ParticleEffect(thirdPosition, 100, ParticleEffect.EffectType.Flash45, 0.1f, 3f, Color.Orchid));
-
-            Thread.Sleep(200);
-
-            Vector2 fourthPosition = new Vector2(position.X + 5, position.Y + 10);
-            this.ParticleManager.Queue(new ParticleEffect(fourthPosition, 100, ParticleEffect.EffectType.Flash135, 0.1f, 3f, Color.Aquamarine));
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles, ParticleEffect.EffectType.Firework, lifeIncrement, totalLife / 2, Color.Red));
         }
 
         /// <summary>

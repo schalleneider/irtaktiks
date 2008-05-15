@@ -118,7 +118,7 @@ namespace IRTaktiks.Components.Manager
         #region Item
 
         /// <summary>
-        /// Use the item.
+        /// Restores 500 life points.
         /// </summary>
         /// <param name="command">Item used.</param>
         /// <param name="caster">The caster of the item.</param>
@@ -126,11 +126,28 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The position of the target.</param>
         private void Potion(Command command, Unit caster, Unit target, Vector2 position)
         {
-            Item item = command as Item;
+            // Obtain the game instance.
+            IRTGame game = caster.Game as IRTGame;
+
+            // Show the animation.
+            Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
+            AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Item, animationPosition);
+
+            // Effects on caster.
+            caster.Time = 0;
+
+            // Effects on target.
+            if (target != null)
+            {
+                target.Life += 500;
+
+                // Show the damage.
+                game.DamageManager.Queue(new Damage(500, null, target.Position, Damage.DamageType.Benefit));
+            }
         }
 
         /// <summary>
-        /// Use the item.
+        /// Restore 350 mana points.
         /// </summary>
         /// <param name="command">Item used.</param>
         /// <param name="caster">The caster of the item.</param>
@@ -138,11 +155,28 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The position of the target.</param>
         private void Ether(Command command, Unit caster, Unit target, Vector2 position)
         {
-            Item item = command as Item;
+            // Obtain the game instance.
+            IRTGame game = caster.Game as IRTGame;
+
+            // Show the animation.
+            Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
+            AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Item, animationPosition);
+
+            // Effects on caster.
+            caster.Time = 0;
+
+            // Effects on target.
+            if (target != null)
+            {
+                target.Mana += 350;
+
+                // Show the damage.
+                game.DamageManager.Queue(new Damage(350, "MP", target.Position, Damage.DamageType.Benefit));
+            }
         }
 
         /// <summary>
-        /// Use the item.
+        /// Restore all life points and mana poins.
         /// </summary>
         /// <param name="command">Item used.</param>
         /// <param name="caster">The caster of the item.</param>
@@ -150,7 +184,25 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The position of the target.</param>
         private void Elixir(Command command, Unit caster, Unit target, Vector2 position)
         {
-            Item item = command as Item;
+            // Obtain the game instance.
+            IRTGame game = caster.Game as IRTGame;
+
+            // Show the animation.
+            Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
+            AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Elixir, animationPosition);
+
+            // Effects on caster.
+            caster.Time = 0;
+
+            // Effects on target.
+            if (target != null)
+            {
+                target.Life = target.Attributes.MaximumLife;
+                target.Mana = target.Attributes.MaximumMana;
+
+                // Show the damage.
+                game.DamageManager.Queue(new Damage("WOHOO", target.Position, Damage.DamageType.Benefit));
+            }
         }
 
         #endregion

@@ -137,11 +137,8 @@ namespace IRTaktiks.Components.Manager
             caster.Mana -= command.Attribute;
             caster.Time = 0;
 
-            // Show the mp cost.
-            if (caster != target)
-            {
-                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
-            }
+            // Show the bonus.
+            game.DamageManager.Queue(new Damage("DEX++", caster.Position, Damage.DamageType.Benefit));
 
             ThreadPool.QueueUserWorkItem(delegate(object data)
             {
@@ -155,7 +152,7 @@ namespace IRTaktiks.Components.Manager
 
                 unit.Attributes.Dexterity = oldDexterity;
 
-            }, caster);
+            }, target);
         }
 
         /// <summary>
@@ -287,11 +284,8 @@ namespace IRTaktiks.Components.Manager
             caster.Mana -= command.Attribute;
             caster.Time = 0;
 
-            // Show the mp cost.
-            if (caster != target)
-            {
-                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
-            }
+            // Show the bonus.
+            game.DamageManager.Queue(new Damage("AGI++", caster.Position, Damage.DamageType.Benefit));
 
             ThreadPool.QueueUserWorkItem(delegate(object data)
             {
@@ -305,7 +299,7 @@ namespace IRTaktiks.Components.Manager
 
                 unit.Attributes.Agility = oldAgility;
 
-            }, caster);
+            }, target);
         }
 
         /// <summary>
@@ -450,11 +444,8 @@ namespace IRTaktiks.Components.Manager
             caster.Mana -= command.Attribute;
             caster.Time = 0;
 
-            // Show the mp cost.
-            if (caster != target)
-            {
-                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
-            }
+            // Show the bonus.
+            game.DamageManager.Queue(new Damage("STR++", caster.Position, Damage.DamageType.Benefit));
 
             ThreadPool.QueueUserWorkItem(delegate(object data)
             {
@@ -468,7 +459,7 @@ namespace IRTaktiks.Components.Manager
 
                 unit.Attributes.Strength = oldStrength;
 
-            }, caster);
+            }, target);
         }
 
         /// <summary>
@@ -500,7 +491,7 @@ namespace IRTaktiks.Components.Manager
                 double damage;
 
                 // Five consecutive blows.
-                for (int index = 0; index < 25; index++)
+                for (int index = 0; index < 5; index++)
                 {
                     damage = (caster.Attributes.MagicAttack - 0.3f * target.Attributes.MagicDefense);
                     damage += this.Random.NextDouble() * 0.1f * damage;
@@ -614,11 +605,8 @@ namespace IRTaktiks.Components.Manager
             caster.Mana -= command.Attribute;
             caster.Time = 0;
 
-            // Show the mp cost.
-            if (caster != target)
-            {
-                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
-            }
+            // Show the bonus.
+            game.DamageManager.Queue(new Damage("VIT++", caster.Position, Damage.DamageType.Benefit));
 
             ThreadPool.QueueUserWorkItem(delegate(object data)
             {
@@ -632,7 +620,7 @@ namespace IRTaktiks.Components.Manager
 
                 unit.Attributes.Vitality = oldVitality;
 
-            }, caster);
+            }, target);
         }
 
         /// <summary>
@@ -665,14 +653,13 @@ namespace IRTaktiks.Components.Manager
             // Effects on target.
             if (target != null)
             {
-                // Heal the target
                 double damage = ((caster.Attributes.Level + caster.Attributes.Inteligence) / 8) * 44;
                 damage += this.Random.NextDouble() * 0.1f * damage;
                 damage = damage < 1 ? 1 : damage; 
                 
                 target.Life += (int)damage;
 
-                // Show the hp gain.
+                // Show the damage.
                 game.DamageManager.Queue(new Damage((int)damage, null, target.Position, Damage.DamageType.Benefit));
             }
         }
@@ -732,6 +719,9 @@ namespace IRTaktiks.Components.Manager
             // Effects on caster.
             caster.Mana -= command.Attribute;
             caster.Time = 0;
+
+            // Show the bonus.
+            game.DamageManager.Queue(new Damage("DEF++\nMDEF++", caster.Position, Damage.DamageType.Benefit));
 
             // Effects on target.
             if (target != null)
@@ -882,7 +872,7 @@ namespace IRTaktiks.Components.Manager
 
         /// <summary>
         /// Ice property skill.
-        /// ((LVL + INT) / 6) * 100) - (2 * MDEF)
+        /// ((LVL + INT) / 6) * 5) - (2 * MDEF)
         /// </summary>
         /// <param name="command">Skill casted.</param>
         /// <param name="caster">The caster of the skill.</param>
@@ -890,7 +880,38 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The position of the target.</param>
         private void Frost(Command command, Unit caster, Unit target, Vector2 position)
         {
-            // 10 hits
+            // Obtain the game instance.
+            IRTGame game = caster.Game as IRTGame;
+
+            // Effects on caster.
+            caster.Mana -= command.Attribute;
+            caster.Time = 0;
+
+            // Show the mp cost.
+            if (caster != target)
+            {
+                game.DamageManager.Queue(new Damage(command.Attribute, "MP", caster.Position, Damage.DamageType.Harmful));
+            }
+
+            // Effects on target.
+            if (target != null)
+            {
+                // Five consecutive blows.
+                for (int index = 0; index < 10; index++)
+                {
+                    // Calculate the damage.
+                    double damage = ((caster.Attributes.Level + caster.Attributes.Inteligence) / 6) * 7 - (2 * target.Attributes.MagicDefense);
+                    damage += this.Random.NextDouble() * 0.5f * damage;
+                    damage = damage < 1 ? 1 : damage;
+
+                    target.Life -= (int)damage;
+
+                    // Show the damage.
+                    game.DamageManager.Queue(new Damage((int)damage, null, target.Position, Damage.DamageType.Harmful));
+
+                    Thread.Sleep(500);
+                }
+            }
         }
 
         #endregion
