@@ -578,10 +578,10 @@ namespace IRTaktiks.Components.Manager
         /// <param name="actionMenu">The menu that requested the mover.</param>
         private void Mover_Moved(ActionMenu actionMenu)
         {
+            this.Reset();
+            
             // End the movement.
             this.Unit.Time = 0;
-
-            this.Reset();
         }
 
         /// <summary>
@@ -592,11 +592,11 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The last valid position of the aim.</param>
         private void Aim_Aimed(ActionMenu actionMenu, Unit target, Vector2 position)
         {
+            this.Reset();
+            
             // Execute the command.
             CommandMenu commandMenu = actionMenu as CommandMenu;
             commandMenu.Command.Execute(target, position);
-            
-            this.Reset();
         }
 
         #endregion
