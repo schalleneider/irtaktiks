@@ -1,0 +1,16 @@
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\bin\Release\SpriteFont Generator.exe
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\bin\Release\SpriteFont Generator.pdb
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\obj\Release\SpriteFont_Generator.FrmMain.resources
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\obj\Release\SpriteFont_Generator.Properties.Resources.resources
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\obj\Release\SpriteFont Generator.csproj.GenerateResource.Cache
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\obj\Release\SpriteFont Generator.exe
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\obj\Release\SpriteFont Generator.pdb
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\bin\Debug\SpriteFont Generator.exe
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\bin\Debug\SpriteFont Generator.pdb
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\obj\Debug\SpriteFont_Generator.FrmMain.resources
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\obj\Debug\SpriteFont_Generator.Properties.Resources.resources
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\obj\Debug\SpriteFont Generator.csproj.GenerateResource.Cache
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\obj\Debug\SpriteFont Generator.exe
+C:\Documents and Settings\Willians\Meus documentos\Programas\ .NET\SpriteFont Generator\SpriteFont Generator\obj\Debug\SpriteFont Generator.pdb

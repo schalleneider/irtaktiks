@@ -1,0 +1,2 @@
+cd touchlib
+configapp.exe
