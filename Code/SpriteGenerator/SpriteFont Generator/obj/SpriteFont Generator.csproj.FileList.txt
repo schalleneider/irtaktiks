@@ -1,0 +1,16 @@
+bin\Debug\SpriteFont Generator.exe
+bin\Debug\SpriteFont Generator.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\SpriteFont_Generator.FrmMain.resources
+obj\Debug\SpriteFont_Generator.Properties.Resources.resources
+obj\Debug\SpriteFont Generator.csproj.GenerateResource.Cache
+obj\Debug\SpriteFont Generator.exe
+obj\Debug\SpriteFont Generator.pdb
+bin\Release\SpriteFont Generator.exe
+bin\Release\SpriteFont Generator.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\SpriteFont_Generator.FrmMain.resources
+obj\Release\SpriteFont_Generator.Properties.Resources.resources
+obj\Release\SpriteFont Generator.csproj.GenerateResource.Cache
+obj\Release\SpriteFont Generator.exe
+obj\Release\SpriteFont Generator.pdb

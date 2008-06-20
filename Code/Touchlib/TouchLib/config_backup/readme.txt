@@ -1,0 +1,1 @@
+These are other sample configurations you can use. Rename them to config.xml and copy to the touchlib\ directory to use them. You will need to download the touchlib test movies as well. A default configuration should be created any time you run a touchlib app.

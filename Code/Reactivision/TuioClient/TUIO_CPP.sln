@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TuioDump", "TuioDump.vcproj", "{5E2EAE4F-8668-4647-98CA-562358EACC10}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TuioDemo", "TuioDemo.vcproj", "{8737A4B6-C44F-4397-9BB5-432646375E9F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E2EAE4F-8668-4647-98CA-562358EACC10}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5E2EAE4F-8668-4647-98CA-562358EACC10}.Debug|Win32.Build.0 = Debug|Win32
+		{5E2EAE4F-8668-4647-98CA-562358EACC10}.Release|Win32.ActiveCfg = Release|Win32
+		{5E2EAE4F-8668-4647-98CA-562358EACC10}.Release|Win32.Build.0 = Release|Win32
+		{8737A4B6-C44F-4397-9BB5-432646375E9F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8737A4B6-C44F-4397-9BB5-432646375E9F}.Release|Win32.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
