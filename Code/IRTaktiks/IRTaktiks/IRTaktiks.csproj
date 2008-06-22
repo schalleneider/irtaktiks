@@ -66,6 +66,7 @@
     <Compile Include="Components\Action\Item.cs" />
     <Compile Include="Components\Action\Skill.cs" />
     <Compile Include="Components\Config\Configurable.cs" />
+    <Compile Include="Components\Config\UnitConfig.cs" />
     <Compile Include="Components\Config\PlayerConfig.cs" />
     <Compile Include="Components\Config\Keyboard.cs" />
     <Compile Include="Components\Debug\Console.cs" />

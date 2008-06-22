@@ -99,13 +99,23 @@ namespace IRTaktiks.Components.Screen
             // Player one configuration items.
             this.Components.Add(this.PlayerOneConfigurationManager.Keyboard);
             this.Components.Add(this.PlayerOneConfigurationManager.PlayerConfig);
+            
+            for (int index = 0; index < this.PlayerOneConfigurationManager.UnitsConfig.Count; index++)
+            {
+                this.Components.Add(this.PlayerOneConfigurationManager.UnitsConfig[index]);
+            }
 
             // Player two configuration items.
             this.Components.Add(this.PlayerTwoConfigurationManager.Keyboard);
             this.Components.Add(this.PlayerTwoConfigurationManager.PlayerConfig);
 
+            for (int index = 0; index < this.PlayerTwoConfigurationManager.UnitsConfig.Count; index++)
+            {
+                this.Components.Add(this.PlayerTwoConfigurationManager.UnitsConfig[index]);
+            }
+
             // Shows the map.
-            (this.Game as IRTGame).MapManager.Visible = true;
+            (this.Game as IRTGame).MapManager.Visible = false;
 
             base.Initialize();
 		}
