@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
+using System.Text;
 
 namespace IRTaktiks.Components.Config
 {
@@ -15,32 +16,33 @@ namespace IRTaktiks.Components.Config
     /// </summary>
     public abstract class Configurable : DrawableGameComponent
     {
+        #region Event
+        
+        /// <summary>
+        /// The delegate of methods that will handle the activated event.
+        /// </summary>
+        public delegate void ActivatedEventHandler(Configurable item);
+
+        /// <summary>
+        /// Event fired when the item is activated.
+        /// </summary>
+        public event ActivatedEventHandler Activated;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
         /// The text that the item will display.
         /// </summary>
-        protected string DisplayTextField;
+        protected StringBuilder DisplayTextField;
 
         /// <summary>
         /// The text that the item will display.
         /// </summary>
-        public string DisplayText
+        public StringBuilder DisplayText
         {
             get { return DisplayTextField; }
-        }
-
-        /// <summary>
-        /// Indicate that the item is selected.
-        /// </summary>
-        protected bool SelectedField;
-
-        /// <summary>
-        /// Indicate that the item is selected.
-        /// </summary>
-        public bool Selected
-        {
-            get { return SelectedField; }
         }
 
         /// <summary>
@@ -51,6 +53,20 @@ namespace IRTaktiks.Components.Config
             get;
         }
 
+        /// <summary>
+        /// Indicate that the item is active.
+        /// </summary>
+        private bool ActiveField;
+        
+        /// <summary>
+        /// Indicate that the item is activated.
+        /// </summary>
+        public bool Active
+        {
+            get { return ActiveField; }
+            set { ActiveField = value; }
+        }
+        
         /// <summary>
         /// The index of the player.
         /// </summary>
@@ -102,6 +118,7 @@ namespace IRTaktiks.Components.Config
         public Configurable(Game game, PlayerIndex playerIndex)
             : base(game)
         {
+            this.DisplayTextField = new StringBuilder();
             this.PlayerIndexField = playerIndex;
         }
 
@@ -136,6 +153,23 @@ namespace IRTaktiks.Components.Config
         {
             base.Draw(gameTime);
         }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Activate the item.
+        /// </summary>
+        protected void Activate()
+        {
+            this.Activated(this);
+        }
+
+        /// <summary>
+        /// Deactivate the item.
+        /// </summary>
+        protected abstract void Deactivate();
 
         #endregion
     }

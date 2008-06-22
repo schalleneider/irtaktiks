@@ -14,25 +14,10 @@ using IRTaktiks.Input.EventArgs;
 namespace IRTaktiks.Components.Config
 {
     /// <summary>
-    /// Representation of the config keyboard.
+    /// Representation of the configuration of player.
     /// </summary>
-    public class Keyboard : Configurable
+    public class PlayerConfig : Configurable
     {
-        #region Event
-
-        /// <summary>
-        /// The delegate of methods that will handle the touched event.
-        /// </summary>
-        /// <param name="letter">The letter pressed on the keyboard.</param>
-        public delegate void TouchedEventHandler(string letter);
-
-        /// <summary>
-        /// Event fired when a letter on the keyboard is touched.
-        /// </summary>
-        public event TouchedEventHandler Touched;
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -40,7 +25,7 @@ namespace IRTaktiks.Components.Config
         /// </summary>
         public override bool Configurated
         {
-            get { return true; }
+            get { return this.DisplayText.Length > 0; }
         }
 
         #endregion
@@ -52,19 +37,17 @@ namespace IRTaktiks.Components.Config
         /// </summary>
         /// <param name="game">The instance of game that is running.</param>
         /// <param name="playerIndex">The index of the player owner of the keyboard.</param>
-        public Keyboard(Game game, PlayerIndex playerIndex)
+        public PlayerConfig(Game game, PlayerIndex playerIndex)
             : base(game, playerIndex)
         {
             switch (playerIndex)
             {
                 case PlayerIndex.One:
                     this.PositionField = new Vector2(0, 0);
-                    this.TextureField = TextureManager.Instance.Sprites.Config.KeyboardPlayerOne;
                     break;
 
                 case PlayerIndex.Two:
                     this.PositionField = new Vector2(640, 0);
-                    this.TextureField = TextureManager.Instance.Sprites.Config.KeyboardPlayerTwo;
                     break;
             }
 
@@ -90,6 +73,15 @@ namespace IRTaktiks.Components.Config
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
+            if (this.Configurated)
+            {
+                this.TextureField = TextureManager.Instance.Sprites.Config.PlayerGreen;
+            }
+            else
+            {
+                this.TextureField = TextureManager.Instance.Sprites.Config.PlayerRed;
+            }
+            
             base.Update(gameTime);
         }
 
@@ -102,13 +94,13 @@ namespace IRTaktiks.Components.Config
         {
             IRTGame game = this.Game as IRTGame;
 
-            game.SpriteManager.Draw(this.Texture, this.Position, Color.White, 20);
+            game.SpriteManager.Draw(this.Texture, this.Position, Color.White, 25);
             
             base.Draw(gameTime);
         }
 
         #endregion
-        
+
         #region Methods
 
         /// <summary>
@@ -128,11 +120,11 @@ namespace IRTaktiks.Components.Config
         /// </summary>
         private void CursorDown(object sender, CursorDownArgs e)
         {
-            // 1st Line
-            // 2nd Line
-            // 3rd Line
-            // 4th Line
-            // 5th Line
+            if ((e.Position.X > (this.Position.X + 44) && e.Position.X < (this.Position.X + 596)) &&
+                (e.Position.Y > (this.Position.Y + 71) && e.Position.Y < (this.Position.Y + 114)))
+            {
+                this.Activate();
+            }
         }
 
         #endregion

@@ -45,6 +45,19 @@ namespace IRTaktiks.Components.Manager
         }
 
         /// <summary>
+        /// The actual active item.
+        /// </summary>
+        private Configurable ActiveItemField;
+
+        /// <summary>
+        /// The actual active item.
+        /// </summary>
+        public Configurable ActiveItem
+        {
+            get { return ActiveItemField; }
+        }
+
+        /// <summary>
         /// The config keyboard.
         /// </summary>
         private Keyboard KeyboardField;
@@ -55,6 +68,19 @@ namespace IRTaktiks.Components.Manager
         public Keyboard Keyboard
         {
             get { return KeyboardField; }
+        }
+
+        /// <summary>
+        /// The config of player.
+        /// </summary>
+        private PlayerConfig PlayerConfigField;
+
+        /// <summary>
+        /// The config of player.
+        /// </summary>
+        public PlayerConfig PlayerConfig
+        {
+            get { return PlayerConfigField; }
         }
                 
         #endregion
@@ -72,9 +98,11 @@ namespace IRTaktiks.Components.Manager
 
             // Items creation
             this.KeyboardField = new Keyboard(game, playerIndex);
+            this.PlayerConfigField = new PlayerConfig(game, playerIndex);
 
             // Event handling
             this.Keyboard.Touched += new Keyboard.TouchedEventHandler(Keyboard_Touched);
+            this.PlayerConfig.Activated += new Configurable.ActivatedEventHandler(Item_Activated);
         }
 
         #endregion
@@ -119,6 +147,23 @@ namespace IRTaktiks.Components.Manager
         /// <param name="letter">The letther that was touched on the keyboard.</param>
         private void Keyboard_Touched(string letter)
         {
+            if (this.ActiveItem != null)
+            {
+                this.ActiveItem.DisplayText.Append(letter);
+            }
+        }
+
+        /// <summary>
+        /// Handle the activated event of the configurables items.
+        /// </summary>
+        /// <param name="item">The item activated</param>
+        private void Item_Activated(Configurable item)
+        {
+            this.Keyboard.Active = false;
+            this.PlayerConfig.Active = false;
+            
+            this.ActiveItemField = item;
+            item.Active = true;
         }
 
         #endregion
