@@ -43,7 +43,7 @@ namespace IRTaktiks.Components.Screen
 		public override void Initialize()
 		{
             IRTGame game = this.Game as IRTGame;
-
+            /*
             // Create the players
             game.PlayerOne = new Player(this.Game, "Willians", PlayerIndex.One);
             game.PlayerTwo = new Player(this.Game, "Sakura", PlayerIndex.Two);
@@ -74,9 +74,8 @@ namespace IRTaktiks.Components.Screen
             game.PlayerTwo.Units.Add(paladin);
             game.PlayerTwo.Units.Add(priest);
             game.PlayerTwo.Units.Add(wizard);
-
-            // Input Event registration.
-            InputManager.Instance.CursorUp += new EventHandler<CursorUpArgs>(CursorUp_Handler);
+            */
+            game.MapManager.Visible = true;
 
             base.Initialize();
 		}
@@ -97,31 +96,7 @@ namespace IRTaktiks.Components.Screen
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Draw(GameTime gameTime)
         {
-            IRTGame game = this.Game as IRTGame;
-
-            game.SpriteManager.Draw(TextureManager.Instance.Sprites.Config.Background, new Vector2(0, 0), Color.White, 100);
-            game.SpriteManager.Draw(TextureManager.Instance.Sprites.Config.Background, new Vector2(640, 0), Color.White, 100);
-            
             base.Draw(gameTime);
-        }
-
-        #endregion
-
-        #region Input Events
-
-        /// <summary>
-        /// Handler for the CursorUp event in this class.
-        /// </summary>
-        /// <param name="sender">Always null.</param>
-        /// <param name="e">Data of event.</param>
-        private void CursorUp_Handler(object sender, CursorUpArgs e)
-        {
-            // Exits the tile screen, changing the status of game.
-            IRTGame game = this.Game as IRTGame;
-            game.ChangeGameStatus(IRTGame.GameStatus.GameScreen);
-
-            // Unregister this event dispatcher.
-            InputManager.Instance.CursorUp -= this.CursorUp_Handler;
         }
 
         #endregion

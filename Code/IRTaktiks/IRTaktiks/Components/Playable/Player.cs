@@ -94,6 +94,14 @@ namespace IRTaktiks.Components.Playable
             set { MenuField = value; }
         }
 
+        /// <summary>
+        /// Indicates that the player won the game.
+        /// </summary>
+        public bool Won
+        {
+            get { return this.Enemy.Units.FindAll(delegate(Unit unit) { return unit.Life > 0; }).Count == 0; }
+        }
+
         #endregion
 
         #region Constructor

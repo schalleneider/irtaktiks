@@ -26,18 +26,14 @@ namespace IRTaktiks
         #region Constants
 
         /// <summary>
-        /// Width of the window.
-        /// 5 * 192: 960
-        /// 5 * 256: 1280    
+        /// Width of the window. 
         /// </summary>
-        public const int Width = 5 * 224;
+        public const int Width = 5 * 240;
         
         /// <summary>
         /// Height of the window.
-        /// 4 * 192: 768
-        /// 4 * 256: 1024
         /// </summary>
-        public const int Height = 4 * 224;
+        public const int Height = 4 * 240;
 
         /// <summary>
         /// Indicates if the game will be started at fullscreen mode.
@@ -46,12 +42,12 @@ namespace IRTaktiks
 
         #endregion
 
-        #region GameStatus
+        #region GameScreens
 
         /// <summary>
-		/// The statuses of the Game.
+		/// The screens of the Game.
 		/// </summary>
-		public enum GameStatus
+		public enum GameScreens
 		{
 			TitleScreen,
 			ConfigScreen,
@@ -164,6 +160,19 @@ namespace IRTaktiks
 			get { return GraphicsDeviceManagerField; }
 		}
 
+        /// <summary>
+        /// Manager of the map.
+        /// </summary>
+        private MapManager MapManagerField;
+
+        /// <summary>
+        /// Manager of the map.
+        /// </summary>
+        public MapManager MapManager
+        {
+            get { return MapManagerField; }
+        }
+
 		/// <summary>
 		/// Manager of sprites.
 		/// </summary>
@@ -215,7 +224,7 @@ namespace IRTaktiks
         {
             get { return DamageManagerField; }
         }
-
+        
         #endregion
 
         #region Screens
@@ -315,41 +324,48 @@ namespace IRTaktiks
             EffectManager.Instance.Initialize(this);
 			FontManager.Instance.Initialize(this);
 
+            // Components creation.
+            this.CameraField = new Camera(this);
+            this.MapManagerField = new MapManager(this);
+            this.SpriteManagerField = new SpriteManager(this);
+            this.AreaManagerField = new AreaManager(this.GraphicsDevice, this.Camera);
+            this.ParticleManagerField = new ParticleManager(new Vector3(0, 0, -100), this.GraphicsDevice, this.Camera);
+            this.DamageManagerField = new DamageManager(this);
+            
             // Debug
             this.ConsoleField = new IRTaktiks.Components.Debug.Console(this);
             this.FPSField = new FPS(this);
             this.TouchDebugField = new TouchDebug(this);
             
-            // Components creation.
-            this.CameraField = new Camera(this);
-            this.SpriteManagerField = new SpriteManager(this);
-            this.AreaManagerField = new AreaManager(this.GraphicsDevice, this.Camera);
-            this.ParticleManagerField = new ParticleManager(new Vector3(0, 0, -100), this.GraphicsDevice, this.Camera);
-            this.DamageManagerField = new DamageManager(this);
             AnimationManager.Instance.Initialize(this);
-
-			// Screen construction.
-			this.TitleScreenField = new TitleScreen(this, 0);
+            
+            // Screen construction.
+            this.TitleScreenField = new TitleScreen(this, 0);
             this.ConfigScreenField = new ConfigScreen(this, 0);
-			this.GameScreenField = new GameScreen(this, 0);
-			this.ScreenManagerField = new ScreenManager(this);
+            this.GameScreenField = new GameScreen(this, 0);
+            this.ScreenManagerField = new ScreenManager(this);
+
+            // Map addicition.
+            this.MapManager.Enabled = false;
+            this.MapManager.Visible = false;
+            this.Components.Add(this.MapManager);
 
 			// Screen addiction.
 			this.ScreenManager.Screens.Add(this.TitleScreen);
             this.ScreenManager.Screens.Add(this.ConfigScreen);
 			this.ScreenManager.Screens.Add(this.GameScreen);
-
+            
+            // Components addiction.
+			this.Components.Add(this.Camera);
+            this.Components.Add(this.ScreenManager);
+            
             // Debug
             this.Components.Add(this.Console);
 			this.Components.Add(this.FPS);
             this.Components.Add(this.TouchDebug);
             
-            // Components addiction.
-			this.Components.Add(this.Camera);
-            this.Components.Add(this.ScreenManager);
-
-			// Change the game to its first status.
-			this.ChangeGameStatus(GameStatus.TitleScreen);
+            // Change the game to its first status.
+			this.ChangeScreen(GameScreens.TitleScreen);
 
 			base.Initialize();
 		}
@@ -359,12 +375,13 @@ namespace IRTaktiks
 		/// </summary>
 		protected override void LoadContent()
 		{
-			base.LoadContent();
+			
+            
+            base.LoadContent();
 		}
 
 		/// <summary>
-		/// UnloadContent will be called once per game and is the place to unload
-		/// all content.
+		/// UnloadContent will be called once per game and is the place to unload all content.
 		/// </summary>
 		protected override void UnloadContent()
 		{
@@ -384,10 +401,8 @@ namespace IRTaktiks
             {
                 this.Exit();
             }
-
-            #warning Mouse injection enabled
-
-			MouseState mouseState = Mouse.GetState();
+            		
+            MouseState mouseState = Mouse.GetState();
 
             if (!mouseIsPressed)
             {
@@ -434,7 +449,7 @@ namespace IRTaktiks
 		/// Change the status of the game.
 		/// </summary>
 		/// <param name="newStatus">The new status of the game.</param>
-		public void ChangeGameStatus(GameStatus newStatus)
+		public void ChangeScreen(GameScreens newScreen)
 		{
 			// Make all screen invisibles and disabled.
 			this.TitleScreen.Enabled = false;
@@ -446,34 +461,28 @@ namespace IRTaktiks
 			this.GameScreen.Enabled = false;
 			this.GameScreen.Visible = false;
 
-            // Title Screen
-            if (newStatus == GameStatus.TitleScreen)
+            switch (newScreen)
             {
-                this.TitleScreen.Enabled = true;
-                this.TitleScreen.Visible = true;
-                this.TitleScreen.Initialize();
-            }
-
-            // Config screen
-            if (newStatus == GameStatus.ConfigScreen)
-            {
-                this.ConfigScreen.Enabled = true;
-                this.ConfigScreen.Visible = true; 
-                this.ConfigScreen.Initialize();
-            }
-
-            // Game Screen
-            if (newStatus == GameStatus.GameScreen)
-            {
-                this.GameScreen.Enabled = true;
-                this.GameScreen.Visible = true;
-                this.GameScreen.Initialize();
-            }
-
-            // End screen
-            if (newStatus == GameStatus.EndScreen)
-            {
-
+                case GameScreens.TitleScreen:
+                    this.TitleScreen.Enabled = true;
+                    this.TitleScreen.Visible = true;
+                    this.TitleScreen.Initialize();
+                    return;
+                
+                case GameScreens.ConfigScreen:
+                    this.ConfigScreen.Enabled = true;
+                    this.ConfigScreen.Visible = true; 
+                    this.ConfigScreen.Initialize();        
+                    return;
+                
+                case GameScreens.GameScreen:
+                    this.GameScreen.Enabled = true;
+                    this.GameScreen.Visible = true;
+                    this.GameScreen.Initialize();
+                    return;
+                
+                case GameScreens.EndScreen:
+                    return;
             }
 		}
 
