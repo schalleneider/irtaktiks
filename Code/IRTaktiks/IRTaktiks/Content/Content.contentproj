@@ -187,13 +187,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Config\Background.png">
-      <Name>Background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sprites\Unit\LifeBar.png">
       <Name>LifeBar</Name>
       <Importer>TextureImporter</Importer>
@@ -321,6 +314,48 @@
   <ItemGroup>
     <Compile Include="Sprites\Menu\SubmenuItemPlayerTwo.png">
       <Name>SubmenuItemPlayerTwo</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Config\AttributesPlayerOne.png">
+      <Name>AttributesPlayerOne</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Config\AttributesPlayerTwo.png">
+      <Name>AttributesPlayerTwo</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Config\KeyboardPlayerOne.png">
+      <Name>KeyboardPlayerOne</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Config\KeyboardPlayerTwo.png">
+      <Name>KeyboardPlayerTwo</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Config\PlayerGreen.png">
+      <Name>PlayerGreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Config\PlayerRed.png">
+      <Name>PlayerRed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Config\UnitGreen.png">
+      <Name>UnitGreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Config\UnitRed.png">
+      <Name>UnitRed</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
