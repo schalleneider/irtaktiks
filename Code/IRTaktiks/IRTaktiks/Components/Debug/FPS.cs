@@ -80,7 +80,7 @@ namespace IRTaktiks.Components.Debug
 		public override void Draw(GameTime gameTime)
 		{
             Vector2 textSize = FontManager.Instance.Debug.MeasureString(String.Format("{0:N}", this.Value));
-            Vector2 textPosition = new Vector2(IRTGame.Width - textSize.X, IRTGame.Height - textSize.Y);
+            Vector2 textPosition = new Vector2(IRTSettings.Default.Width - textSize.X, IRTSettings.Default.Height - textSize.Y);
 
             (this.Game as IRTGame).SpriteManager.DrawString(FontManager.Instance.Debug, String.Format("{0:N}", this.Value), textPosition, Color.Yellow, 100);
 

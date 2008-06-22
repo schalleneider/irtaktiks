@@ -123,7 +123,7 @@ namespace IRTaktiks.Components.Menu
             // Player two informations.
             if (this.Unit.Player.PlayerIndex == PlayerIndex.Two)
             {
-                this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.Background.Width, 192);
+                this.PositionField = new Vector2(IRTSettings.Default.Width - TextureManager.Instance.Sprites.Menu.Background.Width, 192);
                 this.AttributesPosition = new Vector2(this.Position.X - this.AttributesTexture.Width, this.Position.Y);
             }
 

@@ -75,7 +75,7 @@ namespace IRTaktiks.Components.Debug
             if (this.Text != null)
             {
                 Vector2 textSize = FontManager.Instance.Debug.MeasureString(this.Text);
-                Vector2 textPosition = new Vector2(IRTGame.Width / 2 - textSize.X / 2, IRTGame.Height - textSize.Y);
+                Vector2 textPosition = new Vector2(IRTSettings.Default.Width / 2 - textSize.X / 2, IRTSettings.Default.Height - textSize.Y);
 
                 (this.Game as IRTGame).SpriteManager.DrawString(FontManager.Instance.Debug, this.Text, textPosition, Color.Yellow, 100);
             }
