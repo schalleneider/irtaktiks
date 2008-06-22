@@ -172,45 +172,73 @@ namespace IRTaktiks.Components.Manager
                 }
 
                 /// <summary>
-                /// Texture of Sprites/Config/PlayerGreen.
+                /// Texture of Sprites/Config/PlayerOneGreen.
                 /// </summary>
-                private Texture2D PlayerGreenField;
+                private Texture2D PlayerOneGreenField;
 
                 /// <summary>
-                /// Texture of Sprites/Config/PlayerGreen.
+                /// Texture of Sprites/Config/PlayerOneGreen.
                 /// </summary>
-                public Texture2D PlayerGreen
+                public Texture2D PlayerOneGreen
                 {
-                    get { return PlayerGreenField; }
-                    set { PlayerGreenField = value; }
+                    get { return PlayerOneGreenField; }
+                    set { PlayerOneGreenField = value; }
                 }
 
                 /// <summary>
-                /// Texture of Sprites/Config/PlayerRed.
+                /// Texture of Sprites/Config/PlayerOneRed.
                 /// </summary>
-                private Texture2D PlayerRedField;
+                private Texture2D PlayerOneRedField;
 
                 /// <summary>
-                /// Texture of Sprites/Config/PlayerRed.
+                /// Texture of Sprites/Config/PlayerOneRed.
                 /// </summary>
-                public Texture2D PlayerRed
+                public Texture2D PlayerOneRed
                 {
-                    get { return PlayerRedField; }
-                    set { PlayerRedField = value; }
+                    get { return PlayerOneRedField; }
+                    set { PlayerOneRedField = value; }
                 }
 
                 /// <summary>
-                /// Texture of Sprites/Config/SelectedItem.
+                /// Texture of Sprites/Config/PlayerSelected.
                 /// </summary>
-                private Texture2D SelectedItemField;
+                private Texture2D PlayerSelectedField;
 
                 /// <summary>
-                /// Texture of Sprites/Config/SelectedItem.
+                /// Texture of Sprites/Config/PlayerSelected.
                 /// </summary>
-                public Texture2D SelectedItem
+                public Texture2D PlayerSelected
                 {
-                    get { return SelectedItemField; }
-                    set { SelectedItemField = value; }
+                    get { return PlayerSelectedField; }
+                    set { PlayerSelectedField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Config/PlayerOneGreen.
+                /// </summary>
+                private Texture2D PlayerTwoGreenField;
+
+                /// <summary>
+                /// Texture of Sprites/Config/PlayerTwoGreen.
+                /// </summary>
+                public Texture2D PlayerTwoGreen
+                {
+                    get { return PlayerTwoGreenField; }
+                    set { PlayerTwoGreenField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Config/PlayerTwoRed.
+                /// </summary>
+                private Texture2D PlayerTwoRedField;
+
+                /// <summary>
+                /// Texture of Sprites/Config/PlayerTwoRed.
+                /// </summary>
+                public Texture2D PlayerTwoRed
+                {
+                    get { return PlayerTwoRedField; }
+                    set { PlayerTwoRedField = value; }
                 }
 
                 /// <summary>
@@ -239,6 +267,20 @@ namespace IRTaktiks.Components.Manager
                 {
                     get { return UnitRedField; }
                     set { UnitRedField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Config/UnitSelected.
+                /// </summary>
+                private Texture2D UnitSelectedField;
+
+                /// <summary>
+                /// Texture of Sprites/Config/UnitSelected.
+                /// </summary>
+                public Texture2D UnitSelected
+                {
+                    get { return UnitSelectedField; }
+                    set { UnitSelectedField = value; }
                 }
 
                 #endregion
@@ -962,11 +1004,14 @@ namespace IRTaktiks.Components.Manager
             this.Sprites.Config.AttributesPlayerTwo = game.Content.Load<Texture2D>("Sprites/Config/AttributesPlayerTwo");
             this.Sprites.Config.KeyboardPlayerOne = game.Content.Load<Texture2D>("Sprites/Config/KeyboardPlayerOne");
             this.Sprites.Config.KeyboardPlayerTwo = game.Content.Load<Texture2D>("Sprites/Config/KeyboardPlayerTwo");
-            this.Sprites.Config.PlayerGreen = game.Content.Load<Texture2D>("Sprites/Config/PlayerGreen");
-            this.Sprites.Config.PlayerRed = game.Content.Load<Texture2D>("Sprites/Config/PlayerRed");
-            this.Sprites.Config.SelectedItem = game.Content.Load<Texture2D>("Sprites/Config/SelectedItem");
+            this.Sprites.Config.PlayerOneGreen = game.Content.Load<Texture2D>("Sprites/Config/PlayerOneGreen");
+            this.Sprites.Config.PlayerOneRed = game.Content.Load<Texture2D>("Sprites/Config/PlayerOneRed");
+            this.Sprites.Config.PlayerSelected = game.Content.Load<Texture2D>("Sprites/Config/PlayerSelected");
+            this.Sprites.Config.PlayerTwoGreen = game.Content.Load<Texture2D>("Sprites/Config/PlayerTwoGreen");
+            this.Sprites.Config.PlayerTwoRed = game.Content.Load<Texture2D>("Sprites/Config/PlayerTwoRed");
             this.Sprites.Config.UnitGreen = game.Content.Load<Texture2D>("Sprites/Config/UnitGreen");
             this.Sprites.Config.UnitRed = game.Content.Load<Texture2D>("Sprites/Config/UnitRed");
+            this.Sprites.Config.UnitSelected = game.Content.Load<Texture2D>("Sprites/Config/UnitSelected");
 
             this.Sprites.Debug.Arrow = game.Content.Load<Texture2D>("Sprites/Debug/Arrow");
 

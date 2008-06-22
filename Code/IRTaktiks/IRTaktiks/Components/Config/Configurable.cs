@@ -17,16 +17,17 @@ namespace IRTaktiks.Components.Config
     public abstract class Configurable : DrawableGameComponent
     {
         #region Event
-        
-        /// <summary>
-        /// The delegate of methods that will handle the activated event.
-        /// </summary>
-        public delegate void ActivatedEventHandler(Configurable item);
 
         /// <summary>
-        /// Event fired when the item is activated.
+        /// The delegate of methods that will handle the touched event.
         /// </summary>
-        public event ActivatedEventHandler Activated;
+        /// <param name="item">The item touched</param>
+        public delegate void TouchedEventHandler(Configurable item);
+
+        /// <summary>
+        /// Event fired when the item is touched.
+        /// </summary>
+        public event TouchedEventHandler Touched;
 
         #endregion
 
@@ -54,17 +55,17 @@ namespace IRTaktiks.Components.Config
         }
 
         /// <summary>
-        /// Indicate that the item is active.
+        /// Indicate that the item is selected.
         /// </summary>
-        private bool ActiveField;
+        private bool SelectedField;
         
         /// <summary>
-        /// Indicate that the item is activated.
+        /// Indicate that the item is selected.
         /// </summary>
-        public bool Active
+        public bool Selected
         {
-            get { return ActiveField; }
-            set { ActiveField = value; }
+            get { return SelectedField; }
+            set { SelectedField = value; }
         }
         
         /// <summary>
@@ -120,6 +121,8 @@ namespace IRTaktiks.Components.Config
         {
             this.DisplayTextField = new StringBuilder();
             this.PlayerIndexField = playerIndex;
+
+            this.SelectedField = false;
         }
 
         #endregion
@@ -159,17 +162,17 @@ namespace IRTaktiks.Components.Config
         #region Methods
 
         /// <summary>
-        /// Activate the item.
+        /// Touch the item.
         /// </summary>
-        protected void Activate()
+        protected void Touch()
         {
-            this.Activated(this);
+            this.Touched(this);
         }
 
         /// <summary>
-        /// Deactivate the item.
+        /// Unregister all events of the item.
         /// </summary>
-        protected abstract void Deactivate();
+        protected abstract void Unregister();
 
         #endregion
     }

@@ -73,13 +73,33 @@ namespace IRTaktiks.Components.Config
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            if (this.Configurated)
+            switch (this.PlayerIndex)
             {
-                this.TextureField = TextureManager.Instance.Sprites.Config.PlayerGreen;
-            }
-            else
-            {
-                this.TextureField = TextureManager.Instance.Sprites.Config.PlayerRed;
+                case PlayerIndex.One:
+                    
+                    if (this.Configurated)
+                    {
+                        this.TextureField = TextureManager.Instance.Sprites.Config.PlayerOneGreen;
+                    }
+                    else
+                    {
+                        this.TextureField = TextureManager.Instance.Sprites.Config.PlayerOneRed;
+                    }
+
+                    break;
+
+                case PlayerIndex.Two:
+
+                    if (this.Configurated)
+                    {
+                        this.TextureField = TextureManager.Instance.Sprites.Config.PlayerTwoGreen;
+                    }
+                    else
+                    {
+                        this.TextureField = TextureManager.Instance.Sprites.Config.PlayerTwoRed;
+                    }
+                    
+                    break;
             }
             
             base.Update(gameTime);
@@ -94,8 +114,20 @@ namespace IRTaktiks.Components.Config
         {
             IRTGame game = this.Game as IRTGame;
 
+            // Draw the background
             game.SpriteManager.Draw(this.Texture, this.Position, Color.White, 25);
-            
+
+            // Draw the display text
+            Vector2 textSize = FontManager.Instance.Chilopod20.MeasureString(this.DisplayText.ToString());
+            Vector2 textPosition = new Vector2(this.Position.X + ((44 + 596) / 2) - (textSize.X / 2), this.Position.Y + ((71 + 114) / 2) - (textSize.Y / 2));
+            game.SpriteManager.DrawString(FontManager.Instance.Chilopod20, this.DisplayText.ToString(), textPosition, Color.White, 30);
+
+            // Draw the selected indicator.
+            if (this.Selected)
+            {
+                game.SpriteManager.Draw(TextureManager.Instance.Sprites.Config.PlayerSelected, new Vector2(this.Position.X, this.Position.Y), Color.White, 30);
+            }
+
             base.Draw(gameTime);
         }
 
@@ -104,9 +136,9 @@ namespace IRTaktiks.Components.Config
         #region Methods
 
         /// <summary>
-        /// Deactivate the item.
-        /// </summary>
-        protected override void Deactivate()
+        /// Unregister all events of the item.
+        /// </summary
+        protected override void Unregister()
         {
             InputManager.Instance.CursorDown -= CursorDown;
         }
@@ -121,9 +153,9 @@ namespace IRTaktiks.Components.Config
         private void CursorDown(object sender, CursorDownArgs e)
         {
             if ((e.Position.X > (this.Position.X + 44) && e.Position.X < (this.Position.X + 596)) &&
-                (e.Position.Y > (this.Position.Y + 71) && e.Position.Y < (this.Position.Y + 114)))
+                (e.Position.Y > (this.Position.Y + 44) && e.Position.Y < (this.Position.Y + 114)))
             {
-                this.Activate();
+                this.Touch();
             }
         }
 

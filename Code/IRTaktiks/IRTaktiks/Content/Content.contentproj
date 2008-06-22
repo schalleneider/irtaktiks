@@ -339,16 +339,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Sprites\Config\PlayerGreen.png">
-      <Name>PlayerGreen</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Config\PlayerRed.png">
-      <Name>PlayerRed</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Sprites\Config\UnitGreen.png">
       <Name>UnitGreen</Name>
       <Importer>TextureImporter</Importer>
@@ -361,8 +351,37 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Config\SelectedItem.png">
-      <Name>SelectedItem</Name>
+    <Compile Include="Sprites\Config\PlayerSelected.png">
+      <Name>PlayerSelected</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Config\PlayerOneGreen.png">
+      <Name>PlayerOneGreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Config\PlayerOneRed.png">
+      <Name>PlayerOneRed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Config\PlayerTwoGreen.png">
+      <Name>PlayerTwoGreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Config\PlayerTwoRed.png">
+      <Name>PlayerTwoRed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Config\UnitSelected.png">
+      <Name>UnitSelected</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

@@ -45,16 +45,16 @@ namespace IRTaktiks.Components.Manager
         }
 
         /// <summary>
-        /// The actual active item.
+        /// The actual selected item.
         /// </summary>
-        private Configurable ActiveItemField;
+        private Configurable SelectedItemField;
 
         /// <summary>
-        /// The actual active item.
+        /// The actual selected item.
         /// </summary>
-        public Configurable ActiveItem
+        public Configurable SelectedItem
         {
-            get { return ActiveItemField; }
+            get { return SelectedItemField; }
         }
 
         /// <summary>
@@ -82,7 +82,20 @@ namespace IRTaktiks.Components.Manager
         {
             get { return PlayerConfigField; }
         }
-                
+
+        /// <summary>
+        /// The list of the config of unit
+        /// </summary>
+        private List<UnitConfig> UnitsConfigField;
+
+        /// <summary>
+        /// The list of the config of unit
+        /// </summary>
+        public List<UnitConfig> UnitsConfig
+        {
+            get { return UnitsConfigField; }
+        }
+                        
         #endregion
 
         #region Constructor
@@ -99,10 +112,19 @@ namespace IRTaktiks.Components.Manager
             // Items creation
             this.KeyboardField = new Keyboard(game, playerIndex);
             this.PlayerConfigField = new PlayerConfig(game, playerIndex);
+            
+            // Units config creation
+            this.UnitsConfigField = new List<UnitConfig>();
+            for (int index = 0; index < IRTGame.UnitsPerUser; index++)
+            {
+                UnitConfig unitConfig = new UnitConfig(game, playerIndex, index);
+                unitConfig.Touched += new Configurable.TouchedEventHandler(Configurable_Touched);
+                this.UnitsConfig.Add(unitConfig);
+            }
 
             // Event handling
-            this.Keyboard.Touched += new Keyboard.TouchedEventHandler(Keyboard_Touched);
-            this.PlayerConfig.Activated += new Configurable.ActivatedEventHandler(Item_Activated);
+            this.Keyboard.Typed += new Keyboard.TypedEventHandler(Keyboard_Typed);
+            this.PlayerConfig.Touched += new Configurable.TouchedEventHandler(Configurable_Touched);
         }
 
         #endregion
@@ -145,25 +167,48 @@ namespace IRTaktiks.Components.Manager
         /// Handle the pressed event of the keyboard.
         /// </summary>
         /// <param name="letter">The letther that was touched on the keyboard.</param>
-        private void Keyboard_Touched(string letter)
+        private void Keyboard_Typed(string letter)
         {
-            if (this.ActiveItem != null)
+            if (this.SelectedItem != null)
             {
-                this.ActiveItem.DisplayText.Append(letter);
+                if (letter != null)
+                {
+                    this.SelectedItem.DisplayText.Append(letter);
+                }
+                else
+                {
+                    if (this.SelectedItem.DisplayText.Length > 0)
+                    {
+                        this.SelectedItem.DisplayText.Remove(this.SelectedItem.DisplayText.Length - 1, 1);
+                    }
+                }
             }
         }
 
         /// <summary>
-        /// Handle the activated event of the configurables items.
+        /// Handle the touched event of the items.
         /// </summary>
-        /// <param name="item">The item activated</param>
-        private void Item_Activated(Configurable item)
+        /// <param name="item">The item touched</param>
+        private void Configurable_Touched(Configurable item)
         {
-            this.Keyboard.Active = false;
-            this.PlayerConfig.Active = false;
-            
-            this.ActiveItemField = item;
-            item.Active = true;
+            if (item.Selected)
+            {
+                this.SelectedItemField = null;
+                item.Selected = false;
+            }
+            else
+            {
+                this.Keyboard.Selected = false;
+                this.PlayerConfig.Selected = false;
+
+                for (int index = 0; index < this.UnitsConfig.Count; index++)
+                {
+                    this.UnitsConfig[index].Selected = false;
+                }
+
+                this.SelectedItemField = item;
+                item.Selected = true;
+            }
         }
 
         #endregion
