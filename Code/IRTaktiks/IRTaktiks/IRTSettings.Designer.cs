@@ -43,7 +43,7 @@ namespace IRTaktiks {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool FullScreen {
             get {
                 return ((bool)(this["FullScreen"]));
@@ -97,7 +97,7 @@ namespace IRTaktiks {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ListenMouse {
             get {
                 return ((bool)(this["ListenMouse"]));
