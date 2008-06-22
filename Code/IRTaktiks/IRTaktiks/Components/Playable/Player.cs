@@ -147,7 +147,7 @@ namespace IRTaktiks.Components.Playable
 
         /// <summary>
         /// Called when the DrawableGameComponent needs to be drawn. Override this method
-        //  with component-specific drawing code.
+        /// with component-specific drawing code.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Draw(GameTime gameTime)

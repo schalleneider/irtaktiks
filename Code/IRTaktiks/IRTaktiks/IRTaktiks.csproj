@@ -65,6 +65,7 @@
     <Compile Include="Components\Action\Attack.cs" />
     <Compile Include="Components\Action\Item.cs" />
     <Compile Include="Components\Action\Skill.cs" />
+    <Compile Include="Components\Config\Keyboard.cs" />
     <Compile Include="Components\Debug\Console.cs" />
     <Compile Include="Components\Debug\TouchDebug.cs" />
     <Compile Include="Components\Interaction\Aim.cs" />
