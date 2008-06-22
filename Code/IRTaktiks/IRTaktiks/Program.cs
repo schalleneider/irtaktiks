@@ -11,8 +11,6 @@ namespace IRTaktiks
         /// </summary>
         static void Main(string[] args)
         {
-			#warning Not listening TUIO messages
-
 			/* Start the listening of TUIO messages. *
 			TuioDump listener = new TuioDump();
 			ThreadPool.QueueUserWorkItem(listener.Run, null);
@@ -21,7 +19,7 @@ namespace IRTaktiks
 			// Create the game and start it.
 			using (IRTGame game = new IRTGame())
 			{
-				game.Run();
+                game.Run();
 			}
         }
     }

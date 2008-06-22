@@ -20,47 +20,28 @@ namespace IRTaktiks.Components.Screen
     /// </summary>
     public class GameScreen : IScreen
     {
-        #region Properties
-
-		/// <summary>
-		/// The instance of the map of the game.
-		/// </summary>
-		private Map MapField;
-		
-		/// <summary>
-		/// The instance of the map of the game.
-		/// </summary>
-		public Map Map
-		{
-			get { return MapField; }
-		}
-
-        #endregion
-
         #region Constructor
 
         /// <summary>
-		/// Constructor of class.
-		/// </summary>
-		/// <param name="game">The instance of game that is running.</param>
+        /// Constructor of class.
+        /// </summary>
+        /// <param name="game">The instance of game that is running.</param>
         /// <param name="priority">Drawing priority of screen. Higher indicates that the screen will be at the top of the others.</param>
         public GameScreen(Game game, int priority)
             : base(game, priority)
-		{
-			// Create the children components of the screen.
-            this.MapField = new Map(game);
-		}
+        {
+        }
 
-		#endregion
+        #endregion
 
-		#region Component Methods
+        #region Component Methods
 
-		/// <summary>
-		/// Allows the game component to perform any initialization it needs to before starting
-		/// to run. This is where it can query for any required services and load content.
-		/// </summary>
-		public override void Initialize()
-		{
+        /// <summary>
+        /// Allows the game component to perform any initialization it needs to before starting
+        /// to run. This is where it can query for any required services and load content.
+        /// </summary>
+        public override void Initialize()
+        {
             IRTGame game = this.Game as IRTGame;
 
             // Add the players to the game and its menus.
@@ -86,20 +67,27 @@ namespace IRTaktiks.Components.Screen
                 this.Components.Add(unit.ActionManager);
             }
 
-            // Initialize the map.
-            this.Map.Initialize();
+            game.MapManager.Visible = true;
 
             base.Initialize();
-		}
+        }
 
-		/// <summary>
-		/// Allows the game component to update itself.
-		/// </summary>
-		/// <param name="gameTime">Provides a snapshot of timing values.</param>
-		public override void Update(GameTime gameTime)
-		{
+        /// <summary>
+        /// Allows the game component to update itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public override void Update(GameTime gameTime)
+        {
+            IRTGame game = this.Game as IRTGame;
+
+            // End the game.
+            if (game.PlayerOne.Won || game.PlayerTwo.Won)
+            {
+                game.ChangeScreen(IRTGame.GameScreens.EndScreen);
+            }
+
             base.Update(gameTime);
-		}
+        }
 
         /// <summary>
         /// Called when the DrawableGameComponent needs to be drawn. Override this method
@@ -108,33 +96,6 @@ namespace IRTaktiks.Components.Screen
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Draw(GameTime gameTime)
         {
-            IRTGame game = this.Game as IRTGame;
-
-            // Set the effects parameters.
-            this.Map.Effect.Parameters["World"].SetValue(Matrix.Identity);
-            this.Map.Effect.Parameters["View"].SetValue(game.Camera.MapView);
-            this.Map.Effect.Parameters["Projection"].SetValue(game.Camera.MapProjection);
-            this.Map.Effect.Parameters["MaxHeight"].SetValue(this.Map.MaxHeight);
-            this.Map.Effect.Parameters["TerrainHeightmap"].SetValue(TextureManager.Instance.Terrains.Terrain);
-            this.Map.Effect.Parameters["SandTexture"].SetValue(TextureManager.Instance.Textures.Sand);
-            this.Map.Effect.Parameters["GrassTexture"].SetValue(TextureManager.Instance.Textures.Grass);
-            this.Map.Effect.Parameters["RockTexture"].SetValue(TextureManager.Instance.Textures.Rock);
-            this.Map.Effect.Parameters["SnowTexture"].SetValue(TextureManager.Instance.Textures.Snow);
-
-            // Start the effect.
-            this.Map.Effect.Begin();
-
-            // Draws all passes of the current technique.
-            foreach (EffectPass pass in this.Map.Effect.CurrentTechnique.Passes)
-            {
-                pass.Begin();
-                this.Map.Draw(gameTime);
-                pass.End();
-            }
-
-            // End the effect.
-            this.Map.Effect.End(); 
-            
             base.Draw(gameTime);
         }
 

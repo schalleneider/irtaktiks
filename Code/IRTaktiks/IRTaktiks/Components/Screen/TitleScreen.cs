@@ -86,7 +86,7 @@ namespace IRTaktiks.Components.Screen
         {
             // Exits the tile screen, changing the status of game.
             IRTGame game = this.Game as IRTGame;
-            game.ChangeGameStatus(IRTGame.GameStatus.ConfigScreen);
+            game.ChangeScreen(IRTGame.GameScreens.ConfigScreen);
             
             // Unregister this event dispatcher.
             InputManager.Instance.CursorUp -= this.CursorUp_Handler;
