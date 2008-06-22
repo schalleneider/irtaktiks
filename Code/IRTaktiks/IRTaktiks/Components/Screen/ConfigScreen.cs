@@ -98,9 +98,11 @@ namespace IRTaktiks.Components.Screen
 
             // Player one configuration items.
             this.Components.Add(this.PlayerOneConfigurationManager.Keyboard);
+            this.Components.Add(this.PlayerOneConfigurationManager.PlayerConfig);
 
             // Player two configuration items.
             this.Components.Add(this.PlayerTwoConfigurationManager.Keyboard);
+            this.Components.Add(this.PlayerTwoConfigurationManager.PlayerConfig);
 
             // Shows the map.
             (this.Game as IRTGame).MapManager.Visible = true;
@@ -124,7 +126,7 @@ namespace IRTaktiks.Components.Screen
 
         /// <summary>
         /// Called when the DrawableGameComponent needs to be drawn. Override this method
-        //  with component-specific drawing code.
+        /// with component-specific drawing code.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Draw(GameTime gameTime)
