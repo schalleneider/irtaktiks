@@ -4,45 +4,59 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
-using IRTaktiks.Components.Manager;
-using IRTaktiks.Input;
-using IRTaktiks.Input.EventArgs;
+using IRTaktiks.Components.Config;
 
-namespace IRTaktiks.Components.Config
+namespace IRTaktiks.Components.Manager
 {
     /// <summary>
-    /// Representation of the config keyboard.
+    /// Manager of the configuration.
     /// </summary>
-    public class Keyboard : Configurable
+    public class ConfigurationManager : DrawableGameComponent
     {
         #region Event
 
         /// <summary>
         /// The delegate of methods that will handle the touched event.
         /// </summary>
-        /// <param name="letter">The letter pressed on the keyboard.</param>
-        public delegate void TouchedEventHandler(string letter);
+        public delegate void ConfiguratedEventHandler();
 
         /// <summary>
-        /// Event fired when a letter on the keyboard is touched.
+        /// Event fired when a player end the configuration of the items.
         /// </summary>
-        public event TouchedEventHandler Touched;
+        public event ConfiguratedEventHandler Configurated;
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        /// Indicate that the item is configurated.
+        /// The index of the player.
         /// </summary>
-        public override bool Configurated
+        private PlayerIndex PlayerIndexField;
+
+        /// <summary>
+        /// The index of the player.
+        /// </summary>
+        public PlayerIndex PlayerIndex
         {
-            get { return true; }
+            get { return PlayerIndexField; }
         }
 
+        /// <summary>
+        /// The config keyboard.
+        /// </summary>
+        private Keyboard KeyboardField;
+
+        /// <summary>
+        /// The config keyboard.
+        /// </summary>
+        public Keyboard Keyboard
+        {
+            get { return KeyboardField; }
+        }
+                
         #endregion
 
         #region Constructor
@@ -51,24 +65,16 @@ namespace IRTaktiks.Components.Config
         /// Constructor of class.
         /// </summary>
         /// <param name="game">The instance of game that is running.</param>
-        /// <param name="playerIndex">The index of the player owner of the keyboard.</param>
-        public Keyboard(Game game, PlayerIndex playerIndex)
-            : base(game, playerIndex)
+        public ConfigurationManager(Game game, PlayerIndex playerIndex)
+            : base(game)
         {
-            switch (playerIndex)
-            {
-                case PlayerIndex.One:
-                    this.PositionField = new Vector2(0, 0);
-                    this.TextureField = TextureManager.Instance.Sprites.Config.KeyboardPlayerOne;
-                    break;
+            this.PlayerIndexField = playerIndex;
 
-                case PlayerIndex.Two:
-                    this.PositionField = new Vector2(640, 0);
-                    this.TextureField = TextureManager.Instance.Sprites.Config.KeyboardPlayerTwo;
-                    break;
-            }
+            // Items creation
+            this.KeyboardField = new Keyboard(game, playerIndex);
 
-            InputManager.Instance.CursorDown += new EventHandler<CursorDownArgs>(CursorDown);
+            // Event handling
+            this.Keyboard.Touched += new Keyboard.TouchedEventHandler(Keyboard_Touched);
         }
 
         #endregion
@@ -100,27 +106,19 @@ namespace IRTaktiks.Components.Config
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Draw(GameTime gameTime)
         {
-            IRTGame game = this.Game as IRTGame;
-
-            game.SpriteManager.Draw(this.Texture, this.Position, Color.White, 20);
-            
             base.Draw(gameTime);
         }
 
         #endregion
 
-        #region Input Handling
-
+        #region Event Handling
+        
         /// <summary>
-        /// Input Handling for Cursor Down event.
+        /// Handle the pressed event of the keyboard.
         /// </summary>
-        private void CursorDown(object sender, CursorDownArgs e)
+        /// <param name="letter">The letther that was touched on the keyboard.</param>
+        private void Keyboard_Touched(string letter)
         {
-            // 1st Line
-            // 2nd Line
-            // 3rd Line
-            // 4th Line
-            // 5th Line
         }
 
         #endregion

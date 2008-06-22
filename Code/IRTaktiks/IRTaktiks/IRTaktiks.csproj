@@ -65,6 +65,7 @@
     <Compile Include="Components\Action\Attack.cs" />
     <Compile Include="Components\Action\Item.cs" />
     <Compile Include="Components\Action\Skill.cs" />
+    <Compile Include="Components\Config\Configurable.cs" />
     <Compile Include="Components\Config\Keyboard.cs" />
     <Compile Include="Components\Debug\Console.cs" />
     <Compile Include="Components\Debug\TouchDebug.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Components\Manager\AreaManager.cs" />
     <Compile Include="Components\Manager\AnimationManager.cs" />
     <Compile Include="Components\Manager\AttackManager.cs" />
+    <Compile Include="Components\Manager\ConfigurationManager.cs" />
     <Compile Include="Components\Manager\ItemManager.cs" />
     <Compile Include="Components\Manager\DamageManager.cs" />
     <Compile Include="Components\Manager\MapManager.cs" />

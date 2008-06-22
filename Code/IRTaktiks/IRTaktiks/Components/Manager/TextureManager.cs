@@ -116,17 +116,115 @@ namespace IRTaktiks.Components.Manager
                 #region Textures
 
                 /// <summary>
-                /// Texture of Sprites/Config/Background.
+                /// Texture of Sprites/Config/AttributesPlayerOne.
                 /// </summary>
-                private Texture2D BackgroundField;
+                private Texture2D AttributesPlayerOneField;
 
                 /// <summary>
-                /// Texture of Sprites/Config/Background.
+                /// Texture of Sprites/Config/AttributesPlayerOne.
                 /// </summary>
-                public Texture2D Background
+                public Texture2D AttributesPlayerOne
                 {
-                    get { return BackgroundField; }
-                    set { BackgroundField = value; }
+                    get { return AttributesPlayerOneField; }
+                    set { AttributesPlayerOneField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Config/AttributesPlayerTwo.
+                /// </summary>
+                private Texture2D AttributesPlayerTwoField;
+
+                /// <summary>
+                /// Texture of Sprites/Config/AttributesPlayerTwo.
+                /// </summary>
+                public Texture2D AttributesPlayerTwo
+                {
+                    get { return AttributesPlayerTwoField; }
+                    set { AttributesPlayerTwoField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Config/KeyboardPlayerOne.
+                /// </summary>
+                private Texture2D KeyboardPlayerOneField;
+
+                /// <summary>
+                /// Texture of Sprites/Config/KeyboardPlayerOne.
+                /// </summary>
+                public Texture2D KeyboardPlayerOne
+                {
+                    get { return KeyboardPlayerOneField; }
+                    set { KeyboardPlayerOneField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Config/KeyboardPlayerTwo.
+                /// </summary>
+                private Texture2D KeyboardPlayerTwoField;
+
+                /// <summary>
+                /// Texture of Sprites/Config/KeyboardPlayerTwo.
+                /// </summary>
+                public Texture2D KeyboardPlayerTwo
+                {
+                    get { return KeyboardPlayerTwoField; }
+                    set { KeyboardPlayerTwoField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Config/PlayerGreen.
+                /// </summary>
+                private Texture2D PlayerGreenField;
+
+                /// <summary>
+                /// Texture of Sprites/Config/PlayerGreen.
+                /// </summary>
+                public Texture2D PlayerGreen
+                {
+                    get { return PlayerGreenField; }
+                    set { PlayerGreenField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Config/PlayerRed.
+                /// </summary>
+                private Texture2D PlayerRedField;
+
+                /// <summary>
+                /// Texture of Sprites/Config/PlayerRed.
+                /// </summary>
+                public Texture2D PlayerRed
+                {
+                    get { return PlayerRedField; }
+                    set { PlayerRedField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Config/UnitGreen.
+                /// </summary>
+                private Texture2D UnitGreenField;
+
+                /// <summary>
+                /// Texture of Sprites/Config/UnitGreen.
+                /// </summary>
+                public Texture2D UnitGreen
+                {
+                    get { return UnitGreenField; }
+                    set { UnitGreenField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Config/UnitRed.
+                /// </summary>
+                private Texture2D UnitRedField;
+
+                /// <summary>
+                /// Texture of Sprites/Config/UnitRed.
+                /// </summary>
+                public Texture2D UnitRed
+                {
+                    get { return UnitRedField; }
+                    set { UnitRedField = value; }
                 }
 
                 #endregion
@@ -846,7 +944,14 @@ namespace IRTaktiks.Components.Manager
             this.Characters.Knight = game.Content.Load<Texture2D>("Characters/Knight");
             this.Characters.Wizard = game.Content.Load<Texture2D>("Characters/Wizard");
 
-            this.Sprites.Config.Background = game.Content.Load<Texture2D>("Sprites/Config/Background");
+            this.Sprites.Config.AttributesPlayerOne = game.Content.Load<Texture2D>("Sprites/Config/AttributesPlayerOne");
+            this.Sprites.Config.AttributesPlayerTwo = game.Content.Load<Texture2D>("Sprites/Config/AttributesPlayerTwo");
+            this.Sprites.Config.KeyboardPlayerOne = game.Content.Load<Texture2D>("Sprites/Config/KeyboardPlayerOne");
+            this.Sprites.Config.KeyboardPlayerTwo = game.Content.Load<Texture2D>("Sprites/Config/KeyboardPlayerTwo");
+            this.Sprites.Config.PlayerGreen = game.Content.Load<Texture2D>("Sprites/Config/PlayerGreen");
+            this.Sprites.Config.PlayerRed = game.Content.Load<Texture2D>("Sprites/Config/PlayerRed");
+            this.Sprites.Config.UnitGreen = game.Content.Load<Texture2D>("Sprites/Config/UnitGreen");
+            this.Sprites.Config.UnitRed = game.Content.Load<Texture2D>("Sprites/Config/UnitRed");
 
             this.Sprites.Debug.Arrow = game.Content.Load<Texture2D>("Sprites/Debug/Arrow");
 
