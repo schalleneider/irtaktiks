@@ -155,7 +155,7 @@ namespace IRTaktiks.Components.Manager
             // Set the top left position for the player two
             if (this.Unit.Player.PlayerIndex == PlayerIndex.Two)
             {
-                this.PositionField = new Vector2(IRTGame.Width - TextureManager.Instance.Sprites.Menu.ItemPlayerOne.Width, 323);
+                this.PositionField = new Vector2(IRTSettings.Default.Width - TextureManager.Instance.Sprites.Menu.ItemPlayerOne.Width, 323);
             }
 
             // Construct the menu.
@@ -370,7 +370,7 @@ namespace IRTaktiks.Components.Manager
                 if (e.Position.X < limitX && e.Position.X > this.Position.X)
                 {
                     // Define if the touch was inside the menu y area.
-                    if (e.Position.Y > this.Position.Y && e.Position.Y < IRTGame.Height)
+                    if (e.Position.Y > this.Position.Y && e.Position.Y < IRTSettings.Default.Height)
                     {
                         // Updates the menu.
                         this.ChangedField = true;                        

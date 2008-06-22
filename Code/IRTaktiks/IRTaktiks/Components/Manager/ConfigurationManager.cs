@@ -115,7 +115,7 @@ namespace IRTaktiks.Components.Manager
             
             // Units config creation
             this.UnitsConfigField = new List<UnitConfig>();
-            for (int index = 0; index < IRTGame.UnitsPerUser; index++)
+            for (int index = 0; index < IRTSettings.Default.UnitsPerPlayer; index++)
             {
                 UnitConfig unitConfig = new UnitConfig(game, playerIndex, index);
                 unitConfig.Touched += new Configurable.TouchedEventHandler(Configurable_Touched);

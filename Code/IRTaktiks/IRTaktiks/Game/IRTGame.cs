@@ -23,30 +23,6 @@ namespace IRTaktiks
 	/// </summary>
 	public class IRTGame : Game
     {
-        #region Constants
-
-        /// <summary>
-        /// Width of the window. 
-        /// </summary>
-        public const int Width = 5 * 224;
-        
-        /// <summary>
-        /// Height of the window.
-        /// </summary>
-        public const int Height = 4 * 224;
-
-        /// <summary>
-        /// Indicates if the game will be started at fullscreen mode.
-        /// </summary>
-        public const bool IsFullScreen = false;
-
-        /// <summary>
-        /// The quantity of units per user.
-        /// </summary>
-        public const int UnitsPerUser = 1;
-
-        #endregion
-
         #region GameScreens
 
         /// <summary>
@@ -299,12 +275,12 @@ namespace IRTaktiks
 			this.GraphicsDeviceManagerField = new GraphicsDeviceManager(this);
 			this.Content.RootDirectory = "Content";
 
-			this.Window.Title = "IRTaktiks - Tactical RPG for multi-touch screens";
+			this.Window.Title = "IRTaktiks - Tactical RPG for multi-touch interfaces";
 			this.IsMouseVisible = true;
 
-            this.GraphicsDeviceManager.PreferredBackBufferWidth = IRTGame.Width;
-            this.GraphicsDeviceManager.PreferredBackBufferHeight = IRTGame.Height;
-            this.GraphicsDeviceManager.IsFullScreen = IRTGame.IsFullScreen;
+            this.GraphicsDeviceManager.PreferredBackBufferWidth = IRTSettings.Default.Width;
+            this.GraphicsDeviceManager.PreferredBackBufferHeight = IRTSettings.Default.Height;
+            this.GraphicsDeviceManager.IsFullScreen = IRTSettings.Default.FullScreen;
 
             this.GraphicsDeviceManager.SynchronizeWithVerticalRetrace = true;
             this.GraphicsDeviceManager.PreferMultiSampling = true;

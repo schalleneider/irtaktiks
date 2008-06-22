@@ -141,9 +141,9 @@ namespace IRTaktiks.Components.Scenario
         /// </summary>
         private void Scale()
         {
-            float scaledX = Area.ScaledFactorX * (2 * (this.Position.X / (float)IRTGame.Width) - 1);
-            float scaledY = Area.ScaledFactorY * (2 * (this.Position.Y / (float)IRTGame.Height) - 1);
-            float scaledRadius = Area.ScaledFactorRadius * (2 * this.Radius / (float)IRTGame.Width);
+            float scaledX = Area.ScaledFactorX * (2 * (this.Position.X / (float)IRTSettings.Default.Width) - 1);
+            float scaledY = Area.ScaledFactorY * (2 * (this.Position.Y / (float)IRTSettings.Default.Height) - 1);
+            float scaledRadius = Area.ScaledFactorRadius * (2 * this.Radius / (float)IRTSettings.Default.Width);
 
             this.ScaledPositionField = new Vector2(scaledX, scaledY);
             this.ScaledRadiusField = scaledRadius;

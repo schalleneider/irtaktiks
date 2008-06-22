@@ -114,6 +114,11 @@
     <Compile Include="Input\EventArgs\CursorDownArgs.cs" />
     <Compile Include="Input\EventArgs\CursorUpArgs.cs" />
     <Compile Include="Input\InputManager.cs" />
+    <Compile Include="IRTSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>IRTSettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Listener\TuioClient.cs" />
     <Compile Include="Listener\TuioDump.cs" />
     <Compile Include="Listener\TuioListener.cs" />
@@ -135,6 +140,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="IRTaktiks.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="IRTSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>IRTSettings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\v2.0\Microsoft.Xna.GameStudio.Common.targets" />
