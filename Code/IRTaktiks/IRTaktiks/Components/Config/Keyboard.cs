@@ -134,168 +134,168 @@ namespace IRTaktiks.Components.Config
                 if (e.Position.X > (this.Position.X + 27) && e.Position.X < (this.Position.X + 66))
                     this.Typed("1");
 
-                if (e.Position.X > (this.Position.X + 71) && e.Position.X < (this.Position.X + 110))
+                else if (e.Position.X > (this.Position.X + 71) && e.Position.X < (this.Position.X + 110))
                     this.Typed("2");
 
-                if (e.Position.X > (this.Position.X + 115) && e.Position.X < (this.Position.X + 154))
+                else if (e.Position.X > (this.Position.X + 115) && e.Position.X < (this.Position.X + 154))
                     this.Typed("3");
 
-                if (e.Position.X > (this.Position.X + 159) && e.Position.X < (this.Position.X + 198))
+                else if (e.Position.X > (this.Position.X + 159) && e.Position.X < (this.Position.X + 198))
                     this.Typed("4");
 
-                if (e.Position.X > (this.Position.X + 203) && e.Position.X < (this.Position.X + 242))
+                else if (e.Position.X > (this.Position.X + 203) && e.Position.X < (this.Position.X + 242))
                     this.Typed("5");
 
-                if (e.Position.X > (this.Position.X + 247) && e.Position.X < (this.Position.X + 283))
+                else if (e.Position.X > (this.Position.X + 247) && e.Position.X < (this.Position.X + 283))
                     this.Typed("6");
 
-                if (e.Position.X > (this.Position.X + 291) && e.Position.X < (this.Position.X + 330))
+                else if (e.Position.X > (this.Position.X + 291) && e.Position.X < (this.Position.X + 330))
                     this.Typed("7");
 
-                if (e.Position.X > (this.Position.X + 335) && e.Position.X < (this.Position.X + 374))
+                else if (e.Position.X > (this.Position.X + 335) && e.Position.X < (this.Position.X + 374))
                     this.Typed("8");
 
-                if (e.Position.X > (this.Position.X + 379) && e.Position.X < (this.Position.X + 418))
+                else if (e.Position.X > (this.Position.X + 379) && e.Position.X < (this.Position.X + 418))
                     this.Typed("9");
 
-                if (e.Position.X > (this.Position.X + 423) && e.Position.X < (this.Position.X + 462))
+                else if (e.Position.X > (this.Position.X + 423) && e.Position.X < (this.Position.X + 462))
                     this.Typed("0");
 
-                if (e.Position.X > (this.Position.X + 467) && e.Position.X < (this.Position.X + 594))
+                else if (e.Position.X > (this.Position.X + 467) && e.Position.X < (this.Position.X + 594))
                     this.Typed(null);
             }
 
             // 2nd Line
-            if (e.Position.Y > (this.Position.Y + 827) && e.Position.Y < (this.Position.Y + 866))
+            else if (e.Position.Y > (this.Position.Y + 827) && e.Position.Y < (this.Position.Y + 866))
             {
                 if (e.Position.X > (this.Position.X + 35) && e.Position.X < (this.Position.X + 74))
                     this.Typed("Q");
 
-                if (e.Position.X > (this.Position.X + 79) && e.Position.X < (this.Position.X + 118))
+                else if (e.Position.X > (this.Position.X + 79) && e.Position.X < (this.Position.X + 118))
                     this.Typed("W");
 
-                if (e.Position.X > (this.Position.X + 123) && e.Position.X < (this.Position.X + 162))
+                else if (e.Position.X > (this.Position.X + 123) && e.Position.X < (this.Position.X + 162))
                     this.Typed("E");
 
-                if (e.Position.X > (this.Position.X + 167) && e.Position.X < (this.Position.X + 206))
+                else if (e.Position.X > (this.Position.X + 167) && e.Position.X < (this.Position.X + 206))
                     this.Typed("R");
 
-                if (e.Position.X > (this.Position.X + 211) && e.Position.X < (this.Position.X + 250))
+                else if (e.Position.X > (this.Position.X + 211) && e.Position.X < (this.Position.X + 250))
                     this.Typed("T");
 
-                if (e.Position.X > (this.Position.X + 255) && e.Position.X < (this.Position.X + 294))
+                else if (e.Position.X > (this.Position.X + 255) && e.Position.X < (this.Position.X + 294))
                     this.Typed("Y");
 
-                if (e.Position.X > (this.Position.X + 299) && e.Position.X < (this.Position.X + 338))
+                else if (e.Position.X > (this.Position.X + 299) && e.Position.X < (this.Position.X + 338))
                     this.Typed("U");
 
-                if (e.Position.X > (this.Position.X + 343) && e.Position.X < (this.Position.X + 382))
+                else if (e.Position.X > (this.Position.X + 343) && e.Position.X < (this.Position.X + 382))
                     this.Typed("I");
 
-                if (e.Position.X > (this.Position.X + 387) && e.Position.X < (this.Position.X + 426))
+                else if (e.Position.X > (this.Position.X + 387) && e.Position.X < (this.Position.X + 426))
                     this.Typed("O");
 
-                if (e.Position.X > (this.Position.X + 431) && e.Position.X < (this.Position.X + 470))
+                else if (e.Position.X > (this.Position.X + 431) && e.Position.X < (this.Position.X + 470))
                     this.Typed("P");
 
-                if (e.Position.X > (this.Position.X + 475) && e.Position.X < (this.Position.X + 514))
+                else if (e.Position.X > (this.Position.X + 475) && e.Position.X < (this.Position.X + 514))
                     this.Typed("(");
 
-                if (e.Position.X > (this.Position.X + 519) && e.Position.X < (this.Position.X + 558))
+                else if (e.Position.X > (this.Position.X + 519) && e.Position.X < (this.Position.X + 558))
                     this.Typed("[");
 
-                if (e.Position.X > (this.Position.X + 563) && e.Position.X < (this.Position.X + 602))
+                else if (e.Position.X > (this.Position.X + 563) && e.Position.X < (this.Position.X + 602))
                     this.Typed("{");
             }
 
             // 3rd Line
-            if (e.Position.Y > (this.Position.Y + 871) && e.Position.Y < (this.Position.Y + 910))
+            else if (e.Position.Y > (this.Position.Y + 871) && e.Position.Y < (this.Position.Y + 910))
             {
                 if (e.Position.X > (this.Position.X + 46) && e.Position.X < (this.Position.X + 85))
                     this.Typed("A");
 
-                if (e.Position.X > (this.Position.X + 90) && e.Position.X < (this.Position.X + 129))
+                else if (e.Position.X > (this.Position.X + 90) && e.Position.X < (this.Position.X + 129))
                     this.Typed("S");
 
-                if (e.Position.X > (this.Position.X + 134) && e.Position.X < (this.Position.X + 173))
+                else if (e.Position.X > (this.Position.X + 134) && e.Position.X < (this.Position.X + 173))
                     this.Typed("D");
 
-                if (e.Position.X > (this.Position.X + 178) && e.Position.X < (this.Position.X + 217))
+                else if (e.Position.X > (this.Position.X + 178) && e.Position.X < (this.Position.X + 217))
                     this.Typed("F");
 
-                if (e.Position.X > (this.Position.X + 222) && e.Position.X < (this.Position.X + 261))
+                else if (e.Position.X > (this.Position.X + 222) && e.Position.X < (this.Position.X + 261))
                     this.Typed("G");
 
-                if (e.Position.X > (this.Position.X + 266) && e.Position.X < (this.Position.X + 305))
+                else if (e.Position.X > (this.Position.X + 266) && e.Position.X < (this.Position.X + 305))
                     this.Typed("H");
 
-                if (e.Position.X > (this.Position.X + 310) && e.Position.X < (this.Position.X + 349))
+                else if (e.Position.X > (this.Position.X + 310) && e.Position.X < (this.Position.X + 349))
                     this.Typed("J");
 
-                if (e.Position.X > (this.Position.X + 354) && e.Position.X < (this.Position.X + 393))
+                else if (e.Position.X > (this.Position.X + 354) && e.Position.X < (this.Position.X + 393))
                     this.Typed("K");
 
-                if (e.Position.X > (this.Position.X + 398) && e.Position.X < (this.Position.X + 437))
+                else if (e.Position.X > (this.Position.X + 398) && e.Position.X < (this.Position.X + 437))
                     this.Typed("L");
 
-                if (e.Position.X > (this.Position.X + 442) && e.Position.X < (this.Position.X + 481))
+                else if (e.Position.X > (this.Position.X + 442) && e.Position.X < (this.Position.X + 481))
                     this.Typed("C");
 
-                if (e.Position.X > (this.Position.X + 486) && e.Position.X < (this.Position.X + 525))
+                else if (e.Position.X > (this.Position.X + 486) && e.Position.X < (this.Position.X + 525))
                     this.Typed(")");
 
-                if (e.Position.X > (this.Position.X + 530) && e.Position.X < (this.Position.X + 569))
+                else if (e.Position.X > (this.Position.X + 530) && e.Position.X < (this.Position.X + 569))
                     this.Typed("]");
 
-                if (e.Position.X > (this.Position.X + 574) && e.Position.X < (this.Position.X + 613))
+                else if (e.Position.X > (this.Position.X + 574) && e.Position.X < (this.Position.X + 613))
                     this.Typed("}");
             }
 
             // 4th Line
-            if (e.Position.Y > (this.Position.Y + 915) && e.Position.Y < (this.Position.Y + 954))
+            else if (e.Position.Y > (this.Position.Y + 915) && e.Position.Y < (this.Position.Y + 954))
             {
                 if (e.Position.X > (this.Position.X + 27) && e.Position.X < (this.Position.X + 66))
                     this.Typed("\\");
 
-                if (e.Position.X > (this.Position.X + 71) && e.Position.X < (this.Position.X + 110))
+                else if (e.Position.X > (this.Position.X + 71) && e.Position.X < (this.Position.X + 110))
                     this.Typed("Z");
 
-                if (e.Position.X > (this.Position.X + 115) && e.Position.X < (this.Position.X + 154))
+                else if (e.Position.X > (this.Position.X + 115) && e.Position.X < (this.Position.X + 154))
                     this.Typed("X");
 
-                if (e.Position.X > (this.Position.X + 159) && e.Position.X < (this.Position.X + 198))
+                else if (e.Position.X > (this.Position.X + 159) && e.Position.X < (this.Position.X + 198))
                     this.Typed("C");
 
-                if (e.Position.X > (this.Position.X + 203) && e.Position.X < (this.Position.X + 242))
+                else if (e.Position.X > (this.Position.X + 203) && e.Position.X < (this.Position.X + 242))
                     this.Typed("V");
 
-                if (e.Position.X > (this.Position.X + 247) && e.Position.X < (this.Position.X + 283))
+                else if (e.Position.X > (this.Position.X + 247) && e.Position.X < (this.Position.X + 283))
                     this.Typed("B");
 
-                if (e.Position.X > (this.Position.X + 291) && e.Position.X < (this.Position.X + 330))
+                else if (e.Position.X > (this.Position.X + 291) && e.Position.X < (this.Position.X + 330))
                     this.Typed("N");
 
-                if (e.Position.X > (this.Position.X + 335) && e.Position.X < (this.Position.X + 374))
+                else if (e.Position.X > (this.Position.X + 335) && e.Position.X < (this.Position.X + 374))
                     this.Typed("M");
 
-                if (e.Position.X > (this.Position.X + 379) && e.Position.X < (this.Position.X + 418))
+                else if (e.Position.X > (this.Position.X + 379) && e.Position.X < (this.Position.X + 418))
                     this.Typed("<");
 
-                if (e.Position.X > (this.Position.X + 423) && e.Position.X < (this.Position.X + 462))
+                else if (e.Position.X > (this.Position.X + 423) && e.Position.X < (this.Position.X + 462))
                     this.Typed(">");
 
-                if (e.Position.X > (this.Position.X + 467) && e.Position.X < (this.Position.X + 506))
+                else if (e.Position.X > (this.Position.X + 467) && e.Position.X < (this.Position.X + 506))
                     this.Typed(",");
 
-                if (e.Position.X > (this.Position.X + 511) && e.Position.X < (this.Position.X + 550))
+                else if (e.Position.X > (this.Position.X + 511) && e.Position.X < (this.Position.X + 550))
                     this.Typed(".");
 
-                if (e.Position.X > (this.Position.X + 555) && e.Position.X < (this.Position.X + 594))
+                else if (e.Position.X > (this.Position.X + 555) && e.Position.X < (this.Position.X + 594))
                     this.Typed("/");
             }
 
             // 5th Line
-            if (e.Position.Y > (this.Position.Y + 959) && e.Position.Y < (this.Position.Y + 997))
+            else if (e.Position.Y > (this.Position.Y + 959) && e.Position.Y < (this.Position.Y + 997))
             {
                 if (e.Position.X > (this.Position.X + 115) && e.Position.X < (this.Position.X + 506))
                     this.Typed(" ");

@@ -43,7 +43,7 @@ namespace IRTaktiks {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool FullScreen {
             get {
                 return ((bool)(this["FullScreen"]));
@@ -61,7 +61,7 @@ namespace IRTaktiks {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("150")]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
         public int AttributePointsPerUnit {
             get {
                 return ((int)(this["AttributePointsPerUnit"]));

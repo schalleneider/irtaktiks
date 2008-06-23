@@ -126,6 +126,11 @@ namespace IRTaktiks.Components.Config
             get { return UnitTextureField; }
             set { UnitTextureField = value; }
         }
+
+        /// <summary>
+        /// The texture of the attributes.
+        /// </summary>
+        private Texture2D AttributeTexture;
                         
         #endregion
 
@@ -160,11 +165,17 @@ namespace IRTaktiks.Components.Config
                 case PlayerIndex.One:
                     x = 54 + (unitIndex / 4) * (TextureManager.Instance.Sprites.Config.UnitGreen.Width - 2);
                     y = 170 + (unitIndex % 4) * (TextureManager.Instance.Sprites.Config.UnitGreen.Height - 5);
+
+                    this.AttributeTexture = TextureManager.Instance.Sprites.Config.AttributesPlayerOne;
+                    
                     break;
 
                 case PlayerIndex.Two:
                     x = 640 + 54 + (unitIndex / 4) * (TextureManager.Instance.Sprites.Config.UnitGreen.Width - 2);
                     y = 170 + (unitIndex % 4) * (TextureManager.Instance.Sprites.Config.UnitGreen.Height - 5);
+                    
+                    this.AttributeTexture = TextureManager.Instance.Sprites.Config.AttributesPlayerTwo;
+
                     break;
             }
             
@@ -176,7 +187,7 @@ namespace IRTaktiks.Components.Config
             this.InteligenceField = 0;
             this.DexterityField = 0;
 
-            this.AttributePointsFields = 150;
+            this.AttributePointsFields = IRTSettings.Default.AttributePointsPerUnit;
             this.JobField = Job.Knight;
 
             InputManager.Instance.CursorDown += new EventHandler<CursorDownArgs>(CursorDown);
@@ -233,7 +244,41 @@ namespace IRTaktiks.Components.Config
             // Draw the indicator.
             if (this.Selected)
             {
+                Vector2 attributePosition = new Vector2((640 * ((int)this.Position.X / 640)) + 38, 379);
+                
                 game.SpriteManager.Draw(TextureManager.Instance.Sprites.Config.UnitSelected, new Vector2(this.Position.X, this.Position.Y), Color.White, 30);
+                game.SpriteManager.Draw(this.AttributeTexture, attributePosition, Color.White, 30);
+
+                // Draw the points left
+                string pointsText = String.Format("{0} points left", this.AttributePoints);
+                Vector2 pointsSize = FontManager.Instance.Chilopod20.MeasureString(pointsText);
+                Vector2 pointsPosition = new Vector2(attributePosition.X + ((184 + 541) / 2) - (pointsSize.X / 2), attributePosition.Y + ((49 + 82) / 2) - (pointsSize.Y / 2));
+                game.SpriteManager.DrawString(FontManager.Instance.Chilopod20, pointsText, pointsPosition, Color.White, 35);
+
+                // Draw the strength
+                Vector2 strengthSize = FontManager.Instance.Chilopod20.MeasureString(this.Strength.ToString());
+                Vector2 strengthPosition = new Vector2(attributePosition.X + ((411 + 475) / 2) - (strengthSize.X / 2), attributePosition.Y + ((82 + 115) / 2) - (strengthSize.Y / 2));
+                game.SpriteManager.DrawString(FontManager.Instance.Chilopod20, this.Strength.ToString(), strengthPosition, Color.White, 35);
+
+                // Draw the agility
+                Vector2 agilitySize = FontManager.Instance.Chilopod20.MeasureString(this.Agility.ToString());
+                Vector2 agilityPosition = new Vector2(attributePosition.X + ((411 + 475) / 2) - (agilitySize.X / 2), attributePosition.Y + ((115 + 148) / 2) - (agilitySize.Y / 2));
+                game.SpriteManager.DrawString(FontManager.Instance.Chilopod20, this.Agility.ToString(), agilityPosition, Color.White, 35);
+
+                // Draw the vitality
+                Vector2 vitalitySize = FontManager.Instance.Chilopod20.MeasureString(this.Vitality.ToString());
+                Vector2 vitalityPosition = new Vector2(attributePosition.X + ((411 + 475) / 2) - (vitalitySize.X / 2), attributePosition.Y + ((148 + 181) / 2) - (vitalitySize.Y / 2));
+                game.SpriteManager.DrawString(FontManager.Instance.Chilopod20, this.Vitality.ToString(), vitalityPosition, Color.White, 35);
+
+                // Draw the inteligence
+                Vector2 inteligenceSize = FontManager.Instance.Chilopod20.MeasureString(this.Inteligence.ToString());
+                Vector2 inteligencePosition = new Vector2(attributePosition.X + ((411 + 475) / 2) - (inteligenceSize.X / 2), attributePosition.Y + ((181 + 214) / 2) - (inteligenceSize.Y / 2));
+                game.SpriteManager.DrawString(FontManager.Instance.Chilopod20, this.Inteligence.ToString(), inteligencePosition, Color.White, 35);
+
+                // Draw the dexterity
+                Vector2 dexteritySize = FontManager.Instance.Chilopod20.MeasureString(this.Dexterity.ToString());
+                Vector2 dexterityPosition = new Vector2(attributePosition.X + ((411 + 475) / 2) - (dexteritySize.X / 2), attributePosition.Y + ((214 + 247) / 2) - (dexteritySize.Y / 2));
+                game.SpriteManager.DrawString(FontManager.Instance.Chilopod20, this.Dexterity.ToString(), dexterityPosition, Color.White, 35);
             }
 
             base.Draw(gameTime);
@@ -251,6 +296,83 @@ namespace IRTaktiks.Components.Config
             InputManager.Instance.CursorDown -= CursorDown;
         }
 
+        /// <summary>
+        /// Check if the attributes can be changed
+        /// </summary>
+        /// <param name="value">The value that will be added to the attribute</param>
+        private bool CanChangeAttribute(int attribute, int value)
+        {
+            int futureAttributePoints = this.AttributePoints - value;
+            int futureAttributeValue = attribute + value;
+            return (futureAttributePoints >= 0 && futureAttributePoints <= IRTSettings.Default.AttributePointsPerUnit) &&
+                    (futureAttributeValue >= 0 && futureAttributeValue <= IRTSettings.Default.PointsPerAttribute);
+        }
+
+        /// <summary>
+        /// Change the value of the stength
+        /// </summary>
+        /// <param name="value">The value that will be added to the strength</param>
+        private void ChangeStrength(int value)
+        {
+            if (this.CanChangeAttribute(this.Strength, value))
+            {
+                this.StrengthField += value;
+                this.AttributePoints -= value;
+            }
+        }
+
+        /// <summary>
+        /// Change the value of the agility
+        /// </summary>
+        /// <param name="value">The value that will be added to the agility</param>
+        private void ChangeAgility(int value)
+        {
+            if (this.CanChangeAttribute(this.Agility, value))
+            {
+                this.AgilityField += value;
+                this.AttributePoints -= value;
+            }
+        }
+
+        /// <summary>
+        /// Change the value of the vitality
+        /// </summary>
+        /// <param name="value">The value that will be added to the vitality</param>
+        private void ChangeVitality(int value)
+        {
+            if (this.CanChangeAttribute(this.Vitality, value))
+            {
+                this.VitalityField += value;
+                this.AttributePoints -= value;
+            }
+        }
+
+        /// <summary>
+        /// Change the value of the inteligence
+        /// </summary>
+        /// <param name="value">The value that will be added to the inteligence</param>
+        private void ChangeInteligence(int value)
+        {
+            if (this.CanChangeAttribute(this.Inteligence, value))
+            {
+                this.InteligenceField += value;
+                this.AttributePoints -= value;
+            }
+        }
+
+        /// <summary>
+        /// Change the value of the dexterity
+        /// </summary>
+        /// <param name="value">The value that will be added to the dexterity</param>
+        private void ChangeDexterity(int value)
+        {
+            if (this.CanChangeAttribute(this.Dexterity, value))
+            {
+                this.DexterityField += value;
+                this.AttributePoints -= value;
+            }
+        }
+
         #endregion
 
         #region Input Handling
@@ -260,11 +382,163 @@ namespace IRTaktiks.Components.Config
         /// </summary>
         private void CursorDown(object sender, CursorDownArgs e)
         {
+            Vector2 attributePosition = new Vector2((640 * ((int)this.Position.X / 640)) + 38, 379);
 
+            // Touch at unit.            
             if ((e.Position.X > this.Position.X && e.Position.X < (this.Position.X + TextureManager.Instance.Sprites.Config.UnitGreen.Width)) &&
                 (e.Position.Y > this.Position.Y && e.Position.Y < (this.Position.Y + TextureManager.Instance.Sprites.Config.UnitGreen.Height)))
             {
                 this.Touch();
+            }
+
+            // Previous character
+            else if ((e.Position.X > (attributePosition.X + 23) && e.Position.X < (attributePosition.X + 104)) &&
+                (e.Position.Y > (attributePosition.Y + 49) && e.Position.Y < (attributePosition.Y + 247)))
+            {
+
+            }
+
+            // Next character
+            else if ((e.Position.X > (attributePosition.X + 104) && e.Position.X < (attributePosition.X + 104)) &&
+                (e.Position.Y > (attributePosition.Y + 49) && e.Position.Y < (attributePosition.Y + 247)))
+            {
+
+            }
+
+            // -5
+            else if (e.Position.X > (attributePosition.X + 345) && e.Position.X < (attributePosition.X + 378))
+            {
+                // Strength
+                if (e.Position.Y > (attributePosition.Y + 82) && e.Position.Y < (attributePosition.Y + 115))
+                {
+                    this.ChangeStrength(-5);
+                }
+
+                // Agility
+                else if (e.Position.Y > (attributePosition.Y + 115) && e.Position.Y < (attributePosition.Y + 147))
+                {
+                    this.ChangeAgility(-5);
+                }
+
+                // Vitality
+                else if (e.Position.Y > (attributePosition.Y + 147) && e.Position.Y < (attributePosition.Y + 181))
+                {
+                    this.ChangeVitality(-5);
+                }
+
+                // Inteligence
+                else if (e.Position.Y > (attributePosition.Y + 181) && e.Position.Y < (attributePosition.Y + 214))
+                {
+                    this.ChangeInteligence(-5);
+                }
+
+                // Dexterity
+                else if (e.Position.Y > (attributePosition.Y + 214) && e.Position.Y < (attributePosition.Y + 247))
+                {
+                    this.ChangeDexterity(-5);
+                }
+            }
+
+            // -1
+            else if (e.Position.X > (attributePosition.X + 378) && e.Position.X < (attributePosition.X + 411))
+            {
+                // Strength
+                if (e.Position.Y > (attributePosition.Y + 82) && e.Position.Y < (attributePosition.Y + 115))
+                {
+                    this.ChangeStrength(-1);
+                }
+
+                // Agility
+                else if (e.Position.Y > (attributePosition.Y + 115) && e.Position.Y < (attributePosition.Y + 147))
+                {
+                    this.ChangeAgility(-1);
+                }
+
+                // Vitality
+                else if (e.Position.Y > (attributePosition.Y + 147) && e.Position.Y < (attributePosition.Y + 181))
+                {
+                    this.ChangeVitality(-1);
+                }
+
+                // Inteligence
+                else if (e.Position.Y > (attributePosition.Y + 181) && e.Position.Y < (attributePosition.Y + 214))
+                {
+                    this.ChangeInteligence(-1);
+                }
+
+                // Dexterity
+                else if (e.Position.Y > (attributePosition.Y + 214) && e.Position.Y < (attributePosition.Y + 247))
+                {
+                    this.ChangeDexterity(-1);
+                }
+            }
+
+            // +1
+            else if (e.Position.X > (attributePosition.X + 475) && e.Position.X < (attributePosition.X + 508))
+            {
+                // Strength
+                if (e.Position.Y > (attributePosition.Y + 82) && e.Position.Y < (attributePosition.Y + 115))
+                {
+                    this.ChangeStrength(1);
+                }
+
+                // Agility
+                else if (e.Position.Y > (attributePosition.Y + 115) && e.Position.Y < (attributePosition.Y + 147))
+                {
+                    this.ChangeAgility(1);
+                }
+
+                // Vitality
+                else if (e.Position.Y > (attributePosition.Y + 147) && e.Position.Y < (attributePosition.Y + 181))
+                {
+                    this.ChangeVitality(1);
+                }
+
+                // Inteligence
+                else if (e.Position.Y > (attributePosition.Y + 181) && e.Position.Y < (attributePosition.Y + 214))
+                {
+                    this.ChangeInteligence(1);
+                }
+
+                // Dexterity
+                else if (e.Position.Y > (attributePosition.Y + 214) && e.Position.Y < (attributePosition.Y + 247))
+                {
+                    this.ChangeDexterity(1);
+                }
+            }
+
+            // +5
+            else if (e.Position.X > (attributePosition.X + 508) && e.Position.X < (attributePosition.X + 541))
+            {
+                // Strength
+                if (e.Position.Y > (attributePosition.Y + 82) && e.Position.Y < (attributePosition.Y + 115))
+                {
+                    this.ChangeStrength(5);
+                }
+
+                // Agility
+                else if (e.Position.Y > (attributePosition.Y + 115) && e.Position.Y < (attributePosition.Y + 147))
+                {
+                    this.ChangeAgility(5);
+                }
+
+                // Vitality
+                else if (e.Position.Y > (attributePosition.Y + 147) && e.Position.Y < (attributePosition.Y + 181))
+                {
+                    this.ChangeVitality(5);
+                }
+
+                // Inteligence
+                else if (e.Position.Y > (attributePosition.Y + 181) && e.Position.Y < (attributePosition.Y + 214))
+                {
+                    this.ChangeInteligence(5);
+                }
+
+                // Dexterity
+                else if (e.Position.Y > (attributePosition.Y + 214) && e.Position.Y < (attributePosition.Y + 247))
+                {
+                    this.ChangeDexterity(5);
+                }
             }
         }
 
