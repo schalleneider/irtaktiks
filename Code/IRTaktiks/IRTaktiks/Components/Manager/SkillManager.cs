@@ -69,44 +69,44 @@ namespace IRTaktiks.Components.Manager
             {
                 case Job.Assasin:
 
-                    skills.Add(new Skill(unit, "Stealth", 10, Skill.SkillType.Self, Stealth));
-                    skills.Add(new Skill(unit, "Ambush", 10, Skill.SkillType.Target, Ambush));
-                    skills.Add(new Skill(unit, "Curse", 10, Skill.SkillType.Target, Curse));
+                    skills.Add(new Skill(unit, "Stealth", 50, Skill.SkillType.Self, Stealth));
+                    skills.Add(new Skill(unit, "Ambush", 65, Skill.SkillType.Target, Ambush));
+                    skills.Add(new Skill(unit, "Curse", 110, Skill.SkillType.Target, Curse));
                     break;
 
                 case Job.Knight:
 
-                    skills.Add(new Skill(unit, "Quick", 10, Skill.SkillType.Self, Quick));
-                    skills.Add(new Skill(unit, "Impact", 10, Skill.SkillType.Target, Impact));
-                    skills.Add(new Skill(unit, "Revenge", 10, Skill.SkillType.Target, Revenge));
+                    skills.Add(new Skill(unit, "Quick", 40, Skill.SkillType.Self, Quick));
+                    skills.Add(new Skill(unit, "Impact", 70, Skill.SkillType.Target, Impact));
+                    skills.Add(new Skill(unit, "Revenge", 75, Skill.SkillType.Target, Revenge));
                     break;
 
                 case Job.Monk:
 
-                    skills.Add(new Skill(unit, "Warcry", 10, Skill.SkillType.Self, Warcry));
-                    skills.Add(new Skill(unit, "Insane", 10, Skill.SkillType.Target, Insane));
-                    skills.Add(new Skill(unit, "Reject", 10, Skill.SkillType.Target, Reject));
+                    skills.Add(new Skill(unit, "Warcry", 45, Skill.SkillType.Self, Warcry));
+                    skills.Add(new Skill(unit, "Insane", 90, Skill.SkillType.Target, Insane));
+                    skills.Add(new Skill(unit, "Reject", 0, Skill.SkillType.Target, Reject));
                     break;
 
                 case Job.Paladin:
 
-                    skills.Add(new Skill(unit, "Might", 10, Skill.SkillType.Self, Might));
-                    skills.Add(new Skill(unit, "Heal", 10, Skill.SkillType.Target, Heal));
-                    skills.Add(new Skill(unit, "Unseal", 10, Skill.SkillType.Target, Unseal));
+                    skills.Add(new Skill(unit, "Might", 60, Skill.SkillType.Self, Might));
+                    skills.Add(new Skill(unit, "Heal", 85, Skill.SkillType.Target, Heal));
+                    skills.Add(new Skill(unit, "Unseal", 500, Skill.SkillType.Target, Unseal));
                     break;
 
                 case Job.Priest:
 
-                    skills.Add(new Skill(unit, "Heal", 10, Skill.SkillType.Target, Heal));
-                    skills.Add(new Skill(unit, "Barrier", 10, Skill.SkillType.Target, Barrier));
-                    skills.Add(new Skill(unit, "Holy", 10, Skill.SkillType.Target, Holy));
+                    skills.Add(new Skill(unit, "Heal", 85, Skill.SkillType.Target, Heal));
+                    skills.Add(new Skill(unit, "Barrier", 80, Skill.SkillType.Target, Barrier));
+                    skills.Add(new Skill(unit, "Holy", 180, Skill.SkillType.Target, Holy));
                     break;
 
                 case Job.Wizard:
 
-                    skills.Add(new Skill(unit, "Drain", 10, Skill.SkillType.Target, Drain));
-                    skills.Add(new Skill(unit, "Flame", 10, Skill.SkillType.Target, Flame));
-                    skills.Add(new Skill(unit, "Frost", 10, Skill.SkillType.Target, Frost));
+                    skills.Add(new Skill(unit, "Drain", 50, Skill.SkillType.Target, Drain));
+                    skills.Add(new Skill(unit, "Flame", 210, Skill.SkillType.Target, Flame));
+                    skills.Add(new Skill(unit, "Frost", 250, Skill.SkillType.Target, Frost));
                     break;
             }
 
