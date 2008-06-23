@@ -312,7 +312,26 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Ambush(Vector2 position)
         {
-            this.None(position);
+            int sliceParticles = 30;
+            int bloodParticles = 25;
+            float sliceLifeIncrement = 0.2f;
+            float bloodLifeIncrement = 0.3f;
+            float sliceTotalLife = 2.5f;
+            float bloodTotalLife = 3.0f;
+
+            Vector2 slicePosition = new Vector2(position.X, position.Y);
+            Vector2 bloodPosition1st = new Vector2(position.X + 1, position.Y + 1);
+            Vector2 bloodPosition2st = new Vector2(position.X + 2, position.Y + 2);
+
+            this.ParticleManager.Queue(new ParticleEffect(slicePosition, sliceParticles, ParticleEffect.EffectType.Flash45, sliceLifeIncrement, sliceTotalLife, Color.Silver));
+
+            Thread.Sleep(100);
+
+            this.ParticleManager.Queue(new ParticleEffect(bloodPosition1st, bloodParticles, ParticleEffect.EffectType.Flash45, bloodLifeIncrement, bloodTotalLife, Color.Red));
+
+            Thread.Sleep(100);
+
+            this.ParticleManager.Queue(new ParticleEffect(bloodPosition2st, bloodParticles, ParticleEffect.EffectType.Flash0, bloodLifeIncrement, bloodTotalLife, Color.Red));
         }
 
         /// <summary>
@@ -321,7 +340,24 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Barrier(Vector2 position)
         {
-            this.None(position);
+            int ringParticles = 50;
+            int sphereParticles = 100;
+
+            float ringLifeIncrement = 0.1f;
+            float sphereLifeIncrement = 0.7f;
+
+            float ringTotalLife = 4.5f;
+            float sphereTotalLife = 21.0f;
+
+            Vector2 position1st = new Vector2(position.X, position.Y);
+
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, ringParticles, ParticleEffect.EffectType.Ring, ringLifeIncrement, ringTotalLife, Color.Silver));
+            
+            Thread.Sleep(500);
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, sphereParticles, ParticleEffect.EffectType.Sphere, sphereLifeIncrement, sphereTotalLife, Color.Silver));
+
         }
 
         /// <summary>
@@ -330,7 +366,21 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Curse(Vector2 position)
         {
-            this.None(position);
+            int ringParticles = 50;
+            int sphereParticles = 100;
+
+            float ringLifeIncrement = 0.1f;
+            float sphereLifeIncrement = 0.7f;
+
+            float ringTotalLife = 4.5f;
+            float sphereTotalLife = 21.0f;
+
+            Vector2 position1st = new Vector2(position.X, position.Y);
+
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, ringParticles, ParticleEffect.EffectType.Ring, ringLifeIncrement, ringTotalLife, Color.Silver));
+
+            Thread.Sleep(500);
         }
 
         /// <summary>
@@ -390,7 +440,59 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Flame(Vector2 position)
         {
-            this.None(position);
+            int particles1st = 25;
+            int particles2nd = 10;
+            int particles3rd = 5;
+            float lifeIncrement1st = 0.02f;
+            float lifeIncrement2nd = 0.04f;
+            float lifeIncrement3rd = 0.06f;
+            float totalLife = 3.0f;
+
+            Vector2 position1st = new Vector2(position.X - 15, position.Y - 15);
+            Vector2 position2nd = new Vector2(position.X - 10, position.Y - 10);
+            Vector2 position3rd = new Vector2(position.X - 05, position.Y - 05);
+            Vector2 position4th = new Vector2(position.X - 0, position.Y - 0);
+            Vector2 position5th = new Vector2(position.X + 05, position.Y - 05);
+            Vector2 position6th = new Vector2(position.X + 10, position.Y - 10);
+            Vector2 position7th = new Vector2(position.X + 15, position.Y - 15);
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles3rd, ParticleEffect.EffectType.Losangle, lifeIncrement3rd, totalLife, Color.Gold));
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles2nd, ParticleEffect.EffectType.Losangle, lifeIncrement3rd, totalLife, Color.Red));
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles1st, ParticleEffect.EffectType.Losangle, lifeIncrement2nd, totalLife, Color.Goldenrod));
+            this.ParticleManager.Queue(new ParticleEffect(position4th, particles1st, ParticleEffect.EffectType.Firework, lifeIncrement1st, totalLife, Color.Red));
+            this.ParticleManager.Queue(new ParticleEffect(position5th, particles1st, ParticleEffect.EffectType.Losangle, lifeIncrement2nd, totalLife, Color.Tomato));
+            this.ParticleManager.Queue(new ParticleEffect(position6th, particles2nd, ParticleEffect.EffectType.Losangle, lifeIncrement3rd, totalLife, Color.Goldenrod));
+            this.ParticleManager.Queue(new ParticleEffect(position7th, particles3rd, ParticleEffect.EffectType.Losangle, lifeIncrement3rd, totalLife, Color.Gold));
+
+            Thread.Sleep(150);
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles3rd, ParticleEffect.EffectType.Losangle, lifeIncrement3rd, totalLife, Color.Gold));
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles2nd, ParticleEffect.EffectType.Firework, lifeIncrement1st, totalLife, Color.Goldenrod));
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles1st, ParticleEffect.EffectType.Firework, lifeIncrement2nd, totalLife, Color.Red));
+            this.ParticleManager.Queue(new ParticleEffect(position4th, particles1st, ParticleEffect.EffectType.Firework, lifeIncrement1st, totalLife, Color.WhiteSmoke));
+            this.ParticleManager.Queue(new ParticleEffect(position5th, particles1st, ParticleEffect.EffectType.Firework, lifeIncrement2nd, totalLife, Color.Red));
+            this.ParticleManager.Queue(new ParticleEffect(position6th, particles2nd, ParticleEffect.EffectType.Firework, lifeIncrement1st, totalLife, Color.Goldenrod));
+            this.ParticleManager.Queue(new ParticleEffect(position7th, particles3rd, ParticleEffect.EffectType.Losangle, lifeIncrement3rd, totalLife, Color.Gold));
+
+            Thread.Sleep(150);
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles3rd, ParticleEffect.EffectType.Losangle, lifeIncrement3rd, totalLife, Color.Gold));
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles2nd, ParticleEffect.EffectType.Firework, lifeIncrement3rd, totalLife, Color.Goldenrod));
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles1st, ParticleEffect.EffectType.Losangle, lifeIncrement2nd, totalLife, Color.Thistle));
+            this.ParticleManager.Queue(new ParticleEffect(position4th, particles1st, ParticleEffect.EffectType.Firework, lifeIncrement1st, totalLife, Color.Red));
+            this.ParticleManager.Queue(new ParticleEffect(position5th, particles1st, ParticleEffect.EffectType.Losangle, lifeIncrement2nd, totalLife, Color.Thistle));
+            this.ParticleManager.Queue(new ParticleEffect(position6th, particles2nd, ParticleEffect.EffectType.Firework, lifeIncrement3rd, totalLife, Color.Goldenrod));
+            this.ParticleManager.Queue(new ParticleEffect(position7th, particles3rd, ParticleEffect.EffectType.Losangle, lifeIncrement3rd, totalLife, Color.Gold));
+
+            Thread.Sleep(150);
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles3rd, ParticleEffect.EffectType.Losangle, lifeIncrement3rd, totalLife, Color.Gold));
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles2nd, ParticleEffect.EffectType.Firework, lifeIncrement1st, totalLife, Color.Goldenrod));
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles1st, ParticleEffect.EffectType.Firework, lifeIncrement2nd, totalLife, Color.Red));
+            this.ParticleManager.Queue(new ParticleEffect(position4th, particles1st, ParticleEffect.EffectType.Firework, lifeIncrement1st, totalLife, Color.WhiteSmoke));
+            this.ParticleManager.Queue(new ParticleEffect(position5th, particles1st, ParticleEffect.EffectType.Firework, lifeIncrement2nd, totalLife, Color.Red));
+            this.ParticleManager.Queue(new ParticleEffect(position6th, particles2nd, ParticleEffect.EffectType.Firework, lifeIncrement1st, totalLife, Color.Goldenrod));
+            this.ParticleManager.Queue(new ParticleEffect(position7th, particles3rd, ParticleEffect.EffectType.Losangle, lifeIncrement3rd, totalLife, Color.Gold));
         }
 
         /// <summary>
@@ -442,7 +544,25 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Holy(Vector2 position)
         {
-            this.None(position);
+            int particles = 50;
+            float lifeIncrement = 0.06f;
+            float totalLife = 3.0f;
+
+            Vector2 horizontalPosition1st = new Vector2(position.X - 0, position.Y + 03);
+            Vector2 horizontalPosition2nd = new Vector2(position.X - 0, position.Y + 0);
+            Vector2 horizontalPosition3rd = new Vector2(position.X + 0, position.Y - 03);           
+            Vector2 verticalPosition1st = new Vector2(position.X - 03, position.Y + 0);
+            Vector2 verticalPosition2nd = new Vector2(position.X - 0, position.Y + 0);
+            Vector2 verticalPosition3rd = new Vector2(position.X + 03, position.Y - 0);
+
+
+            this.ParticleManager.Queue(new ParticleEffect(horizontalPosition1st, particles, ParticleEffect.EffectType.Flash0, lifeIncrement, totalLife, Color.Goldenrod));
+            this.ParticleManager.Queue(new ParticleEffect(horizontalPosition2nd, particles, ParticleEffect.EffectType.Flash0, lifeIncrement, totalLife, Color.Goldenrod));
+            this.ParticleManager.Queue(new ParticleEffect(horizontalPosition3rd, particles, ParticleEffect.EffectType.Flash0, lifeIncrement, totalLife, Color.Goldenrod));
+            this.ParticleManager.Queue(new ParticleEffect(verticalPosition1st, particles, ParticleEffect.EffectType.Flash90, lifeIncrement, totalLife, Color.Goldenrod));
+            this.ParticleManager.Queue(new ParticleEffect(verticalPosition2nd, particles, ParticleEffect.EffectType.Flash90, lifeIncrement, totalLife, Color.Goldenrod));
+            this.ParticleManager.Queue(new ParticleEffect(verticalPosition3rd, particles, ParticleEffect.EffectType.Flash90, lifeIncrement, totalLife, Color.Goldenrod));
+
         }
 
         /// <summary>
