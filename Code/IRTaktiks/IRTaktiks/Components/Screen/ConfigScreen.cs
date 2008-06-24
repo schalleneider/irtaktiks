@@ -12,6 +12,7 @@ using IRTaktiks.Input.EventArgs;
 using IRTaktiks.Components.Playable;
 using IRTaktiks.Components.Logic;
 using IRTaktiks.Components.Manager;
+using IRTaktiks.Components.Config;
 
 namespace IRTaktiks.Components.Screen
 {
@@ -115,7 +116,8 @@ namespace IRTaktiks.Components.Screen
             }
 
             // Shows the map.
-            (this.Game as IRTGame).MapManager.Visible = false;
+            IRTGame game = this.Game as IRTGame; 
+            game.MapManager.Visible = true;
 
             base.Initialize();
 		}
@@ -154,7 +156,60 @@ namespace IRTaktiks.Components.Screen
         /// </summary>
         private void ConfigGame()
         {
+            IRTGame game = this.Game as IRTGame;
 
+            game.PlayerOne = this.ConfigPlayer(this.PlayerOneConfigurationManager);
+            game.PlayerTwo = this.ConfigPlayer(this.PlayerTwoConfigurationManager);
+        }
+
+        /// <summary>
+        /// Configure one player, based on the given ConfigurationManager informations.
+        /// </summary>
+        /// <param name="configurationManager">The ConfigurationManager used to configure the player.</param>
+        /// <returns>One player with its units configured.</returns>
+        private Player ConfigPlayer(ConfigurationManager configurationManager)
+        {
+            Player player = new Player(this.Game, configurationManager.PlayerConfig.DisplayText.ToString(), configurationManager.PlayerIndex);
+
+            for (int index = 0; index < configurationManager.UnitsConfig.Count; index++)
+            {
+                Attributes unitAttribute =
+                    new Attributes(
+                        IRTSettings.Default.BaseLevel,
+                        Character.Instance[configurationManager.UnitsConfig[index].CharacterIndex].Job,
+                        Element.Holy,
+                        configurationManager.UnitsConfig[index].Strength,
+                        configurationManager.UnitsConfig[index].Agility,
+                        configurationManager.UnitsConfig[index].Vitality,
+                        configurationManager.UnitsConfig[index].Inteligence,
+                        configurationManager.UnitsConfig[index].Dexterity
+                    );
+
+                string unitName = configurationManager.UnitsConfig[index].DisplayText.ToString();
+                Texture2D unitTexture = Character.Instance[configurationManager.UnitsConfig[index].CharacterIndex].Texture;
+                
+                Vector2 unitPosition = default(Vector2);
+                Orientation unitOrientation = default(Orientation);
+
+                switch (configurationManager.PlayerIndex)
+                {
+                    case PlayerIndex.One:
+                        unitPosition = new Vector2(TextureManager.Instance.Sprites.Menu.Background.Width, TextureManager.Instance.Sprites.Menu.Background.Width + (index * 60));
+                        unitOrientation = Orientation.Left;
+                        break;
+
+                    case PlayerIndex.Two:
+                        unitPosition = new Vector2(IRTSettings.Default.Width - TextureManager.Instance.Sprites.Menu.Background.Width, TextureManager.Instance.Sprites.Menu.Background.Width + (index * 60));
+                        unitOrientation = Orientation.Right;
+                        break;
+                }
+
+                Unit unit = new Unit(this.Game, player, unitPosition, unitAttribute, unitOrientation, unitTexture, unitName);
+
+                player.Units.Add(unit);
+            }
+
+            return player;
         }
 
         #endregion

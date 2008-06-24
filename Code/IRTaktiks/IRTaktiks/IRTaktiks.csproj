@@ -108,6 +108,7 @@
     <Compile Include="Components\Manager\ScreenManager.cs" />
     <Compile Include="Components\Scenario\Sprite.cs" />
     <Compile Include="Components\Screen\ConfigScreen.cs" />
+    <Compile Include="Components\Screen\EndScreen.cs" />
     <Compile Include="Components\Screen\GameScreen.cs" />
     <Compile Include="Components\Screen\IScreen.cs" />
     <Compile Include="Components\Screen\TitleScreen.cs" />
