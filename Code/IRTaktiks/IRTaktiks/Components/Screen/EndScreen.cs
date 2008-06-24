@@ -20,6 +20,32 @@ namespace IRTaktiks.Components.Screen
     {
         #region Properties
 
+        /// <summary>
+        /// The endgame texture for the player one.
+        /// </summary>
+        private Texture2D PlayerOneTextureField;
+
+        /// <summary>
+        /// The endgame texture for the player one.
+        /// </summary>
+        public Texture2D PlayerOneTexture
+        {
+            get { return PlayerOneTextureField; }
+        }
+
+        /// <summary>
+        /// The endgame texture for the player two.
+        /// </summary>
+        private Texture2D PlayerTwoTextureField;
+
+        /// <summary>
+        /// The endgame texture for the player two.
+        /// </summary>
+        public Texture2D PlayerTwoTexture
+        {
+            get { return PlayerTwoTextureField; }
+        }
+        
         #endregion
 
         #region Constructor
@@ -46,7 +72,21 @@ namespace IRTaktiks.Components.Screen
 		{
             IRTGame game = this.Game as IRTGame; 
             game.MapManager.Visible = true;
-            
+
+            // Player one win !!!
+            if (game.PlayerOne.Won)
+            {
+                this.PlayerOneTextureField = TextureManager.Instance.Sprites.Menu.Win;
+                this.PlayerTwoTextureField = TextureManager.Instance.Sprites.Menu.Lose;
+            }
+
+            // Player two win !!!
+            if (game.PlayerTwo.Won)
+            {
+                this.PlayerOneTextureField = TextureManager.Instance.Sprites.Menu.Lose;
+                this.PlayerTwoTextureField = TextureManager.Instance.Sprites.Menu.Win;
+            }
+
             base.Initialize();
 		}
 
@@ -67,9 +107,10 @@ namespace IRTaktiks.Components.Screen
         public override void Draw(GameTime gameTime)
         {
             IRTGame game = this.Game as IRTGame;
-            
-            //game.SpriteManager.Draw(TextureManager.Instance.Sprites.TitleScreen, new Vector2(0, 0), Color.White, 100);
-            
+
+            game.SpriteManager.Draw(this.PlayerOneTexture, new Vector2(0, 0), Color.White, 90);
+            game.SpriteManager.Draw(this.PlayerTwoTexture, new Vector2(640, 0), Color.White, 90);
+
             base.Draw(gameTime);
         }
 

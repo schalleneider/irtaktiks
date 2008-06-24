@@ -303,7 +303,28 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void None(Vector2 position)
         {
-            this.ParticleManager.Queue(new ParticleEffect(position, 100, ParticleEffect.EffectType.Ring, 0.1f, 5.0f, Color.PowderBlue));
+            int particles = 50;
+            float lifeIncrement = 0.1f;
+            float totalLife = 2.5f;
+
+            Vector2 position1st = new Vector2(position.X - 5, position.Y - 5);
+            Vector2 position2nd = new Vector2(position.X - 5, position.Y + 5);
+            Vector2 position3rd = new Vector2(position.X + 5, position.Y - 5);
+            Vector2 position4th = new Vector2(position.X + 5, position.Y + 5);
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Firework, lifeIncrement, totalLife, Color.Tan));
+
+            Thread.Sleep(50);
+
+            this.ParticleManager.Queue(new ParticleEffect(position2nd, particles, ParticleEffect.EffectType.Firework, lifeIncrement, totalLife, Color.RoyalBlue));
+
+            Thread.Sleep(50);
+
+            this.ParticleManager.Queue(new ParticleEffect(position3rd, particles, ParticleEffect.EffectType.Firework, lifeIncrement, totalLife, Color.IndianRed));
+
+            Thread.Sleep(50);
+
+            this.ParticleManager.Queue(new ParticleEffect(position4th, particles, ParticleEffect.EffectType.Firework, lifeIncrement, totalLife, Color.SpringGreen));
         }
 
         /// <summary>
@@ -362,13 +383,11 @@ namespace IRTaktiks.Components.Manager
 
             Vector2 position1st = new Vector2(position.X, position.Y);
 
-
             this.ParticleManager.Queue(new ParticleEffect(position1st, ringParticles, ParticleEffect.EffectType.Ring, ringLifeIncrement, ringTotalLife, Color.Silver));
             
             Thread.Sleep(500);
 
             this.ParticleManager.Queue(new ParticleEffect(position1st, sphereParticles, ParticleEffect.EffectType.Sphere, sphereLifeIncrement, sphereTotalLife, Color.Silver));
-
         }
 
         /// <summary>
@@ -391,9 +410,7 @@ namespace IRTaktiks.Components.Manager
             this.ParticleManager.Queue(new ParticleEffect(position2st, particles, ParticleEffect.EffectType.Slice, lifeIncrement, totalLife, Color.Green));
             this.ParticleManager.Queue(new ParticleEffect(position3st, particles, ParticleEffect.EffectType.Slice, lifeIncrement, totalLife, Color.Green));
             this.ParticleManager.Queue(new ParticleEffect(position4st, particles, ParticleEffect.EffectType.Slice, lifeIncrement, totalLife, Color.Green));
-            this.ParticleManager.Queue(new ParticleEffect(position5st, particles, ParticleEffect.EffectType.Slice, lifeIncrement, totalLife, Color.Green));
-            
-                        
+            this.ParticleManager.Queue(new ParticleEffect(position5st, particles, ParticleEffect.EffectType.Slice, lifeIncrement, totalLife, Color.Green));       
         }
 
         /// <summary>
@@ -651,7 +668,7 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Insane(Vector2 position)
         {
-            this.None(position);
+            this.Flame(position);
         }
 
         /// <summary>
@@ -747,7 +764,7 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Revenge(Vector2 position)
         {
-            this.None(position);
+            this.Long(position);
         }
 
         /// <summary>
@@ -795,7 +812,7 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Unseal(Vector2 position)
         {
-            this.None(position);
+            this.Elixir(position);
         }
 
         /// <summary>

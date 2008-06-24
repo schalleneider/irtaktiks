@@ -748,6 +748,20 @@ namespace IRTaktiks.Components.Manager
                 }
 
                 /// <summary>
+                /// Texture of Sprites/Menu/Lose.
+                /// </summary>
+                private Texture2D LoseField;
+
+                /// <summary>
+                /// Texture of Sprites/Menu/Lose.
+                /// </summary>
+                public Texture2D Lose
+                {
+                    get { return LoseField; }
+                    set { LoseField = value; }
+                }
+
+                /// <summary>
                 /// Texture of Sprites/Menu/Orientation.
                 /// </summary>
                 private Texture2D OrientationField;
@@ -829,6 +843,20 @@ namespace IRTaktiks.Components.Manager
                 {
                     get { return SubmenuSelectedItemField; }
                     set { SubmenuSelectedItemField = value; }
+                }
+
+                /// <summary>
+                /// Texture of Sprites/Menu/Win.
+                /// </summary>
+                private Texture2D WinField;
+
+                /// <summary>
+                /// Texture of Sprites/Menu/Win.
+                /// </summary>
+                public Texture2D Win
+                {
+                    get { return WinField; }
+                    set { WinField = value; }
                 }
 
                 #endregion
@@ -1371,12 +1399,14 @@ namespace IRTaktiks.Components.Manager
             this.Sprites.Menu.Background = game.Content.Load<Texture2D>("Sprites/Menu/Background");
             this.Sprites.Menu.ItemPlayerOne = game.Content.Load<Texture2D>("Sprites/Menu/ItemPlayerOne");
             this.Sprites.Menu.ItemPlayerTwo = game.Content.Load<Texture2D>("Sprites/Menu/ItemPlayerTwo");
+            this.Sprites.Menu.Lose = game.Content.Load<Texture2D>("Sprites/Menu/Lose");
             this.Sprites.Menu.Orientation = game.Content.Load<Texture2D>("Sprites/Menu/Orientation");
             this.Sprites.Menu.SelectedItem = game.Content.Load<Texture2D>("Sprites/Menu/SelectedItem");
             this.Sprites.Menu.SubmenuDisabledItem = game.Content.Load<Texture2D>("Sprites/Menu/SubmenuDisabledItem");
             this.Sprites.Menu.SubmenuItemPlayerOne = game.Content.Load<Texture2D>("Sprites/Menu/SubmenuItemPlayerOne");
             this.Sprites.Menu.SubmenuItemPlayerTwo = game.Content.Load<Texture2D>("Sprites/Menu/SubmenuItemPlayerTwo");
             this.Sprites.Menu.SubmenuSelectedItem = game.Content.Load<Texture2D>("Sprites/Menu/SubmenuSelectedItem");
+            this.Sprites.Menu.Win = game.Content.Load<Texture2D>("Sprites/Menu/Win");
 
             this.Sprites.Player.PlayerOneBackground = game.Content.Load<Texture2D>("Sprites/Player/PlayerOneBackground");
             this.Sprites.Player.PlayerTwoBackground = game.Content.Load<Texture2D>("Sprites/Player/PlayerTwoBackground");
