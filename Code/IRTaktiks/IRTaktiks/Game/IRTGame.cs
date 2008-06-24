@@ -250,17 +250,30 @@ namespace IRTaktiks
             get { return ConfigScreenField; }
         }
 
-		/// <summary>
-		/// The game screen of the game.
-		/// </summary>
-		private GameScreen GameScreenField;
+        /// <summary>
+        /// The game screen of the game.
+        /// </summary>
+        private GameScreen GameScreenField;
 
-		/// <summary>
-		/// The game screen of the game.
-		/// </summary>
-		public GameScreen GameScreen
-		{
-			get { return GameScreenField; }
+        /// <summary>
+        /// The game screen of the game.
+        /// </summary>
+        public GameScreen GameScreen
+        {
+            get { return GameScreenField; }
+        }
+
+        /// <summary>
+        /// The end screen of the game.
+        /// </summary>
+        private EndScreen EndScreenField;
+
+        /// <summary>
+        /// The end screen of the game.
+        /// </summary>
+        public EndScreen EndScreen
+        {
+            get { return EndScreenField; }
         }
 
         #endregion
@@ -324,7 +337,8 @@ namespace IRTaktiks
             this.TitleScreenField = new TitleScreen(this, 0);
             this.ConfigScreenField = new ConfigScreen(this, 0);
             this.GameScreenField = new GameScreen(this, 0);
-            this.ScreenManagerField = new ScreenManager(this);
+            this.EndScreenField = new EndScreen(this, 0);
+            this.ScreenManagerField = new ScreenManager(this);            
 
             // Map addicition.
             this.MapManager.Enabled = false;
@@ -335,6 +349,7 @@ namespace IRTaktiks
 			this.ScreenManager.Screens.Add(this.TitleScreen);
             this.ScreenManager.Screens.Add(this.ConfigScreen);
 			this.ScreenManager.Screens.Add(this.GameScreen);
+            this.ScreenManager.Screens.Add(this.EndScreen);
             
             // Components addiction.
 			this.Components.Add(this.Camera);
@@ -446,6 +461,9 @@ namespace IRTaktiks
 			this.GameScreen.Enabled = false;
 			this.GameScreen.Visible = false;
 
+            this.EndScreen.Enabled = false;
+            this.EndScreen.Visible = false;
+
             switch (newScreen)
             {
                 case GameScreens.TitleScreen:
@@ -467,6 +485,9 @@ namespace IRTaktiks
                     return;
                 
                 case GameScreens.EndScreen:
+                    this.EndScreen.Enabled = true;
+                    this.EndScreen.Visible = true;
+                    this.EndScreen.Initialize();
                     return;
             }
 		}

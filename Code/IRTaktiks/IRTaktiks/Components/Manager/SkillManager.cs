@@ -909,6 +909,10 @@ namespace IRTaktiks.Components.Manager
                     // Show the damage.
                     game.DamageManager.Queue(new Damage((int)damage, null, target.Position, Damage.DamageType.Harmful));
 
+                    // Show the animation.
+                    Vector2 animationPosition = target == null ? position : new Vector2(target.Position.X + target.Texture.Width / 2, target.Position.Y + target.Texture.Height / 8);
+                    AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Frost, animationPosition);
+
                     Thread.Sleep(500);
                 }
             }
