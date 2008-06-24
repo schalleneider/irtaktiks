@@ -161,18 +161,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Characters\Knight.png">
-      <Name>Knight</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Characters\Wizard.png">
-      <Name>Wizard</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sprites\Unit\QuickStatus.png">
       <Name>QuickStatus</Name>
       <Importer>TextureImporter</Importer>
@@ -387,123 +375,123 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Characters\assassin_m1.png">
-      <Name>assassin_m1</Name>
+    <Compile Include="Characters\Assassin_M_001.png">
+      <Name>Assassin_M_001</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\assassin_m2.png">
-      <Name>assassin_m2</Name>
+    <Compile Include="Characters\Assassin_M_002.png">
+      <Name>Assassin_M_002</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\assassin_W1.png">
-      <Name>assassin_W1</Name>
+    <Compile Include="Characters\Assassin_W_001.png">
+      <Name>Assassin_W_001</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\assassin_w2.png">
-      <Name>assassin_w2</Name>
+    <Compile Include="Characters\Assassin_W_002.png">
+      <Name>Assassin_W_002</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\knight_m1.png">
-      <Name>knight_m1</Name>
+    <Compile Include="Characters\Knight_M_001.png">
+      <Name>Knight_M_001</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\knight_m2.png">
-      <Name>knight_m2</Name>
+    <Compile Include="Characters\Knight_M_002.png">
+      <Name>Knight_M_002</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\knight_w1.png">
-      <Name>knight_w1</Name>
+    <Compile Include="Characters\Knight_W_001.png">
+      <Name>Knight_W_001</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\knight_w2.png">
-      <Name>knight_w2</Name>
+    <Compile Include="Characters\Knight_W_002.png">
+      <Name>Knight_W_002</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\monk_m1.png">
-      <Name>monk_m1</Name>
+    <Compile Include="Characters\Monk_M_001.png">
+      <Name>Monk_M_001</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\monk_m2.png">
-      <Name>monk_m2</Name>
+    <Compile Include="Characters\Monk_M_002.png">
+      <Name>Monk_M_002</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\monk_w1.png">
-      <Name>monk_w1</Name>
+    <Compile Include="Characters\Monk_W_001.png">
+      <Name>Monk_W_001</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\monk_w2.png">
-      <Name>monk_w2</Name>
+    <Compile Include="Characters\Monk_W_002.png">
+      <Name>Monk_W_002</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\paladin_m1.png">
-      <Name>paladin_m1</Name>
+    <Compile Include="Characters\Paladin_M_001.png">
+      <Name>Paladin_M_001</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\paladin_m2.png">
-      <Name>paladin_m2</Name>
+    <Compile Include="Characters\Paladin_M_002.png">
+      <Name>Paladin_M_002</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\paladin_w1.png">
-      <Name>paladin_w1</Name>
+    <Compile Include="Characters\Paladin_W_001.png">
+      <Name>Paladin_W_001</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\paladin_w2.png">
-      <Name>paladin_w2</Name>
+    <Compile Include="Characters\Paladin_W_002.png">
+      <Name>Paladin_W_002</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\priest_m1.png">
-      <Name>priest_m1</Name>
+    <Compile Include="Characters\Priest_M_001.png">
+      <Name>Priest_M_001</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\priest_m2.png">
-      <Name>priest_m2</Name>
+    <Compile Include="Characters\Priest_M_002.png">
+      <Name>Priest_M_002</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\priest_w2.png">
-      <Name>priest_w2</Name>
+    <Compile Include="Characters\Priest_W_001.png">
+      <Name>Priest_W_001</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\prist_w1.png">
-      <Name>prist_w1</Name>
+    <Compile Include="Characters\Priest_W_002.png">
+      <Name>Priest_W_002</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\wizard_m1.png">
-      <Name>wizard_m1</Name>
+    <Compile Include="Characters\Wizard_M_001.png">
+      <Name>Wizard_M_001</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\wizard_m2.png">
-      <Name>wizard_m2</Name>
+    <Compile Include="Characters\Wizard_M_002.png">
+      <Name>Wizard_M_002</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\wizard_w1.png">
-      <Name>wizard_w1</Name>
+    <Compile Include="Characters\Wizard_W_001.png">
+      <Name>Wizard_W_001</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\wizard_w2.png">
-      <Name>wizard_w2</Name>
+    <Compile Include="Characters\Wizard_W_002.png">
+      <Name>Wizard_W_002</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
