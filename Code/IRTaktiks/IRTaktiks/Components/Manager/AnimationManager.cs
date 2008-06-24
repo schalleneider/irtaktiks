@@ -686,7 +686,14 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Might(Vector2 position)
         {
-            this.None(position);
+            int particles = 75;
+            float lifeIncrement = 0.1f;
+            float totalLife = 7.0f;
+
+            Vector2 position1st = new Vector2(position.X, position.Y + 24);
+            Vector2 position2nd = new Vector2(position.X, position.Y);
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Pillar, lifeIncrement, totalLife, Color.GhostWhite));
         }
 
         /// <summary>
@@ -695,7 +702,14 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Quick(Vector2 position)
         {
-            this.None(position);
+            int particles = 75;
+            float lifeIncrement = 0.1f;
+            float totalLife = 7.0f;
+
+            Vector2 position1st = new Vector2(position.X, position.Y + 24);
+            Vector2 position2nd = new Vector2(position.X, position.Y);
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Pillar, lifeIncrement, totalLife, Color.Green));
         }
 
         /// <summary>
@@ -745,7 +759,14 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Stealth(Vector2 position)
         {
-            this.None(position);
+            int particles = 75;
+            float lifeIncrement = 0.1f;
+            float totalLife = 7.0f;
+
+            Vector2 position1st = new Vector2(position.X, position.Y + 24);
+            Vector2 position2nd = new Vector2(position.X, position.Y);
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Pillar, lifeIncrement, totalLife, Color.Black));
         }
 
         /// <summary>
@@ -763,7 +784,14 @@ namespace IRTaktiks.Components.Manager
         /// <param name="position">The target position.</param>
         private void Warcry(Vector2 position)
         {
-            this.None(position);
+            int particles = 75;
+            float lifeIncrement = 0.1f;
+            float totalLife = 7.0f;
+
+            Vector2 position1st = new Vector2(position.X, position.Y + 24);
+            Vector2 position2nd = new Vector2(position.X, position.Y);
+
+            this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Pillar, lifeIncrement, totalLife, Color.SaddleBrown));
         }
         
         #endregion
