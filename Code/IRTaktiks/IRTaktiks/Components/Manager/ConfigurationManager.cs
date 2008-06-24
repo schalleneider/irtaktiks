@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using IRTaktiks.Components.Config;
+using IRTaktiks.Input;
+using IRTaktiks.Input.EventArgs;
 
 namespace IRTaktiks.Components.Manager
 {
@@ -44,6 +46,19 @@ namespace IRTaktiks.Components.Manager
             get { return PlayerIndexField; }
         }
 
+        /// <summary>
+        /// The value of the base position.
+        /// </summary>
+        private Vector2 BasePositionField;
+        
+        /// <summary>
+        /// The value of the base position.
+        /// </summary>
+        public Vector2  BasePosition
+        {
+            get { return BasePositionField; }
+        }
+        
         /// <summary>
         /// The actual selected item.
         /// </summary>
@@ -114,6 +129,17 @@ namespace IRTaktiks.Components.Manager
         {
             this.PlayerIndexField = playerIndex;
 
+            switch (playerIndex)
+            {
+                case PlayerIndex.One:
+                    this.BasePositionField = new Vector2(0, 0);
+                    break;
+
+                case PlayerIndex.Two:
+                    this.BasePositionField = new Vector2(640, 0);
+                    break;
+            }
+
             // Items creation
             this.KeyboardField = new Keyboard(game, playerIndex);
             this.PlayerConfigField = new PlayerConfig(game, playerIndex);
@@ -130,6 +156,8 @@ namespace IRTaktiks.Components.Manager
             // Event handling
             this.Keyboard.Typed += new Keyboard.TypedEventHandler(Keyboard_Typed);
             this.PlayerConfig.Touched += new Configurable.TouchedEventHandler(Configurable_Touched);
+
+            InputManager.Instance.CursorDown += new EventHandler<CursorDownArgs>(CursorDown);
         }
 
         #endregion
@@ -173,7 +201,7 @@ namespace IRTaktiks.Components.Manager
             {
                 IRTGame game = this.Game as IRTGame;
 
-                game.SpriteManager.Draw(TextureManager.Instance.Sprites.Config.Start, new Vector2(39, 655), Color.White, 30);
+                game.SpriteManager.Draw(TextureManager.Instance.Sprites.Config.Start, new Vector2(this.BasePositionField.X + 39, this.BasePositionField.Y + 655), Color.White, 30);
             }
                         
             base.Draw(gameTime);
@@ -181,8 +209,35 @@ namespace IRTaktiks.Components.Manager
 
         #endregion
 
+        #region Methods
+
+        /// <summary>
+        /// Handle the CursorDown event.
+        /// </summary>
+        private void CursorDown(object sender, CursorDownArgs e)
+        {
+            if (this.ReadyToStart)
+            {
+                if ((e.Position.X > 39 && e.Position.X < (39 + TextureManager.Instance.Sprites.Config.Start.Width)) &&
+                    (e.Position.Y > 655 && e.Position.Y < (655 + TextureManager.Instance.Sprites.Config.Start.Height)))
+                {
+                    this.Configurated();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Unregister all events of the item.
+        /// </summary>
+        public void Unregister()
+        {
+            InputManager.Instance.CursorDown -= CursorDown;
+        }
+
+        #endregion
+
         #region Event Handling
-        
+
         /// <summary>
         /// Handle the pressed event of the keyboard.
         /// </summary>

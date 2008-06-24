@@ -138,7 +138,7 @@ namespace IRTaktiks.Components.Config
         /// <summary>
         /// Unregister all events of the item.
         /// </summary
-        protected override void Unregister()
+        public override void Unregister()
         {
             InputManager.Instance.CursorDown -= CursorDown;
         }

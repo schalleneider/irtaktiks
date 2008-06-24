@@ -288,9 +288,9 @@ namespace IRTaktiks.Components.Config
         #region Methods
 
         /// <summary>
-        /// Deactivate the item.
+        /// Unregister all touch events in the keyboard.
         /// </summary>
-        protected override void Unregister()
+        public override void Unregister()
         {
             InputManager.Instance.CursorDown -= CursorDown;
         }

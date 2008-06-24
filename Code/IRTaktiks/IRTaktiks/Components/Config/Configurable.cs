@@ -170,9 +170,9 @@ namespace IRTaktiks.Components.Config
         }
 
         /// <summary>
-        /// Unregister all events of the item.
+        /// Unregister all touch events in the keyboard.
         /// </summary>
-        protected abstract void Unregister();
+        public abstract void Unregister();
 
         #endregion
     }
