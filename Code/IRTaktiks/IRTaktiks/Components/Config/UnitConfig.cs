@@ -407,162 +407,166 @@ namespace IRTaktiks.Components.Config
         /// </summary>
         private void CursorDown(object sender, CursorDownArgs e)
         {
-            Vector2 attributePosition = new Vector2((640 * ((int)this.Position.X / 640)) + 38, 379);
-
             // Touch at unit.            
             if ((e.Position.X > this.Position.X && e.Position.X < (this.Position.X + TextureManager.Instance.Sprites.Config.UnitGreen.Width)) &&
                 (e.Position.Y > this.Position.Y && e.Position.Y < (this.Position.Y + TextureManager.Instance.Sprites.Config.UnitGreen.Height)))
             {
                 this.Touch();
             }
-
-            // Previous character
-            else if ((e.Position.X > (attributePosition.X + 23) && e.Position.X < (attributePosition.X + 104)) &&
-                (e.Position.Y > (attributePosition.Y + 49) && e.Position.Y < (attributePosition.Y + 247)))
+            
+            // Enable attributes only if the unit is selected.
+            else if (this.Selected)
             {
-                this.PreviousCharacter();
-            }
+                Vector2 attributePosition = new Vector2((640 * ((int)this.Position.X / 640)) + 38, 379);
 
-            // Next character
-            else if ((e.Position.X > (attributePosition.X + 104) && e.Position.X < (attributePosition.X + 184)) &&
-                (e.Position.Y > (attributePosition.Y + 49) && e.Position.Y < (attributePosition.Y + 247)))
-            {
-                this.NextCharacter();
-            }
-
-            // -5
-            else if (e.Position.X > (attributePosition.X + 345) && e.Position.X < (attributePosition.X + 378))
-            {
-                // Strength
-                if (e.Position.Y > (attributePosition.Y + 82) && e.Position.Y < (attributePosition.Y + 115))
+                // Previous character
+                if ((e.Position.X > (attributePosition.X + 23) && e.Position.X < (attributePosition.X + 104)) &&
+                    (e.Position.Y > (attributePosition.Y + 49) && e.Position.Y < (attributePosition.Y + 247)))
                 {
-                    this.ChangeStrength(-5);
+                    this.PreviousCharacter();
                 }
 
-                // Agility
-                else if (e.Position.Y > (attributePosition.Y + 115) && e.Position.Y < (attributePosition.Y + 147))
+                // Next character
+                else if ((e.Position.X > (attributePosition.X + 104) && e.Position.X < (attributePosition.X + 184)) &&
+                    (e.Position.Y > (attributePosition.Y + 49) && e.Position.Y < (attributePosition.Y + 247)))
                 {
-                    this.ChangeAgility(-5);
+                    this.NextCharacter();
                 }
 
-                // Vitality
-                else if (e.Position.Y > (attributePosition.Y + 147) && e.Position.Y < (attributePosition.Y + 181))
+                // -5
+                else if (e.Position.X > (attributePosition.X + 345) && e.Position.X < (attributePosition.X + 378))
                 {
-                    this.ChangeVitality(-5);
+                    // Strength
+                    if (e.Position.Y > (attributePosition.Y + 82) && e.Position.Y < (attributePosition.Y + 115))
+                    {
+                        this.ChangeStrength(-5);
+                    }
+
+                    // Agility
+                    else if (e.Position.Y > (attributePosition.Y + 115) && e.Position.Y < (attributePosition.Y + 147))
+                    {
+                        this.ChangeAgility(-5);
+                    }
+
+                    // Vitality
+                    else if (e.Position.Y > (attributePosition.Y + 147) && e.Position.Y < (attributePosition.Y + 181))
+                    {
+                        this.ChangeVitality(-5);
+                    }
+
+                    // Inteligence
+                    else if (e.Position.Y > (attributePosition.Y + 181) && e.Position.Y < (attributePosition.Y + 214))
+                    {
+                        this.ChangeInteligence(-5);
+                    }
+
+                    // Dexterity
+                    else if (e.Position.Y > (attributePosition.Y + 214) && e.Position.Y < (attributePosition.Y + 247))
+                    {
+                        this.ChangeDexterity(-5);
+                    }
                 }
 
-                // Inteligence
-                else if (e.Position.Y > (attributePosition.Y + 181) && e.Position.Y < (attributePosition.Y + 214))
+                // -1
+                else if (e.Position.X > (attributePosition.X + 378) && e.Position.X < (attributePosition.X + 411))
                 {
-                    this.ChangeInteligence(-5);
+                    // Strength
+                    if (e.Position.Y > (attributePosition.Y + 82) && e.Position.Y < (attributePosition.Y + 115))
+                    {
+                        this.ChangeStrength(-1);
+                    }
+
+                    // Agility
+                    else if (e.Position.Y > (attributePosition.Y + 115) && e.Position.Y < (attributePosition.Y + 147))
+                    {
+                        this.ChangeAgility(-1);
+                    }
+
+                    // Vitality
+                    else if (e.Position.Y > (attributePosition.Y + 147) && e.Position.Y < (attributePosition.Y + 181))
+                    {
+                        this.ChangeVitality(-1);
+                    }
+
+                    // Inteligence
+                    else if (e.Position.Y > (attributePosition.Y + 181) && e.Position.Y < (attributePosition.Y + 214))
+                    {
+                        this.ChangeInteligence(-1);
+                    }
+
+                    // Dexterity
+                    else if (e.Position.Y > (attributePosition.Y + 214) && e.Position.Y < (attributePosition.Y + 247))
+                    {
+                        this.ChangeDexterity(-1);
+                    }
                 }
 
-                // Dexterity
-                else if (e.Position.Y > (attributePosition.Y + 214) && e.Position.Y < (attributePosition.Y + 247))
+                // +1
+                else if (e.Position.X > (attributePosition.X + 475) && e.Position.X < (attributePosition.X + 508))
                 {
-                    this.ChangeDexterity(-5);
-                }
-            }
+                    // Strength
+                    if (e.Position.Y > (attributePosition.Y + 82) && e.Position.Y < (attributePosition.Y + 115))
+                    {
+                        this.ChangeStrength(1);
+                    }
 
-            // -1
-            else if (e.Position.X > (attributePosition.X + 378) && e.Position.X < (attributePosition.X + 411))
-            {
-                // Strength
-                if (e.Position.Y > (attributePosition.Y + 82) && e.Position.Y < (attributePosition.Y + 115))
-                {
-                    this.ChangeStrength(-1);
-                }
+                    // Agility
+                    else if (e.Position.Y > (attributePosition.Y + 115) && e.Position.Y < (attributePosition.Y + 147))
+                    {
+                        this.ChangeAgility(1);
+                    }
 
-                // Agility
-                else if (e.Position.Y > (attributePosition.Y + 115) && e.Position.Y < (attributePosition.Y + 147))
-                {
-                    this.ChangeAgility(-1);
-                }
+                    // Vitality
+                    else if (e.Position.Y > (attributePosition.Y + 147) && e.Position.Y < (attributePosition.Y + 181))
+                    {
+                        this.ChangeVitality(1);
+                    }
 
-                // Vitality
-                else if (e.Position.Y > (attributePosition.Y + 147) && e.Position.Y < (attributePosition.Y + 181))
-                {
-                    this.ChangeVitality(-1);
-                }
+                    // Inteligence
+                    else if (e.Position.Y > (attributePosition.Y + 181) && e.Position.Y < (attributePosition.Y + 214))
+                    {
+                        this.ChangeInteligence(1);
+                    }
 
-                // Inteligence
-                else if (e.Position.Y > (attributePosition.Y + 181) && e.Position.Y < (attributePosition.Y + 214))
-                {
-                    this.ChangeInteligence(-1);
-                }
-
-                // Dexterity
-                else if (e.Position.Y > (attributePosition.Y + 214) && e.Position.Y < (attributePosition.Y + 247))
-                {
-                    this.ChangeDexterity(-1);
-                }
-            }
-
-            // +1
-            else if (e.Position.X > (attributePosition.X + 475) && e.Position.X < (attributePosition.X + 508))
-            {
-                // Strength
-                if (e.Position.Y > (attributePosition.Y + 82) && e.Position.Y < (attributePosition.Y + 115))
-                {
-                    this.ChangeStrength(1);
+                    // Dexterity
+                    else if (e.Position.Y > (attributePosition.Y + 214) && e.Position.Y < (attributePosition.Y + 247))
+                    {
+                        this.ChangeDexterity(1);
+                    }
                 }
 
-                // Agility
-                else if (e.Position.Y > (attributePosition.Y + 115) && e.Position.Y < (attributePosition.Y + 147))
+                // +5
+                else if (e.Position.X > (attributePosition.X + 508) && e.Position.X < (attributePosition.X + 541))
                 {
-                    this.ChangeAgility(1);
-                }
+                    // Strength
+                    if (e.Position.Y > (attributePosition.Y + 82) && e.Position.Y < (attributePosition.Y + 115))
+                    {
+                        this.ChangeStrength(5);
+                    }
 
-                // Vitality
-                else if (e.Position.Y > (attributePosition.Y + 147) && e.Position.Y < (attributePosition.Y + 181))
-                {
-                    this.ChangeVitality(1);
-                }
+                    // Agility
+                    else if (e.Position.Y > (attributePosition.Y + 115) && e.Position.Y < (attributePosition.Y + 147))
+                    {
+                        this.ChangeAgility(5);
+                    }
 
-                // Inteligence
-                else if (e.Position.Y > (attributePosition.Y + 181) && e.Position.Y < (attributePosition.Y + 214))
-                {
-                    this.ChangeInteligence(1);
-                }
+                    // Vitality
+                    else if (e.Position.Y > (attributePosition.Y + 147) && e.Position.Y < (attributePosition.Y + 181))
+                    {
+                        this.ChangeVitality(5);
+                    }
 
-                // Dexterity
-                else if (e.Position.Y > (attributePosition.Y + 214) && e.Position.Y < (attributePosition.Y + 247))
-                {
-                    this.ChangeDexterity(1);
-                }
-            }
+                    // Inteligence
+                    else if (e.Position.Y > (attributePosition.Y + 181) && e.Position.Y < (attributePosition.Y + 214))
+                    {
+                        this.ChangeInteligence(5);
+                    }
 
-            // +5
-            else if (e.Position.X > (attributePosition.X + 508) && e.Position.X < (attributePosition.X + 541))
-            {
-                // Strength
-                if (e.Position.Y > (attributePosition.Y + 82) && e.Position.Y < (attributePosition.Y + 115))
-                {
-                    this.ChangeStrength(5);
-                }
-
-                // Agility
-                else if (e.Position.Y > (attributePosition.Y + 115) && e.Position.Y < (attributePosition.Y + 147))
-                {
-                    this.ChangeAgility(5);
-                }
-
-                // Vitality
-                else if (e.Position.Y > (attributePosition.Y + 147) && e.Position.Y < (attributePosition.Y + 181))
-                {
-                    this.ChangeVitality(5);
-                }
-
-                // Inteligence
-                else if (e.Position.Y > (attributePosition.Y + 181) && e.Position.Y < (attributePosition.Y + 214))
-                {
-                    this.ChangeInteligence(5);
-                }
-
-                // Dexterity
-                else if (e.Position.Y > (attributePosition.Y + 214) && e.Position.Y < (attributePosition.Y + 247))
-                {
-                    this.ChangeDexterity(5);
+                    // Dexterity
+                    else if (e.Position.Y > (attributePosition.Y + 214) && e.Position.Y < (attributePosition.Y + 247))
+                    {
+                        this.ChangeDexterity(5);
+                    }
                 }
             }
         }
