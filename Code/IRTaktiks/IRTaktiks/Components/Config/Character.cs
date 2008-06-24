@@ -86,12 +86,12 @@ namespace IRTaktiks.Components.Config
         #region Properties
 
         /// <summary>
-        /// The texture of the item.
+        /// The texture of the character.
         /// </summary>
         private Texture2D TextureField;
 
         /// <summary>
-        /// The texture of the item.
+        /// The texture of the character.
         /// </summary>
         public Texture2D Texture
         {
@@ -99,12 +99,12 @@ namespace IRTaktiks.Components.Config
         }
 
         /// <summary>
-        /// The job of the item.
+        /// The job of the character.
         /// </summary>
         private Job JobField;
 
         /// <summary>
-        /// The job of the item.
+        /// The job of the character.
         /// </summary>
         public Job Job
         {

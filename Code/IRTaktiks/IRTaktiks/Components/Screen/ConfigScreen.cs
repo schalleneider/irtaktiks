@@ -128,6 +128,7 @@ namespace IRTaktiks.Components.Screen
 		{
             if (this.PlayerOneConfigurated && this.PlayerTwoConfigurated)
             {
+                this.ConfigGame();
                 (this.Game as IRTGame).ChangeScreen(IRTGame.GameScreens.GameScreen);
             }
 
@@ -146,6 +147,18 @@ namespace IRTaktiks.Components.Screen
 
         #endregion
 
+        #region Methods
+
+        /// <summary>
+        /// Configure the game, creating all players and its units.
+        /// </summary>
+        private void ConfigGame()
+        {
+
+        }
+
+        #endregion
+
         #region Event Handling
 
         /// <summary>
@@ -154,6 +167,14 @@ namespace IRTaktiks.Components.Screen
         private void PlayerOne_Configurated()
         {
             this.PlayerOneConfigurated = true;
+
+            this.PlayerOneConfigurationManager.Unregister();
+            this.PlayerOneConfigurationManager.Keyboard.Unregister();
+            this.PlayerOneConfigurationManager.PlayerConfig.Unregister();
+            for (int index = 0; index < this.PlayerOneConfigurationManager.UnitsConfig.Count; index++)
+            {
+                this.PlayerOneConfigurationManager.UnitsConfig[index].Unregister();
+            }
         }
 
         /// <summary>
@@ -162,6 +183,14 @@ namespace IRTaktiks.Components.Screen
         private void PlayerTwo_Configurated()
         {
             this.PlayerTwoConfigurated = true;
+
+            this.PlayerTwoConfigurationManager.Unregister();
+            this.PlayerTwoConfigurationManager.Keyboard.Unregister();
+            this.PlayerTwoConfigurationManager.PlayerConfig.Unregister();
+            for (int index = 0; index < this.PlayerTwoConfigurationManager.UnitsConfig.Count; index++)
+            {
+                this.PlayerTwoConfigurationManager.UnitsConfig[index].Unregister();
+            }
         }
 
         #endregion
