@@ -12,10 +12,10 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="UnitsPerPlayer" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="AttributePointsPerUnit" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">200</Value>
+      <Value Profile="(Default)">198</Value>
     </Setting>
     <Setting Name="PointsPerAttribute" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">99</Value>
@@ -24,7 +24,7 @@
       <Value Profile="(Default)">99</Value>
     </Setting>
     <Setting Name="ListenTUIO" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ListenMouse" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>

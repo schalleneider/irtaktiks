@@ -78,11 +78,11 @@ namespace IRTaktiks.Components.Debug
         {
             IRTGame game = this.Game as IRTGame;
 
-            /*game.ParticleManager.Queue(
+            game.ParticleManager.Queue(
                 new ParticleEffect(e.Position, 50, ParticleEffect.EffectType.Ring, 0.2f, 3.0f, Color.SteelBlue)
-                );*/
+                );
 
-            AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Reject, e.Position);
+            //AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Reject, e.Position);
         }
 
         #endregion

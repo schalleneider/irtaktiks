@@ -52,7 +52,7 @@ namespace IRTaktiks {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
         public int UnitsPerPlayer {
             get {
                 return ((int)(this["UnitsPerPlayer"]));
@@ -61,7 +61,7 @@ namespace IRTaktiks {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        [global::System.Configuration.DefaultSettingValueAttribute("198")]
         public int AttributePointsPerUnit {
             get {
                 return ((int)(this["AttributePointsPerUnit"]));
@@ -88,7 +88,7 @@ namespace IRTaktiks {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ListenTUIO {
             get {
                 return ((bool)(this["ListenTUIO"]));
