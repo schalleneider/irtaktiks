@@ -194,13 +194,13 @@ namespace IRTaktiks.Components.Screen
                 switch (configurationManager.PlayerIndex)
                 {
                     case PlayerIndex.One:
-                        unitPosition = new Vector2(TextureManager.Instance.Sprites.Menu.Background.Width, TextureManager.Instance.Sprites.Menu.Background.Width + (index * 60));
-                        unitOrientation = Orientation.Left;
+                        unitPosition = new Vector2((TextureManager.Instance.Sprites.Menu.Background.Width + 50), TextureManager.Instance.Sprites.Menu.Background.Width + (index * 60));
+                        unitOrientation = Orientation.Right;
                         break;
 
                     case PlayerIndex.Two:
-                        unitPosition = new Vector2(IRTSettings.Default.Width - TextureManager.Instance.Sprites.Menu.Background.Width, TextureManager.Instance.Sprites.Menu.Background.Width + (index * 60));
-                        unitOrientation = Orientation.Right;
+                        unitPosition = new Vector2(IRTSettings.Default.Width - (TextureManager.Instance.Sprites.Menu.Background.Width + 50), TextureManager.Instance.Sprites.Menu.Background.Width + (index * 60));
+                        unitOrientation = Orientation.Left;
                         break;
                 }
 

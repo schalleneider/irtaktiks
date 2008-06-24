@@ -296,16 +296,19 @@ namespace IRTaktiks.Components.Manager
 
                 for (int index = 0; index < this.Areas.Count; index++)
                 {
-                    world = this.Areas[index].World;
-                    worldViewProjection = world * this.Camera.AreaView * this.Camera.AreaProjection;
+                    if (this.Areas[index] != null)
+                    {
+                        world = this.Areas[index].World;
+                        worldViewProjection = world * this.Camera.AreaView * this.Camera.AreaProjection;
 
-                    this.Effect.Parameters["worldViewProj"].SetValue(worldViewProjection);
-                    this.Effect.Parameters["color"].SetValue(this.Areas[index].Color.ToVector4());
-                    this.Effect.Parameters["blurThreshold"].SetValue(0.95f);
+                        this.Effect.Parameters["worldViewProj"].SetValue(worldViewProjection);
+                        this.Effect.Parameters["color"].SetValue(this.Areas[index].Color.ToVector4());
+                        this.Effect.Parameters["blurThreshold"].SetValue(0.95f);
 
-                    this.Effect.CommitChanges();
+                        this.Effect.CommitChanges();
 
-                    this.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, this.VerticesNumber, 0, this.PrimitivesNumber);
+                        this.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, this.VerticesNumber, 0, this.PrimitivesNumber);
+                    }
                 }
 
                 pass.End();
