@@ -57,31 +57,339 @@ namespace IRTaktiks.Components.Manager
             #region Textures
 
             /// <summary>
-            /// Texture of Characters/Knight.
+            /// Texture of Characters/Assassin_M_001.
             /// </summary>
-            private Texture2D KnightField;
+            private Texture2D Assassin_M_001Field;
 
             /// <summary>
-            /// Texture of Characters/Knight.
+            /// Texture of Characters/Assassin_M_001.
             /// </summary>
-            public Texture2D Knight
+            public Texture2D Assassin_M_001
             {
-                get { return KnightField; }
-                set { KnightField = value; }
+                get { return Assassin_M_001Field; }
+                set { Assassin_M_001Field = value; }
             }
 
             /// <summary>
-            /// Texture of Characters/Wizard.
+            /// Texture of Characters/Assassin_M_002.
             /// </summary>
-            private Texture2D WizardField;
+            private Texture2D Assassin_M_002Field;
 
             /// <summary>
-            /// Texture of Characters/Wizard.
+            /// Texture of Characters/Assassin_M_002.
             /// </summary>
-            public Texture2D Wizard
+            public Texture2D Assassin_M_002
             {
-                get { return WizardField; }
-                set { WizardField = value; }
+                get { return Assassin_M_002Field; }
+                set { Assassin_M_002Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Assassin_W_001.
+            /// </summary>
+            private Texture2D Assassin_W_001Field;
+
+            /// <summary>
+            /// Texture of Characters/Assassin_W_001.
+            /// </summary>
+            public Texture2D Assassin_W_001
+            {
+                get { return Assassin_W_001Field; }
+                set { Assassin_W_001Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Assassin_W_002.
+            /// </summary>
+            private Texture2D Assassin_W_002Field;
+
+            /// <summary>
+            /// Texture of Characters/Assassin_W_002.
+            /// </summary>
+            public Texture2D Assassin_W_002
+            {
+                get { return Assassin_W_002Field; }
+                set { Assassin_W_002Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Knight_M_001.
+            /// </summary>
+            private Texture2D Knight_M_001Field;
+
+            /// <summary>
+            /// Texture of Characters/Knight_M_001.
+            /// </summary>
+            public Texture2D Knight_M_001
+            {
+                get { return Knight_M_001Field; }
+                set { Knight_M_001Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Knight_M_002.
+            /// </summary>
+            private Texture2D Knight_M_002Field;
+
+            /// <summary>
+            /// Texture of Characters/Knight_M_002.
+            /// </summary>
+            public Texture2D Knight_M_002
+            {
+                get { return Knight_M_002Field; }
+                set { Knight_M_002Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Knight_W_001.
+            /// </summary>
+            private Texture2D Knight_W_001Field;
+
+            /// <summary>
+            /// Texture of Characters/Knight_W_001.
+            /// </summary>
+            public Texture2D Knight_W_001
+            {
+                get { return Knight_W_001Field; }
+                set { Knight_W_001Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Knight_W_002.
+            /// </summary>
+            private Texture2D Knight_W_002Field;
+
+            /// <summary>
+            /// Texture of Characters/Knight_W_002.
+            /// </summary>
+            public Texture2D Knight_W_002
+            {
+                get { return Knight_W_002Field; }
+                set { Knight_W_002Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Monk_M_001.
+            /// </summary>
+            private Texture2D Monk_M_001Field;
+
+            /// <summary>
+            /// Texture of Characters/Monk_M_001.
+            /// </summary>
+            public Texture2D Monk_M_001
+            {
+                get { return Monk_M_001Field; }
+                set { Monk_M_001Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Monk_M_002.
+            /// </summary>
+            private Texture2D Monk_M_002Field;
+
+            /// <summary>
+            /// Texture of Characters/Monk_M_002.
+            /// </summary>
+            public Texture2D Monk_M_002
+            {
+                get { return Monk_M_002Field; }
+                set { Monk_M_002Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Monk_W_001.
+            /// </summary>
+            private Texture2D Monk_W_001Field;
+
+            /// <summary>
+            /// Texture of Characters/Monk_W_001.
+            /// </summary>
+            public Texture2D Monk_W_001
+            {
+                get { return Monk_W_001Field; }
+                set { Monk_W_001Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Monk_W_002.
+            /// </summary>
+            private Texture2D Monk_W_002Field;
+
+            /// <summary>
+            /// Texture of Characters/Monk_W_002.
+            /// </summary>
+            public Texture2D Monk_W_002
+            {
+                get { return Monk_W_002Field; }
+                set { Monk_W_002Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Paladin_M_001.
+            /// </summary>
+            private Texture2D Paladin_M_001Field;
+
+            /// <summary>
+            /// Texture of Characters/Paladin_M_001.
+            /// </summary>
+            public Texture2D Paladin_M_001
+            {
+                get { return Paladin_M_001Field; }
+                set { Paladin_M_001Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Paladin_M_002.
+            /// </summary>
+            private Texture2D Paladin_M_002Field;
+
+            /// <summary>
+            /// Texture of Characters/Paladin_M_002.
+            /// </summary>
+            public Texture2D Paladin_M_002
+            {
+                get { return Paladin_M_002Field; }
+                set { Paladin_M_002Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Paladin_W_001.
+            /// </summary>
+            private Texture2D Paladin_W_001Field;
+
+            /// <summary>
+            /// Texture of Characters/Paladin_W_001.
+            /// </summary>
+            public Texture2D Paladin_W_001
+            {
+                get { return Paladin_W_001Field; }
+                set { Paladin_W_001Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Paladin_W_002.
+            /// </summary>
+            private Texture2D Paladin_W_002Field;
+
+            /// <summary>
+            /// Texture of Characters/Paladin_W_002.
+            /// </summary>
+            public Texture2D Paladin_W_002
+            {
+                get { return Paladin_W_002Field; }
+                set { Paladin_W_002Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Priest_M_001.
+            /// </summary>
+            private Texture2D Priest_M_001Field;
+
+            /// <summary>
+            /// Texture of Characters/Priest_M_001.
+            /// </summary>
+            public Texture2D Priest_M_001
+            {
+                get { return Priest_M_001Field; }
+                set { Priest_M_001Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Priest_M_002.
+            /// </summary>
+            private Texture2D Priest_M_002Field;
+
+            /// <summary>
+            /// Texture of Characters/Priest_M_002.
+            /// </summary>
+            public Texture2D Priest_M_002
+            {
+                get { return Priest_M_002Field; }
+                set { Priest_M_002Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Priest_W_001.
+            /// </summary>
+            private Texture2D Priest_W_001Field;
+
+            /// <summary>
+            /// Texture of Characters/Priest_W_001.
+            /// </summary>
+            public Texture2D Priest_W_001
+            {
+                get { return Priest_W_001Field; }
+                set { Priest_W_001Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Priest_W_002.
+            /// </summary>
+            private Texture2D Priest_W_002Field;
+
+            /// <summary>
+            /// Texture of Characters/Priest_W_002.
+            /// </summary>
+            public Texture2D Priest_W_002
+            {
+                get { return Priest_W_002Field; }
+                set { Priest_W_002Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Wizard_M_001.
+            /// </summary>
+            private Texture2D Wizard_M_001Field;
+
+            /// <summary>
+            /// Texture of Characters/Wizard_M_001.
+            /// </summary>
+            public Texture2D Wizard_M_001
+            {
+                get { return Wizard_M_001Field; }
+                set { Wizard_M_001Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Wizard_M_002.
+            /// </summary>
+            private Texture2D Wizard_M_002Field;
+
+            /// <summary>
+            /// Texture of Characters/Wizard_M_002.
+            /// </summary>
+            public Texture2D Wizard_M_002
+            {
+                get { return Wizard_M_002Field; }
+                set { Wizard_M_002Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Wizard_W_001.
+            /// </summary>
+            private Texture2D Wizard_W_001Field;
+
+            /// <summary>
+            /// Texture of Characters/Wizard_W_001.
+            /// </summary>
+            public Texture2D Wizard_W_001
+            {
+                get { return Wizard_W_001Field; }
+                set { Wizard_W_001Field = value; }
+            }
+
+            /// <summary>
+            /// Texture of Characters/Wizard_W_002.
+            /// </summary>
+            private Texture2D Wizard_W_002Field;
+
+            /// <summary>
+            /// Texture of Characters/Wizard_W_002.
+            /// </summary>
+            public Texture2D Wizard_W_002
+            {
+                get { return Wizard_W_002Field; }
+                set { Wizard_W_002Field = value; }
             }
 
             #endregion
@@ -997,8 +1305,35 @@ namespace IRTaktiks.Components.Manager
         /// </summary>
         public void Initialize(Game game)
         {
-            this.Characters.Knight = game.Content.Load<Texture2D>("Characters/Knight");
-            this.Characters.Wizard = game.Content.Load<Texture2D>("Characters/Wizard");
+            this.Characters.Assassin_M_001 = game.Content.Load<Texture2D>("Characters/Assassin_M_001");
+            this.Characters.Assassin_M_002 = game.Content.Load<Texture2D>("Characters/Assassin_M_002");
+            this.Characters.Assassin_W_001 = game.Content.Load<Texture2D>("Characters/Assassin_W_001");
+            this.Characters.Assassin_W_002 = game.Content.Load<Texture2D>("Characters/Assassin_W_002");
+
+            this.Characters.Knight_M_001 = game.Content.Load<Texture2D>("Characters/Knight_M_001");
+            this.Characters.Knight_M_002 = game.Content.Load<Texture2D>("Characters/Knight_M_002");
+            this.Characters.Knight_W_001 = game.Content.Load<Texture2D>("Characters/Knight_W_001");
+            this.Characters.Knight_W_002 = game.Content.Load<Texture2D>("Characters/Knight_W_002");
+
+            this.Characters.Monk_M_001 = game.Content.Load<Texture2D>("Characters/Monk_M_001");
+            this.Characters.Monk_M_002 = game.Content.Load<Texture2D>("Characters/Monk_M_002");
+            this.Characters.Monk_W_001 = game.Content.Load<Texture2D>("Characters/Monk_W_001");
+            this.Characters.Monk_W_002 = game.Content.Load<Texture2D>("Characters/Monk_W_002");
+
+            this.Characters.Paladin_M_001 = game.Content.Load<Texture2D>("Characters/Paladin_M_001");
+            this.Characters.Paladin_M_002 = game.Content.Load<Texture2D>("Characters/Paladin_M_002");
+            this.Characters.Paladin_W_001 = game.Content.Load<Texture2D>("Characters/Paladin_W_001");
+            this.Characters.Paladin_W_002 = game.Content.Load<Texture2D>("Characters/Paladin_W_002");
+
+            this.Characters.Priest_M_001 = game.Content.Load<Texture2D>("Characters/Priest_M_001");
+            this.Characters.Priest_M_002 = game.Content.Load<Texture2D>("Characters/Priest_M_002");
+            this.Characters.Priest_W_001 = game.Content.Load<Texture2D>("Characters/Priest_W_001");
+            this.Characters.Priest_W_002 = game.Content.Load<Texture2D>("Characters/Priest_W_002");
+
+            this.Characters.Wizard_M_001 = game.Content.Load<Texture2D>("Characters/Wizard_M_001");
+            this.Characters.Wizard_M_002 = game.Content.Load<Texture2D>("Characters/Wizard_M_002");
+            this.Characters.Wizard_W_001 = game.Content.Load<Texture2D>("Characters/Wizard_W_001");
+            this.Characters.Wizard_W_002 = game.Content.Load<Texture2D>("Characters/Wizard_W_002");
 
             this.Sprites.Config.AttributesPlayerOne = game.Content.Load<Texture2D>("Sprites/Config/AttributesPlayerOne");
             this.Sprites.Config.AttributesPlayerTwo = game.Content.Load<Texture2D>("Sprites/Config/AttributesPlayerTwo");

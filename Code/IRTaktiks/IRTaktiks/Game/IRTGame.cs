@@ -382,28 +382,32 @@ namespace IRTaktiks
             {
                 this.Exit();
             }
-            		
-            MouseState mouseState = Mouse.GetState();
+            
+		    // Check for mouse injection
+            if (IRTSettings.Default.ListenMouse)
+            {
+                MouseState mouseState = Mouse.GetState();
 
-            if (!mouseIsPressed)
-            {
-                if (mouseState.LeftButton == ButtonState.Pressed)
+                if (!mouseIsPressed)
                 {
-                    mouseIsPressed = true;
-                    InputManager.Instance.RaiseCursorDown(0, new Vector2(mouseState.X, mouseState.Y));
-                }
-            }
-            else
-            {
-                if (mouseState.LeftButton == ButtonState.Pressed)
-                {
-                    mouseIsPressed = true;
-                    InputManager.Instance.RaiseCursorUpdate(0, new Vector2(mouseState.X, mouseState.Y));
+                    if (mouseState.LeftButton == ButtonState.Pressed)
+                    {
+                        mouseIsPressed = true;
+                        InputManager.Instance.RaiseCursorDown(0, new Vector2(mouseState.X, mouseState.Y));
+                    }
                 }
                 else
                 {
-                    mouseIsPressed = false;
-                    InputManager.Instance.RaiseCursorUp(0, new Vector2(mouseState.X, mouseState.Y));
+                    if (mouseState.LeftButton == ButtonState.Pressed)
+                    {
+                        mouseIsPressed = true;
+                        InputManager.Instance.RaiseCursorUpdate(0, new Vector2(mouseState.X, mouseState.Y));
+                    }
+                    else
+                    {
+                        mouseIsPressed = false;
+                        InputManager.Instance.RaiseCursorUp(0, new Vector2(mouseState.X, mouseState.Y));
+                    }
                 }
             }
 
