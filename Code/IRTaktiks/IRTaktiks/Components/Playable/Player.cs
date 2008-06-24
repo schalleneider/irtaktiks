@@ -99,7 +99,7 @@ namespace IRTaktiks.Components.Playable
         /// </summary>
         public bool Won
         {
-            get { return this.Enemy.Units.FindAll(delegate(Unit unit) { return unit.Life > 0; }).Count == 0; }
+            get { return this.Enemy.Units.FindAll(delegate(Unit unit) { return unit.Life > 0; }).Count == 0 && this.Units.FindAll(delegate(Unit unit) { return unit.Life > 0; }).Count > 0; }
         }
 
         #endregion
