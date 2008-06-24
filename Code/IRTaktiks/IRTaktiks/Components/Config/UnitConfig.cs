@@ -99,32 +99,18 @@ namespace IRTaktiks.Components.Config
         {
             get { return DexterityField; }
         }
-
+        
         /// <summary>
-        /// The job of the unit.
+        /// The index of the actual character.
         /// </summary>
-        private Job JobField;
-
+        private int CharacterIndexField;
+        
         /// <summary>
-        /// The job of the unit.
+        /// The index of the actual character.
         /// </summary>
-        public Job Job
+        public int CharacterIndex
         {
-            get { return JobField; }
-        }
-
-        /// <summary>
-        /// The texture of the unit.
-        /// </summary>
-        private Texture2D UnitTextureField;
-
-        /// <summary>
-        /// The texture of the unit.
-        /// </summary>
-        public Texture2D UnitTexture
-        {
-            get { return UnitTextureField; }
-            set { UnitTextureField = value; }
+            get { return CharacterIndexField; }
         }
 
         /// <summary>
@@ -187,8 +173,9 @@ namespace IRTaktiks.Components.Config
             this.InteligenceField = 0;
             this.DexterityField = 0;
 
+            this.CharacterIndexField = 0;
+
             this.AttributePointsFields = IRTSettings.Default.AttributePointsPerUnit;
-            this.JobField = Job.Knight;
 
             InputManager.Instance.CursorDown += new EventHandler<CursorDownArgs>(CursorDown);
         }
@@ -249,6 +236,18 @@ namespace IRTaktiks.Components.Config
                 game.SpriteManager.Draw(TextureManager.Instance.Sprites.Config.UnitSelected, new Vector2(this.Position.X, this.Position.Y), Color.White, 30);
                 game.SpriteManager.Draw(this.AttributeTexture, attributePosition, Color.White, 30);
 
+                // Draw the character
+                Texture2D characterTexture = Character.Instance[this.CharacterIndex].Texture;
+                Vector2 characterPosition = new Vector2(attributePosition.X + ((23 + 184) / 2) - (characterTexture.Width / 2), attributePosition.Y + ((49 + 214) / 2) - (characterTexture.Height / 8));
+                int index = gameTime.TotalGameTime.Seconds % 4; index = index == 0 ? 0 : index == 1 ? 2 : index == 2 ? 3 : 1;
+                game.SpriteManager.Draw(characterTexture, characterPosition, new Rectangle(0, 48 * index, 32, 48), Color.White, 35);
+
+                // Draw the job name
+                string jobName = Enum.GetName(typeof(Job), Character.Instance[this.CharacterIndex].Job);
+                Vector2 jobSize = FontManager.Instance.Chilopod20.MeasureString(jobName);
+                Vector2 jobPosition = new Vector2(attributePosition.X + ((23 + 184) / 2) - (jobSize.X / 2), attributePosition.Y + ((214 + 247) / 2) - (jobSize.Y / 2));
+                game.SpriteManager.DrawString(FontManager.Instance.Chilopod20, jobName, jobPosition, Color.White, 35);
+
                 // Draw the points left
                 string pointsText = String.Format("{0} points left", this.AttributePoints);
                 Vector2 pointsSize = FontManager.Instance.Chilopod20.MeasureString(pointsText);
@@ -294,6 +293,32 @@ namespace IRTaktiks.Components.Config
         protected override void Unregister()
         {
             InputManager.Instance.CursorDown -= CursorDown;
+        }
+
+        /// <summary>
+        /// Change the character to the next.
+        /// </summary>
+        private void NextCharacter()
+        {
+            this.CharacterIndexField++;
+
+            if (this.CharacterIndex >= Character.Instance.Count)
+            {
+                this.CharacterIndexField = 0;
+            }
+        }
+
+        /// <summary>
+        /// Change the character to the previous.
+        /// </summary>
+        private void PreviousCharacter()
+        {
+            this.CharacterIndexField--;
+
+            if (this.CharacterIndex < 0)
+            {
+                this.CharacterIndexField = Character.Instance.Count - 1;
+            }
         }
 
         /// <summary>
@@ -395,14 +420,14 @@ namespace IRTaktiks.Components.Config
             else if ((e.Position.X > (attributePosition.X + 23) && e.Position.X < (attributePosition.X + 104)) &&
                 (e.Position.Y > (attributePosition.Y + 49) && e.Position.Y < (attributePosition.Y + 247)))
             {
-
+                this.PreviousCharacter();
             }
 
             // Next character
-            else if ((e.Position.X > (attributePosition.X + 104) && e.Position.X < (attributePosition.X + 104)) &&
+            else if ((e.Position.X > (attributePosition.X + 104) && e.Position.X < (attributePosition.X + 184)) &&
                 (e.Position.Y > (attributePosition.Y + 49) && e.Position.Y < (attributePosition.Y + 247)))
             {
-
+                this.NextCharacter();
             }
 
             // -5
