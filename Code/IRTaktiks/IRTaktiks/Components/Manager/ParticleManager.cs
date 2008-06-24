@@ -191,13 +191,16 @@ namespace IRTaktiks.Components.Manager
         {
             for (int index = 0; index < this.ParticleEffects.Count; index++)
             {
-                if (this.ParticleEffects[index].Alive)
+                if (this.ParticleEffects[index] != null)
                 {
-                    this.ParticleEffects[index].Update(gameTime);
-                }
-                else
-                {
-                    this.ParticleEffects.RemoveAt(index);
+                    if (this.ParticleEffects[index].Alive)
+                    {
+                        this.ParticleEffects[index].Update(gameTime);
+                    }
+                    else
+                    {
+                        this.ParticleEffects.RemoveAt(index);
+                    }
                 }
             }
         }

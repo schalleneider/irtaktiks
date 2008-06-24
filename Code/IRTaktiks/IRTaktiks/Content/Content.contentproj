@@ -410,11 +410,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Characters\Knight_W_002.png">
-      <Name>Knight_W_002</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Characters\Monk_M_001.png">
       <Name>Monk_M_001</Name>
       <Importer>TextureImporter</Importer>
@@ -492,6 +487,20 @@
     </Compile>
     <Compile Include="Characters\Wizard_W_002.png">
       <Name>Wizard_W_002</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Config\Start.png">
+      <Name>Start</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Characters\Knight_W_002.png">
+      <Name>Knight_W_002</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

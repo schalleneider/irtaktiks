@@ -95,7 +95,12 @@ namespace IRTaktiks.Components.Manager
         {
             get { return UnitsConfigField; }
         }
-                        
+
+        /// <summary>
+        /// Indicate that the game is ready to start;
+        /// </summary>
+        private bool ReadyToStart;
+
         #endregion
 
         #region Constructor
@@ -146,6 +151,14 @@ namespace IRTaktiks.Components.Manager
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
+            this.ReadyToStart = this.Keyboard.Configurated && this.PlayerConfig.Configurated && 
+                this.UnitsConfig.FindAll(
+                    delegate(UnitConfig unitConfig)
+                    { 
+                        return unitConfig.Configurated;
+                    }
+                ).Count == this.UnitsConfig.Count;
+            
             base.Update(gameTime);
         }
 
@@ -156,6 +169,13 @@ namespace IRTaktiks.Components.Manager
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Draw(GameTime gameTime)
         {
+            if (this.ReadyToStart)
+            {
+                IRTGame game = this.Game as IRTGame;
+
+                game.SpriteManager.Draw(TextureManager.Instance.Sprites.Config.Start, new Vector2(39, 655), Color.White, 30);
+            }
+                        
             base.Draw(gameTime);
         }
 

@@ -79,7 +79,7 @@ namespace IRTaktiks.Components.Debug
             IRTGame game = this.Game as IRTGame;
 
             game.ParticleManager.Queue(
-                new ParticleEffect(e.Position, 50, ParticleEffect.EffectType.Firework, 0.1f, 2.0f, Color.Goldenrod)
+                new ParticleEffect(e.Position, 50, ParticleEffect.EffectType.Ring, 0.2f, 3.0f, Color.SteelBlue)
                 );
 
             //AnimationManager.Instance.QueueAnimation(AnimationManager.AnimationType.Long, e.Position);
