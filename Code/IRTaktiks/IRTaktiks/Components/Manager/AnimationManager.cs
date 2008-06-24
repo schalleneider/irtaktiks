@@ -319,11 +319,22 @@ namespace IRTaktiks.Components.Manager
             float sliceTotalLife = 2.5f;
             float bloodTotalLife = 3.0f;
 
-            Vector2 slicePosition = new Vector2(position.X, position.Y);
+            Vector2 slicePosition = new Vector2(position.X - 1, position.Y - 1);
             Vector2 bloodPosition1st = new Vector2(position.X + 1, position.Y + 1);
             Vector2 bloodPosition2st = new Vector2(position.X + 2, position.Y + 2);
 
-            this.ParticleManager.Queue(new ParticleEffect(slicePosition, sliceParticles, ParticleEffect.EffectType.Flash45, sliceLifeIncrement, sliceTotalLife, Color.Silver));
+            this.ParticleManager.Queue(new ParticleEffect(slicePosition, sliceParticles, ParticleEffect.EffectType.Slice, sliceLifeIncrement, sliceTotalLife, Color.Silver));
+
+            Thread.Sleep(100);
+
+            this.ParticleManager.Queue(new ParticleEffect(bloodPosition1st, bloodParticles, ParticleEffect.EffectType.Flash45, bloodLifeIncrement, bloodTotalLife, Color.Red));
+
+            Thread.Sleep(100);
+
+            this.ParticleManager.Queue(new ParticleEffect(bloodPosition2st, bloodParticles, ParticleEffect.EffectType.Flash0, bloodLifeIncrement, bloodTotalLife, Color.Red));
+
+
+            this.ParticleManager.Queue(new ParticleEffect(slicePosition, sliceParticles, ParticleEffect.EffectType.Slice, sliceLifeIncrement, sliceTotalLife, Color.Silver));
 
             Thread.Sleep(100);
 
@@ -370,9 +381,18 @@ namespace IRTaktiks.Components.Manager
             float lifeIncrement = 0.1f;
             float totalLife = 4.5f;
             
-            Vector2 position1st = new Vector2(position.X, position.Y);
+            Vector2 position1st = new Vector2(position.X - 12, position.Y + 15);
+            Vector2 position2st = new Vector2(position.X - 0, position.Y - 15);
+            Vector2 position3st = new Vector2(position.X - 20, position.Y + 0);
+            Vector2 position4st = new Vector2(position.X + 12, position.Y + 15);
+            Vector2 position5st = new Vector2(position.X + 20, position.Y + 0);
 
             this.ParticleManager.Queue(new ParticleEffect(position1st, particles, ParticleEffect.EffectType.Slice, lifeIncrement, totalLife, Color.Green));
+            this.ParticleManager.Queue(new ParticleEffect(position2st, particles, ParticleEffect.EffectType.Slice, lifeIncrement, totalLife, Color.Green));
+            this.ParticleManager.Queue(new ParticleEffect(position3st, particles, ParticleEffect.EffectType.Slice, lifeIncrement, totalLife, Color.Green));
+            this.ParticleManager.Queue(new ParticleEffect(position4st, particles, ParticleEffect.EffectType.Slice, lifeIncrement, totalLife, Color.Green));
+            this.ParticleManager.Queue(new ParticleEffect(position5st, particles, ParticleEffect.EffectType.Slice, lifeIncrement, totalLife, Color.Green));
+            
                         
         }
 
