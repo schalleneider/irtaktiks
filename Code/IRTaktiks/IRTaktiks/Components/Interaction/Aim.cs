@@ -259,7 +259,7 @@ namespace IRTaktiks.Components.Interaction
             if (this.Enabled)
             {
                 // Updates the aim ten times per second.
-                if (gameTime.TotalGameTime.Milliseconds % 100 == 0)
+                if (true || gameTime.TotalGameTime.Milliseconds % 100 == 0)
                 {
                     // Get all the units of the game.
                     List<Unit> units = new List<Unit>();
