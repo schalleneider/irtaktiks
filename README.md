@@ -48,4 +48,4 @@ The touch is used to interact with the game. Actions such select the units, choo
 
 Willians Schallemberger Schneider – [@schalleneider](https://twitter.com/schalleneider)
 
-Distributed under the GNU 2.0 license. See ``LICENSE`` for more information.
+Distributed under the GNU General Public License v3.0 license. See [LICENSE](LICENSE.md) for more information.
