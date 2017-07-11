@@ -1,5 +1,5 @@
 # irtaktiks
-> The IRTaktiks is a tactical rpg game for multitouch screens developed using Microsoft XNA 2.0 and the touch recognition library Touchlib 2.0.
+> irtaktiks is a tactical rpg game for multitouch screens developed using Microsoft XNA 2.0 and the touch recognition library Touchlib 2.0.
 
 It's playable by two players who can control at least eight combat units. Each one of these units have its owns attributes such as level, class, strength, agility, dexterity, vitality and intelligence. Each attribute influences the gameplay, for example, changing the movement area, the magic damage, defense, quantity of life and mana points, hit and flee percentage, etc...
 
