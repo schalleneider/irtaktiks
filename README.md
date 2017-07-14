@@ -3,7 +3,7 @@
 
 It's playable by two players who can control at least eight combat units. Each one of these units have its owns attributes such as level, class, strength, agility, dexterity, vitality and intelligence. Each attribute influences the gameplay, for example, changing the movement area, the magic damage, defense, quantity of life and mana points, hit and flee percentage, etc...
 
-![](/docs/images/game.png)
+![](/docs/Files/Readme/game.png)
 
 ## Videos
 
@@ -14,13 +14,13 @@ It's playable by two players who can control at least eight combat units. Each o
 
 ## Monography
 
-* PDF Version - 4.5Mb: irtaktiks.zip
+* PDF Version - [IRTaktiks.pdf](/docs/Monograph/IRTaktiks.pdf)
 
 ## Multitouch Screen
 
 The multitouch screen is composed by a acrylic table based on the Frustrated Total Internal Reflection (FTIR) principle. The acrylic have 1.20m x 1.60m and uses Polyethylene as light diffuser. In order to recognize the touches, there are a modified Microsoft Life Cam VX6000 that can only see the lights on infrared spectrum. The library TouchLib 2.0 uses the webcam to recognize the touches, process its position and movement and send these informations to the game, that updates itself. The game is projected over the multitouch table screen.
 
-![](/docs/images/architecture.png)
+![](/docs/Files/Readme/architecture.png)
 
 ## Game
 
@@ -30,11 +30,11 @@ The objective of the game is defeat the other player by killing it's combat unit
 
 The combat unit's implemented attributes are: HP, MP, Level, Class, Skills, Attack, Defense, Magic Attack, Magic Deffense ,Hit, Flee, Delay, Strength, Agility, Vitality, Intelligence and Dexterity. The choice in the class changes the values of these attributes, for example: One Paladin always have more HP than a Assassin; even if both have the same value of vitality, and a Knight have skills based on physical attack and a Wizard, skills based on magical attack.
 
-![](/docs/images/unit-config.png)
+![](/docs/Files/Readme/unit-config.png)
 
 The touch is used to interact with the game. Actions such select the units, choose the skills and its targets; and move the unit over the map can be done by finger press and finger movements, like drag-and-drop.
 
-![](/docs/images/game-play.png)
+![](/docs/Files/Readme/game-play.png)
 
 ## Useful Links
 
@@ -48,4 +48,4 @@ The touch is used to interact with the game. Actions such select the units, choo
 
 Willians Schallemberger Schneider – [@schalleneider](https://twitter.com/schalleneider)
 
-Distributed under the GNU General Public License v3.0 license. See [LICENSE](LICENSE.md) for more information.
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
